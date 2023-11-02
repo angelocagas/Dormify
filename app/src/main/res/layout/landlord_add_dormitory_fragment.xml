@@ -595,11 +595,6 @@
                     android:layout_height="wrap_content"
                     android:text="Gcash" />
 
-                <CheckBox
-                    android:id="@+id/checkBoxBankTransfer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bank Transfer" />
             </LinearLayout>
 
 
@@ -885,7 +880,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Select Dormitory Photo"
+                    android:text="Upload Dormitory Photo"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

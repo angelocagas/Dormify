@@ -34,27 +34,27 @@
                         android:id="@+id/ivDormitoryImagecardview"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
-                        app:cardElevation="6dp"
                         app:cardCornerRadius="10dp"
-                        >
+                        app:cardElevation="6dp">
+
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/backbtn"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:background="@drawable/dorm_backbtn"
-                            android:backgroundTint="@color/white"
+                            android:layout_centerVertical="true"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
-                            android:layout_centerVertical="true" />
+                            android:background="@drawable/dorm_backbtn"
+                            android:backgroundTint="@color/white" />
 
                         <ImageView
                             android:id="@+id/ivDormitoryImage"
                             android:layout_width="match_parent"
                             android:layout_height="200dp"
-                            android:scaleType="centerCrop"
                             android:layout_centerHorizontal="true"
-                            android:src="@drawable/dormify_logo"
-                            android:contentDescription="Dormitory Image" />
+                            android:contentDescription="Dormitory Image"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/dormify_logo" />
                     </androidx.cardview.widget.CardView>
                     <!-- Dormitory Image -->
 
@@ -77,17 +77,19 @@
                             android:textSize="22sp"
                             android:textStyle="bold" />
 
+
+
                         <TextView
                             android:id="@+id/textDormloc"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/textDormName"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:text="1 Fully Furnished Condo Unit for Rent in Quezon City"
                             android:textAlignment="viewStart"
                             android:textColor="@color/black"
                             android:textSize="14sp"
-                            android:layout_marginBottom="10dp"
                             android:textStyle="bold" />
 
                         <!-- Back button -->
@@ -96,7 +98,7 @@
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnRemoveFromSaved"
                             android:layout_width="28dp"
-                            android:layout_height="30dp"
+                            android:layout_height="28dp"
                             android:layout_alignParentEnd="true"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="20dp"
@@ -104,14 +106,14 @@
                             android:backgroundTint="#DC5165"
                             android:visibility="gone" />
 
-
                         <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btnAddToSaved"
-                            android:layout_width="28dp"
-                            android:layout_height="28dp"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:layout_alignTop="@id/btnChatLandlord"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="20dp"
+                            android:layout_marginTop="-3dp"
+                            android:layout_marginEnd="17dp"
                             android:background="@drawable/dorm_favorite"
                             android:backgroundTint="#DC5165"
                             android:drawableTint="@color/bg_bx_dark"
@@ -130,13 +132,44 @@
                             android:background="@drawable/dorm_message"
                             android:backgroundTint="@color/chat_color_sender" />
 
+                        <RatingBar
+                            android:id="@+id/Ratingbar"
+                            android:layout_width="243dp"
+                            android:layout_height="44dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_below="@+id/textDormloc"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="3dp"
+                            android:numStars="5"
+                            android:progressTint="#FFBF00"
+                            android:rating="4"
+                            android:scaleX=".45"
+                            android:scaleY=".45"
+                            android:stepSize="1"
+                            android:transformPivotX="1dp"
+                            />
+
+                        <TextView
+                            android:id="@+id/Ratingtxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                           android:layout_alignTop="@id/Ratingbar"
+                            android:layout_marginBottom="10dp"
+                            android:text="4 out of 5 Rating"
+                            android:layout_marginTop="4dp"
+                            android:layout_toEndOf="@id/Ratingbar"
+                            android:layout_marginStart="-130dp"
+                            android:textAlignment="viewStart"
+                            android:textColor="@color/black"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
 
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:layout_below="@+id/textDormloc"
+                            android:layout_below="@+id/Ratingbar"
                             android:background="#000000" />
-
 
                     </RelativeLayout>
 
@@ -198,13 +231,12 @@
                             android:id="@+id/AmenitiesListtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginStart="20dp"
                             android:layout_below="@+id/Amenities"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="5dp"
                             android:text="Parking\nFree Internet Access\nFitness Gym\nStudy Hub\nRoof Deck"
                             android:textColor="@color/chat_color_sender" />
-
 
 
                         <View
@@ -271,7 +303,6 @@
                             android:textColor="#000000" />
 
 
-
                         <TextView
                             android:id="@+id/Availableroomtxt"
                             android:layout_width="wrap_content"
@@ -292,9 +323,9 @@
                             android:layout_below="@+id/RoomCapacitytxt"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="30dp"
-                            android:textSize="11sp"
                             android:text="@string/shared_public"
                             android:textColor="@color/chat_color_sender"
+                            android:textSize="11sp"
                             android:textStyle="bold" />
 
 
@@ -359,11 +390,10 @@
                             android:layout_below="@+id/pay"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="20dp"
-                            android:textSize="14sp"
                             android:text="Cash On Hand\nGcash"
                             android:textColor="@color/chat_color_sender"
+                            android:textSize="14sp"
                             android:textStyle="bold" />
-
 
 
                         <TextView
@@ -386,7 +416,6 @@
                             android:text="6 Months"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
-
 
 
                         <TextView
@@ -419,9 +448,9 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@id/Electricitytxt"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="40dp"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
+                            android:layout_marginEnd="40dp"
                             android:text="Water Bills"
                             android:textColor="#000000" />
 
@@ -429,15 +458,14 @@
                             android:id="@+id/Watertxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="40dp"
                             android:layout_below="@+id/Electricitytxt"
+                            android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="30dp"
+                            android:layout_marginEnd="40dp"
                             android:text="EXCLUDED"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
-
 
 
                         <View
@@ -453,9 +481,9 @@
 
                     <RelativeLayout
                         android:id="@+id/propertylayout"
-                        android:layout_below="@+id/paymentlayout"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/paymentlayout">
 
                         <TextView
                             android:id="@+id/Property"
@@ -486,13 +514,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/ivMapView"
+                            android:layout_centerHorizontal="true"
                             android:fontFamily="@font/inter_light"
                             android:text="Exact location will be provided after visit schedule was approved."
-                            android:textSize="11sp"
-                            android:visibility="invisible"
-                            android:layout_centerHorizontal="true"
                             android:textColor="@color/chat_color_sender"
-                            android:textStyle="italic" />
+                            android:textSize="11sp"
+                            android:textStyle="italic"
+                            android:visibility="invisible" />
 
                         <View
                             android:layout_width="match_parent"
@@ -526,16 +554,15 @@
                             android:textStyle="bold" />
 
 
-
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cardViewImage"
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:elevation="1dp"
-                            android:layout_marginStart="20dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_marginEnd="10dp"
                             android:layout_below="@+id/Landlordinfo"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="10dp"
+                            android:elevation="1dp"
                             app:cardCornerRadius="30dp">
 
                             <ImageView
@@ -556,11 +583,11 @@
                             android:id="@+id/tvUserName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:text="Username"
                             android:layout_below="@+id/Landlordinfo"
-                            android:textColor="#000000"
+                            android:layout_marginTop="10dp"
                             android:layout_toEndOf="@+id/cardViewImage"
+                            android:text="Username"
+                            android:textColor="#000000"
                             android:textSize="22sp"
                             android:textStyle="bold" />
 
@@ -587,24 +614,26 @@
 
 
                         <TextView
+                            android:id="@+id/emailview"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/cardViewImage"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="2dp"
-                            android:layout_marginEnd="53dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="140dp"
                             android:text="Email"
                             android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/emailtxt"
-                            android:layout_width="169dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/cardViewImage"
                             android:layout_alignParentEnd="true"
+                            android:layout_alignStart="@id/emailview"
                             android:layout_marginTop="27dp"
-                            android:layout_marginEnd="50dp"
+                            android:textSize="11sp"
                             android:maxLines="1"
                             android:text="sample1@gmail.com"
                             android:textColor="@color/chat_color_sender"
@@ -615,8 +644,8 @@
                             android:layout_height="1dp"
                             android:layout_below="@+id/emailtxt"
                             android:layout_marginTop="10dp"
-                            android:background="#000000"
-                            android:layout_marginBottom="10dp"/>
+                            android:layout_marginBottom="10dp"
+                            android:background="#000000" />
 
                     </RelativeLayout>
 
@@ -647,14 +676,14 @@
                             android:id="@+id/cardviewpermitImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_below="@id/permittxt"
                             android:layout_centerInParent="true"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
-                            android:layout_below="@id/permittxt"
-                            app:cardElevation="5dp"
+                            android:scaleType="centerCrop"
                             app:cardCornerRadius="10dp"
-                            android:scaleType="centerCrop">
+                            app:cardElevation="5dp">
 
                             <ImageView
                                 android:id="@+id/permitImage"
@@ -663,8 +692,6 @@
                                 android:src="@drawable/dormify_logo" />
 
                         </androidx.cardview.widget.CardView>
-
-
 
 
                         <View
@@ -744,10 +771,10 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        app:cardElevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:cardElevation="10dp">
+        app:layout_constraintStart_toStartOf="parent">
 
 
         <!-- bottom nav -->
@@ -788,7 +815,7 @@
                     android:fontFamily="@font/karla"
                     android:gravity="center_horizontal"
                     android:paddingStart="4dp"
-                    android:text="Monthly"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="13sp" />
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Shadow -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#3C454545" />
+            <padding
+                android:left="0dp"
+                android:top="1dp"
+                android:right="0dp"
+                android:bottom="0dp" /> <!-- Adjust the bottom padding for the shadow height -->
+        </shape>
+    </item>
+
+    <!-- Main Content -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/bg_bx_light" />/>
+        </shape>
+    </item>
+
+</layer-list>
