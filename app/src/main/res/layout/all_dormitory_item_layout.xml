@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rectangle_radius_white"
+    android:elevation="4dp"
+    android:paddingLeft="0dp"
+    android:layout_marginVertical="10dp"
+    android:layout_marginRight="10dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clDorm2"
+        android:layout_width="130dp"
+        android:layout_height="180dp"
+        android:background="@drawable/rectangle_radius_white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="5dp"
+            android:elevation="10dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivDorm2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/dormify_logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/textDormName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Cholen's Dorm"
+            android:textColor="@color/black"
+            android:textSize="9sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <TextView
+            android:id="@+id/textDormPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₱1600"
+            android:textColor="@color/violet"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textDormName"
+            app:layout_constraintTop_toBottomOf="@+id/textDormName" />
+
+        <TextView
+            android:id="@+id/tvDorm2NumberOfRatings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(6)"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvDorm2Distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/ic_location"
+            android:text="5.00km"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textDormPrice"
+            app:layout_constraintTop_toBottomOf="@+id/textDormPrice" />
+
+        <TextView
+            android:id="@+id/tvRentalTerm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="5dp"
+            android:text="per"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDormName" />
+
+        <TextView
+            android:id="@+id/tvDorm2BedNumber"
+            android:layout_width="5sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/ic_bed"
+            android:text="4"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDorm2Distance"
+            app:layout_constraintStart_toEndOf="@+id/tvDorm2Distance"
+            app:layout_constraintTop_toTopOf="@+id/tvDorm2Distance" />
+
+        <TextView
+            android:id="@+id/tvDorm2BathroomNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/ic_bath"
+            android:text="1"
+            android:textColor="@color/black"
+            android:textSize="8sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDorm2BedNumber"
+            app:layout_constraintStart_toEndOf="@+id/tvDorm2BedNumber"
+            app:layout_constraintTop_toTopOf="@+id/tvDorm2BedNumber" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

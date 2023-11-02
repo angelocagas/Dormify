@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "463064871202",
+    "firebase_url": "https://dormify-15dcd-default-rtdb.firebaseio.com",
+    "project_id": "dormify-15dcd",
+    "storage_bucket": "dormify-15dcd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463064871202:android:7ba66625d439899078b57b",
+        "android_client_info": {
+          "package_name": "com.dormify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4SRyMeTygsBTwd3wL6zMpwTdI9T86bhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:463064871202:android:4793c03a5f4a384b78b57b",
+        "android_client_info": {
+          "package_name": "com.example.kotlindormify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4SRyMeTygsBTwd3wL6zMpwTdI9T86bhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

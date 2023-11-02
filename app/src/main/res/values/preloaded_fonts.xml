@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/hind</item>
+        <item>@font/hind_guntur_bold</item>
+        <item>@font/inter_light</item>
+        <item>@font/karla</item>
+        <item>@font/poppins</item>
+        <item>@font/poppins_thin</item>
+    </array>
+</resources>

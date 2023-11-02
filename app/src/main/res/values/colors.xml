@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="violet">#6f6ff4</color>
+
+
+    <color name="yellow">#FFC801</color>
+    <color name="light_gray">#d4d4d4</color>
+
+    <color name="primary">#1B023B</color>
+    <color name="secondary">#FF03DAC5</color>
+
+    <color name="night_mode">#6124B1</color>
+    <color name="notificcations">#13B2C3</color>
+    <color name="private_account">#E6A326</color>
+    <color name="security">#D95F69</color>
+    <color name="my_button_color">#00D95F69</color>
+
+    //DORMIFY COLORS LIGHT MODE
+    <color name="clear">#00FFFFFF</color>
+    <color name="dormify_clr">#22215B</color>
+    <color name="find_clr">#7B7F9E</color>
+    <color name="txt_box">#F2F3F3</color>
+    <color name="Signup_btn">#4516A7</color>
+    <color name="available_success">#4BB543</color>FF7276
+    <color name="occupied_error">#FF7276</color>
+    <color name="bg_clr_light">#f1f2f4</color>
+    <color name="bg_bx_light">#f0f3f5</color>
+    <color name="txt_clr">#000000</color>
+    <color name="txt_clr2">#22215B</color>
+
+    <color name="my_primary">#FFBB86FC</color>
+    <color name="my_secondary">#FFE74C</color>
+
+    <color name="chat_color_sender">#1E88E5</color>
+    <color name="chat_color_receiver">#7CB342</color>
+    <color name="theme_color_80">#CC2176FF</color>
+    <color name="theme_color_8">#142176ff</color>
+    <color name="light_8">#14000000</color>
+
+
+    //darkmode
+
+    <color name="bg_clr_drk">#454655</color>
+    <color name="bg_bx_dark">#353540</color>
+    <color name="txt_clr_dark">#FFFFFF</color>
+    <color name="txt_clr2_dark">#22215B</color>
+    <color name="txt_box_dark">#000000</color>
+    <color name="nav_clr_dark">#202123</color>
+
+
+
+
+
+    //nav bar light mode
+    <color name="nav_clr">#e9e8e8</color>
+    <color name="trans">#00E9E8E8</color>
+
+
+</resources>

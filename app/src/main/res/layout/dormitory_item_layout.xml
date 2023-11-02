@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DormitoryItemLayout.xml -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/rectangle_radius_super_light_gray"
+    android:padding="15dp"
+    android:layout_marginBottom="10dp"
+    android:elevation="4dp">
+
+    <TextView
+        android:id="@+id/tvPerMonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:text="per month"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDormPrice" />
+
+    <ImageView
+        android:id="@+id/ivQrCode"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDormName" />
+
+
+    <TextView
+        android:id="@+id/tvUnits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="rooms"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivQrCode" />
+
+    <TextView
+        android:id="@+id/tvAvailable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="available"
+        android:textColor="@color/available_success"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/tvUnits"
+        app:layout_constraintTop_toBottomOf="@+id/tvUnits" />
+
+    <TextView
+        android:id="@+id/tvOccupied"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="occupied"
+        android:textColor="@color/occupied_error"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/tvAvailable"
+        app:layout_constraintTop_toTopOf="@+id/tvAvailable" />
+
+    <ImageButton
+        android:id="@+id/ibDelete"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:scaleType="centerInside"
+        android:background="#00000000"
+        android:src="@drawable/dorm_delete_mini"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibEdit"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="10sp"
+        android:scaleType="centerInside"
+        android:background="#00000000"
+        android:visibility="invisible"
+        android:src="@drawable/dorm_edit_mini"
+        app:layout_constraintEnd_toStartOf="@+id/ibDelete"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textDormName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/hind_guntur_bold"
+        android:paddingBottom="10sp"
+        android:text="Dormitory Name"
+        android:textColor="@color/dormify_clr"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textDormPrice"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="10sp"
+        android:text="Dormitory Price"
+        android:textColor="@color/violet"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textDormName" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnView"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_btn_bck_light"
+        android:text="View"
+        android:textColor="@color/white"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAvailable" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRequests"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_btn_bck_light"
+        android:paddingHorizontal="10dp"
+        android:text="0 Pending requests"
+        android:textColor="@color/white"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvAvailable" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

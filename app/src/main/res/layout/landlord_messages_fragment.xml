@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMessages1"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clNotification">
+
+        <ImageView
+            android:id="@+id/ivNotification1Profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/circle_light_gray"
+            android:src="@drawable/profile_icon2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNotification1Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Angelo Cagas"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivNotification1Profile"
+            app:layout_constraintTop_toTopOf="@+id/ivNotification1Profile" />
+
+        <TextView
+            android:id="@+id/tvNotification1Info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="90dp"
+            android:text="Thanks for contacting me!"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivNotification1Profile"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotification1Name" />
+
+        <TextView
+            android:id="@+id/tvNotification1Time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="15:23"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvNotification1Name" />
+
+        <TextView
+            android:id="@+id/UnreadMessages1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/circle_violet"
+            android:text="2"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tvNotification1Time"
+            app:layout_constraintStart_toStartOf="@+id/tvNotification1Time"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotification1Time" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMessages3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clMessages2">
+
+        <ImageView
+            android:id="@+id/ivNotification3Profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/profile_icon2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNotification3Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Klay Ibarra"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivNotification3Profile"
+            app:layout_constraintTop_toTopOf="@+id/ivNotification3Profile" />
+
+        <TextView
+            android:id="@+id/tvNotification3Info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="90dp"
+            android:text="How much does it cost?"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivNotification3Profile"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotification3Name" />
+
+        <TextView
+            android:id="@+id/tvNotification3Time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="11/10/2021"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvNotification3Name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/circle_light_gray"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMessages2"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clMessages1">
+
+        <ImageView
+            android:id="@+id/ivNotification2Profile"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/profile_icon2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNotification2Name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="Maria Clara"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ivNotification2Profile"
+            app:layout_constraintTop_toTopOf="@+id/ivNotification2Profile" />
+
+        <TextView
+            android:id="@+id/tvNotification2Info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="90dp"
+            android:text="Your payment was accepted."
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivNotification2Profile"
+            app:layout_constraintTop_toBottomOf="@+id/tvNotification2Name" />
+
+        <TextView
+            android:id="@+id/tvNotification2Time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Yesterday"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvNotification2Name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clNotification"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/rectangle_radius_light_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDormify">
+
+        <TextView
+            android:id="@+id/tvNotification"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/rectangle_radius_light_gray"
+            android:text="Notification"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tvMessages"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMessages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/rectangle_radius_white"
+            android:text="Messages"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tvNotification"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/ivDormifyIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/dormify_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvDormify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Dormify"
+        android:textColor="@color/black"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivDormifyIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="99dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <ImageView
+        android:id="@+id/ivDisplayPicture"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/base_person"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivNotification"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="12dp"
+        android:src="@drawable/ic_notif"
+        app:layout_constraintBottom_toBottomOf="@+id/ivDisplayPicture"
+        app:layout_constraintEnd_toStartOf="@+id/ivDisplayPicture"
+        app:layout_constraintTop_toTopOf="@+id/ivDisplayPicture"
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="98dp" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
