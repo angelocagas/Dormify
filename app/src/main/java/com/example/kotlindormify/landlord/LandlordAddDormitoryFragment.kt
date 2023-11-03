@@ -180,16 +180,6 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
-        binding.checkBoxBankTransfer.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                selectedPaymentOptions.add("Bank Transfer")
-            } else {
-                selectedPaymentOptions.remove("Bank Transfer")
-            }
-        }
-
-
-
 
 
         binding.btnSubmit.setOnClickListener {

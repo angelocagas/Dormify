@@ -14,16 +14,16 @@
         android:fontFamily="@font/poppins"
         android:text="Welcome to"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/dormify_clr"
         android:textSize="20sp"
         android:textStyle=""
         android:typeface="normal"
-        android:textColor="@color/dormify_clr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.369"
+        app:layout_constraintHorizontal_bias="0.31"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.418" />
+        app:layout_constraintVertical_bias="0.417" />
 
     <TextView
         android:id="@+id/txtviewdormify"
@@ -37,16 +37,16 @@
         android:textSize="45sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.433"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48" />
+        app:layout_constraintVertical_bias="0.483" />
 
     <TextView
         android:id="@+id/txtviewchena2"
         android:layout_width="288dp"
         android:layout_height="55dp"
-        android:text="Find your perfect dormitory and manage your peoperties with dormify."
+        android:text="Find your perfect dormitory and manage your properties with dormify."
         android:textColor="@color/find_clr"
         android:fontFamily="@font/hind"
         android:textSize="16sp"
@@ -71,19 +71,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.625" />
 
-            <ImageView
-                android:id="@+id/btnAddImage"
-                android:layout_width="57dp"
-                android:layout_height="60dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.194"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.344"
-                app:srcCompat="@drawable/logo_no_bg" />
+    <ImageView
+        android:id="@+id/btnAddImage"
+        android:layout_width="137dp"
+        android:layout_height="136dp"
+        android:foregroundGravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.455"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.272"
+        app:srcCompat="@drawable/logo_no_bg" />
 
-            <Button
+    <Button
                 android:id="@+id/btngettingstarted1"
                 android:layout_width="243dp"
                 android:layout_height="55dp"
