@@ -1,6 +1,7 @@
 
 package com.example.kotlindormify
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.SpannableString
@@ -29,6 +30,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.location.Geocoder
+import android.net.Uri
+
 
 class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
@@ -204,22 +208,58 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             val boundsBuilder = LatLngBounds.builder()
 
             // Add markers for dormitories and include their positions in the bounds
+            // Add markers for dormitories and include their positions in the bounds
             for (dormitory in allDormitories) {
-                val dormitoryLocation = LatLng(
-                    dormitory.latitude ?: DEFAULT_LATITUDE,
-                    dormitory.longitude ?: DEFAULT_LONGITUDE
-                )
-                // Set the custom marker icon
-                val markerOptions = MarkerOptions()
-                    .position(dormitoryLocation)
-                    .title("Dorm Name: ${dormitory.dormName}")
-                    .icon(customMarkerIcon)
+                    val dormitoryLocation = LatLng(
+                        dormitory.latitude ?: DEFAULT_LATITUDE,
+                        dormitory.longitude ?: DEFAULT_LONGITUDE
+                    )
 
-                googleMap.addMarker(markerOptions)
+                    // Set the custom marker icon
+                    val markerOptions = MarkerOptions()
+                        .position(dormitoryLocation)
+                        .title(dormitory.dormName)
+                        .snippet("${dormitory.address}")
+                        .icon(customMarkerIcon)
 
-                // Include the dormitory's position in the bounds
-                boundsBuilder.include(dormitoryLocation)
+                    val marker = googleMap.addMarker(markerOptions)
+
+                    // Include the dormitory's position in the bounds
+                    boundsBuilder.include(dormitoryLocation)
+
+                    // Add an info window for the marker
+
+                googleMap.setOnMarkerClickListener { marker ->
+                    marker.showInfoWindow()
+                    true
+                }
+
+                // Add a click listener to the info window's title
+                googleMap.setOnInfoWindowClickListener { clickedMarker ->
+                    val dormitoryLocation = clickedMarker.position // Get the LatLng of the clicked marker
+                    val dormitoryName = clickedMarker.title ?: "Dormitory Name" // Use the dormitory's name as the label, or provide a default name
+
+                    // Create an Intent to open the Google Maps app with a pinned marker at the specified location
+                    val gmmIntentUri = Uri.parse("geo:${dormitoryLocation.latitude},${dormitoryLocation.longitude}?z=15&q=${dormitoryLocation.latitude},${dormitoryLocation.longitude}(${Uri.encode(dormitoryName)})")
+
+                    val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                    mapIntent.setPackage("com.google.android.apps.maps") // Specify the Google Maps package
+
+                    // Check if the Google Maps app is installed
+                    if (mapIntent.resolveActivity(requireContext().packageManager) != null) {
+                        startActivity(mapIntent)
+                    } else {
+                        // If the Google Maps app is not installed, handle it accordingly
+                        // You can open a web-based map or prompt the user to install the app.
+                        // Example: Open a web-based map
+                        val webMapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/?api=1&query=${dormitoryLocation.latitude},${dormitoryLocation.longitude}"))
+                        startActivity(webMapIntent)
+                    }
+                }
+
+
             }
+
 
             // Build the LatLngBounds object only if there are dormitories
             if (allDormitories.isNotEmpty()) {
@@ -240,6 +280,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
             // Enable compass control
             googleMap.uiSettings.isCompassEnabled = true
+
+            googleMap.uiSettings.isMapToolbarEnabled = false
         }
     }
 
@@ -396,6 +438,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                 }
         }
     }
+
 
 
 
