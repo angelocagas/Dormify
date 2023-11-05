@@ -34,7 +34,8 @@ class RentalRequestsListFragment : Fragment() {
         recyclerView.adapter = rentalRequestsAdapter
         btnPending = rootView.findViewById(R.id.btnPending)
         btnAccepted = rootView.findViewById(R.id.btnAccepted)
-        btnRejected = rootView.findViewById(R.id.btnRejected) // Assuming you have buttons with IDs btnPending, btnAccepted, btnRejected
+        btnRejected =
+            rootView.findViewById(R.id.btnRejected) // Assuming you have buttons with IDs btnPending, btnAccepted, btnRejected
 
         // Retrieve dormitory ID passed from LandlordUnitsFragment
         val dormitoryId = arguments?.getString("dormitoryId")
@@ -87,11 +88,8 @@ class RentalRequestsListFragment : Fragment() {
         }
 
 
-
         // Add this code to your app's initialization (e.g., in your Application class or activity's onCreate)
         val firestore = FirebaseFirestore.getInstance()
-
-
 
 
         val ibBack = rootView.findViewById<ImageView>(R.id.ibBack)
@@ -123,7 +121,15 @@ class RentalRequestsListFragment : Fragment() {
                     val dormitoryId = requestDocument.getString("dormitoryId")
 
                     // Add rental request to the list
-                    rentalRequestsList.add(RentalRequest(requestId, status, requesterFullName, timestamp,dormitoryId))
+                    rentalRequestsList.add(
+                        RentalRequest(
+                            requestId,
+                            status,
+                            requesterFullName,
+                            timestamp,
+                            dormitoryId
+                        )
+                    )
                 }
 
                 // Update the RecyclerView with the complete rental requests list

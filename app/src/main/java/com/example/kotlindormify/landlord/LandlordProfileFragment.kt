@@ -67,8 +67,6 @@ class LandlordProfileFragment : Fragment(R.layout.landlord_profile_fragment) {
             }
 
 
-
-
         val btnLogout: Button = view.findViewById(R.id.btnLogout)
 
         btnLogout.setOnClickListener {
@@ -140,6 +138,7 @@ class LandlordProfileFragment : Fragment(R.layout.landlord_profile_fragment) {
         }
 
     }
+
     // Function to navigate to PersonalInformationActivity
     private fun navigateToPersonalInformation() {
         val intent = Intent(requireContext(), LandlordPersonalInformationActivity::class.java)

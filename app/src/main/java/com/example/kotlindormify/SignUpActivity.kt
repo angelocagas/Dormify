@@ -42,31 +42,31 @@ class SignUpActivity : AppCompatActivity() {
 
 //next btn
         binding.rbTenant.setOnClickListener {
-            if ( binding.rbTenant.isChecked) {
+            if (binding.rbTenant.isChecked) {
                 // Tenant is selected, so deselect Landlord
                 binding.rbLandlord.isChecked = false
             }
         }
 
         binding.rbLandlord.setOnClickListener {
-            if ( binding.rbLandlord.isChecked) {
+            if (binding.rbLandlord.isChecked) {
                 // Landlord is selected, so deselect Tenant
                 binding.rbTenant.isChecked = false
             }
         }
 
-            binding.cvtent.setOnClickListener{
-                binding.rbTenant.isChecked = true
+        binding.cvtent.setOnClickListener {
+            binding.rbTenant.isChecked = true
 
-                if ( binding.rbTenant.isChecked) {
-                    // Tenant is selected, so deselect Landlord
-                    binding.rbLandlord.isChecked = false
-                }
+            if (binding.rbTenant.isChecked) {
+                // Tenant is selected, so deselect Landlord
+                binding.rbLandlord.isChecked = false
             }
-        binding.cvland.setOnClickListener{
+        }
+        binding.cvland.setOnClickListener {
             binding.rbLandlord.isChecked = true
 
-            if ( binding.rbLandlord.isChecked) {
+            if (binding.rbLandlord.isChecked) {
                 // Landlord is selected, so deselect Tenant
                 binding.rbTenant.isChecked = false
             }
@@ -97,7 +97,6 @@ class SignUpActivity : AppCompatActivity() {
         }
 
 
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -105,10 +104,6 @@ class SignUpActivity : AppCompatActivity() {
 
 
     }
-
-
-
-
 
 
 }

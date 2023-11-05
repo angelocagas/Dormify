@@ -2,8 +2,8 @@ package com.example.kotlindormify
 
 data class TenantsDetails(
     var username: String? = null,
-    var age:String?= null,
-    var sex:String?= null,
+    var age: String? = null,
+    var sex: String? = null,
     var address: String? = null,
     var phoneNumber: String? = null,
     var email: String? = null,

@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toStartOf="@+id/clRentedUnits"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDashboard" >
+        app:layout_constraintTop_toBottomOf="@+id/tvDashboard">
 
         <TextView
             android:id="@+id/tvTotalUnits"
@@ -329,7 +329,6 @@
             app:tabTextColor="@color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

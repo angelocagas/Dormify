@@ -83,7 +83,8 @@ class RequestDetailFragment : Fragment() {
                         val email = documentSnapshot.getString("email")
                         val emergencyFullName = documentSnapshot.getString("emergencyFullName")
                         val emergencyAddress = documentSnapshot.getString("emergencyAddress")
-                        val emergencyPhoneNumber = documentSnapshot.getString("emergencyPhoneNumber")
+                        val emergencyPhoneNumber =
+                            documentSnapshot.getString("emergencyPhoneNumber")
                         val emergencyEmail = documentSnapshot.getString("emergencyEmail")
                         val selectedGender = documentSnapshot.getString("gender")
                         val idImageUrl = documentSnapshot.getString("idImageUrl")
@@ -105,7 +106,7 @@ class RequestDetailFragment : Fragment() {
                         textViewStatus.text = " $status"
                         textViewTimestamp.text = " $timestamp"
                         textViewRequesterId.text = requesterId
-                        if (status != "pending"){
+                        if (status != "pending") {
                             btnDeclineRequest.visibility = View.GONE
                             btnAcceptRequest.visibility = View.GONE
                         }
@@ -133,7 +134,8 @@ class RequestDetailFragment : Fragment() {
                 val firestore = FirebaseFirestore.getInstance()
 
                 if (requestId != null) {
-                    val rentalRequestRef = firestore.collection("rental_requests").document(requestId)
+                    val rentalRequestRef =
+                        firestore.collection("rental_requests").document(requestId)
 
                     val updateData = mapOf(
                         "status" to "declined",
@@ -146,13 +148,18 @@ class RequestDetailFragment : Fragment() {
 
                             val dormitoryId = arguments?.getString("dormitoryId")
                             if (dormitoryId != null) {
-                                val dormitoryRequestsRef = firestore.collection("dormitories").document(dormitoryId)
-                                    .collection("rental_requests")
+                                val dormitoryRequestsRef =
+                                    firestore.collection("dormitories").document(dormitoryId)
+                                        .collection("rental_requests")
                                 dormitoryRequestsRef.document(requestId)
                                     .update(updateData)
                                     .addOnSuccessListener {
                                         // Successfully updated the dormitory with the declined request
-                                        Toast.makeText(requireContext(), "Request has been declined", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Request has been declined",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                         requireActivity().supportFragmentManager.popBackStack()
                                     }
                                     .addOnFailureListener { e ->
@@ -175,29 +182,27 @@ class RequestDetailFragment : Fragment() {
 
         btnAcceptRequest.setOnClickListener {
             // Check if the status is "pending" (only allow accepting if the request is pending)
-                // Navigate to the AssignTenantFragment and pass the selected request details
-                val args = Bundle()
-                val dormitoryId = arguments?.getString("dormitoryId")
-                val requesterFullName = textViewFullName.text.toString()
-                val requesterId = textViewRequesterId.text.toString()
+            // Navigate to the AssignTenantFragment and pass the selected request details
+            val args = Bundle()
+            val dormitoryId = arguments?.getString("dormitoryId")
+            val requesterFullName = textViewFullName.text.toString()
+            val requesterId = textViewRequesterId.text.toString()
             args.putString("requestId", requestId)
 
-                args.putString("requesterFullName", requesterFullName)
+            args.putString("requesterFullName", requesterFullName)
             args.putString("requesterId", requesterId)
-                args.putString("dormitoryId", dormitoryId)
-
-
+            args.putString("dormitoryId", dormitoryId)
 
 
             val assignTenantFragment = AssignTenantFragment()
-                assignTenantFragment.arguments = args
+            assignTenantFragment.arguments = args
 
-                // Use FragmentManager to navigate to the AssignTenantFragment
-                val fragmentManager = requireActivity().supportFragmentManager
-                fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, assignTenantFragment)
-                    .addToBackStack(null)
-                    .commit()
+            // Use FragmentManager to navigate to the AssignTenantFragment
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, assignTenantFragment)
+                .addToBackStack(null)
+                .commit()
 
         }
 
@@ -222,7 +227,6 @@ class RequestDetailFragment : Fragment() {
 
 
         return rootView
-
 
 
     }

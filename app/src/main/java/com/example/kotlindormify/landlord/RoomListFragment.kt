@@ -113,7 +113,8 @@ class RoomListFragment : Fragment() {
                 roomList.clear()
 
                 for (roomDocument in querySnapshot.documents) {
-                    val roomNumber = roomDocument.getLong("roomNumber")?.toInt() // Retrieve as Long and convert to Int
+                    val roomNumber = roomDocument.getLong("roomNumber")
+                        ?.toInt() // Retrieve as Long and convert to Int
                     val availability = roomDocument.getString("availability")
                     val tenantId = roomDocument.getString("tenantId")
                     val tenantName = roomDocument.getString("tenantName")

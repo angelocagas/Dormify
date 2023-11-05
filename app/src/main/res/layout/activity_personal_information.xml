@@ -1,6 +1,4 @@
-
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -69,7 +67,6 @@
             android:layout_marginTop="15dp">
 
 
-
             <!-- username -->
             <TextView
                 android:id="@+id/lblprofile_username"
@@ -79,7 +76,7 @@
                 android:text="Your Username"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/lblprofile_username2"
@@ -100,8 +97,7 @@
                 android:layout_marginTop="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblprofile_username"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/lblprofile_username">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/profile_username"
@@ -121,11 +117,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
-
-
             <!-- email -->
             <TextView
                 android:id="@+id/lblprofile_email"
@@ -135,7 +126,7 @@
                 android:text="Your Full Name"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/profile_usernameLayout"/>
+                app:layout_constraintTop_toBottomOf="@+id/profile_usernameLayout" />
 
             <TextView
                 android:id="@+id/lblprofile_email2"
@@ -171,7 +162,6 @@
                     app:backgroundTint="@color/black"
                     app:backgroundTintMode="multiply" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <!-- number -->
@@ -238,10 +228,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
-
             <!-- password -->
             <TextView
                 android:id="@+id/lblconfirmPassword"
@@ -251,7 +237,7 @@
                 android:text="Your Password"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/login_mobile_numberLayout"/>
+                app:layout_constraintTop_toBottomOf="@+id/login_mobile_numberLayout" />
 
             <TextView
                 android:id="@+id/lblconfirmPassword2"
@@ -300,7 +286,7 @@
                 android:textColor="@color/txt_clr_dark"
                 app:layout_constraintTop_toBottomOf="@+id/confirmPasswordLayout"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ProgressBar
                 android:id="@+id/profile_progress_bar"

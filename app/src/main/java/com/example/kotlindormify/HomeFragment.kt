@@ -1,4 +1,3 @@
-
 package com.example.kotlindormify
 
 import android.content.Intent
@@ -38,7 +37,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
     private lateinit var googleMap: GoogleMap
     private val DEFAULT_LATITUDE = 14.998027206214473 // Replace with your desired default latitude
-    private val DEFAULT_LONGITUDE = 120.65611294250105 // Replace with your desired default longitude
+    private val DEFAULT_LONGITUDE =
+        120.65611294250105 // Replace with your desired default longitude
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 123
     private val DEFAULT_ZOOM_LEVEL = 35f
@@ -51,7 +51,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
 
         // Check and request location permission
@@ -74,15 +73,15 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
         allDormitoriesRecyclerView = view.findViewById<RecyclerView>(R.id.rvAllDormitories)
         val savedDormitoriesRecyclerView = view.findViewById<RecyclerView>(R.id.rvSavedDormitories)
 
-        allDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        allDormitoriesLayoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager
 
         allDormitoriesLayoutManager2 = GridLayoutManager(requireContext(), 2)
 
 
-
-
-        val savedDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val savedDormitoriesLayoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         savedDormitoriesRecyclerView.layoutManager = savedDormitoriesLayoutManager
 
         val allDormitoriesList: MutableList<Dormitory> = mutableListOf()
@@ -113,16 +112,17 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
         val tvExpandList = view.findViewById<TextView>(R.id.tvSeeAll)
 
-        
-        tvExpandList.setOnClickListener{
-            if(!listExpanded){
+
+        tvExpandList.setOnClickListener {
+            if (!listExpanded) {
                 allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager2
 
                 tvExpandList.text = "Collapse List"
                 listExpanded = true
 
-            }else{
-                allDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            } else {
+                allDormitoriesLayoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager
 
                 tvExpandList.text = "Expand List"
@@ -134,7 +134,12 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
 
         val spannableString = SpannableString("View All Saved")
-        spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            UnderlineSpan(),
+            0,
+            spannableString.length,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         tvSeeAllSaved.text = spannableString
 
         tvSeeAllSaved.setOnClickListener {
@@ -145,11 +150,10 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             transaction.commit()
 
             // Set the selected item in the bottom navigation view
-            val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            val bottomNavigationView =
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
             bottomNavigationView.menu.findItem(R.id.menu_save).isChecked = true
         }
-
-
 
 
         // Query and display all dormitories
@@ -160,7 +164,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
 
         // Initialize the map
-        val mapFragment = childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         // Find the button that will expand/shrink the map
@@ -173,16 +178,14 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
             var condition = true
 
-            if(condition){
+            if (condition) {
 
                 toggleMapHeight(toggleMapButton) // Pass the button as an argument
-            }else{
+            } else {
 
             }
             condition = !condition
         }
-
-
 
 
     }
@@ -210,24 +213,24 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             // Add markers for dormitories and include their positions in the bounds
             // Add markers for dormitories and include their positions in the bounds
             for (dormitory in allDormitories) {
-                    val dormitoryLocation = LatLng(
-                        dormitory.latitude ?: DEFAULT_LATITUDE,
-                        dormitory.longitude ?: DEFAULT_LONGITUDE
-                    )
+                val dormitoryLocation = LatLng(
+                    dormitory.latitude ?: DEFAULT_LATITUDE,
+                    dormitory.longitude ?: DEFAULT_LONGITUDE
+                )
 
-                    // Set the custom marker icon
-                    val markerOptions = MarkerOptions()
-                        .position(dormitoryLocation)
-                        .title("${dormitory.dormName}")
-                        .snippet("${dormitory.address}")
-                        .icon(customMarkerIcon)
+                // Set the custom marker icon
+                val markerOptions = MarkerOptions()
+                    .position(dormitoryLocation)
+                    .title("${dormitory.dormName}")
+                    .snippet("${dormitory.address}")
+                    .icon(customMarkerIcon)
 
-                    val marker = googleMap.addMarker(markerOptions)
+                val marker = googleMap.addMarker(markerOptions)
 
-                    // Include the dormitory's position in the bounds
-                    boundsBuilder.include(dormitoryLocation)
+                // Include the dormitory's position in the bounds
+                boundsBuilder.include(dormitoryLocation)
 
-                    // Add an info window for the marker
+                // Add an info window for the marker
 
                 googleMap.setOnMarkerClickListener { marker ->
                     // Show the info window for the clicked marker
@@ -242,12 +245,19 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
                 // Add a click listener to the info window's title
                 googleMap.setOnInfoWindowClickListener { clickedMarker ->
-                    val dormitoryLocation = clickedMarker.position // Get the LatLng of the clicked marker
-                    val dormitoryName = clickedMarker.title ?: "Dormitory Name" // Use the dormitory's name as the label, or provide a default name
-                    val dormitorySnippet = clickedMarker.snippet ?: "Dormitory Snippet" // Use the marker's snippet as the address, or provide a default snippet
+                    val dormitoryLocation =
+                        clickedMarker.position // Get the LatLng of the clicked marker
+                    val dormitoryName = clickedMarker.title
+                        ?: "Dormitory Name" // Use the dormitory's name as the label, or provide a default name
+                    val dormitorySnippet = clickedMarker.snippet
+                        ?: "Dormitory Snippet" // Use the marker's snippet as the address, or provide a default snippet
 
                     // Create an Intent to open the Google Maps app with a pinned marker at the specified location
-                    val gmmIntentUri = Uri.parse("geo:${dormitoryLocation.latitude},${dormitoryLocation.longitude}?z=15&q=${dormitoryLocation.latitude},${dormitoryLocation.longitude}(${Uri.encode(dormitoryName)})")
+                    val gmmIntentUri = Uri.parse(
+                        "geo:${dormitoryLocation.latitude},${dormitoryLocation.longitude}?z=15&q=${dormitoryLocation.latitude},${dormitoryLocation.longitude}(${
+                            Uri.encode(dormitoryName)
+                        })"
+                    )
 
                     val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                     mapIntent.setPackage("com.google.android.apps.maps") // Specify the Google Maps package
@@ -259,7 +269,10 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                         // If the Google Maps app is not installed, handle it accordingly
                         // You can open a web-based map or prompt the user to install the app.
                         // Example: Open a web-based map
-                        val webMapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/?api=1&query=${dormitoryLocation.latitude},${dormitoryLocation.longitude}"))
+                        val webMapIntent = Intent(
+                            Intent.ACTION_VIEW,
+                            Uri.parse("https://www.google.com/maps/search/?api=1&query=${dormitoryLocation.latitude},${dormitoryLocation.longitude}")
+                        )
                         startActivity(webMapIntent)
                     }
                 }
@@ -293,8 +306,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
     }
 
 
-
-
     private fun toggleMapHeight(button: Button) { // Accept the button as an argument
         // Find the map view by its ID
         val mapView = requireView().findViewById<View>(R.id.ivMapView)
@@ -315,7 +326,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
         isMapExpanded = !isMapExpanded
 
         // Update the button text based on the new state
-        val buttonDrawableId = if (isMapExpanded) R.drawable.dorm_maximize else R.drawable.dorm_minimize
+        val buttonDrawableId =
+            if (isMapExpanded) R.drawable.dorm_maximize else R.drawable.dorm_minimize
         button.setBackgroundResource(buttonDrawableId)
     }
 
@@ -345,7 +357,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val username = dormitoryDocument.getString("username")
                     val description = dormitoryDocument.getString("description")
                     val permitImage = dormitoryDocument.getString("permitImage")
-                    val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                    val pendingRequestsCount =
+                        dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                     val rentalTerm = dormitoryDocument.getString("rentalTerm")
                     val bathroom = dormitoryDocument.getString("bathroom")
                     val electric = dormitoryDocument.getString("electric")
@@ -354,12 +367,33 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val amenities = dormitoryDocument.get("amenities") as? List<String>
 
 
-
-
                     // Add other dormitory fields as needed
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities)
+                    val dormitory = Dormitory(
+                        dormName,
+                        dormPrice,
+                        dormitoryId,
+                        numOfRooms,
+                        imageUrl,
+                        landlordId,
+                        qrCodeImageUrl,
+                        latitude,
+                        longitude,
+                        address,
+                        phoneNumber,
+                        email,
+                        username,
+                        description,
+                        permitImage,
+                        pendingRequestsCount,
+                        rentalTerm,
+                        bathroom,
+                        electric,
+                        water,
+                        paymentOptions,
+                        amenities
+                    )
                     allDormitories.add(dormitory)
                 }
                 callback(allDormitories)
@@ -379,7 +413,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
                     val userDocument = querySnapshot.documents[0]
-                    val savedDormitoryIds = userDocument["savedDormitories"] as? List<String> ?: emptyList()
+                    val savedDormitoryIds =
+                        userDocument["savedDormitories"] as? List<String> ?: emptyList()
                     callback(savedDormitoryIds)
                 } else {
                     // No user found, return an empty list
@@ -392,7 +427,10 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             }
     }
 
-    private fun queryDormitoryDetails(dormitoryIds: List<String>, callback: (List<Dormitory>) -> Unit) {
+    private fun queryDormitoryDetails(
+        dormitoryIds: List<String>,
+        callback: (List<Dormitory>) -> Unit
+    ) {
         val firestore = FirebaseFirestore.getInstance()
         val dormitoriesRef = firestore.collection("dormitories")
 
@@ -420,7 +458,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val username = dormitoryDocument.getString("username")
                     val description = dormitoryDocument.getString("description")
                     val permitImage = dormitoryDocument.getString("permitImage")
-                    val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                    val pendingRequestsCount =
+                        dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                     val rentalTerm = dormitoryDocument.getString("rentalTerm")
                     val bathroom = dormitoryDocument.getString("bathroom")
                     val electric = dormitoryDocument.getString("electric")
@@ -430,7 +469,30 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     // Add other dormitory fields as needed
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount, rentalTerm, bathroom, electric, water, paymentOptions, amenities)
+                    val dormitory = Dormitory(
+                        dormName,
+                        dormPrice,
+                        dormitoryId,
+                        numOfRooms,
+                        imageUrl,
+                        landlordId,
+                        qrCodeImageUrl,
+                        latitude,
+                        longitude,
+                        address,
+                        phoneNumber,
+                        email,
+                        username,
+                        description,
+                        permitImage,
+                        pendingRequestsCount,
+                        rentalTerm,
+                        bathroom,
+                        electric,
+                        water,
+                        paymentOptions,
+                        amenities
+                    )
                     dormitoriesList.add(dormitory)
 
 
@@ -445,11 +507,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                 }
         }
     }
-
-
-
-
-
 
 
 }

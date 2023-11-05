@@ -42,8 +42,6 @@ class AssignTenantFragment : Fragment() {
         recyclerView.adapter = roomListAdapter
 
 
-
-
         // Add this code to your app's initialization (e.g., in your Application class or activity's onCreate)
         val firestore = FirebaseFirestore.getInstance()
 
@@ -75,7 +73,8 @@ class AssignTenantFragment : Fragment() {
                 roomList.clear()
 
                 for (roomDocument in querySnapshot.documents) {
-                    val roomNumber = roomDocument.getLong("roomNumber")?.toInt() // Retrieve as Long and convert to Int
+                    val roomNumber = roomDocument.getLong("roomNumber")
+                        ?.toInt() // Retrieve as Long and convert to Int
                     val availability = roomDocument.getString("availability")
                     val tenantId = roomDocument.getString("tenantId")
                     val tenantName = roomDocument.getString("tenantName")
@@ -154,19 +153,28 @@ class AssignTenantFragment : Fragment() {
 
                                 // Now update the room's availability to "occupied"
                                 val roomNumber = selectedRoom!!.roomNumber
-                                val roomRef = firestore.collection("dormitories").document(dormitoryId)
-                                    .collection("rooms")
-                                    .whereEqualTo("roomNumber", roomNumber)
+                                val roomRef =
+                                    firestore.collection("dormitories").document(dormitoryId)
+                                        .collection("rooms")
+                                        .whereEqualTo("roomNumber", roomNumber)
 
                                 roomRef.get()
                                     .addOnSuccessListener { querySnapshot ->
                                         if (!querySnapshot.isEmpty) {
                                             val roomDocument = querySnapshot.documents[0]
-                                            roomDocument.reference.update("availability", "occupied", "tenantId", requesterId, "tenantName", requesterFullName)
+                                            roomDocument.reference.update(
+                                                "availability",
+                                                "occupied",
+                                                "tenantId",
+                                                requesterId,
+                                                "tenantName",
+                                                requesterFullName
+                                            )
                                         }
 
                                         // Clone the requester's data to the "tenant" collection
-                                        val tenantRef = firestore.collection("tenant").document(requestId)
+                                        val tenantRef =
+                                            firestore.collection("tenant").document(requestId)
                                         val tenantData = mapOf(
                                             "requesterFullName" to requesterFullName,
                                             "requesterId" to requesterId,
@@ -176,15 +184,27 @@ class AssignTenantFragment : Fragment() {
                                         )
                                         tenantRef.set(tenantData)
                                             .addOnSuccessListener {
-                                                Toast.makeText(requireContext(), "Request has been accepted", Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Request has been accepted",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                             }
                                             .addOnFailureListener { e ->
-                                                Toast.makeText(requireContext(), "Error accepting the request", Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(
+                                                    requireContext(),
+                                                    "Error accepting the request",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                             }
                                     }
                                     .addOnFailureListener { e ->
                                         // Handle the failure to query and update room availability
-                                        Toast.makeText(requireContext(), "Error accepting the request", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Error accepting the request",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                     }
                             }
                             .addOnFailureListener { e ->
@@ -193,23 +213,19 @@ class AssignTenantFragment : Fragment() {
                     }
                     .addOnFailureListener { e ->
                         // Handle the failure to update the request status
-                        Toast.makeText(requireContext(), "Error accepting the request", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Error accepting the request",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
             }
         } else {
             // Handle the case where no room is selected
-            Toast.makeText(requireContext(), "Please select a room first.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please select a room first.", Toast.LENGTH_SHORT)
+                .show()
         }
     }
-
-
-
-
-
-
-
-
-
 
 
 }

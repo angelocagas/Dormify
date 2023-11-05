@@ -34,7 +34,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-
 class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var userId: String
@@ -51,11 +50,6 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val btnRemoveFromSaved = view.findViewById<Button>(R.id.btnRemoveFromSaved)
         val btnRent = view.findViewById<Button>(R.id.inquirebtn)
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture)
-
-
-
-
-
 
 
         // Retrieve dormitory data from arguments
@@ -83,10 +77,6 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val username = arguments?.getString("username")
         val amenities = arguments?.getStringArrayList("amenities")
         val paymentOptions = arguments?.getStringArrayList("paymentOptions")
-
-
-
-
 
 
         val activity = requireActivity() as DashboardActivity
@@ -170,7 +160,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         }
 
         // Initialize the map
-        val mapFragment = childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         // Check if latitude and longitude are available
@@ -192,7 +183,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
             // Move the camera to the dormitory's location
             googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(dormitoryLocation, 15f))
-        }else{
+        } else {
             Toast.makeText(requireContext(), "wala yung lat long", Toast.LENGTH_SHORT).show()
         }
 
@@ -213,7 +204,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             val requestRentFragment = RequestRentFragment()
             requestRentFragment.arguments = bundle
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, requestRentFragment )
+            transaction.replace(R.id.fragment_container, requestRentFragment)
             transaction.addToBackStack(null) // Optional: Add to the back stack if needed
             transaction.commit()
         }
@@ -239,15 +230,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         }
 
 
-
-
-
-
-
-
         // Initialize Firebase Firestore
         val firestore = FirebaseFirestore.getInstance()
-
 
 
         // Check if the dormitory is already saved for the current user
@@ -320,14 +304,14 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             chatFragment.arguments = bundle
 
 
-
 // Replace the current fragment with ChatFragment using a fragment transaction
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, chatFragment)
             transaction.addToBackStack(null) // Optional: Add to back stack for navigation
             transaction.commit()
 
-            val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            val bottomNavigationView =
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
             bottomNavigationView.menu.findItem(R.id.menu_chat).isChecked = true
 
         }
@@ -343,7 +327,11 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         return view
     }
 
-    private fun checkIfDormitoryIsSaved(userEmail: String, dormitoryId: String, callback: (Boolean) -> Unit) {
+    private fun checkIfDormitoryIsSaved(
+        userEmail: String,
+        dormitoryId: String,
+        callback: (Boolean) -> Unit
+    ) {
         val firestore = FirebaseFirestore.getInstance()
         // Query user document by email
         firestore.collection("users")
@@ -352,7 +340,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
                     val userDocument = querySnapshot.documents[0]
-                    val savedDormitories = userDocument["savedDormitories"] as? List<String> ?: emptyList()
+                    val savedDormitories =
+                        userDocument["savedDormitories"] as? List<String> ?: emptyList()
                     // Check if the dormitoryId is in the list of saved dormitories
                     val isSaved = savedDormitories.contains(dormitoryId)
                     callback(isSaved)
@@ -407,7 +396,11 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             }
     }
 
-    private fun removeDormitoryFromSaved(userEmail: String, dormitoryId: String, callback: () -> Unit) {
+    private fun removeDormitoryFromSaved(
+        userEmail: String,
+        dormitoryId: String,
+        callback: () -> Unit
+    ) {
         val firestore = FirebaseFirestore.getInstance()
         // Fetch the user's ID based on their email
         fetchUserIdFromFirestore(userEmail) { userId ->
@@ -428,8 +421,10 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
+
     private fun initMap() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
@@ -456,7 +451,11 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             // Show the info window without the need for clicking the marker
             marker?.showInfoWindow()
         } else {
-            Toast.makeText(requireContext(), "Latitude and longitude not available", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Latitude and longitude not available",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

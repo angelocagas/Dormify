@@ -5,8 +5,6 @@
     android:padding="8dp">
 
 
-
-
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/left_chat_layout"
@@ -22,7 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#424242"
-            android:text="This is opponent message"/>
+            android:text="This is opponent message" />
     </LinearLayout>
 
 </RelativeLayout>

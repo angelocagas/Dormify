@@ -10,7 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlindormify.R
 
-class RoomListAdapter(private var roomList: List<Room>) : RecyclerView.Adapter<RoomListAdapter.ViewHolder>() {
+class RoomListAdapter(private var roomList: List<Room>) :
+    RecyclerView.Adapter<RoomListAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val roomNumberTextView: TextView = itemView.findViewById(R.id.textRoomNumber)
@@ -30,14 +31,21 @@ class RoomListAdapter(private var roomList: List<Room>) : RecyclerView.Adapter<R
         holder.roomNumberTextView.text = "Room ${room.roomNumber}"
         holder.availabilityTextView.text = room.availability
 
-        if (holder.availabilityTextView.text == "available"){
-            holder.availabilityTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.available_success))
-        }else{
-            holder.availabilityTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.occupied_error))
+        if (holder.availabilityTextView.text == "available") {
+            holder.availabilityTextView.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.available_success
+                )
+            )
+        } else {
+            holder.availabilityTextView.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.occupied_error
+                )
+            )
         }
-
-
-
 
 
     }

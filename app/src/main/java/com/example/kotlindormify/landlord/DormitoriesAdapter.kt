@@ -36,7 +36,7 @@ class DormitoriesAdapter(private val dormitoriesList: MutableList<Dormitory>) :
         val dormNumOfRooms: TextView = itemView.findViewById(R.id.tvUnits)
         val btnEdit: ImageButton = itemView.findViewById(R.id.ibEdit)
         val btnDelete: ImageButton = itemView.findViewById(R.id.ibDelete)
-        val btnRequests: Button =  itemView.findViewById(R.id.btnRequests)
+        val btnRequests: Button = itemView.findViewById(R.id.btnRequests)
         val btnView: Button = itemView.findViewById(R.id.btnView)
         val availableRooms: TextView = itemView.findViewById(R.id.tvAvailable)
         val occupiedRooms: TextView = itemView.findViewById(R.id.tvOccupied)
@@ -70,11 +70,11 @@ class DormitoriesAdapter(private val dormitoriesList: MutableList<Dormitory>) :
         }
 
 
-
-
-
         // Check if counts are available for this dormitory
-        if (availableRoomsMap.containsKey(dormitory.dormitoryId) && occupiedRoomsMap.containsKey(dormitory.dormitoryId)) {
+        if (availableRoomsMap.containsKey(dormitory.dormitoryId) && occupiedRoomsMap.containsKey(
+                dormitory.dormitoryId
+            )
+        ) {
             val availableRoomsCount = availableRoomsMap[dormitory.dormitoryId]!!
             val occupiedRoomsCount = occupiedRoomsMap[dormitory.dormitoryId]!!
             holder.availableRooms.text = "${availableRoomsCount} available"
@@ -124,7 +124,11 @@ class DormitoriesAdapter(private val dormitoriesList: MutableList<Dormitory>) :
                 downloadImage(holder.itemView.context, imageUrl)
             } else {
                 // Handle the case when the image URL is not available
-                Toast.makeText(holder.itemView.context, "Image URL not available", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    holder.itemView.context,
+                    "Image URL not available",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
             true // Return true to indicate that the long click event is consumed
         }
@@ -202,17 +206,20 @@ class DormitoriesAdapter(private val dormitoriesList: MutableList<Dormitory>) :
                 val batch = firestore.batch()
 
                 for (userDocument in querySnapshot) {
-                    val updatedSavedDormitories = (userDocument["savedDormitories"] as? List<String> ?: emptyList()).toMutableList()
+                    val updatedSavedDormitories = (userDocument["savedDormitories"] as? List<String>
+                        ?: emptyList()).toMutableList()
                     updatedSavedDormitories.remove(dormitoryId)
-                    batch.update(userDocument.reference, "savedDormitories", updatedSavedDormitories)
+                    batch.update(
+                        userDocument.reference,
+                        "savedDormitories",
+                        updatedSavedDormitories
+                    )
                 }
 
                 // Commit the batch to update all affected user documents
                 batch.commit()
             }
     }
-
-
 
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
@@ -259,7 +266,10 @@ class DormitoriesAdapter(private val dormitoriesList: MutableList<Dormitory>) :
                     .asBitmap()
                     .load(imageUrl)
                     .into(object : CustomTarget<Bitmap>() {
-                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                        override fun onResourceReady(
+                            resource: Bitmap,
+                            transition: Transition<in Bitmap>?
+                        ) {
                             try {
                                 // Get the internal storage directory
                                 val internalStorageDir = context.getExternalFilesDir(null)

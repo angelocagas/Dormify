@@ -36,20 +36,26 @@ class RoomList2Adapter(
         holder.roomNumberTextView.text = "Room ${room.roomNumber}"
         holder.availabilityTextView.text = room.availability
 
-        if (holder.availabilityTextView.text == "available"){
-            holder.availabilityTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.available_success))
-        }else{
-            holder.availabilityTextView.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.occupied_error))
+        if (holder.availabilityTextView.text == "available") {
+            holder.availabilityTextView.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.available_success
+                )
+            )
+        } else {
+            holder.availabilityTextView.setTextColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.occupied_error
+                )
+            )
         }
 
         holder.itemView.setOnClickListener {
             val room = roomList[position]
             onRoomClick(room)
         }
-
-
-
-
 
 
     }

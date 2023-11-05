@@ -14,8 +14,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 
 
-
-class AllLandlordAdapter (private val usersList: List<Users>) :
+class AllLandlordAdapter(private val usersList: List<Users>) :
     RecyclerView.Adapter<AllLandlordAdapter.ViewHolder>() {
     private lateinit var userId: String
 
@@ -24,10 +23,8 @@ class AllLandlordAdapter (private val usersList: List<Users>) :
 
         val textemail: TextView = itemView.findViewById(R.id.tvEmail)
         val textusername: TextView = itemView.findViewById(R.id.tvUserName)
-        val textphonenumber : TextView = itemView.findViewById(R.id.etPhoneNumber)
+        val textphonenumber: TextView = itemView.findViewById(R.id.etPhoneNumber)
         // Add other views as needed based on your layout
-
-
 
 
         init {
@@ -42,7 +39,7 @@ class AllLandlordAdapter (private val usersList: List<Users>) :
                 bundle.putString("email", clickeduser.email)
                 bundle.putString("username", clickeduser.username)
                 bundle.putString("phoneNumber", clickeduser.phoneNumber)
-              //  bundle.putString("profileImageUrl", clickeduser.profileImageUrl)
+                //  bundle.putString("profileImageUrl", clickeduser.profileImageUrl)
 
 
                 // Add other dormitory details to the bundle as needed
@@ -59,27 +56,29 @@ class AllLandlordAdapter (private val usersList: List<Users>) :
         }
 
 
-
-
-    }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AllLandlordAdapter.ViewHolder {
-      val itemView = LayoutInflater.from(parent.context)
-           .inflate(R.layout.fragment_request_detail, parent, false)
-      return ViewHolder(itemView)
     }
 
-   override fun onBindViewHolder(holder: AllLandlordAdapter.ViewHolder, position: Int) {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): AllLandlordAdapter.ViewHolder {
+        val itemView = LayoutInflater.from(parent.context)
+            .inflate(R.layout.fragment_request_detail, parent, false)
+        return ViewHolder(itemView)
+    }
+
+    override fun onBindViewHolder(holder: AllLandlordAdapter.ViewHolder, position: Int) {
         val Users = usersList[position]
-       holder.textusername.text = Users.username
-       holder.textemail.text = Users.email
-       holder.textphonenumber.text = Users.phoneNumber
+        holder.textusername.text = Users.username
+        holder.textemail.text = Users.email
+        holder.textphonenumber.text = Users.phoneNumber
 
-    //  if (Users.image?.isNotEmpty() == true) {
-    //  Picasso.get().load(Users.image).into(holder.dormImage)
-    //          } else {
-    //      Handle the case where there's no image URL provided
-    //       You can set a default image or hide the ImageView
-    //       }
+        //  if (Users.image?.isNotEmpty() == true) {
+        //  Picasso.get().load(Users.image).into(holder.dormImage)
+        //          } else {
+        //      Handle the case where there's no image URL provided
+        //       You can set a default image or hide the ImageView
+        //       }
 
         // Bind other dormitory data to views as needed based on your layout
     }

@@ -78,8 +78,6 @@ class LandlordUnitsFragment : Fragment() {
         progressBar.visibility = View.VISIBLE
 
 
-
-
         // Reference to your "dormitories" collection in Firestore
         val firestore = FirebaseFirestore.getInstance()
         val dormitoriesRef = firestore.collection("dormitories")
@@ -112,10 +110,12 @@ class LandlordUnitsFragment : Fragment() {
                                     val dormName = dormitoryDocument.getString("dormName")
                                     val dormPrice = dormitoryDocument.getString("price")
                                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
-                                    val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
+                                    val numOfRooms =
+                                        dormitoryDocument.getLong("numOfRooms")?.toInt()
                                     val imageUrl = dormitoryDocument.getString("image")
                                     val landlordId = dormitoryDocument.getString("landlordId")
-                                    val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
+                                    val qrCodeImageUrl =
+                                        dormitoryDocument.getString("qrCodeImageUrl")
                                     val latitude = dormitoryDocument.getDouble("latitude")
                                     val longitude = dormitoryDocument.getDouble("longitude")
                                     val address = dormitoryDocument.getString("address")
@@ -124,16 +124,44 @@ class LandlordUnitsFragment : Fragment() {
                                     val username = dormitoryDocument.getString("username")
                                     val description = dormitoryDocument.getString("description")
                                     val permitImage = dormitoryDocument.getString("permitImage")
-                                    val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                                    val pendingRequestsCount =
+                                        dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                                     val rentalterm = dormitoryDocument.getString("rentalterm")
                                     val bathroom = dormitoryDocument.getString("bathroom")
                                     val electric = dormitoryDocument.getString("electric")
                                     val water = dormitoryDocument.getString("water")
-                                    val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
-                                    val amenities = dormitoryDocument.get("amenities") as? List<String>
+                                    val paymentOptions =
+                                        dormitoryDocument.get("paymentOptions") as? List<String>
+                                    val amenities =
+                                        dormitoryDocument.get("amenities") as? List<String>
 
                                     // Add dormitory to the list
-                                    dormitoriesList.add(Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalterm, bathroom, electric, water, paymentOptions, amenities))
+                                    dormitoriesList.add(
+                                        Dormitory(
+                                            dormName,
+                                            dormPrice,
+                                            dormitoryId,
+                                            numOfRooms,
+                                            imageUrl,
+                                            landlordId,
+                                            qrCodeImageUrl,
+                                            latitude,
+                                            longitude,
+                                            address,
+                                            phoneNumber,
+                                            email,
+                                            username,
+                                            description,
+                                            permitImage,
+                                            pendingRequestsCount,
+                                            rentalterm,
+                                            bathroom,
+                                            electric,
+                                            water,
+                                            paymentOptions,
+                                            amenities
+                                        )
+                                    )
                                 }
 
                                 // Notify the adapter that data has changed
@@ -183,7 +211,8 @@ class LandlordUnitsFragment : Fragment() {
                         .setMessage("Do you want to delete '${dormitoryToDelete.dormName}'?")
                         .setPositiveButton("Yes") { _, _ ->
                             // Reference to your "dormitories" collection in Firestore
-                            val dormitoriesRef = FirebaseFirestore.getInstance().collection("dormitories")
+                            val dormitoriesRef =
+                                FirebaseFirestore.getInstance().collection("dormitories")
 
                             // Delete the dormitory from Firestore based on its ID
                             dormitoriesRef.document(dormitoryIdToDelete).delete()
@@ -257,17 +286,44 @@ class LandlordUnitsFragment : Fragment() {
                         val username = dormitoryDocument.getString("username")
                         val description = dormitoryDocument.getString("description")
                         val permitImage = dormitoryDocument.getString("permitImage")
-                        val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                        val pendingRequestsCount =
+                            dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                         val rentalterm = dormitoryDocument.getString("rentalterm")
                         val bathroom = dormitoryDocument.getString("bathroom")
                         val electric = dormitoryDocument.getString("electric")
                         val water = dormitoryDocument.getString("water")
-                        val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
+                        val paymentOptions =
+                            dormitoryDocument.get("paymentOptions") as? List<String>
                         val amenities = dormitoryDocument.get("amenities") as? List<String>
 
 
                         // Add dormitory to the list
-                        dormitoriesList.add(Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalterm, bathroom, electric, water, paymentOptions, amenities))
+                        dormitoriesList.add(
+                            Dormitory(
+                                dormName,
+                                dormPrice,
+                                dormitoryId,
+                                numOfRooms,
+                                imageUrl,
+                                landlordId,
+                                qrCodeImageUrl,
+                                latitude,
+                                longitude,
+                                address,
+                                phoneNumber,
+                                email,
+                                username,
+                                description,
+                                permitImage,
+                                pendingRequestsCount,
+                                rentalterm,
+                                bathroom,
+                                electric,
+                                water,
+                                paymentOptions,
+                                amenities
+                            )
+                        )
                     }
 
                     // Notify the adapter that data has changed

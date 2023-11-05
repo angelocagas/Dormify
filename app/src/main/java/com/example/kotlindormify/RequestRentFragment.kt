@@ -66,7 +66,10 @@ class RequestRentFragment : Fragment() {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
+            startActivityForResult(
+                Intent.createChooser(intent, "Select Picture"),
+                PICK_IMAGE_REQUEST
+            )
         }
 
         binding.btnSubmit.setOnClickListener {
@@ -88,7 +91,8 @@ class RequestRentFragment : Fragment() {
             if (requesterFullName.isNotEmpty() && age.isNotEmpty() && address.isNotEmpty() &&
                 phoneNumber.isNotEmpty() && email.isNotEmpty() && emergencyFullName.isNotEmpty() &&
                 emergencyAddress.isNotEmpty() && emergencyPhoneNumber.isNotEmpty() && emergencyEmail.isNotEmpty() &&
-                selectedGenderPosition != 0) {
+                selectedGenderPosition != 0
+            ) {
                 showLoadingDialog()
 
                 if (isImageSelected) {
@@ -99,7 +103,8 @@ class RequestRentFragment : Fragment() {
                         val requestId = UUID.randomUUID().toString()
 
                         // Upload the image to Firebase Storage
-                        val storageRef = storage.reference.child("rental_requests_id").child("$requestId.jpg")
+                        val storageRef =
+                            storage.reference.child("rental_requests_id").child("$requestId.jpg")
                         val uploadTask = storageRef.putFile(selectedImageUri)
                         uploadTask.addOnSuccessListener { _ ->
                             // Get the download URL for the uploaded image
@@ -125,18 +130,19 @@ class RequestRentFragment : Fragment() {
 
                                 val doubleCheckDialog = AlertDialog.Builder(requireContext())
                                     .setTitle("Double Check")
-                                    .setMessage("Please double-check your information before submitting.\n\n" +
-                                            "Full Name: $requesterFullName\n" +
-                                            "Age: $age\n" +
-                                            "Gender: $selectedGender\n" +
-                                            "Address: $address\n" +
-                                            "Phone Number: $phoneNumber\n" +
-                                            "Email: $email\n" +
-                                            "Emergency Contact Name: $emergencyFullName\n" +
-                                            "Emergency Contact Address: $emergencyAddress\n" +
-                                            "Emergency Contact Phone: $emergencyPhoneNumber\n" +
-                                            "Emergency Contact Email: $emergencyEmail\n"
-                                            )
+                                    .setMessage(
+                                        "Please double-check your information before submitting.\n\n" +
+                                                "Full Name: $requesterFullName\n" +
+                                                "Age: $age\n" +
+                                                "Gender: $selectedGender\n" +
+                                                "Address: $address\n" +
+                                                "Phone Number: $phoneNumber\n" +
+                                                "Email: $email\n" +
+                                                "Emergency Contact Name: $emergencyFullName\n" +
+                                                "Emergency Contact Address: $emergencyAddress\n" +
+                                                "Emergency Contact Phone: $emergencyPhoneNumber\n" +
+                                                "Emergency Contact Email: $emergencyEmail\n"
+                                    )
                                     .setPositiveButton("Submit") { _, _ ->
                                         // Store the rental request in Firestore under the document with requestId
                                         firestore.collection("rental_requests")
@@ -163,10 +169,18 @@ class RequestRentFragment : Fragment() {
 
                                                 // Add the requestId to the dormitory's rental_requests subcollection
                                                 val dormitoryRequestsRef =
-                                                    firestore.collection("dormitories").document(dormitoryId!!)
+                                                    firestore.collection("dormitories")
+                                                        .document(dormitoryId!!)
                                                         .collection("rental_requests")
                                                 dormitoryRequestsRef.document(requestId)
-                                                    .set(mapOf("timestamp" to FieldValue.serverTimestamp(), "status" to "pending", "requesterFullName" to requesterFullName, "dormitoryId" to dormitoryId))
+                                                    .set(
+                                                        mapOf(
+                                                            "timestamp" to FieldValue.serverTimestamp(),
+                                                            "status" to "pending",
+                                                            "requesterFullName" to requesterFullName,
+                                                            "dormitoryId" to dormitoryId
+                                                        )
+                                                    )
                                                     .addOnSuccessListener {
                                                         // Successfully updated dormitory with rental request
                                                         // Optionally, navigate to a success screen or perform other actions
@@ -186,15 +200,24 @@ class RequestRentFragment : Fragment() {
                             }
                         }
                     } else {
-                        Toast.makeText(requireContext(), "Please agree to the terms and conditions.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Please agree to the terms and conditions.",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         progressDialog?.dismiss()
                     }
                 } else {
-                    Toast.makeText(requireContext(), "Please upload an image.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Please upload an image.", Toast.LENGTH_SHORT)
+                        .show()
                     progressDialog?.dismiss()
                 }
             } else {
-                Toast.makeText(requireContext(), "Please fill in all fields and select a gender.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Please fill in all fields and select a gender.",
+                    Toast.LENGTH_SHORT
+                ).show()
                 progressDialog?.dismiss()
             }
         }

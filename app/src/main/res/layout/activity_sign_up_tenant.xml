@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <!-- Add your background view here -->
+        <!-- Add your background view here -->
         <ImageView
             android:layout_width="match_parent"
 
@@ -49,7 +49,7 @@
                 android:fontFamily="@font/hind_guntur_bold"
                 android:text="Create"
                 android:layout_marginTop="30dp"
-              app:layout_constraintTop_toBottomOf="@id/imageView"
+                app:layout_constraintTop_toBottomOf="@id/imageView"
                 android:textColor="@color/dormify_clr"
                 android:textSize="40dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,12 +66,11 @@
                 android:fontFamily="@font/hind_guntur_bold"
                 android:text="Account"
                 android:layout_marginTop="-35dp"
-           app:layout_constraintTop_toBottomOf="@id/DORMIFY"
+                app:layout_constraintTop_toBottomOf="@id/DORMIFY"
                 android:textColor="@color/dormify_clr"
                 android:textSize="40dp"
                 app:layout_constraintStart_toStartOf="@id/DORMIFY"
                 tools:layout_editor_absoluteY="262dp" />
-
 
 
             <!-- Personal Information Section -->
@@ -86,8 +85,6 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/DORMIFY2" />
-
-
 
 
             <!-- Full Name -->
@@ -135,7 +132,6 @@
                     app:backgroundTint="@color/black"
                     app:backgroundTintMode="multiply" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <!-- Age -->
@@ -189,7 +185,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <!-- Address -->
 
             <TextView
@@ -235,9 +230,6 @@
                     app:backgroundTint="@color/black"
                     app:backgroundTintMode="multiply" />
             </com.google.android.material.textfield.TextInputLayout>
-
-
-
 
 
             <!-- Phone Number -->
@@ -434,7 +426,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
             <!-- Emergency Contact Section -->
             <TextView
                 android:id="@+id/tvAddTenants3"
@@ -492,7 +483,6 @@
                     app:backgroundTint="@color/black"
                     app:backgroundTintMode="multiply" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <!-- Emergency Address -->
@@ -586,7 +576,6 @@
                     app:backgroundTint="@color/black"
                     app:backgroundTintMode="multiply" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
 
             <!-- Emergency Email -->
@@ -713,8 +702,7 @@
                 android:textColor="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="125dp"
-                app:layout_constraintTop_toBottomOf="@+id/etFullNameLayout"
-                />
+                app:layout_constraintTop_toBottomOf="@+id/etFullNameLayout" />
 
             <TextView
                 android:id="@+id/Gender2"
@@ -808,8 +796,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/ivSelectedImage" />
 
 
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -883,6 +869,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
+
             <RadioGroup
                 android:id="@+id/rgRole"
                 android:layout_width="44dp"

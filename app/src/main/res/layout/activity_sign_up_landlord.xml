@@ -150,8 +150,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
             <!-- Emergency Full Name -->
             <TextView
                 android:id="@+id/lbletpasswordLayout"

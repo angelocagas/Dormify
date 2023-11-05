@@ -79,20 +79,20 @@
         app:srcCompat="@drawable/logo_no_bg" />
 
     <Button
-                android:id="@+id/btngettingstarted1"
-                android:layout_width="243dp"
-                android:layout_height="55dp"
-                android:fontFamily="@font/hind"
-                android:background="@drawable/bg_btn_bck_light"
-                android:text="Get Started"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.488"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.767"
-                android:onClick="goToSignInPage"/>
+        android:id="@+id/btngettingstarted1"
+        android:layout_width="243dp"
+        android:layout_height="55dp"
+        android:fontFamily="@font/hind"
+        android:background="@drawable/bg_btn_bck_light"
+        android:text="Get Started"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.767"
+        android:onClick="goToSignInPage" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

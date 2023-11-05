@@ -27,6 +27,24 @@ data class Dormitories(
 ) {
     // No-argument constructor
     constructor() : this(
-        null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
     )
 }

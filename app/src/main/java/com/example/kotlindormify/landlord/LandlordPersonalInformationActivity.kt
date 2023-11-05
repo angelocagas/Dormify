@@ -141,7 +141,8 @@ class LandlordPersonalInformationActivity : AppCompatActivity() {
                 finish()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to update profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to update profile: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 
@@ -175,7 +176,13 @@ class LandlordPersonalInformationActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUserData(username: String, email: String, mobileNumber: String, password: String, profilePictureUri: Uri?) {
+    private fun updateUserData(
+        username: String,
+        email: String,
+        mobileNumber: String,
+        password: String,
+        profilePictureUri: Uri?
+    ) {
         val user = auth.currentUser
 
         if (user != null) {
@@ -199,16 +206,28 @@ class LandlordPersonalInformationActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 finish()
                                 progressDialog?.dismiss()
-                                Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    "Profile updated successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                         .addOnFailureListener { e ->
-                            Toast.makeText(this, "Failed to update profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                "Failed to update profile: ${e.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             progressDialog?.dismiss()
                         }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Reauthentication failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Reauthentication failed: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     progressDialog?.dismiss()
                 }
         } else {

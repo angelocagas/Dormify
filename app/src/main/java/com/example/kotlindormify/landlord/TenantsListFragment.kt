@@ -36,7 +36,7 @@ class TenantsListFragment : Fragment() {
         val dormitoryId = arguments?.getString("dormitoryId")
 
 
-            fetchTenantList()
+        fetchTenantList()
 
 
         return rootView
@@ -53,7 +53,8 @@ class TenantsListFragment : Fragment() {
                 for (tenantDocument in querySnapshot.documents) {
                     // Retrieve tenant data and add it to the list
                     val requesterFullName = tenantDocument.getString("requesterFullName")
-                    val roomNumber = tenantDocument.getLong("roomNumber")?.toInt() // Retrieve as Long and convert to Int
+                    val roomNumber = tenantDocument.getLong("roomNumber")
+                        ?.toInt() // Retrieve as Long and convert to Int
 
                     if (requesterFullName != null && roomNumber != null) {
                         tenantList.add(Tenant(roomNumber, requesterFullName))

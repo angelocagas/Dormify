@@ -7,7 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlindormify.R
 
-class TenantsListAdapter(private var tenantList: List<Tenant>) : RecyclerView.Adapter<TenantsListAdapter.ViewHolder>() {
+class TenantsListAdapter(private var tenantList: List<Tenant>) :
+    RecyclerView.Adapter<TenantsListAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tenantName: TextView = itemView.findViewById(R.id.textTenantName)

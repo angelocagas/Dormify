@@ -28,7 +28,7 @@ class ChatFragment : Fragment() {
     private lateinit var tvDormName: TextView
 
 
-            override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
