@@ -2,10 +2,12 @@ package com.example.kotlindormify
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlindormify.databinding.ActivitySignInBinding
 import com.example.kotlindormify.landlord.LandlordDashboardActivity
@@ -41,6 +43,20 @@ class SignInActivity : AppCompatActivity() {
         binding.button.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val password = binding.passET.text.toString()
+
+            if (email.isEmpty()) {
+                binding.emailLayout.error = "Email is required"
+            } else {
+                binding.emailLayout.error = null // Clear the error if not empty
+            }
+
+            if (password.isEmpty()) {
+                binding.passwordLayout.error = "Password is required"
+            } else {
+                binding.passwordLayout.error = null // Clear the error if not empty
+            }
+
+
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 // Show loading ProgressBar
@@ -84,7 +100,7 @@ class SignInActivity : AppCompatActivity() {
                                                         progressDialog?.dismiss()
                                                     }
                                                     else -> {
-                                                        Toast.makeText(this@SignInActivity, "Invalid role", Toast.LENGTH_SHORT).show()
+                                                        showAlert("Invalid role")
                                                         progressDialog?.dismiss()
                                                     }
                                                 }
@@ -92,18 +108,18 @@ class SignInActivity : AppCompatActivity() {
                                             }
                                         }
                                         // If execution reaches here, no matching user was found
-                                        Toast.makeText(this@SignInActivity, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                                        showAlert("Login failed.")
                                         progressDialog?.dismiss()
                                     }
                                     .addOnFailureListener { e ->
                                         // Handle database error
-                                        Toast.makeText(this@SignInActivity, "Database error:", Toast.LENGTH_SHORT).show()
+                                        showAlert("Database error: $e")
                                         progressDialog?.dismiss()
                                     }
                             }
                         } else {
                             // Authentication failed
-                            Toast.makeText(this@SignInActivity, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                            showAlert("Password is invalid.")
                             progressDialog?.dismiss()
                         }
                     }
@@ -111,10 +127,10 @@ class SignInActivity : AppCompatActivity() {
                         // Hide loading ProgressBar
                         progressDialog?.dismiss()
                         // Handle authentication error
-                        Toast.makeText(this@SignInActivity, "Authentication error: ${e.message}", Toast.LENGTH_SHORT).show()
+                        showAlert("Login Failed: ${e.message}")
                     }
             } else {
-                Toast.makeText(this@SignInActivity, "Empty fields are not allowed.", Toast.LENGTH_SHORT).show()
+                showAlert("Please fill all fields.")
                 progressDialog?.dismiss()
             }
         }
@@ -125,5 +141,12 @@ class SignInActivity : AppCompatActivity() {
         progressDialog?.setMessage("Logging In ...") // Set the message you want to display
         progressDialog?.setCancelable(false) // Prevents user from dismissing the dialog by tapping outside
         progressDialog?.show()
+    }
+
+    fun showAlert(message: String) {
+        AlertDialog.Builder(this)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 }
