@@ -3,6 +3,7 @@ package com.example.kotlindormify
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -433,7 +434,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
-    private fun addDormitoryMarker(latitude: Double?, longitude: Double?, dormName: String?) {
+    private fun addDormitoryMarker(latitude: Double?, longitude: Double?, dormName: String?, address: String) {
         if (latitude != null && longitude != null) {
             // Create a LatLng object for the dormitory's location
             val dormitoryLocation = LatLng(latitude, longitude)
@@ -446,12 +447,45 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
                 .position(dormitoryLocation)
                 .title(dormName) // Use dormName without the $ symbol
                 .icon(customMarkerIcon)
+                .snippet(address)
                 .anchor(0.5f, 1.0f)
 // Add a marker for the dormitory's location with the custom icon
             val marker = googleMap?.addMarker(markerOptions)
 
+            googleMap?.setOnMarkerClickListener { marker ->
+                // Show the info window for the clicked marker
+                marker.showInfoWindow()
+
+                true
+            }
+
+            googleMap?.setOnInfoWindowClickListener { clickedMarker ->
+                val dormitoryLocation = clickedMarker.position // Get the LatLng of the clicked marker
+                val dormitoryName = clickedMarker.title ?: "Dormitory Name" // Use the dormitory's name as the label, or provide a default name
+                val dormitorySnippet = clickedMarker.snippet ?: "Dormitory Snippet" // Use the marker's snippet as the address, or provide a default snippet
+
+                // Create an Intent to open the Google Maps app with a pinned marker at the specified location
+                val gmmIntentUri = Uri.parse("geo:${dormitoryLocation.latitude},${dormitoryLocation.longitude}?z=15&q=${dormitoryLocation.latitude},${dormitoryLocation.longitude}(${Uri.encode(dormitoryName)})")
+
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps") // Specify the Google Maps package
+
+                // Check if the Google Maps app is installed
+                if (mapIntent.resolveActivity(requireContext().packageManager) != null) {
+                    startActivity(mapIntent)
+                } else {
+                    // If the Google Maps app is not installed, handle it accordingly
+                    // You can open a web-based map or prompt the user to install the app.
+                    // Example: Open a web-based map
+                    val webMapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/?api=1&query=${dormitoryLocation.latitude},${dormitoryLocation.longitude}"))
+                    startActivity(webMapIntent)
+                }
+            }
+
             // Move the camera to the dormitory's location
             googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(dormitoryLocation, 15f))
+
+            googleMap?.uiSettings?.isMapToolbarEnabled = false
 
             // Show the info window without the need for clicking the marker
             marker?.showInfoWindow()
@@ -475,7 +509,10 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val latitude = arguments?.getDouble("latitude")
         val longitude = arguments?.getDouble("longitude")
         val dormName = arguments?.getString("dormName")
-        addDormitoryMarker(latitude, longitude, dormName)
+        val address = arguments?.getString("address")
+        if (address != null) {
+            addDormitoryMarker(latitude, longitude, dormName, address)
+        }
 
         // Enable zoom controls
         googleMap!!.uiSettings.isZoomControlsEnabled = true
