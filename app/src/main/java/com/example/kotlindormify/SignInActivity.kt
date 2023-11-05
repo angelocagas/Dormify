@@ -56,84 +56,113 @@ class SignInActivity : AppCompatActivity() {
                 binding.passwordLayout.error = null // Clear the error if not empty
             }
 
-
-
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 // Show loading ProgressBar
                 showLoadingDialog()
 
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { authTask ->
-                        // Hide loading ProgressBar
-                        if (authTask.isSuccessful) {
-                            val user = auth.currentUser
-                            if (user != null) {
-                                // Successfully authenticated
-                                firestore.collection("users")
-                                    .whereEqualTo("email", email)
-                                    .get()
-                                    .addOnSuccessListener { querySnapshot ->
-                                        loadingProgressBar.visibility = View.GONE
-                                        if (!querySnapshot.isEmpty) {
-                                            for (document in querySnapshot) {
-                                                val user = document.toObject(Users::class.java)
-                                                val selectedRole = user.role
-                                                when (selectedRole) {
-                                                    1 -> {
-                                                        // Proceed to MainActivity for Tenant
-                                                        val intent = Intent(this@SignInActivity, DashboardActivity::class.java)
-                                                        val userEmail = email // Retrieve the user's email from the sign-in response or authentication object
-                                                        val prefManager = PrefManager(this@SignInActivity) // Initialize PrefManager with the context
-                                                        prefManager.setUserEmail(userEmail)
-                                                        startActivity(intent)
-                                                        finish()
+                if (!isValidEmail(email)) {
+                    binding.emailLayout.error = "Invalid email format"
+                    progressDialog?.dismiss()
+                    return@setOnClickListener
+                } else {
+                    binding.emailLayout.error = null // Clear the error if the email format is valid
+                }
+
+                // Check if the email exists in Firestore before attempting authentication
+                firestore.collection("users")
+                    .whereEqualTo("email", email)
+                    .get()
+                    .addOnSuccessListener { querySnapshot ->
+                        if (!querySnapshot.isEmpty) {
+                            // The email exists in Firestore, proceed with authentication
+                                auth.signInWithEmailAndPassword(email, password)
+                                    .addOnCompleteListener { authTask ->
+                                        // Hide loading ProgressBar
+                                        binding.passwordLayout.error = null
+
+                                        if (authTask.isSuccessful) {
+                                            // User successfully authenticated
+                                            val user = auth.currentUser
+                                            if (user != null) {
+                                                // Proceed to fetch user data from Firestore
+                                                firestore.collection("users")
+                                                    .whereEqualTo("email", email)
+                                                    .get()
+                                                    .addOnSuccessListener { querySnapshot ->
+                                                        loadingProgressBar.visibility = View.GONE
+                                                        if (!querySnapshot.isEmpty) {
+                                                            for (document in querySnapshot) {
+                                                                val user = document.toObject(Users::class.java)
+                                                                val selectedRole = user.role
+                                                                when (selectedRole) {
+                                                                    1 -> {
+                                                                        // Proceed to MainActivity for Tenant
+                                                                        val intent = Intent(this@SignInActivity, DashboardActivity::class.java)
+                                                                        val userEmail = email
+                                                                        val prefManager = PrefManager(this@SignInActivity)
+                                                                        prefManager.setUserEmail(userEmail)
+                                                                        startActivity(intent)
+                                                                        finish()
+                                                                        progressDialog?.dismiss()
+                                                                    }
+                                                                    2 -> {
+                                                                        // Proceed to SecondaryActivity for Dorm Landlord
+                                                                        val intent = Intent(this@SignInActivity, LandlordDashboardActivity::class.java)
+                                                                        val userEmail = email
+                                                                        val prefManager = PrefManager(this@SignInActivity)
+                                                                        prefManager.setUserEmail(userEmail)
+                                                                        startActivity(intent)
+                                                                        finish()
+                                                                        progressDialog?.dismiss()
+                                                                    }
+                                                                    else -> {
+                                                                        showAlert("Invalid role")
+                                                                        progressDialog?.dismiss()
+                                                                    }
+                                                                }
+                                                            }
+                                                        } else {
+                                                            // No matching user found in Firestore
+                                                            showAlert("We couldn't find any registered users with this email address.")
+                                                            progressDialog?.dismiss()
+                                                        }
+                                                    }
+                                                    .addOnFailureListener { e ->
+                                                        // Handle Firestore database error
+                                                        showAlert("Database error: $e")
                                                         progressDialog?.dismiss()
                                                     }
-                                                    2 -> {
-                                                        // Proceed to SecondaryActivity for Dorm Landlord
-                                                        val intent = Intent(this@SignInActivity, LandlordDashboardActivity::class.java)
-                                                        val userEmail = email // Retrieve the user's email from the sign-in response or authentication object
-                                                        val prefManager = PrefManager(this@SignInActivity) // Initialize PrefManager with the context
-                                                        prefManager.setUserEmail(userEmail)
-                                                        startActivity(intent)
-                                                        finish()
-                                                        progressDialog?.dismiss()
-                                                    }
-                                                    else -> {
-                                                        showAlert("Invalid role")
-                                                        progressDialog?.dismiss()
-                                                    }
-                                                }
-                                                return@addOnSuccessListener // Exit the loop since we found a matching user
                                             }
+                                        } else {
+                                            // Authentication failed
+                                            showAlert("Invalid password.")
+                                            binding.passwordLayout.error = "Invalid password."
+                                            progressDialog?.dismiss()
                                         }
-                                        // If execution reaches here, no matching user was found
-                                        showAlert("Login failed.")
-                                        progressDialog?.dismiss()
                                     }
                                     .addOnFailureListener { e ->
-                                        // Handle database error
-                                        showAlert("Database error: $e")
+                                        // Hide loading ProgressBar
                                         progressDialog?.dismiss()
                                     }
-                            }
                         } else {
-                            // Authentication failed
-                            showAlert("Password is invalid.")
+                            // No matching user found in Firestore
+                            showAlert("We couldn't find any registered users with this email address.")
                             progressDialog?.dismiss()
                         }
                     }
                     .addOnFailureListener { e ->
-                        // Hide loading ProgressBar
+                        // Handle Firestore database error
+                        showAlert("Database error: $e")
                         progressDialog?.dismiss()
-                        // Handle authentication error
-                        showAlert("Login Failed: ${e.message}")
                     }
             } else {
                 showAlert("Please fill all fields.")
                 progressDialog?.dismiss()
             }
         }
+
+
+
     }
 
     private fun showLoadingDialog() {
@@ -149,4 +178,10 @@ class SignInActivity : AppCompatActivity() {
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
     }
+    // Function to validate email format
+    private fun isValidEmail(email: String): Boolean {
+        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+        return email.matches(emailPattern.toRegex())
+    }
+
 }
