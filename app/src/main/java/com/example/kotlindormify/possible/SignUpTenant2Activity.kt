@@ -1,14 +1,11 @@
-package com.example.kotlindormify
+package com.example.kotlindormify.possible
 
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.kotlindormify.databinding.ActivitySignUpBinding
 import com.example.kotlindormify.databinding.ZactivitySignUp2Binding
-import com.example.kotlindormify.profile.TermsAndConditions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -35,7 +32,14 @@ class SignUpTenant2Activity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
 
 
+        binding.selectbtn2.setOnClickListener {
 
+
+
+
+            val intent = Intent(this, SignUpTenantMainActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }

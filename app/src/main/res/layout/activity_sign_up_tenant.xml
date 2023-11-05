@@ -128,7 +128,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Please enter your Full Name"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -170,7 +169,7 @@
                 app:hintEnabled="false"
                 android:layout_marginTop="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/spinnerGender"
+                app:layout_constraintEnd_toStartOf="@+id/spinnerGendertenant"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblAge">
@@ -180,7 +179,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Your Age"
                     android:maxLength="3"
                     android:inputType="number"
                     android:minHeight="48dp"
@@ -230,7 +228,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/etAddress2"
-                    android:hint="Please enter your Address"
                     android:inputType="textPostalAddress"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -292,7 +289,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="9123456789"
                     android:inputType="number"
                     android:maxLength="10"
                     android:minHeight="48dp"
@@ -341,7 +337,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/etEmail"
-                    android:hint="Please enter your Email"
                     android:inputType="textEmailAddress"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -390,7 +385,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:hint="Type Your Password (Min. 6 characters)"
                     android:inputType="textPassword"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -435,7 +429,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
-                    android:hint="Retype Your Password"
                     android:inputType="textPassword"
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -492,7 +485,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Please enter the Full Name"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -540,7 +532,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Please enter the Address"
                     android:inputType="textPostalAddress"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -587,7 +578,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Please enter the Phone Number"
                     android:maxLength="11"
                     android:inputType="number"
                     android:minHeight="48dp"
@@ -637,7 +627,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Please enter the Email"
                     android:inputType="textEmailAddress"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -738,7 +727,7 @@
                 app:layout_constraintTop_toTopOf="@+id/lblGender" />
 
             <Spinner
-                android:id="@+id/spinnerGender"
+                android:id="@+id/spinnerGendertenant"
                 android:layout_width="184dp"
                 android:layout_height="40dp"
                 android:entries="@array/gender_choices"
@@ -824,7 +813,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button"
+                android:id="@+id/buttonTenant"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
@@ -846,7 +835,7 @@
                 android:gravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button">
+                app:layout_constraintTop_toBottomOf="@+id/buttonTenant">
 
                 <TextView
 
@@ -894,6 +883,40 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
+            <RadioGroup
+                android:id="@+id/rgRole"
+                android:layout_width="44dp"
+                android:layout_height="28dp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <RadioButton
+                    android:id="@+id/rbTenant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:fontFamily="@font/poppins"
+                    android:textAlignment="textStart"
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <RadioButton
+                    android:id="@+id/rbLandlord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </RadioGroup>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

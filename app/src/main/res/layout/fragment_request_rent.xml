@@ -146,7 +146,7 @@
             app:hintEnabled="false"
             android:layout_marginTop="1dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/spinnerGender"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerGendertenant"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblAge">

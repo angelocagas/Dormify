@@ -35,15 +35,21 @@
             android:exported="false"
             android:theme="@style/Theme.LoginAndSignUp"/>
         <activity
-            android:name=".SignUpTenant1Activity"
+            android:name=".SignUpTenantActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LoginAndSignUp"/>
+
+
+        <activity
+            android:name=".possible.SignUpTenant1Activity"
             android:exported="false"
             android:theme="@style/Theme.LoginAndSignUp"/>
         <activity
-            android:name=".SignUpTenant2Activity"
+            android:name=".possible.SignUpTenant2Activity"
             android:exported="false"
             android:theme="@style/Theme.LoginAndSignUp"/>
         <activity
-            android:name=".SignUpTenantMainActivity"
+            android:name=".possible.SignUpTenantMainActivity"
             android:exported="false"
             android:theme="@style/Theme.LoginAndSignUp"/>
 

@@ -5,25 +5,23 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.widget.ArrayAdapter
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
+import com.example.kotlindormify.databinding.ActivitySignUpBinding
 import com.example.kotlindormify.databinding.ActivitySignUpLandlordBinding
-import com.example.kotlindormify.databinding.ZactivitySignUp1Binding
+import com.example.kotlindormify.databinding.ActivitySignUpTenantBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.storage.FirebaseStorage
 import java.io.IOException
-import java.util.UUID
 
-class SignUpTenant1Activity : AppCompatActivity() {
+class SignUpTenantActivity : AppCompatActivity() {
 
-    private lateinit var binding: ZactivitySignUp1Binding
+
+    private lateinit var binding: ActivitySignUpTenantBinding
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private val PICK_IMAGE_REQUEST = 1
@@ -36,7 +34,7 @@ class SignUpTenant1Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ZactivitySignUp1Binding.inflate(layoutInflater)
+        binding = ActivitySignUpTenantBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
 
@@ -45,19 +43,39 @@ class SignUpTenant1Activity : AppCompatActivity() {
 
         binding.loginCountrycode.setCountryForPhoneCode(63)
 
+        binding.textView.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
-
-        binding.selectbtn1.setOnClickListener {
+        binding.buttonTenant.setOnClickListener {
             val username = binding.etFullName.text.toString()
+            val age = binding.etAge.text.toString()
+            val address = binding.etAddress2.text.toString()
+
             val email = binding.etEmail.text.toString()
             val password = binding.passET.text.toString()
             val confirmPassword = binding.confirmPassEt.text.toString()
 
 
+            val fullName = binding.etEmergencyFullName.text.toString()
+            val emAddress = binding.etEmergencyAddress.text.toString()
+            val emphoneNumber = binding.etEmergencyPhoneNumber.text.toString()
+            val emEmail = binding.etEmergencyEmail.text.toString()
+
+            val progressBar = binding.progressBar
+            val cbAgreement = binding.cbAgreement
+
+
 
             // Check if an image has been selected
             if (!isImageSelected) {
-                Toast.makeText(this, "Please upload an image", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener // Prevent further execution of the click listener
+            }
+            if (!cbAgreement.isChecked) {
+                Toast.makeText(this, "Please agree to the terms and conditions to continue", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Prevent further execution of the click listener
             }
 
@@ -109,8 +127,9 @@ class SignUpTenant1Activity : AppCompatActivity() {
                                                                     .document(userId)
                                                                     .set(user)
                                                                     .addOnSuccessListener {
+                                                                        progressBar.visibility = ProgressBar.GONE
                                                                         uploadProfilePicture(userId)
-                                                                        val intent = Intent(this, SignUpTenant2Activity::class.java)
+                                                                        val intent = Intent(this, SignInActivity::class.java)
                                                                         startActivity(intent)
                                                                         Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_SHORT).show()
                                                                         finish()
@@ -153,11 +172,11 @@ class SignUpTenant1Activity : AppCompatActivity() {
             }
         }
 
-        binding.ivSelectedImage.setOnClickListener {
+        binding.btnAddImage2.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(Intent.createChooser(intent, "Upload Profile Photo to Continue"), PICK_IMAGE_REQUEST)
+            startActivityForResult(Intent.createChooser(intent, "Select Profile Photo to Continue"), PICK_IMAGE_REQUEST)
         }
     }
 
@@ -228,4 +247,7 @@ class SignUpTenant1Activity : AppCompatActivity() {
         progressDialog?.show()
     }
 
+
+
 }
+
