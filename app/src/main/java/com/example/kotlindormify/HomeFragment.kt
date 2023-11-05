@@ -218,7 +218,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     // Set the custom marker icon
                     val markerOptions = MarkerOptions()
                         .position(dormitoryLocation)
-                        .title(dormitory.dormName)
+                        .title("${dormitory.dormName}")
                         .snippet("${dormitory.address}")
                         .icon(customMarkerIcon)
 
@@ -230,7 +230,13 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     // Add an info window for the marker
 
                 googleMap.setOnMarkerClickListener { marker ->
+                    // Show the info window for the clicked marker
                     marker.showInfoWindow()
+
+                    // Center the camera on the clicked marker
+                    val cameraUpdate = CameraUpdateFactory.newLatLng(marker.position)
+                    googleMap.moveCamera(cameraUpdate)
+
                     true
                 }
 
@@ -238,6 +244,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                 googleMap.setOnInfoWindowClickListener { clickedMarker ->
                     val dormitoryLocation = clickedMarker.position // Get the LatLng of the clicked marker
                     val dormitoryName = clickedMarker.title ?: "Dormitory Name" // Use the dormitory's name as the label, or provide a default name
+                    val dormitorySnippet = clickedMarker.snippet ?: "Dormitory Snippet" // Use the marker's snippet as the address, or provide a default snippet
 
                     // Create an Intent to open the Google Maps app with a pinned marker at the specified location
                     val gmmIntentUri = Uri.parse("geo:${dormitoryLocation.latitude},${dormitoryLocation.longitude}?z=15&q=${dormitoryLocation.latitude},${dormitoryLocation.longitude}(${Uri.encode(dormitoryName)})")
