@@ -67,6 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         app:boxStrokeColor="@color/violet"
+        app:boxStrokeErrorColor="@color/colorError"
         app:hintTextColor="@color/violet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +78,7 @@
             style="@style/LoginTextInputInnerFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Type your Email"
+            android:hint="Email"
             android:fontFamily="@font/poppins"
             android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -88,6 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:boxStrokeColor="@color/violet"
+        app:boxStrokeErrorColor="@color/colorError"
         app:hintTextColor="@color/violet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +103,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             app:boxStrokeColor="@color/violet"
-            android:hint="Type Your Password"
+            android:hint="Password"
             android:inputType="textPassword"
             tools:ignore="TouchTargetSizeCheck" />
     </com.google.android.material.textfield.TextInputLayout>
