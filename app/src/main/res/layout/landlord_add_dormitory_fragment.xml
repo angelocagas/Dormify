@@ -44,11 +44,12 @@
 
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/nestedScrollView"
 
-        >
+        tools:layout_editor_absoluteX="-43dp"
+        tools:layout_editor_absoluteY="-162dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -59,19 +60,17 @@
             >
 
 
-
             <TextView
                 android:id="@+id/lblDormDetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="55dp"
-                android:textSize="18sp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Dormitory Details"
                 android:textColor="#000000"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/lblDormName"
@@ -108,7 +107,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Dormitory Name"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -153,7 +151,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Rooms"
                     android:inputType="number"
                     android:maxLength="2"
                     android:minHeight="48dp"
@@ -198,13 +195,12 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="161dp"
-                    android:hint="Description"
-                    android:gravity="top"
-                    android:textAlignment="textStart"
+                    android:gravity="top|start"
                     android:inputType="textMultiLine"
                     android:lines="5"
                     android:maxLines="5"
                     android:minHeight="48dp"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     app:backgroundTint="@color/black"
@@ -290,7 +286,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Address"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
@@ -324,10 +319,10 @@
                 android:id="@+id/radioBathroom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblBathroom"
                 android:orientation="horizontal"
-                app:flow_horizontalAlign="center">
+                app:flow_horizontalAlign="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblBathroom">
 
                 <RadioButton
                     android:id="@+id/radioShared"
@@ -372,65 +367,65 @@
                 android:id="@+id/radioRentalTerms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
                 android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblRentalTerms"
 
                 >
 
-            <RadioButton
-                android:id="@+id/radioButtonMonth"
-                android:layout_width="0dp"
+                <RadioButton
+                    android:id="@+id/radioButtonMonth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Per Month" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonSemester"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Per Semester" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonYear"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Per Year" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/lblDormPricingDetails"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Per Month" />
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Pricing Details"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioRentalTerms" />
 
-            <RadioButton
-                android:id="@+id/radioButtonSemester"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/lblPrice"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Per Semester" />
+                android:layout_marginTop="20dp"
+                android:text="Price (₱)"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDormPricingDetails" />
 
-            <RadioButton
-                android:id="@+id/radioButtonYear"
-                android:layout_width="0dp"
+            <TextView
+                android:id="@+id/lblPrice2"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Per Year" />
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/lblDormPricingDetails"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:textSize="18dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Pricing Details"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioRentalTerms" />
-
-        <TextView
-            android:id="@+id/lblPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Price (₱)"
-            android:textColor="#000000"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblDormPricingDetails" />
-
-        <TextView
-            android:id="@+id/lblPrice2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-2dp"
-            android:text="*"
-            android:textColor="@android:color/holo_red_light"
-            app:layout_constraintStart_toEndOf="@+id/lblPrice"
-            app:layout_constraintTop_toTopOf="@+id/lblPrice" />
+                android:layout_marginTop="-2dp"
+                android:text="*"
+                android:textColor="@android:color/holo_red_light"
+                app:layout_constraintStart_toEndOf="@+id/lblPrice"
+                app:layout_constraintTop_toTopOf="@+id/lblPrice" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etPriceLayout"
@@ -447,9 +442,8 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Price"
-                    android:maxLength="5"
                     android:inputType="numberDecimal"
+                    android:maxLength="5"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -482,27 +476,27 @@
                 android:id="@+id/radioElectricity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblElectricity"
                 android:orientation="horizontal"
-                app:flow_horizontalAlign="center">
+                app:flow_horizontalAlign="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblElectricity">
 
                 <RadioButton
                     android:id="@+id/radioIncluded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="Included"
                     android:textColor="@color/available_success"
-                    android:textStyle="bold"
-                    android:text="Included" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioExcluded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#EF3636"
-                    android:text="Excluded" />
+                    android:text="Excluded"
+                    android:textColor="#EF3636" />
 
 
             </RadioGroup>
@@ -532,27 +526,27 @@
                 android:id="@+id/radioWater"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblWater"
                 android:orientation="horizontal"
-                app:flow_horizontalAlign="center">
+                app:flow_horizontalAlign="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblWater">
 
                 <RadioButton
                     android:id="@+id/radioWaterIncluded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="Included"
                     android:textColor="@color/available_success"
-                    android:textStyle="bold"
-                    android:text="Included" />
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/radioWaterExcluded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#EF3636"
-                    android:text="Excluded" />
+                    android:text="Excluded"
+                    android:textColor="#EF3636" />
 
             </RadioGroup>
 
@@ -612,6 +606,7 @@
                 android:id="@+id/lblMapLocation2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="-112dp"
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
@@ -634,6 +629,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:elevation="2dp">
+
                     <fragment
                         android:id="@+id/ivMapView"
                         android:name="com.google.android.gms.maps.SupportMapFragment"
@@ -655,10 +651,10 @@
                         android:id="@+id/btnPinLocation"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
                         android:background="@drawable/dorm_pinadd"
                         android:paddingHorizontal="10dp"
                         android:text=""
-                        android:layout_marginStart="10dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         tools:layout_editor_absoluteY="25dp" />
 
@@ -700,10 +696,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textSize="18dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Landlord Contact Details"
                 android:textColor="#000000"
+                android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
@@ -742,9 +738,8 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone Number"
-                    android:maxLength="10"
                     android:inputType="number"
+                    android:maxLength="10"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -787,7 +782,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -830,7 +824,6 @@
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Landlord Name"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -843,10 +836,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:textSize="18dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Supporting Photos"
                 android:textColor="#000000"
+                android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etUsernameLayout" />
 
@@ -861,6 +854,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblDormSupporting">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/imageRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/ivSelectedImage"
@@ -889,18 +892,16 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btnAddPermitImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:background="@drawable/rectangle_radius_white_stroke_black"
                 android:paddingVertical="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnAddImage"
-                android:background="@drawable/rectangle_radius_white_stroke_black">
+                app:layout_constraintTop_toBottomOf="@+id/btnAddImage">
 
                 <ImageView
                     android:id="@+id/ivSelectedPermitImage"
@@ -934,8 +935,8 @@
                 android:id="@+id/cbAgreement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
                 android:layout_marginTop="10dp"
+                android:minHeight="48dp"
                 android:text=" I agree to the terms and condition of Dormify"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -947,33 +948,33 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="170dp"
                 android:layout_height="41dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/bg_btn_bck_light"
                 android:text="Submit"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="5dp"
-                app:layout_constraintTop_toBottomOf="@+id/cbAgreement"
                 app:layout_constraintEnd_toStartOf="@+id/btnCancel"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cbAgreement" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCancel"
                 android:layout_width="170dp"
                 android:layout_height="41dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="80dp"
                 android:background="@drawable/rectangle_radius_light_gray"
+                android:backgroundTint="@color/clear"
+                android:clipToOutline="true"
                 android:text="Cancel"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:backgroundTint="@color/clear"
-                android:clipToOutline="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cbAgreement"
                 app:layout_constraintStart_toEndOf="@+id/btnSubmit"
-                android:layout_marginBottom="80dp"
+                app:layout_constraintTop_toBottomOf="@+id/cbAgreement"
                 app:layout_constraintVertical_bias="1.0" />
 
 

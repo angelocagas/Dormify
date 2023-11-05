@@ -7,10 +7,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlindormify.databinding.ActivitySignUpBinding
+import com.example.kotlindormify.profile.TermsAndConditions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpTenantMainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     private lateinit var firestore: FirebaseFirestore
@@ -76,7 +77,7 @@ class SignUpActivity : AppCompatActivity() {
 
             if (binding.rbTenant.isChecked) {
                 // Launch the activity for Tenant
-                val intent = Intent(this, SignUpTenant1Activity::class.java)
+                val intent = Intent(this, TermsAndConditions::class.java)
                 startActivity(intent)
 
 

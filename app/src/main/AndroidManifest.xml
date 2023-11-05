@@ -31,8 +31,21 @@
         android:theme="@style/AppTheme.Light">
 
         <activity
-            android:name=".SignUpOtpActivity"
-            android:exported="false" />
+            android:name=".SignUpLandlordActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LoginAndSignUp"/>
+        <activity
+            android:name=".SignUpTenant1Activity"
+            android:exported="false"
+            android:theme="@style/Theme.LoginAndSignUp"/>
+        <activity
+            android:name=".SignUpTenant2Activity"
+            android:exported="false"
+            android:theme="@style/Theme.LoginAndSignUp"/>
+        <activity
+            android:name=".SignUpTenantMainActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LoginAndSignUp"/>
 
         <activity
             android:name=".profile.TermsAndConditions"
