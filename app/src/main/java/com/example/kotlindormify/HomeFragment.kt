@@ -32,6 +32,8 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.location.Geocoder
 import android.net.Uri
+import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
 
 
 class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
@@ -45,13 +47,18 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
     private var isMapExpanded = false
     private var listExpanded = false
+    private lateinit var allDormitoriesAdapter: AllDormitoriesAdapter
+
     private lateinit var allDormitoriesRecyclerView: RecyclerView
     private lateinit var allDormitoriesLayoutManager: LinearLayoutManager
     private lateinit var allDormitoriesLayoutManager2: GridLayoutManager
 
+    private lateinit var tvSort: TextView
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
 
         // Check and request location permission
@@ -79,60 +86,41 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
         allDormitoriesLayoutManager2 = GridLayoutManager(requireContext(), 2)
 
-
-
-
         val savedDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         savedDormitoriesRecyclerView.layoutManager = savedDormitoriesLayoutManager
 
         val allDormitoriesList: MutableList<Dormitory> = mutableListOf()
         val savedDormitoriesList: MutableList<Dormitory> = mutableListOf()
 
-        val allDormitoriesAdapter = AllDormitoriesAdapter(allDormitoriesList)
+        allDormitoriesAdapter = AllDormitoriesAdapter(allDormitoriesList)
         val savedDormitoriesAdapter = AllDormitoriesAdapter(savedDormitoriesList)
 
         allDormitoriesRecyclerView.adapter = allDormitoriesAdapter
         savedDormitoriesRecyclerView.adapter = savedDormitoriesAdapter
 
 
-        val activity = requireActivity() as DashboardActivity
-        val currentUserEmail = activity.userEmail
+        val tvExpandList = view.findViewById<TextView>(R.id.tvSeeAll)
+        val btnSort = view.findViewById<ConstraintLayout>(R.id.clFilters)
 
-        // Fetch saved dormitory IDs for the current user
-        if (currentUserEmail != null) {
-            fetchSavedDormitoryIds(currentUserEmail) { savedDormitoryIds ->
-                // Query dormitory details based on saved IDs
-                queryDormitoryDetails(savedDormitoryIds) { savedDormitories ->
-                    // Add the retrieved saved dormitories to the list with reversing
-                    savedDormitoriesList.clear()
-                    savedDormitoriesList.addAll(savedDormitories)
-                    savedDormitoriesAdapter.notifyDataSetChanged()
-                }
-            }
+        tvSort = view.findViewById<TextView>(R.id.tvAllDormitories2)
+
+        btnSort.setOnClickListener {
+            showSortOptionsDialog()
         }
 
-        val tvExpandList = view.findViewById<TextView>(R.id.tvSeeAll)
-
-        
-        tvExpandList.setOnClickListener{
-            if(!listExpanded){
+        tvExpandList.setOnClickListener {
+            if (!listExpanded) {
                 allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager2
-
                 tvExpandList.text = "Collapse List"
                 listExpanded = true
-
-            }else{
-                allDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            } else {
                 allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager
-
                 tvExpandList.text = "Expand List"
                 listExpanded = false
             }
         }
 
         val tvSeeAllSaved = view.findViewById<TextView>(R.id.tvSeeAllSaved)
-
-
         val spannableString = SpannableString("View All Saved")
         spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         tvSeeAllSaved.text = spannableString
@@ -155,6 +143,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
         // Query and display all dormitories
         queryAllDormitories { allDormitories ->
             allDormitoriesList.addAll(allDormitories)
+            allDormitoriesAdapter.sortByDistanceAscending()
             allDormitoriesAdapter.notifyDataSetChanged()
         }
 
@@ -444,6 +433,67 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     callback(emptyList())
                 }
         }
+    }
+
+    private var sortingOptions = arrayOf(
+        "Name (Z - A ↓)",
+        "Name (A - Z ↑)",
+        "Price (Lowest - Highest ↑)",
+        "Price (Highest to Lowest ↓)",
+        "Distance (Closest to DHVSU)",
+        "Distance (Farthest from DHVSU)"
+    )
+
+    private fun showSortOptionsDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Sort By:")
+            .setItems(sortingOptions) { _, which ->
+                when (which) {
+                    0 -> {
+                        allDormitoriesAdapter.sortByNameDescending()
+                        tvSort.text = "Sorted by Name (Z - A)"
+                        updateSortingOptionText(0)
+
+                    }
+                    1 -> {
+                        allDormitoriesAdapter.sortByNameAscending()
+                        tvSort.text = "Sorted by Name (A - Z)"
+                        updateSortingOptionText(1)
+                    }
+                    2 -> {
+                        allDormitoriesAdapter.sortByPriceAscending()
+                        tvSort.text = "Sorted by Price (Lowest - Highest)"
+                        updateSortingOptionText(2)
+                    }
+                    3 -> {
+                        allDormitoriesAdapter.sortByPriceDescending()
+                        tvSort.text = "Sorted by Price (Highest to Lowest)"
+                        updateSortingOptionText(3)
+                    }
+                    4 -> {
+                        allDormitoriesAdapter.sortByDistanceAscending()
+                        tvSort.text = "Sorted by Distance (Closest to DHVSU)"
+                        updateSortingOptionText(4)
+                    }
+                    5 -> {
+                        allDormitoriesAdapter.sortByDistanceDescending()
+                        tvSort.text = "Sorted by Distance (Farthest from DHVSU)"
+                        updateSortingOptionText(5)
+                    }
+
+                }
+            }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun updateSortingOptionText(selectedIndex: Int) {
+        // Remove "(Selected)" from all options
+        sortingOptions = sortingOptions.map { it.replace("  ✔", "") }.toTypedArray()
+
+        // Update the text of the selected option
+        sortingOptions[selectedIndex] += "  ✔"
+        // Update the dialog with the modified options
     }
 
 

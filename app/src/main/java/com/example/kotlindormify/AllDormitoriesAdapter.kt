@@ -16,8 +16,66 @@ import com.squareup.picasso.Picasso
 import kotlin.math.*
 
 
-class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
+class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
     RecyclerView.Adapter<AllDormitoriesAdapter.ViewHolder>() {
+
+    private enum class SortType {
+        NONE, NAME_ASCENDING, NAME_DESCENDING, PRICE_ASCENDING, PRICE_DESCENDING, DISTANCE_ASCENDING, DISTANCE_DESCENDING
+    }
+
+    private var currentSortType = SortType.NONE
+
+    fun sortByNameAscending() {
+        currentSortType = SortType.NAME_ASCENDING
+        dormitoriesList = dormitoriesList.sortedWith(compareBy { it.dormName?.lowercase() })
+        notifyDataSetChanged()
+    }
+
+    fun sortByNameDescending() {
+        currentSortType = SortType.NAME_DESCENDING
+        dormitoriesList = dormitoriesList.sortedWith(compareByDescending { it.dormName?.lowercase() })
+        notifyDataSetChanged()
+    }
+
+
+    fun sortByPriceAscending() {
+        currentSortType = SortType.PRICE_ASCENDING
+        dormitoriesList = dormitoriesList.sortedBy { it.dormPrice?.toDouble() }
+        notifyDataSetChanged()
+    }
+
+    fun sortByPriceDescending() {
+        currentSortType = SortType.PRICE_DESCENDING
+        dormitoriesList = dormitoriesList.sortedByDescending { it.dormPrice?.toDouble() }
+        notifyDataSetChanged()
+    }
+
+
+    fun sortByDistanceAscending() {
+        currentSortType = SortType.DISTANCE_ASCENDING
+        dormitoriesList = dormitoriesList.sortedBy { dormitory ->
+            calculateDistance(
+                dormitory.latitude ?: 0.0,
+                dormitory.longitude ?: 0.0,
+                14.998027206214473,
+                120.65611294250105
+            )
+        }
+        notifyDataSetChanged()
+    }
+
+    fun sortByDistanceDescending() {
+        currentSortType = SortType.DISTANCE_DESCENDING
+        dormitoriesList = dormitoriesList.sortedByDescending { dormitory ->
+            calculateDistance(
+                dormitory.latitude ?: 0.0,
+                dormitory.longitude ?: 0.0,
+                14.998027206214473,
+                120.65611294250105
+            )
+        }
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val DEFAULT_LATITUDE = 14.998027206214473 // Replace with your desired default latitude
