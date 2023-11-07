@@ -138,13 +138,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         //dorm multi image select
 
         // Set a LinearLayoutManager for the RecyclerView
-        imageRecyclerView = binding.imageRecyclerView
-        imageRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        // Initialize the imageAdapter with the selectedImageUris and set it to the RecyclerView
-        imageAdapter = ImageAdapter(selectedImageUris)
-        imageRecyclerView.adapter = imageAdapter
 
 
         binding.btnAddImage.setOnClickListener {

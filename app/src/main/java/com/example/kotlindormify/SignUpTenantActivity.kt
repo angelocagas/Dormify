@@ -11,8 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
-import com.example.kotlindormify.databinding.ActivitySignUpBinding
-import com.example.kotlindormify.databinding.ActivitySignUpLandlordBinding
+import com.bumptech.glide.Glide
 import com.example.kotlindormify.databinding.ActivitySignUpTenantBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
@@ -29,8 +28,12 @@ class SignUpTenantActivity : AppCompatActivity() {
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
     private val PICK_IMAGE_REQUEST = 1
-    private lateinit var selectedImageUri: Uri
     private var isImageSelected = false
+    private lateinit var selectedImageUri: Uri
+
+    private val PICK_IM_IMAGE_REQUEST2 = 2
+    private lateinit var selectedImageUri2: Uri
+    private var isImageSelected2 = false
 
     private var progressDialog: ProgressDialog? = null
 
@@ -45,7 +48,6 @@ class SignUpTenantActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        binding.loginCountrycode.setCountryForPhoneCode(63)
 
         binding.textView.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
@@ -53,8 +55,19 @@ class SignUpTenantActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.btnAddImage2.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(
+                Intent.createChooser(intent, "Select Picture"),
+                PICK_IM_IMAGE_REQUEST2
+            )
+        }
+
         val firestore = FirebaseFirestore.getInstance()
         val storage = FirebaseStorage.getInstance()
+        binding.loginCountrycode.setCountryForPhoneCode(63)
 
         val genderAdapter = ArrayAdapter.createFromResource(
             this,
@@ -64,23 +77,25 @@ class SignUpTenantActivity : AppCompatActivity() {
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerGendertenant.adapter = genderAdapter
 
-        binding.btnAddImage.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(
-                Intent.createChooser(intent, "Upload I.D Picture"),
-                PICK_IMAGE_REQUEST
-            )
-        }
+
 
         binding.buttonTenant.setOnClickListener {
-            val username = binding.etFullName.text.toString()
             val email = binding.etEmail.text.toString()
             val password = binding.passET.text.toString()
             val confirmPassword = binding.confirmPassEt.text.toString()
+            val username = binding.etFullName.text.toString()
             val progressBar = binding.progressBar
             val cbAgreement = binding.cbAgreement
+
+            val age = binding.etAge.text.toString()
+            val username2 = binding.etFullName.text.toString()
+            val email2 = binding.etEmail.text.toString()
+            val address = binding.etAddress2.text.toString()
+            val fullName = binding.etEmergencyFullName.text.toString()
+            val emAddress = binding.etEmergencyAddress.text.toString()
+            val emphoneNumber = binding.etEmergencyPhoneNumber.text.toString()
+            val emEmail = binding.etEmergencyEmail.text.toString()
+            val selectedGenderPosition = binding.spinnerGendertenant.selectedItemPosition
 
 
             // Check if an image has been selected
@@ -124,8 +139,7 @@ class SignUpTenantActivity : AppCompatActivity() {
                                                 binding.loginCountrycode.setCountryForPhoneCode(63)
                                                 val selectedCountryCode =
                                                     binding.loginCountrycode.selectedCountryCode
-                                                val phoneNumber =
-                                                    "+$selectedCountryCode$enteredPhoneNumber"
+                                                val phoneNumber = "+$selectedCountryCode$enteredPhoneNumber"
 
                                                 firestore.collection("users")
                                                     .whereEqualTo("username", username)
@@ -149,20 +163,9 @@ class SignUpTenantActivity : AppCompatActivity() {
                                                                     .document(userId)
                                                                     .set(user)
                                                                     .addOnSuccessListener {
-                                                                        progressBar.visibility =
-                                                                            ProgressBar.GONE
+                                                                        progressBar.visibility = ProgressBar.GONE
                                                                         uploadProfilePicture(userId)
-                                                                        val intent = Intent(
-                                                                            this,
-                                                                            SignInActivity::class.java
-                                                                        )
-                                                                        startActivity(intent)
-                                                                        Toast.makeText(
-                                                                            this,
-                                                                            "User Registered Successfully",
-                                                                            Toast.LENGTH_SHORT
-                                                                        ).show()
-                                                                        finish()
+
                                                                         progressDialog?.dismiss()
                                                                     }
                                                                     .addOnFailureListener { e ->
@@ -230,77 +233,79 @@ class SignUpTenantActivity : AppCompatActivity() {
             }
 
 
-        }
-
-
-        binding.buttonTenant.setOnClickListener {
-            val username = binding.etFullName.text.toString()
-            val age = binding.etAge.text.toString()
-            val address = binding.etAddress2.text.toString()
-            val email = binding.etEmail.text.toString()
-            //emergency
-            val fullName = binding.etEmergencyFullName.text.toString()
-            val emAddress = binding.etEmergencyAddress.text.toString()
-            val emphoneNumber = binding.etEmergencyPhoneNumber.text.toString()
-            val emEmail = binding.etEmergencyEmail.text.toString()
-            val selectedGenderPosition = binding.spinnerGendertenant.selectedItemPosition
-
-            val progressBar = binding.progressBar
-            val cbAgreement = binding.cbAgreement
-
-            if (username.isNotEmpty() && age.isNotEmpty() && address.isNotEmpty() && email.isNotEmpty() &&
+            if (username2.isNotEmpty() && age.isNotEmpty() && address.isNotEmpty() && email2.isNotEmpty() &&
                 fullName.isNotEmpty() && emAddress.isNotEmpty() && emphoneNumber.isNotEmpty() && emEmail.isNotEmpty() &&
-                selectedGenderPosition != 0) {
-                showLoadingDialog()
+                selectedGenderPosition != 0
+            ) {
 
-                if (isImageSelected) {
+                if (isImageSelected2) {
                     if (cbAgreement.isChecked) {
                         val selectedGender = binding.spinnerGendertenant.selectedItem.toString()
 
                         // Create a unique request ID
                         val requestId = UUID.randomUUID().toString()
 
-                        // Upload the image to Firebase Storage
-                        val storageRef =
-                            storage.reference.child("rental_requests_id").child("$requestId.jpg")
-                        val uploadTask = storageRef.putFile(selectedImageUri)
-
-                        //phone number
+                        // Phone number
                         val enteredPhoneNumber = binding.etEmergencyPhoneNumber.text.toString()
                         binding.loginCountrycode.setCountryForPhoneCode(63)
                         val selectedCountryCode = binding.loginCountrycode.selectedCountryCode
-                        val phoneNumber = "+$selectedCountryCode$enteredPhoneNumber"
+                        val phoneNumber2 = "+$selectedCountryCode$enteredPhoneNumber"
+
+                        // Upload the image to Firebase Storage
+                        val storageRef =
+                            storage.reference.child("rental_requests_id").child("$requestId.jpg")
+                        val uploadTask = storageRef.putFile(selectedImageUri2)
+                        uploadTask.addOnSuccessListener { _ ->
+                            // Get the download URL for the uploaded image
+                            storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
 
 
-                        // Store the download URL in the rental request data
-                        val rentalRequestData = hashMapOf(
-                            "requesterId" to FirebaseAuth.getInstance().currentUser?.uid,
-                            "timestamp" to FieldValue.serverTimestamp(),
-                            "status" to "pending",
-                            "requesterFullName" to username,
-                            "age" to age,
-                            "address" to address,
-                            "phoneNumber" to phoneNumber,
-                            "email" to email,
-                            "emergencyFullName" to fullName,
-                            "emergencyAddress" to emAddress,
-                            "emergencyPhoneNumber" to emphoneNumber,
-                            "emergencyEmail" to emEmail,
-                            "gender" to selectedGender
-                        )
+                                // Store the download URL in the rental request data
+                                val rentalRequestData = hashMapOf(
+                                    "timestamp" to FieldValue.serverTimestamp(),
+                                    "requesterFullName" to username2,
+                                    "age" to age,
+                                    "address" to address,
+                                    "phoneNumber" to phoneNumber2,
+                                    "email" to email2,
+                                    "emergencyFullName" to fullName,
+                                    "emergencyAddress" to emAddress,
+                                    "emergencyPhoneNumber" to emphoneNumber,
+                                    "emergencyEmail" to emEmail,
+                                    "gender" to selectedGender,
+                                    "idImageUrl" to downloadUri.toString()
+                                )
 
-                        // Store the rental request in Firestore under the document with requestId
-                        firestore.collection("rental_requests")
-                            .document(requestId)
-                            .set(rentalRequestData)
-                            .addOnSuccessListener {
-                                progressBar.visibility = ProgressBar.GONE
-                                //yung sa i.d
-                                //uploadIDPicture(requestId)
-                                finish()
-                                progressDialog?.dismiss()
+                                // Store the rental request in Firestore under the document with requestId
+                                firestore.collection("rental_requests")
+                                    .document(requestId)
+                                    .set(rentalRequestData)
+                                    .addOnSuccessListener {
+                                        progressBar.visibility = ProgressBar.GONE
+                                        val intent = Intent(
+                                            this,
+                                            SignInActivity::class.java
+                                        )
+                                        startActivity(intent)
+                                        Toast.makeText(
+                                            this,
+                                            "User Registered Successfully",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        finish()
+                                        progressDialog?.dismiss()
+                                    }
+                                    .addOnFailureListener { e ->
+                                        // Handle failure to store rental request data
+                                        Toast.makeText(
+                                            this,
+                                            "Failed to store rental request data",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        progressDialog?.dismiss()
+                                    }
                             }
-
+                        }
                     } else {
                         Toast.makeText(
                             this,
@@ -308,9 +313,9 @@ class SignUpTenantActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                         progressDialog?.dismiss()
-                    }
 
-                } else {
+                    }
+                }else {
                     Toast.makeText(this, "Please upload an image.", Toast.LENGTH_SHORT).show()
                     progressDialog?.dismiss()
                 }
@@ -322,11 +327,15 @@ class SignUpTenantActivity : AppCompatActivity() {
                 ).show()
                 progressDialog?.dismiss()
             }
+
+
         }
 
 
 
-        binding.btnAddImage2.setOnClickListener {
+
+
+        binding.btnAddImage.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -335,6 +344,8 @@ class SignUpTenantActivity : AppCompatActivity() {
                 PICK_IMAGE_REQUEST
             )
         }
+
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -355,6 +366,15 @@ class SignUpTenantActivity : AppCompatActivity() {
                 e.printStackTrace()
             }
         }
+
+        if (requestCode == PICK_IM_IMAGE_REQUEST2 && resultCode == RESULT_OK && data != null && data.data != null) {
+            selectedImageUri2 = data.data!!
+            Glide.with(this)
+                .load(selectedImageUri2)
+                .into(binding.ivId)
+            isImageSelected2 = true
+        }
+
     }
 
     private fun uploadProfilePicture(userId: String) {

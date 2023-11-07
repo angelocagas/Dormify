@@ -40,13 +40,17 @@ class SignUpLandlordActivity : AppCompatActivity() {
         firestore = FirebaseFirestore.getInstance()
         auth = FirebaseAuth.getInstance()
 
-        binding.loginCountrycode.setCountryForPhoneCode(63)
 
         binding.textView.setOnClickListener {
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
             finish()
         }
+
+
+        binding.loginCountrycode.setCountryForPhoneCode(63)
+
+
 
         binding.buttonlandlord.setOnClickListener {
             val email = binding.emailEt.text.toString()
