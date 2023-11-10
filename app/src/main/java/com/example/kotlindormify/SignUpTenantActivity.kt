@@ -253,80 +253,66 @@ class SignUpTenantActivity : AppCompatActivity() {
                         val phoneNumber2 = "+$selectedCountryCode$enteredPhoneNumber"
 
                         val firebaseUser = auth.currentUser
+
+                        // Retrieve the userId from the Firebase user
                         val userId = firebaseUser?.uid
 
+                        if (userId != null) {
+                            // Upload the image to Firebase Storage
+                            val storageRef = storage.reference.child("potential_tenant_details_id").child("$potentialId.jpg")
+                            val uploadTask = storageRef.putFile(selectedImageUri2)
 
+                            uploadTask.addOnSuccessListener { _ ->
+                                // Get the download URL for the uploaded image
+                                storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
 
-                        // Upload the image to Firebase Storage
-                        val storageRef =
-                            storage.reference.child("potential_tenant_details_id").child("$potentialId.jpg")
-                        val uploadTask = storageRef.putFile(selectedImageUri2)
-                        uploadTask.addOnSuccessListener { _ ->
-                            // Get the download URL for the uploaded image
-                            storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                                    // Store the download URL and userId in the potentialTenant data
+                                    val potentialTenantData = hashMapOf(
+                                        "userId" to FirebaseAuth.getInstance().currentUser?.uid, // Store the retrieved userId
+                                        "timestamp" to FieldValue.serverTimestamp(),
+                                        // Include other fields in your data here
+                                        "requesterFullName" to username2,
+                                        "age" to age,
+                                        "address" to address,
+                                        "phoneNumber" to phoneNumber2,
+                                        "email" to email2,
+                                        "emergencyFullName" to fullName,
+                                        "emergencyAddress" to emAddress,
+                                        "emergencyPhoneNumber" to emphoneNumber,
+                                        "emergencyEmail" to emEmail,
+                                        "gender" to selectedGender,
+                                        "idImageUrl" to downloadUri.toString()
+                                    )
 
-
-                                // Store the download URL in the potentialTenant data
-                                val potentialTenantData = hashMapOf(
-                                    "userId" to userId,
-                                    "timestamp" to FieldValue.serverTimestamp(),
-                                    "requesterFullName" to username2,
-                                    "age" to age,
-                                    "address" to address,
-                                    "phoneNumber" to phoneNumber2,
-                                    "email" to email2,
-                                    "emergencyFullName" to fullName,
-                                    "emergencyAddress" to emAddress,
-                                    "emergencyPhoneNumber" to emphoneNumber,
-                                    "emergencyEmail" to emEmail,
-                                    "gender" to selectedGender,
-                                    "idImageUrl" to downloadUri.toString()
-                                )
-
-                                // Store the rental request in Firestore under the document with potentialId
-                                firestore.collection("potential_tenant_details")
-                                    .document(potentialId)
-                                    .set(potentialTenantData.apply {
-                                        put("userId", userId) // Include the userId in the rental request data
-                                    })
-                                    .addOnSuccessListener {
-                                        progressBar.visibility = ProgressBar.GONE
-                                        val intent = Intent(
-                                            this,
-                                            SignInActivity::class.java
-                                        )
-                                        startActivity(intent)
-                                        Toast.makeText(
-                                            this,
-                                            "User Registered Successfully",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        finish()
-                                        progressDialog?.dismiss()
-                                    }
-                                    .addOnFailureListener { e ->
-                                        // Handle failure to store rental request data
-                                        Toast.makeText(
-                                            this,
-                                            "Failed to store rental request data",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        progressDialog?.dismiss()
-                                    }
+                                    // Store the rental request in Firestore under the document with potentialId
+                                    firestore.collection("potential_tenant_details")
+                                        .document(potentialId)
+                                        .set(potentialTenantData)
+                                        .addOnSuccessListener {
+                                            progressBar.visibility = ProgressBar.GONE
+                                            val intent = Intent(this, SignInActivity::class.java)
+                                            startActivity(intent)
+                                            Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_SHORT).show()
+                                            finish()
+                                            progressDialog?.dismiss()
+                                        }
+                                        .addOnFailureListener { e ->
+                                            // Handle failure to store rental request data
+                                            Toast.makeText(this, "Failed to store rental request data", Toast.LENGTH_SHORT).show()
+                                            progressDialog?.dismiss()
+                                        }
+                                }
                             }
-
-
+                        } else {
+                            // Handle the case where the userId is null
+                            Toast.makeText(this, "User not authenticated.", Toast.LENGTH_SHORT).show()
+                            progressDialog?.dismiss()
                         }
                     } else {
-                        Toast.makeText(
-                            this,
-                            "Please agree to the terms and conditions.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this, "Please agree to the terms and conditions.", Toast.LENGTH_SHORT).show()
                         progressDialog?.dismiss()
-
                     }
-                }else {
+                } else {
                     Toast.makeText(this, "Please upload an image.", Toast.LENGTH_SHORT).show()
                     progressDialog?.dismiss()
                 }
