@@ -17,7 +17,7 @@ data class Dormitories(
     var landlordId: String? = null,
     var latitude: Double? = null,
     var longitude: Double? = null,
-    var image: String? = null,
+    var images: List<String>? = null,
     var rentalTerm: String? = null,
     var bathroom: String? = null,
     var electric: String? = null,

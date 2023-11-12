@@ -23,6 +23,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.landlord.LandlordDashboardActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -56,7 +57,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val dormName = arguments?.getString("dormName")
         val dormPrice = arguments?.getString("dormPrice")
         val dormitoryId = arguments?.getString("dormitoryId")
-        val imageUrl = arguments?.getString("imageUrl")
+        val imageUrl = arguments?.getString("imagesUrl")
         val landlordId = arguments?.getString("landlordId")
         val dormRooms = arguments?.getInt("dormRooms")
         val qrCodeImageUrl = arguments?.getString("qrCodeImageUrl")
@@ -89,6 +90,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val dormNameTextView = view.findViewById<TextView>(R.id.textDormName)
         val dormPriceTextView = view.findViewById<TextView>(R.id.textDormPrice)
         val dormImageView = view.findViewById<ImageView>(R.id.ivDormitoryImage)
+      //  val recyclerView = view.findViewById<RecyclerView>(R.)
         val descriptionTextview = view.findViewById<TextView>(R.id.ViewContent)
         val addressTextView = view.findViewById<TextView>(R.id.textDormloc)
         val numOfRoomsTextView = view.findViewById<TextView>(R.id.Availableroomtxt)

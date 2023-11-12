@@ -47,16 +47,25 @@
                             android:background="@drawable/dorm_backbtn"
                             android:backgroundTint="@color/white" />
 
-                        <ImageView
-                            android:id="@+id/ivDormitoryImage"
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_centerHorizontal="true"
-                            android:contentDescription="Dormitory Image"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/dormify_logo" />
-                    </androidx.cardview.widget.CardView>
-                    <!-- Dormitory Image -->
+                        <!--   <androidx.recyclerview.widget.RecyclerView
+                             android:id="@+id/displayRecyclerViews"
+                             android:layout_width="match_parent"
+                             android:layout_height="200dp"
+                             android:layout_centerHorizontal="true"
+                             android:scaleType="centerCrop"
+                              />
+ -->
+                      <ImageView
+                         android:id="@+id/ivDormitoryImage"
+                         android:layout_width="match_parent"
+                         android:layout_height="200dp"
+                         android:layout_centerHorizontal="true"
+                         android:contentDescription="Dormitory Image"
+                         android:scaleType="centerCrop"
+                         android:src="@drawable/dormify_logo" />
+
+                </androidx.cardview.widget.CardView>
+                <!-- Dormitory Image -->
 
                     <RelativeLayout
                         android:id="@+id/dorminfolayout"

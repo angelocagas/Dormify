@@ -48,11 +48,20 @@ class LandlordProfileFragment : Fragment(R.layout.landlord_profile_fragment) {
                     val userEmail = userData["email"] as String
                     val userProfileImageUrl = userData["profileImageUrl"] as String
 
-                    // Load the user's profile image using a library like Glide or Picasso
-                    // For example, using Glide:
-                    Glide.with(requireContext())
-                        .load(userProfileImageUrl)
-                        .into(ivProfilePicture)
+                    // Load the user's profile image using a library like Glide
+                    if (userProfileImageUrl != null && userProfileImageUrl.isNotEmpty()) {
+                        Glide.with(requireContext())
+                            .load(userProfileImageUrl)
+                            .placeholder(R.drawable.person_icon) // Placeholder image while loading
+                            .error(R.drawable.error_image) // Error image if loading fails
+                            .into(ivProfilePicture)
+                    } else {
+                        // Handle the case where the profile image URL is not available
+                        // For example, you can set a default placeholder or hide the ImageView
+                        ivProfilePicture.setImageResource(R.drawable.person_icon)
+                        // or ivProfilePicture.visibility = View.GONE
+                    }
+
 
                     // Set the user's name and email
                     tvUserName.text = userName
