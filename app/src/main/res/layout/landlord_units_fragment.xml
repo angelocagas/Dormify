@@ -50,7 +50,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginBottom="76dp"
-            android:background="@drawable/bg_btn_bck_light"
+            android:background="@drawable/add"
             android:fontFamily="@font/poppins"
             android:text="+"
             android:textColor="#FFFFFF"
