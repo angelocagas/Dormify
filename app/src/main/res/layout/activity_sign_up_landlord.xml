@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Username"
+                android:text="Full Name"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/DORMIFY2" />
@@ -78,6 +78,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/lbletEmergencyFullName"
                 app:layout_constraintTop_toTopOf="@+id/lbletEmergencyFullName" />
 
@@ -91,6 +92,7 @@
                 app:boxStrokeColor="@color/violet"
                 app:boxStrokeErrorColor="@color/colorError"
                 app:hintTextColor="@color/violet"
+                app:errorTextColor="@color/clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lbletEmergencyFullName">
@@ -123,6 +125,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/lbletemailLayout"
                 app:layout_constraintTop_toTopOf="@+id/lbletemailLayout" />
 
@@ -135,6 +138,7 @@
                 android:layout_marginTop="0dp"
                 app:boxStrokeColor="@color/violet"
                 app:boxStrokeErrorColor="@color/colorError"
+                app:errorTextColor="@color/clear"
                 app:hintTextColor="@color/violet"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.32"
@@ -170,6 +174,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/lbletpasswordLayout"
                 app:layout_constraintTop_toTopOf="@+id/lbletpasswordLayout" />
 
@@ -181,6 +186,7 @@
                 app:boxStrokeColor="@color/violet"
                 app:boxStrokeErrorColor="@color/colorError"
                 app:hintTextColor="@color/violet"
+                app:errorTextColor="@color/clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="0dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -198,17 +204,7 @@
                     tools:ignore="TouchTargetSizeCheck" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.hbb20.CountryCodePicker
-                android:id="@+id/login_countrycode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                app:ccp_showFlag="false"
-                app:ccp_showNameCode="true"
-                app:layout_constraintEnd_toStartOf="@+id/phoneNumberLayout"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblphoneNumberLayout" />
+
 
             <!-- Emergency Full Name -->
             <TextView
@@ -228,6 +224,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/lblphoneNumberLayout"
                 app:layout_constraintTop_toTopOf="@+id/lblphoneNumberLayout" />
 
@@ -240,9 +237,10 @@
                 app:boxStrokeColor="@color/violet"
                 app:boxStrokeErrorColor="@color/colorError"
                 app:hintTextColor="@color/violet"
+                app:errorTextColor="@color/clear"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/login_countrycode"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblphoneNumberLayout">
 
 
@@ -252,11 +250,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins"
+                    android:paddingStart="100dp"
                     android:inputType="phone"
                     android:maxLength="10" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/login_countrycode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:ccp_showFlag="false"
+                app:ccp_showNameCode="true"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblphoneNumberLayout" />
 
             <!-- Emergency Full Name -->
             <TextView
@@ -276,6 +285,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/lbletpassword2Layout"
                 app:layout_constraintTop_toTopOf="@+id/lbletpassword2Layout" />
 
@@ -288,6 +298,7 @@
                 app:boxStrokeColor="@color/violet"
                 app:boxStrokeErrorColor="@color/colorError"
                 app:hintTextColor="@color/violet"
+                app:errorTextColor="@color/clear"
                 android:layout_marginTop="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -349,6 +360,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
+                android:visibility="invisible"
                 app:layout_constraintStart_toEndOf="@+id/lbletbtnAddImage"
                 app:layout_constraintTop_toTopOf="@+id/lbletbtnAddImage" />
 

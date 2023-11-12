@@ -106,11 +106,7 @@ class SignUpTenantActivity : AppCompatActivity() {
             val emEmail = binding.etEmergencyEmail.text.toString()
             val selectedGenderPosition = binding.spinnerGendertenant.selectedItemPosition
 
-            val ivId = binding.ivId
 
-
-// Get the resource ID of the currently set drawable
-            val currentDrawableResource = ivId.tag as? Int
 
             if (username.isEmpty()) {
                 binding.etFullNameLayout.error = "Full name is required"

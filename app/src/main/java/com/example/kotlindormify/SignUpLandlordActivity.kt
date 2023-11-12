@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -52,13 +53,64 @@ class SignUpLandlordActivity : AppCompatActivity() {
 
 
 
+
+
         binding.buttonlandlord.setOnClickListener {
             val email = binding.emailEt.text.toString()
             val password = binding.passET.text.toString()
             val confirmPassword = binding.confirmPassEt.text.toString()
             val username = binding.usernameEt.text.toString()
+            val phoneNumber = binding.phoneNumberEt.text.toString()
+
             val progressBar = binding.progressBar
             val cbAgreement = binding.cbAgreement
+
+            if (username.isEmpty()) {
+                binding.usernameLayout.error = "Full name is required"
+                binding.lbletEmergencyFullName.text = "Full name is required" // Set error message in lblFullName
+                binding.lbletEmergencyFullName2.visibility = View.VISIBLE
+            } else {
+                binding.usernameLayout.error = null // Clear the error if not empty
+                binding.lbletEmergencyFullName.text = "Full Name" // Clear the error message in lblFullName
+                binding.lbletEmergencyFullName2.visibility = View.INVISIBLE
+            }
+
+            if (phoneNumber.isEmpty()) {
+                binding.phoneNumberLayout.error = "Phone number is required"
+                binding.lblphoneNumberLayout.text = "Phone Number is required" // Set error message in lblFullName
+                binding.lblphoneNumberLayout2.visibility = View.VISIBLE
+            } else {
+                binding.phoneNumberLayout.error = null // Clear the error if not empty
+                binding.lblphoneNumberLayout.text = "Phone Number" // Clear the error message in lblFullName
+                binding.lblphoneNumberLayout2.visibility = View.INVISIBLE
+            }
+            if (email.isEmpty()) {
+                binding.emailLayout.error = "Email is required"
+                binding.lbletemailLayout.text = "Email is required" // Set error message in lblFullName
+                binding.lbletemailLayout2.visibility = View.VISIBLE
+            } else {
+                binding.emailLayout.error = null // Clear the error if not empty
+                binding.lbletemailLayout.text = "Email" // Clear the error message in lblFullName
+                binding.lbletemailLayout2.visibility = View.INVISIBLE
+            }
+            if (password.isEmpty()) {
+                binding.passwordLayout.error = "Password is required"
+                binding.lbletpasswordLayout.text = "Password is required" // Set error message in lblFullName
+                binding.lbletpasswordLayout2.visibility = View.VISIBLE
+            } else {
+                binding.passwordLayout.error = null // Clear the error if not empty
+                binding.lbletpasswordLayout.text = "Password" // Clear the error message in lblFullName
+                binding.lbletpasswordLayout2.visibility = View.INVISIBLE
+            }
+            if (confirmPassword.isEmpty()) {
+                binding.confirmPasswordLayout.error = "Confirm Password is required"
+                binding.lbletpassword2Layout.text = "Re-type Password is required" // Set error message in lblFullName
+                binding.lbletpassword2Layout2.visibility = View.VISIBLE
+            } else {
+                binding.confirmPasswordLayout.error = null // Clear the error if not empty
+                binding.lbletpassword2Layout.text = "Re-type Password" // Clear the error message in lblFullName
+                binding.lbletpassword2Layout2.visibility = View.INVISIBLE
+            }
 
 
             // Check if an image has been selected
