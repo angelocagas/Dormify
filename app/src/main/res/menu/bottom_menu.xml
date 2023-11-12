@@ -6,9 +6,9 @@
         android:id="@+id/menu_home"
         android:title="Home"/>
 
-    <item android:icon="@drawable/dorm_wallet"
+    <!-- <item android:icon="@drawable/dorm_wallet"
         android:id="@+id/menu_payment"
-        android:title="Payment"/>
+        android:title="Payment"/> -->
 
     <item android:icon="@drawable/dorm_message"
         android:id="@+id/menu_chat"

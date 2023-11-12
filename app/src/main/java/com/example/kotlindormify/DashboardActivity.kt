@@ -85,11 +85,7 @@ class DashboardActivity : AppCompatActivity() {
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
 
-                R.id.menu_payment -> {
-                    setCurrentFragment(paymentFragment)
-                    binding.tvDormify3.text = "Payment"
-                    binding.cardViewImage.visibility = View.VISIBLE
-                }
+
 
                 R.id.menu_chat -> {
                     setCurrentFragment(chatFragment)

@@ -164,6 +164,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
         }
 
 
+
         // Initialize the map
         val mapFragment = childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
