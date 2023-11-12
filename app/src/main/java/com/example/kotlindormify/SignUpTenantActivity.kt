@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.databinding.ActivitySignUpTenantBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -84,6 +85,10 @@ class SignUpTenantActivity : AppCompatActivity() {
         )
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerGendertenant.adapter = genderAdapter
+
+        binding.imageView.setOnClickListener {
+            super.onBackPressed()
+        }
 
 
 
@@ -224,8 +229,19 @@ class SignUpTenantActivity : AppCompatActivity() {
 
             // Check if an image has been selected
             if (!isImageSelected) {
-                Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener // Prevent further execution of the click listener
+                Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+            }else{
+                binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+            }
+
+            if (!isImageSelected2) {
+                Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                binding.btnAddImage2.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                return@setOnClickListener
+            }
+            else{
+                binding.btnAddImage2.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
             }
             if (!cbAgreement.isChecked) {
                 Toast.makeText(
@@ -235,6 +251,8 @@ class SignUpTenantActivity : AppCompatActivity() {
                 ).show()
                 return@setOnClickListener // Prevent further execution of the click listener
             }
+
+
 
 
             if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() && password.length >= 6) {
@@ -414,9 +432,13 @@ class SignUpTenantActivity : AppCompatActivity() {
                                         .addOnSuccessListener {
                                             progressBar.visibility = ProgressBar.GONE
                                             val intent = Intent(this, SignInActivity::class.java)
-                                            startActivity(intent)
-                                            Toast.makeText(this, "User Registered Successfully", Toast.LENGTH_SHORT).show()
-                                            finish()
+                                            AlertDialog.Builder(this)
+                                                .setMessage("User Registered successfully")
+                                                .setPositiveButton("OK") { dialog, _ ->
+                                                    dialog.dismiss()
+                                                    startActivity(intent)
+                                                    finish()}
+                                                .show()
                                             progressDialog?.dismiss()
                                         }
                                         .addOnFailureListener { e ->
@@ -436,13 +458,13 @@ class SignUpTenantActivity : AppCompatActivity() {
                         progressDialog?.dismiss()
                     }
                 } else {
-                    Toast.makeText(this, "Please upload an image.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
                     progressDialog?.dismiss()
                 }
             } else {
                 Toast.makeText(
                     this,
-                    "Please fill in all fields and select a gender.",
+                    "Please fill all fields.",
                     Toast.LENGTH_SHORT
                 ).show()
                 progressDialog?.dismiss()

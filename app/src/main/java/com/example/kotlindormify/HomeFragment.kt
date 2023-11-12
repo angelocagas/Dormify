@@ -32,6 +32,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.location.Geocoder
 import android.net.Uri
+import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 
@@ -110,15 +111,30 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
         tvExpandList.setOnClickListener {
             if (!listExpanded) {
+                // Set the layoutManager when the list is expanded
                 allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager2
+
+                // Add margins to the left and right
+                val layoutParams = allDormitoriesRecyclerView.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.setMargins(50, 0, 0, 0)
+
+                // Update the text and flag
                 tvExpandList.text = "Collapse List"
                 listExpanded = true
             } else {
+                // If the list is collapsed, remove margins
+                val layoutParams = allDormitoriesRecyclerView.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.setMargins(0, 0, 0, 0)
+
+                // Set the original layoutManager
                 allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager
+
+                // Update the text and flag
                 tvExpandList.text = "Expand List"
                 listExpanded = false
             }
         }
+
 
         val tvSeeAllSaved = view.findViewById<TextView>(R.id.tvSeeAllSaved)
         val spannableString = SpannableString("View All Saved")

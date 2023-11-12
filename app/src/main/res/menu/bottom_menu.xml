@@ -14,7 +14,7 @@
         android:id="@+id/menu_chat"
         android:title="Chat"/>
 
-    <item android:icon="@drawable/dorm_favorite"
+    <item android:icon="@drawable/dorm_trash"
         android:id="@+id/menu_save"
         android:title="Saved"/>
 
