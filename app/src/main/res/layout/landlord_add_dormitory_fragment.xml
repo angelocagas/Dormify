@@ -490,7 +490,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/available_success"
                     android:textStyle="bold"
-                    android:text="Included" />
+                    android:text="Included in monthly bill" />
 
                 <RadioButton
                     android:id="@+id/radioExcluded"
@@ -498,7 +498,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="#EF3636"
-                    android:text="Excluded" />
+                    android:text="Excluded in monthly bill" />
 
 
             </RadioGroup>
@@ -540,7 +540,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/available_success"
                     android:textStyle="bold"
-                    android:text="Included" />
+                    android:text="Included in monthly bill" />
 
                 <RadioButton
                     android:id="@+id/radioWaterExcluded"
@@ -548,7 +548,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="#EF3636"
-                    android:text="Excluded" />
+                    android:text="Excluded in monthly bill" />
 
             </RadioGroup>
 
