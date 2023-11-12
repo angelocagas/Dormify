@@ -92,44 +92,29 @@ class SignInActivity : AppCompatActivity() {
                                                     loadingProgressBar.visibility = View.GONE
                                                     if (!querySnapshot.isEmpty) {
                                                         for (document in querySnapshot) {
-                                                            val user =
-                                                                document.toObject(Users::class.java)
+                                                            val user = document.toObject(Users::class.java)
                                                             val selectedRole = user.role
                                                             when (selectedRole) {
                                                                 1 -> {
                                                                     // Proceed to MainActivity for Tenant
-                                                                    val intent = Intent(
-                                                                        this@SignInActivity,
-                                                                        DashboardActivity::class.java
-                                                                    )
+                                                                    val intent = Intent( this@SignInActivity, DashboardActivity::class.java )
                                                                     val userEmail = email
-                                                                    val prefManager =
-                                                                        PrefManager(this@SignInActivity)
-                                                                    prefManager.setUserEmail(
-                                                                        userEmail
-                                                                    )
+                                                                    val prefManager = PrefManager(this@SignInActivity)
+                                                                    prefManager.setUserEmail( userEmail)
                                                                     startActivity(intent)
                                                                     finish()
                                                                     progressDialog?.dismiss()
                                                                 }
-
                                                                 2 -> {
                                                                     // Proceed to SecondaryActivity for Dorm Landlord
-                                                                    val intent = Intent(
-                                                                        this@SignInActivity,
-                                                                        LandlordDashboardActivity::class.java
-                                                                    )
+                                                                    val intent = Intent(this@SignInActivity, LandlordDashboardActivity::class.java)
                                                                     val userEmail = email
-                                                                    val prefManager =
-                                                                        PrefManager(this@SignInActivity)
-                                                                    prefManager.setUserEmail(
-                                                                        userEmail
-                                                                    )
+                                                                    val prefManager = PrefManager(this@SignInActivity)
+                                                                    prefManager.setUserEmail( userEmail )
                                                                     startActivity(intent)
                                                                     finish()
                                                                     progressDialog?.dismiss()
                                                                 }
-
                                                                 else -> {
                                                                     showAlert("Invalid role")
                                                                     progressDialog?.dismiss()

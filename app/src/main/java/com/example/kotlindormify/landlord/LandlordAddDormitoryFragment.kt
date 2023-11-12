@@ -4,8 +4,13 @@ import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,37 +18,31 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlindormify.Dormitories
 import com.example.kotlindormify.R
 import com.example.kotlindormify.databinding.LandlordAddDormitoryFragmentBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import android.content.Intent
-import android.net.Uri
-import android.provider.MediaStore
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.CollectionReference
-import com.google.firebase.firestore.Query
-import java.io.IOException
-import android.graphics.Bitmap
-import android.graphics.Color
-import android.widget.Button
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.EncodeHintType
 import com.google.zxing.qrcode.QRCodeWriter
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import java.io.ByteArrayOutputStream
+import java.io.IOException
 import java.util.Hashtable
 
 
@@ -57,19 +56,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     private lateinit var storageRef: StorageReference
     private lateinit var firestore: FirebaseFirestore
     private lateinit var dormitoriesCollection: CollectionReference
-    private lateinit var imageRecyclerView: RecyclerView
 
-
-    private lateinit var imageLayoutManager: LinearLayoutManager
-
-    // Request code for picking images from the gallery
-    private val PICK_IMAGES_REQUEST = 1
-
-    // ArrayList to store selected image URIs
-    private val selectedImageUris = ArrayList<Uri>()
-
-    // Adapter for displaying selected images in a RecyclerView
-    private lateinit var imageAdapter: ImageAdapter
 
 
     private val firestorePath = "dormitories"
@@ -77,8 +64,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     private var isMapExpanded = false // Initially, the map is not expanded
 
     private val DEFAULT_LATITUDE = 14.998027206214473 // Replace with your desired default latitude
-    private val DEFAULT_LONGITUDE =
-        120.65611294250105 // Replace with your desired default longitude
+    private val DEFAULT_LONGITUDE = 120.65611294250105 // Replace with your desired default longitude
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 123
     private val DEFAULT_ZOOM_LEVEL = 15f
@@ -91,7 +77,6 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     private lateinit var selectedPermitImageUri: Uri
     private var isPermitImageSelected = false
     private var progressDialog: ProgressDialog? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -113,10 +98,6 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
-
-
-
-
         binding.btnPinLocation.setOnClickListener {
             if (::selectedLocation.isInitialized) {
                 // Update the Latitude and Longitude EditText fields
@@ -126,50 +107,21 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 binding.tvnoPin.visibility = View.GONE
             } else {
                 // Handle the case where the selected location is not initialized
-                Toast.makeText(
-                    requireContext(),
-                    "Select a location on the map first",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), "Select a location on the map first", Toast.LENGTH_SHORT).show()
             }
         }
-
-
-        //dorm multi image select
-
-        // Set a LinearLayoutManager for the RecyclerView
-
-
 
         binding.btnAddImage.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-
-            // Allow multiple image selection
-            intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-
-            startActivityForResult(
-                Intent.createChooser(intent, "Select Picture"),
-                PICK_IMAGES_REQUEST
-            )
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST)
         }
-
-        // Create a LinearLayoutManager for the image RecyclerView, with a horizontal orientation
-        imageLayoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-
-        // Set the LinearLayoutManager for the image RecyclerView
-        imageRecyclerView.layoutManager = imageLayoutManager
-
         binding.btnAddPermitImage.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(
-                Intent.createChooser(intent, "Select Business Permit Photo"),
-                PICK_PERMIT_IMAGE_REQUEST
-            )
+            startActivityForResult(Intent.createChooser(intent, "Select Business Permit Photo"), PICK_PERMIT_IMAGE_REQUEST)
         }
         var selectedRentalTerm = "Per Month"
         binding.radioRentalTerms.setOnCheckedChangeListener { _, checkedId ->
@@ -251,30 +203,11 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
             // Check if an image has been selected
             if (!isImageSelected || !isPermitImageSelected) {
-                Toast.makeText(
-                    requireContext(),
-                    "Please select both Dormitory Image and Business Permit Image",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(requireContext(), "Please select both Dormitory Image and Business Permit Image", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener // Prevent further execution of the click listener
             }
 
-            if (listOf(
-                    dormName,
-                    numOfRooms,
-                    price,
-                    address,
-                    phoneNumber,
-                    email,
-                    username,
-                    description,
-                    amenitiesString,
-                    selectedRentalTerm,
-                    selectedBathroom,
-                    selectedElectric,
-                    selectedWater,
-                ).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty()
-            ) {
+            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, amenitiesString, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty()) {
                 if (cbAgreement.isChecked) {
                     showLoadingDialog()
                     val activity = requireActivity() as LandlordDashboardActivity
@@ -410,11 +343,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                     progressDialog?.dismiss()
                                 }
                             } else {
-                                Toast.makeText(
-                                    requireContext(),
-                                    "Pin the dormitory location on the map first to continue (Long press on the map)",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(requireContext(), "Pin the dormitory location on the map first to continue (Long press on the map)", Toast.LENGTH_SHORT).show()
                                 progressDialog?.dismiss()
                             }
                         }
@@ -569,58 +498,26 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             }
     }
 
-    // Callback function to handle the result from the image picker
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Check if the request code matches the image picker request code and the result is successful
-        if (requestCode == PICK_IMAGES_REQUEST && resultCode == Activity.RESULT_OK) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+            selectedImageUri = data.data!!
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImageUri)
+                binding.ivSelectedImage.setImageBitmap(bitmap)
+                binding.ivSelectedImage.visibility = View.VISIBLE
 
-            // Check if multiple images were selected
-            if (data?.clipData != null) {
-                val count = data.clipData!!.itemCount
-                for (i in 0 until count) {
-                    // Get the URI of each selected image and add it to the selectedImageUris list
-                    val imageUri = data.clipData!!.getItemAt(i)?.uri // Handle nullable Uri
-                    if (imageUri != null) {
-                        selectedImageUris.add(imageUri)
-                    }
-                }
-            } else if (data?.data != null) {
-                // If only one image was selected, add its URI to the list
-                val imageUri = data.data // Handle nullable Uri
-                if (imageUri != null) {
-                    selectedImageUris.add(imageUri)
-                }
-            }
-
-            // Notify the imageAdapter that the data has changed
-            imageAdapter.notifyDataSetChanged()
-
-            // Now, you can proceed to display and process the selected images as in the previous code
-            for (imageUri in selectedImageUris) {
-                try {
-                    val bitmap = MediaStore.Images.Media.getBitmap(
-                        requireActivity().contentResolver,
-                        imageUri
-                    )
-                    // Display the image in your ImageView and set relevant flags (isImageSelected, etc.)
-                    binding.ivSelectedImage.setImageBitmap(bitmap)
-                    binding.ivSelectedImage.visibility = View.VISIBLE
-
-                    isImageSelected = true
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
+                isImageSelected = true
+            } catch (e: IOException) {
+                e.printStackTrace()
             }
         }
+
         if (requestCode == PICK_PERMIT_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
             selectedPermitImageUri = data.data!!
             try {
-                val bitmap = MediaStore.Images.Media.getBitmap(
-                    requireActivity().contentResolver,
-                    selectedPermitImageUri
-                )
+                val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedPermitImageUri)
                 binding.ivSelectedPermitImage.setImageBitmap(bitmap)
                 binding.ivSelectedPermitImage.visibility = View.VISIBLE
 
@@ -630,7 +527,6 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
-
 
     // Function to upload the selected image to Firebase Storage
     private fun uploadImage(dormitoryId: String) {
@@ -735,6 +631,11 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         progressDialog?.setCancelable(false) // Prevents user from dismissing the dialog by tapping outside
         progressDialog?.show()
     }
+
+
+
+
+
 
 
 }
