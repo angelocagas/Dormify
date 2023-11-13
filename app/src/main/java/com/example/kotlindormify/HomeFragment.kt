@@ -135,6 +135,22 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             }
         }
 
+        val activity = requireActivity() as DashboardActivity
+        val currentUserEmail = activity.userEmail
+
+        // Fetch saved dormitory IDs for the current user
+        if (currentUserEmail != null) {
+            fetchSavedDormitoryIds(currentUserEmail) { savedDormitoryIds ->
+                // Query dormitory details based on saved IDs
+                queryDormitoryDetails(savedDormitoryIds) { savedDormitories ->
+                    // Add the retrieved saved dormitories to the list with reversing
+                    savedDormitoriesList.clear()
+                    savedDormitoriesList.addAll(savedDormitories)
+                    savedDormitoriesAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+
 
         val tvSeeAllSaved = view.findViewById<TextView>(R.id.tvSeeAllSaved)
         val spannableString = SpannableString("View All Saved")
