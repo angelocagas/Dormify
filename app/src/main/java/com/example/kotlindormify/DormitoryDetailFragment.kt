@@ -94,8 +94,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val phoneNumber = arguments?.getString("phoneNumber")
         val username = arguments?.getString("username")
         val amenities = arguments?.getStringArrayList("amenities")
-        val amenities2 = arguments?.getStringArrayList("amenities2")
         val paymentOptions = arguments?.getStringArrayList("paymentOptions")
+        val amenities2 = arguments?.getStringArrayList("amenities2")
 
 
         val activity = requireActivity() as DashboardActivity
@@ -124,7 +124,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         //new features for better application
         //Amenities & Features
         val AmenitiesListTextView = view.findViewById<TextView>(R.id.AmenitiesListtxt)
-        val Amenities2ListTextView = view.findViewById<TextView>(R.id.Amenities2List)
+        val Amenities2ListTextView = view.findViewById<TextView>(R.id.Amenities2Listtxt)
         val perWhat = view.findViewById<TextView>(R.id.monthlytxt)
 
         //Room Information
@@ -163,7 +163,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             // Do something with amenities, it's a list
 
             val amenities2String = amenities2.joinToString("\n ✔ ")
-           AmenitiesListTextView.text = " ✔ $amenities2String"
+            AmenitiesListTextView.text = " ✔ $amenities2String"
 
 
         } else {
@@ -174,7 +174,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             // Do something with amenities, it's a list
 
             val amenitiesString = amenities.joinToString("\n ✔ ")
-            Amenities2ListTextView.text  = " ✔ $amenitiesString"
+            Amenities2ListTextView.text = " ✔ $amenitiesString"
 
 
         } else {
