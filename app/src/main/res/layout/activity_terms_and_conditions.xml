@@ -213,7 +213,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst4"
+                android:text="A. Dormify is designed to facilitate the search for dormitory accommodations near DHVSU Main Campus.\n
+B. Users can search, view, and connect with dormitory landlords or tenants through the application.\n
+C. Payment processing through GCash is integrated into the system for financial transactions.\n
+"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -237,7 +240,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst5"
+                android:text=" A. Users are responsible for the accuracy of information provided in their profiles and listings.\n
+B. Users must adhere to local laws, regulations, and policies, including those related to dormitory accommodations.\n
+C. Users are encouraged to provide accurate and constructive feedback through the application's rating feature.\n"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
