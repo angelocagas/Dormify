@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.kotlindormify.R
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 // RequestDetailFragment.kt
 
@@ -31,6 +35,7 @@ class RequestDetailFragment : Fragment() {
     private lateinit var textViewStatus: TextView
     private lateinit var textViewTimestamp: TextView
     private lateinit var textViewRequesterId: TextView
+    private lateinit var idImage: ImageView
 
 
     override fun onCreateView(
@@ -53,6 +58,7 @@ class RequestDetailFragment : Fragment() {
         textViewStatus = rootView.findViewById(R.id.textViewStatus)
         textViewTimestamp = rootView.findViewById(R.id.textViewTimestamp)
         textViewRequesterId = rootView.findViewById(R.id.textViewrequesterId)
+        idImage = rootView.findViewById(R.id.imgId)
         val btnDeclineRequest = rootView.findViewById<Button>(R.id.btnDecline)
         val btnAcceptRequest = rootView.findViewById<Button>(R.id.btnAccept)
 
@@ -102,9 +108,16 @@ class RequestDetailFragment : Fragment() {
                         textViewEmergencyPhoneNumber.text = " $emergencyPhoneNumber"
                         textViewEmergencyEmail.text = " $emergencyEmail"
                         textViewSelectedGender.text = " $selectedGender"
-                        textViewIdImageUrl.text = " $idImageUrl"
+                        if (idImageUrl != null) {
+                            // Load the selected image into the ImageView using Glide
+                            Glide.with(requireContext())
+                                .load(idImageUrl)
+                                .error(R.drawable.error_image) // Optional error image
+                                .into(idImage)
+
+                        }
                         textViewStatus.text = " $status"
-                        textViewTimestamp.text = " $timestamp"
+                        textViewTimestamp.text = formatTimestamp(timestamp)
                         textViewRequesterId.text = requesterId
                         if (status != "pending") {
                             btnDeclineRequest.visibility = View.GONE
@@ -229,5 +242,12 @@ class RequestDetailFragment : Fragment() {
         return rootView
 
 
+    }
+    fun formatTimestamp(timestamp: com.google.firebase.Timestamp?): String {
+        if (timestamp == null) return ""
+
+        val date = timestamp.toDate()
+        val sdf = SimpleDateFormat("MMMM dd, yyyy hh:mm a", Locale.getDefault())
+        return sdf.format(date)
     }
 }
