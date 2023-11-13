@@ -373,14 +373,14 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val water = dormitoryDocument.getString("water")
                     val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
                     val amenities = dormitoryDocument.get("amenities") as? List<String>
-
+                    val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
 
 
 
                     // Add other dormitory fields as needed
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities)
+                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities, amenities2)
                     allDormitories.add(dormitory)
                 }
                 callback(allDormitories)
@@ -448,10 +448,11 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val water = dormitoryDocument.getString("water")
                     val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
                     val amenities = dormitoryDocument.get("amenities") as? List<String>
+                    val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
                     // Add other dormitory fields as needed
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount, rentalTerm, bathroom, electric, water, paymentOptions, amenities)
+                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount, rentalTerm, bathroom, electric, water, paymentOptions, amenities, amenities2)
                     dormitoriesList.add(dormitory)
 
 

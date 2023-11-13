@@ -93,7 +93,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = LandlordAddDormitoryFragmentBinding.inflate(inflater, container, false)
         database = FirebaseDatabase.getInstance()
         dormitoriesRef = database.reference.child("dormitories")
@@ -151,6 +151,64 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // Add more cases for other radio buttons if needed
             }
         }
+
+        val selectedAmenities = mutableListOf<String>()
+
+
+        binding.cbKitchen.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                selectedAmenities.add("Kitchen")
+            }else{
+                selectedAmenities.remove("Kitchen")
+            }
+        }
+
+        binding.cbCCTV.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                selectedAmenities.add("CCTV")
+            }else{
+                selectedAmenities.remove("CCTV")
+            }
+        }
+        binding.cbLounge.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                selectedAmenities.add("Lounge")
+            }else{
+                selectedAmenities.remove("Lounge")
+            }
+        }
+
+        binding.cbFitness.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                selectedAmenities.add("Fitness Gym")
+            }else{
+                selectedAmenities.remove("Fitness Gym")
+            }
+        }
+        binding.cbParking.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                selectedAmenities.add("Parking Lot")
+            }else{
+                selectedAmenities.remove("Parking Lot")
+            }
+        }
+
+        binding.cbWifi.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                selectedAmenities.add("WI-FI Network")
+            }else{
+                selectedAmenities.remove("WI-FI Network")
+            }
+        }
+        binding.cbSwimming.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked){
+                selectedAmenities.add("Swimming Pool")
+            }else{
+                selectedAmenities.remove("Swimming Pool")
+            }
+        }
+
+
 
         var selectedBathroom = "Separate (Private)"
         binding.radioBathroom.setOnCheckedChangeListener { _, checkedId ->
@@ -215,6 +273,13 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val email = binding.etEmail.text.toString()
             val username = binding.etusername.text.toString()
             val cbAgreement = binding.cbAgreement
+            val cbKitchen = binding.cbKitchen
+            val cbLounge = binding.cbLounge
+            val cbWifi = binding.cbWifi
+            val cbSwimming = binding.cbSwimming
+            val cbFitness = binding.cbFitness
+            val cbParking = binding.cbParking
+            val cbCCTV = binding.cbCCTV
             var amenitiesString = binding.etAmenities.text.toString()
             var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
 
@@ -227,7 +292,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
-            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, amenitiesString, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty()) {
+
+            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, amenitiesString, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
                 if (cbAgreement.isChecked) {
                     showLoadingDialog()
                     val activity = requireActivity() as LandlordDashboardActivity
@@ -257,7 +323,9 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             selectedElectric,
                                             selectedWater,
                                             selectedPaymentOptions,
-                                            amenitiesList
+                                            amenitiesList,
+                                            selectedAmenities,
+
                                         )
 
                                         // Add the dormitory information to Firestore
@@ -520,7 +588,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_CODE_SELECT_IMAGES && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_CODE_SELECT_IMAGES && resultCode == RESULT_OK) {
             if (data != null && data.clipData != null) {
                 // Multiple images selected
                 val clipData = data.clipData!!
@@ -692,7 +760,19 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
-
+    private fun handleCheckboxChange(
+        term: String,
+        isChecked: Boolean,
+        selectedTerms: MutableList<String>
+    ) {
+        if (isChecked) {
+            // Checkbox is checked, add the corresponding term to the list
+            selectedTerms.add(term)
+        } else {
+            // Checkbox is unchecked, remove the corresponding term from the list
+            selectedTerms.remove(term)
+        }
+    }
 
 
 

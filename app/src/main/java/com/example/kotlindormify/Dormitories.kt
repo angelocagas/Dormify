@@ -24,9 +24,11 @@ data class Dormitories(
     var water: String? = null,
     var paymentOptions: List<String>? = null,
     var amenities: List<String>? = null,
+    var amenities2: List<String>? = null,
 ) {
     // No-argument constructor
     constructor() : this(
+        null,
         null,
         null,
         null,

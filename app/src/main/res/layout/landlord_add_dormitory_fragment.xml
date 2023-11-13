@@ -55,8 +55,6 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
-
             >
 
 
@@ -237,21 +235,93 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblAmenities">
+                app:layout_constraintTop_toBottomOf="@+id/lblAmenitiesbc">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAmenities"
                     style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Separate by comma (eg.,Free Wifi,Ref,Gym,etc.)"
+                    android:hint="Other Amenities"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     app:backgroundTint="@color/black"
                     app:backgroundTintMode="multiply" />
+
+
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/lblAmenitiesbc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Separate by comma (eg.,Free Wifi,Ref,Gym,etc.)"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rdAmenities" />
+
+            <RadioGroup
+                android:id="@+id/rdAmenities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblAmenities">
+
+
+                <CheckBox
+                    android:id="@+id/cbKitchen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Kitchen"
+                    />
+
+                <CheckBox
+                    android:id="@+id/cbLounge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lounge"
+                   />
+
+                <CheckBox
+                    android:id="@+id/cbWifi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WI-FI Network"
+                    />
+
+                <CheckBox
+                    android:id="@+id/cbSwimming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Swimming Pool"
+                   />
+
+                <CheckBox
+                    android:id="@+id/cbFitness"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fitness Gym"
+                    />
+
+                <CheckBox
+                    android:id="@+id/cbParking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Parking Lot"
+                    />
+
+                <CheckBox
+                    android:id="@+id/cbCCTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CCTV"
+                   />
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/lblAddress"

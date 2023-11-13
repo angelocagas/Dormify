@@ -58,7 +58,7 @@ class ChatFragment : Fragment() {
         recyclerView.adapter = adapter
 
         tvDormName = view.findViewById(R.id.textView3)
-        tvDormName.setText(dormName)
+        tvDormName.text = dormName
         // Load chat messages
         loadChatMessages()
 

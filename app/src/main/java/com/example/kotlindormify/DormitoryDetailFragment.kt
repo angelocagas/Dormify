@@ -94,6 +94,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val phoneNumber = arguments?.getString("phoneNumber")
         val username = arguments?.getString("username")
         val amenities = arguments?.getStringArrayList("amenities")
+        val amenities2 = arguments?.getStringArrayList("amenities2")
         val paymentOptions = arguments?.getStringArrayList("paymentOptions")
 
 
@@ -123,6 +124,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         //new features for better application
         //Amenities & Features
         val AmenitiesListTextView = view.findViewById<TextView>(R.id.AmenitiesListtxt)
+        val Amenities2ListTextView = view.findViewById<TextView>(R.id.Amenities2List)
         val perWhat = view.findViewById<TextView>(R.id.monthlytxt)
 
         //Room Information
@@ -157,16 +159,32 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         perWhat.text = rentalTerm
 
 
-
-        if (amenities != null) {
+        if (amenities2 != null) {
             // Do something with amenities, it's a list
 
-            val amenitiesString = amenities.joinToString("\n ✔ ")
-            AmenitiesListTextView.text = " ✔ $amenitiesString"
+            val amenities2String = amenities2.joinToString("\n ✔ ")
+           AmenitiesListTextView.text = " ✔ $amenities2String"
+
+
         } else {
             Toast.makeText(requireContext(), "wala", Toast.LENGTH_SHORT).show()
 
         }
+        if (amenities != null) {
+            // Do something with amenities, it's a list
+
+            val amenitiesString = amenities.joinToString("\n ✔ ")
+            Amenities2ListTextView.text  = " ✔ $amenitiesString"
+
+
+        } else {
+            Toast.makeText(requireContext(), "wala", Toast.LENGTH_SHORT).show()
+
+        }
+
+
+
+
 
         if (paymentOptions != null) {
             // Do something with paymentOptions, it's a list
