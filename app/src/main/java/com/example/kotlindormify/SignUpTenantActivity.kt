@@ -231,17 +231,26 @@ class SignUpTenantActivity : AppCompatActivity() {
             if (!isImageSelected) {
                 Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
                 binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                binding.lblid.text = "Upload your Student I.D or COR below is required" // Set error message in lblFullName
+                binding.lblid2.visibility = View.VISIBLE
             }else{
                 binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                binding.lblid.text = "Upload your Student ID or COR below" // Clear the error message in lblFullName
+                binding.lblid2 .visibility = View.INVISIBLE
+
             }
 
             if (!isImageSelected2) {
                 Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
                 binding.btnAddImage2.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                binding.lbletprof.text = "Upload profile is required" // Set error message in lblFullName
+                binding.lbletprof2.visibility = View.VISIBLE
                 return@setOnClickListener
             }
             else{
                 binding.btnAddImage2.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                binding.lbletprof.text = "Upload profile" // Clear the error message in lblFullName
+                binding.lbletprof2.visibility = View.INVISIBLE
             }
             if (!cbAgreement.isChecked) {
                 Toast.makeText(
@@ -254,10 +263,14 @@ class SignUpTenantActivity : AppCompatActivity() {
 
 
 
-
-            if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() && password.length >= 6) {
-
+            if (email.isNotEmpty() && password.isNotEmpty() && confirmPassword.isNotEmpty() && username2.isNotEmpty() && age.isNotEmpty() && address.isNotEmpty() && email2.isNotEmpty() &&
+                fullName.isNotEmpty() && emAddress.isNotEmpty() && emphoneNumber.isNotEmpty() && emEmail.isNotEmpty() &&
+                selectedGenderPosition != 0 ) {
                 showLoadingDialog()
+
+                if(password.length >= 6){
+
+
                 if (password == confirmPassword) {
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener { authTask ->
@@ -272,15 +285,28 @@ class SignUpTenantActivity : AppCompatActivity() {
                                                 val fcmToken = task.result
 
                                                 val enteredPhoneNumber = binding.etPhoneNumber.text.toString()
-
                                                 val selectedRole = when (binding.rgRole.checkedRadioButtonId) {
-                                                        R.id.rbTenant -> 1 // Tenant
-                                                        R.id.rbLandlord -> 2 // Dorm Landlord
-                                                        else -> 0 // Default or no selection
-                                                    }
+                                                    R.id.rbTenant -> 1 // Tenant
+                                                    R.id.rbLandlord -> 2 // Dorm Landlord
+                                                    else -> 0 // Default or no selection
+                                                }
                                                 binding.loginCountrycode.setCountryForPhoneCode(63)
                                                 val selectedCountryCode = binding.loginCountrycode.selectedCountryCode
                                                 val phoneNumber = "+$selectedCountryCode$enteredPhoneNumber"
+
+                                                val selectedGender = binding.spinnerGendertenant.selectedItem.toString()
+
+                                                // Create a unique request ID
+                                                val potentialId = UUID.randomUUID().toString()
+                                                val enteredEmPhoneNumber = binding.etEmergencyPhoneNumber.text.toString()
+
+                                                // Upload the image to Firebase Storage
+                                                val storageRef = storage.reference.child("potential_tenant_details_id").child("$potentialId.jpg")
+                                                val uploadTask = storageRef.putFile(selectedImageUri2)
+
+
+
+
 
                                                 firestore.collection("users")
                                                     .whereEqualTo("username", username)
@@ -304,171 +330,113 @@ class SignUpTenantActivity : AppCompatActivity() {
                                                                     .document(userId)
                                                                     .set(user)
                                                                     .addOnSuccessListener {
+                                                                        progressBar.visibility = ProgressBar.GONE
                                                                         uploadProfilePicture(userId)
                                                                         progressBar.visibility = ProgressBar.GONE
                                                                         progressDialog?.dismiss()
                                                                     }
                                                                     .addOnFailureListener { e ->
-                                                                        Toast.makeText(
-                                                                            this,
-                                                                            "Registration failed. Please try again.",
-                                                                            Toast.LENGTH_SHORT
-                                                                        ).show()
+                                                                        Toast.makeText(this, "Registration failed. Please try again.", Toast.LENGTH_SHORT).show()
                                                                         progressDialog?.dismiss()
                                                                     }
+
+                                                                uploadTask.addOnSuccessListener { _ ->
+                                                                    // Get the download URL for the uploaded image
+                                                                    storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
+                                                                        val selectedCountryCode = binding.loginCountrycode2.selectedCountryCode
+                                                                        val phoneNumber2 = "+$selectedCountryCode$enteredEmPhoneNumber"
+                                                                        // Store the download URL and userId in the potentialTenant data
+                                                                        val potentialTenantData = hashMapOf(
+                                                                            "userId" to FirebaseAuth.getInstance().currentUser?.uid, // Store the retrieved userId
+                                                                            "timestamp" to FieldValue.serverTimestamp(),
+                                                                            // Include other fields in your data here
+                                                                            "requesterFullName" to username2,
+                                                                            "age" to age,
+                                                                            "address" to address,
+                                                                            "phoneNumber" to phoneNumber2,
+                                                                            "email" to email2,
+                                                                            "emergencyFullName" to fullName,
+                                                                            "emergencyAddress" to emAddress,
+                                                                            "emergencyPhoneNumber" to emphoneNumber,
+                                                                            "emergencyEmail" to emEmail,
+                                                                            "gender" to selectedGender,
+                                                                            "idImageUrl" to downloadUri.toString()
+                                                                        )
+
+                                                                        // Store the rental request in Firestore under the document with potentialId
+                                                                        firestore.collection("potential_tenant_details")
+                                                                            .document(potentialId)
+                                                                            .set(potentialTenantData)
+                                                                            .addOnSuccessListener {
+                                                                                progressBar.visibility = ProgressBar.GONE
+                                                                                val intent = Intent(this, SignInActivity::class.java)
+                                                                                AlertDialog.Builder(this)
+                                                                                    .setMessage("User Registered successfully")
+                                                                                    .setPositiveButton("OK") { dialog, _ ->
+                                                                                        dialog.dismiss()
+                                                                                        startActivity(intent)
+                                                                                        finish()}
+                                                                                    .show()
+                                                                                progressDialog?.dismiss()
+                                                                            }
+                                                                            .addOnFailureListener { e ->
+                                                                                // Handle failure to store rental request data
+                                                                                Toast.makeText(this, "Failed to store potential tenant details data", Toast.LENGTH_SHORT).show()
+                                                                                progressDialog?.dismiss()
+                                                                            }
+                                                                    }
+                                                                }
+
+
+
+
                                                             } else {
-                                                                Toast.makeText(
-                                                                    this,
-                                                                    "Username already taken. Please choose a different one.",
-                                                                    Toast.LENGTH_SHORT
-                                                                ).show()
-                                                                binding.etFullNameLayout.error = "Username already exist!"
+                                                                Toast.makeText(this, "Full Name already taken. Please choose a different one.", Toast.LENGTH_SHORT).show()
+                                                                binding.etFullNameLayout.error = "Full Name already exist!"
                                                                 progressDialog?.dismiss()
                                                             }
                                                         } else {
-                                                            Toast.makeText(
-                                                                this,
-                                                                "Error checking username uniqueness. Please try again.",
-                                                                Toast.LENGTH_SHORT
-                                                            ).show()
+                                                            Toast.makeText(this, "Error checking username uniqueness. Please try again.", Toast.LENGTH_SHORT).show()
                                                             progressDialog?.dismiss()
                                                         }
                                                     }
                                             } else {
-                                                Toast.makeText(
-                                                    this,
-                                                    "Failed to obtain FCM token. Please try again.",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+                                                Toast.makeText(this, "Failed to obtain FCM token. Please try again.", Toast.LENGTH_SHORT).show()
                                                 progressDialog?.dismiss()
                                             }
                                         }
                                 } else {
-                                    Toast.makeText(
-                                        this,
-                                        "Failed to get user ID.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    Toast.makeText(this, "Failed to get user ID.", Toast.LENGTH_SHORT).show()
                                     progressDialog?.dismiss()
                                 }
                             } else {
-                                Toast.makeText(
-                                    this,
-                                    "Registration failed. Please try again.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this, "Email already exist!. Please try again.", Toast.LENGTH_SHORT).show()
+                                binding.etEmailLayout.error = "!"
                                 progressDialog?.dismiss()
                             }
                         }
+
+
+
+
                 } else {
                     Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
+                    binding.confirmPasswordLayout.error = "!"
+                    binding.passwordLayout.error = "!"
                     progressDialog?.dismiss()
-                    binding.confirmPasswordLayout.error = "Password is not matching!"
                 }
+                }else{
+                    Toast.makeText(this, "Password must be at least 6 characters.", Toast.LENGTH_SHORT).show()
+                    binding.confirmPasswordLayout.error = "!"
+                    binding.passwordLayout.error = "!"
+                    progressDialog?.dismiss() }
             } else {
-                Toast.makeText(
-                    this,
-                    "Invalid email or password. Password must be at least 6 characters.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(this, "Please fill up all fields.", Toast.LENGTH_SHORT).show()
                 progressDialog?.dismiss()
             }
 
 
-            if (username2.isNotEmpty() && age.isNotEmpty() && address.isNotEmpty() && email2.isNotEmpty() &&
-                fullName.isNotEmpty() && emAddress.isNotEmpty() && emphoneNumber.isNotEmpty() && emEmail.isNotEmpty() &&
-                selectedGenderPosition != 0
-            ) {
 
-                if (isImageSelected2) {
-                    if (cbAgreement.isChecked) {
-                        val selectedGender = binding.spinnerGendertenant.selectedItem.toString()
-
-                        // Create a unique request ID
-                        val potentialId = UUID.randomUUID().toString()
-
-
-                        val enteredPhoneNumber = binding.etEmergencyPhoneNumber.text.toString()
-
-
-                        val firebaseUser = auth.currentUser
-
-                        // Retrieve the userId from the Firebase user
-                        val userId = firebaseUser?.uid
-
-                        if (userId != null) {
-                            // Upload the image to Firebase Storage
-                            val storageRef = storage.reference.child("potential_tenant_details_id").child("$potentialId.jpg")
-                            val uploadTask = storageRef.putFile(selectedImageUri2)
-
-
-                            uploadTask.addOnSuccessListener { _ ->
-                                // Get the download URL for the uploaded image
-                                storageRef.downloadUrl.addOnSuccessListener { downloadUri ->
-                                    val selectedCountryCode = binding.loginCountrycode2.selectedCountryCode
-                                    val phoneNumber2 = "+$selectedCountryCode$enteredPhoneNumber"
-                                    // Store the download URL and userId in the potentialTenant data
-                                    val potentialTenantData = hashMapOf(
-                                        "userId" to FirebaseAuth.getInstance().currentUser?.uid, // Store the retrieved userId
-                                        "timestamp" to FieldValue.serverTimestamp(),
-                                        // Include other fields in your data here
-                                        "requesterFullName" to username2,
-                                        "age" to age,
-                                        "address" to address,
-                                        "phoneNumber" to phoneNumber2,
-                                        "email" to email2,
-                                        "emergencyFullName" to fullName,
-                                        "emergencyAddress" to emAddress,
-                                        "emergencyPhoneNumber" to emphoneNumber,
-                                        "emergencyEmail" to emEmail,
-                                        "gender" to selectedGender,
-                                        "idImageUrl" to downloadUri.toString()
-                                    )
-
-                                    // Store the rental request in Firestore under the document with potentialId
-                                    firestore.collection("potential_tenant_details")
-                                        .document(potentialId)
-                                        .set(potentialTenantData)
-                                        .addOnSuccessListener {
-                                            progressBar.visibility = ProgressBar.GONE
-                                            val intent = Intent(this, SignInActivity::class.java)
-                                            AlertDialog.Builder(this)
-                                                .setMessage("User Registered successfully")
-                                                .setPositiveButton("OK") { dialog, _ ->
-                                                    dialog.dismiss()
-                                                    startActivity(intent)
-                                                    finish()}
-                                                .show()
-                                            progressDialog?.dismiss()
-                                        }
-                                        .addOnFailureListener { e ->
-                                            // Handle failure to store rental request data
-                                            Toast.makeText(this, "Failed to store potential tenant details data", Toast.LENGTH_SHORT).show()
-                                            progressDialog?.dismiss()
-                                        }
-                                }
-                            }
-                        } else {
-                            // Handle the case where the userId is null
-                            Toast.makeText(this, "User not authenticated.", Toast.LENGTH_SHORT).show()
-                            progressDialog?.dismiss()
-                        }
-                    } else {
-                        Toast.makeText(this, "Please agree to the terms and conditions.", Toast.LENGTH_SHORT).show()
-                        progressDialog?.dismiss()
-                    }
-                } else {
-                    Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
-                    progressDialog?.dismiss()
-                }
-            } else {
-                Toast.makeText(
-                    this,
-                    "Please fill all fields.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                progressDialog?.dismiss()
-            }
 
 
         }

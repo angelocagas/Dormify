@@ -123,15 +123,16 @@ class SignUpLandlordActivity : AppCompatActivity() {
             if (!isImageSelected) {
                 Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
                 binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                binding.lbletbtnAddImage.text = "Upload Profile Photo is required" // Set error message in lblFullName
+                binding.lbletbtnAddImage2.visibility = View.VISIBLE
                 return@setOnClickListener
             }else{
                 binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                binding.lbletbtnAddImage.text = "Upload Profile Photo" // Clear the error message in lblFullName
+                binding.lbletbtnAddImage2.visibility = View.INVISIBLE
             }
             if (!cbAgreement.isChecked) {
-                Toast.makeText(
-                    this,
-                    "Please agree to the terms and conditions to continue",
-                    Toast.LENGTH_SHORT
+                Toast.makeText(this, "Please agree to the terms and conditions to continue", Toast.LENGTH_SHORT
                 ).show()
                 return@setOnClickListener // Prevent further execution of the click listener
             }
@@ -207,11 +208,12 @@ class SignUpLandlordActivity : AppCompatActivity() {
                                                                         progressDialog?.dismiss()
                                                                     }
                                                                     .addOnFailureListener { e ->
-                                                                        showAlert("Registration failed. Please try again.")
+                                                                        showAlert("Invalid email or already taken. Please try again.")
                                                                         progressDialog?.dismiss()
                                                                     }
                                                             } else {
-                                                                showAlert("Username already taken. Please choose a different one.")
+                                                                Toast.makeText(this, "Full Name already taken. Please choose a different one.", Toast.LENGTH_SHORT).show()
+                                                                binding.usernameLayout.error = "Full Name already exist!"
                                                                 progressDialog?.dismiss()
                                                             }
                                                         } else {
@@ -237,24 +239,22 @@ class SignUpLandlordActivity : AppCompatActivity() {
                                     progressDialog?.dismiss()
                                 }
                             } else {
-                                Toast.makeText(
-                                    this,
-                                    "Registration failed. Please try again.",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this, "Email already exist!. Please try again.", Toast.LENGTH_SHORT).show()
+                                binding.emailLayout.error = "!"
                                 progressDialog?.dismiss()
                             }
                         }
                 } else {
                     Toast.makeText(this, "Password is not matching", Toast.LENGTH_SHORT).show()
+                    binding.confirmPasswordLayout.error = "!"
+                    binding.passwordLayout.error = "!"
                     progressDialog?.dismiss()
                 }
             } else {
                 Toast.makeText(
-                    this,
-                    "Invalid email or password. Password must be at least 6 characters.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                    this, "Password must be at least 6 characters.", Toast.LENGTH_SHORT).show()
+                binding.confirmPasswordLayout.error = "!"
+                binding.passwordLayout.error = "!"
                 progressDialog?.dismiss()
             }
         }
