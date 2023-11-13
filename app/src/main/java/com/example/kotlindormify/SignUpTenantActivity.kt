@@ -353,7 +353,7 @@ class SignUpTenantActivity : AppCompatActivity() {
                                                                             "requesterFullName" to username2,
                                                                             "age" to age,
                                                                             "address" to address,
-                                                                            "phoneNumber" to phoneNumber2,
+                                                                            "phoneNumber" to phoneNumber,
                                                                             "email" to email2,
                                                                             "emergencyFullName" to fullName,
                                                                             "emergencyAddress" to emAddress,

@@ -348,7 +348,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="ID Image URL:"
+                android:text="ID Image:"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSelectedGender" />
@@ -368,19 +368,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#000000"
-                app:layout_constraintTop_toBottomOf="@+id/textViewIdImageUrl" />
+                app:layout_constraintTop_toBottomOf="@+id/imgId" />
             <!-- Status -->
             <TextView
                 android:id="@+id/textViewStatusLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Status:"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewIdImageUrl" />
+                app:layout_constraintTop_toBottomOf="@+id/imgId" />
 
             <TextView
                 android:id="@+id/textViewStatus"
@@ -406,7 +405,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Timestamp:"
+                android:text="Time of Request:"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewStatus" />
@@ -428,6 +427,16 @@
                 android:background="#000000"
                 android:paddingBottom="50dp"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTimestamp" />
+
+            <ImageView
+                android:id="@+id/imgId"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewIdImageUrlLabel"
+                app:srcCompat="@drawable/logo_no_bg"
+                android:layout_marginLeft="50dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
