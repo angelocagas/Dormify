@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.databinding.FragmentRequestRentBinding
+import com.example.kotlindormify.landlord.LandlordDashboardActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
@@ -30,6 +32,7 @@ class RequestRentFragment : Fragment() {
     private var progressDialog: ProgressDialog? = null
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,6 +40,7 @@ class RequestRentFragment : Fragment() {
         binding = FragmentRequestRentBinding.inflate(inflater, container, false)
         val dormName = arguments?.getString("dormName")
         val dormitoryId = arguments?.getString("dormitoryId")
+
 
         val firestore = FirebaseFirestore.getInstance()
         val storage = FirebaseStorage.getInstance()
@@ -71,6 +75,8 @@ class RequestRentFragment : Fragment() {
                 PICK_IMAGE_REQUEST
             )
         }
+
+
 
         binding.btnSubmit.setOnClickListener {
             val requesterFullName = binding.etFullName.text.toString()
