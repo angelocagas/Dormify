@@ -21,6 +21,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 class SavedFragment : Fragment(R.layout.saved_fragment) {
 
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -32,12 +34,10 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
         val allDormitoriesRecyclerView = view.findViewById<RecyclerView>(R.id.rvAllDormitories)
         val savedDormitoriesRecyclerView = view.findViewById<RecyclerView>(R.id.rvSavedDormitories)
 
-        val allDormitoriesLayoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        val allDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager
 
-        val savedDormitoriesLayoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val savedDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         savedDormitoriesRecyclerView.layoutManager = savedDormitoriesLayoutManager
 
         val allDormitoriesList: MutableList<Dormitory> = mutableListOf()
@@ -73,7 +73,11 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
         }
 
 
+
+
     }
+
+
 
 
     private fun queryAllDormitories(callback: (List<Dormitory>) -> Unit) {
@@ -91,7 +95,7 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
                     val dormPrice = dormitoryDocument.getString("price")
                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
                     val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
-                    val imageUrl = dormitoryDocument.getString("image")
+                    val imageUrl = dormitoryDocument.get("images") as? List<String>
                     val landlordId = dormitoryDocument.getString("landlordId")
                     val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
                     val latitude = dormitoryDocument.getDouble("latitude")
@@ -102,8 +106,7 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
                     val username = dormitoryDocument.getString("username")
                     val description = dormitoryDocument.getString("description")
                     val permitImage = dormitoryDocument.getString("permitImage")
-                    val pendingRequestsCount =
-                        dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                    val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                     val rentalTerm = dormitoryDocument.getString("rentalTerm")
                     val bathroom = dormitoryDocument.getString("bathroom")
                     val electric = dormitoryDocument.getString("electric")
@@ -113,30 +116,7 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
                     // Add other dormitory fields as needed
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(
-                        dormName,
-                        dormPrice,
-                        dormitoryId,
-                        numOfRooms,
-                        imageUrl,
-                        landlordId,
-                        qrCodeImageUrl,
-                        latitude,
-                        longitude,
-                        address,
-                        phoneNumber,
-                        email,
-                        username,
-                        description,
-                        permitImage,
-                        pendingRequestsCount,
-                        rentalTerm,
-                        bathroom,
-                        electric,
-                        water,
-                        paymentOptions,
-                        amenities
-                    )
+                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities )
 
                 }
                 callback(allDormitories)
@@ -155,8 +135,7 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
                     val userDocument = querySnapshot.documents[0]
-                    val savedDormitoryIds =
-                        userDocument["savedDormitories"] as? List<String> ?: emptyList()
+                    val savedDormitoryIds = userDocument["savedDormitories"] as? List<String> ?: emptyList()
                     callback(savedDormitoryIds)
                 } else {
                     // No user found, return an empty list
@@ -169,10 +148,7 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
             }
     }
 
-    private fun queryDormitoryDetails(
-        dormitoryIds: List<String>,
-        callback: (List<Dormitory>) -> Unit
-    ) {
+    private fun queryDormitoryDetails(dormitoryIds: List<String>, callback: (List<Dormitory>) -> Unit) {
         val firestore = FirebaseFirestore.getInstance()
         val dormitoriesRef = firestore.collection("dormitories")
 
@@ -189,7 +165,7 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
                     val dormPrice = dormitoryDocument.getString("price")
                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
                     val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
-                    val imageUrl = dormitoryDocument.getString("image")
+                    val imageUrl = dormitoryDocument.get("images") as? List<String>
                     val landlordId = dormitoryDocument.getString("landlordId")
                     val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
                     val latitude = dormitoryDocument.getDouble("latitude")
@@ -200,8 +176,7 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
                     val username = dormitoryDocument.getString("username")
                     val description = dormitoryDocument.getString("description")
                     val permitImage = dormitoryDocument.getString("permitImage")
-                    val pendingRequestsCount =
-                        dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                    val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                     val rentalTerm = dormitoryDocument.getString("rentalTerm")
                     val bathroom = dormitoryDocument.getString("bathroom")
                     val electric = dormitoryDocument.getString("electric")
@@ -213,30 +188,7 @@ class SavedFragment : Fragment(R.layout.saved_fragment) {
                     // Add other dormitory fields as needed
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(
-                        dormName,
-                        dormPrice,
-                        dormitoryId,
-                        numOfRooms,
-                        imageUrl,
-                        landlordId,
-                        qrCodeImageUrl,
-                        latitude,
-                        longitude,
-                        address,
-                        phoneNumber,
-                        email,
-                        username,
-                        description,
-                        permitImage,
-                        pendingRequestsCount,
-                        rentalTerm,
-                        bathroom,
-                        electric,
-                        water,
-                        paymentOptions,
-                        amenities
-                    )
+                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities )
                     dormitoriesList.add(dormitory)
 
                     // Check if all dormitories have been retrieved

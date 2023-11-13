@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.landlord.LandlordDashboardActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -34,6 +35,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
@@ -53,12 +56,17 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val btnRent = view.findViewById<Button>(R.id.inquirebtn)
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture)
 
+        val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
+        val tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
+
+
+
 
         // Retrieve dormitory data from arguments
         val dormName = arguments?.getString("dormName")
         val dormPrice = arguments?.getString("dormPrice")
         val dormitoryId = arguments?.getString("dormitoryId")
-        val imageUrl = arguments?.getString("imagesUrl")
+        val imageUrls: ArrayList<String>? = arguments?.getStringArrayList("imageUrls")
         val landlordId = arguments?.getString("landlordId")
         val dormRooms = arguments?.getInt("dormRooms")
         val qrCodeImageUrl = arguments?.getString("qrCodeImageUrl")
@@ -71,6 +79,14 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val electric = arguments?.getString("electric")
         val rentalTerm = arguments?.getString("rentalTerm")
         val bathroom = arguments?.getString("bathroom")
+
+        val imageSliderAdapter = ImageSliderAdapter(requireContext(), imageUrls ?: emptyList())
+        viewPager.adapter = imageSliderAdapter
+
+        // Connect ViewPager2 with TabLayout (optional)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            // Customize tab if needed
+        }.attach()
 
 
         //landlord details
@@ -90,7 +106,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         // Populate UI with dormitory details
         val dormNameTextView = view.findViewById<TextView>(R.id.textDormName)
         val dormPriceTextView = view.findViewById<TextView>(R.id.textDormPrice)
-        val dormImageView = view.findViewById<ImageView>(R.id.ivDormitoryImage)
+        //val dormImageView = view.findViewById<ImageView>(R.id.ivDormitoryImage)
       //  val recyclerView = view.findViewById<RecyclerView>(R.)
         val descriptionTextview = view.findViewById<TextView>(R.id.ViewContent)
         val addressTextView = view.findViewById<TextView>(R.id.textDormloc)
@@ -214,11 +230,13 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
 
         // Load and display the dormitory image using Picasso or Glide
-        if (imageUrl != null) {
-            Picasso.get().load(imageUrl).into(dormImageView)
+       /* if (imageUrls != null) {
+            Picasso.get().load(imageUrls[0]).into(dormImageView)
         } else {
             dormImageView.setImageResource(R.drawable.dormify_logo)
         }
+
+        */
 
         if (permitImage != null) {
             Picasso.get().load(permitImage).into(permitImageview)

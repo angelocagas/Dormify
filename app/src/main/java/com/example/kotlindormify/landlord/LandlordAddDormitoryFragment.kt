@@ -30,6 +30,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.CollectionReference
@@ -560,38 +562,43 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
     // Function to upload the selected image to Firebase Storage
     private fun uploadImages(dormitoryId: String) {
-        val uploadedImageUrls = mutableMapOf<Int, String>() // Using a map to preserve order
+        val uploadedImageUrls = mutableListOf<String>()
 
         if (selectedImageUris.isNotEmpty()) {
-            for ((index, imageUri) in selectedImageUris.withIndex()) {
-                val fileName = "${dormitoryId}_img${index}.jpg"
+            val uploadTasks = mutableListOf<Task<Uri>>()
+
+            for (imageUri in selectedImageUris) {
+                val fileName = "${dormitoryId}_${System.currentTimeMillis()}.jpg"
                 val imageRef = storageRef.child("$dormitoryId/$fileName")
 
-                imageRef.putFile(imageUri)
-                    .addOnSuccessListener { taskSnapshot ->
-                        // Image uploaded successfully, get the download URL
-                        imageRef.downloadUrl.addOnCompleteListener { downloadUrlTask ->
-                            if (downloadUrlTask.isSuccessful) {
-                                val imageUrl = downloadUrlTask.result.toString()
-                                uploadedImageUrls[index] = imageUrl
-
-                                // Check if all images are uploaded before updating Firestore
-                                if (uploadedImageUrls.size == selectedImageUris.size) {
-                                    // Sort the URLs based on the original order
-                                    val sortedUrls = uploadedImageUrls.toSortedMap().values.toList()
-
-                                    // All images are uploaded, store the sorted image URLs in Firestore
-                                    storeImageUrlsInFirestore(dormitoryId, sortedUrls)
-                                }
-                            } else {
-                                // Handle error while getting the image URL
+                val uploadTask = imageRef.putFile(imageUri)
+                    .continueWithTask { task ->
+                        if (!task.isSuccessful) {
+                            task.exception?.let {
+                                throw it
                             }
                         }
+                        imageRef.downloadUrl
                     }
-                    .addOnFailureListener { e ->
-                        // Handle image upload failure
-                    }
+
+                uploadTasks.add(uploadTask)
             }
+
+            Tasks.whenAllComplete(uploadTasks)
+                .addOnSuccessListener { taskList ->
+                    for (task in taskList) {
+                        if (task.isSuccessful) {
+                            val imageUrl = (task.result as Uri).toString()
+                            uploadedImageUrls.add(imageUrl)
+                        }
+                    }
+
+                    // All images are uploaded, now you have the URLs in the order of selection
+                    storeImageUrlsInFirestore(dormitoryId, uploadedImageUrls)
+                }
+                .addOnFailureListener { exception ->
+                    // Handle error
+                }
         } else {
             // Handle the case when no images are selected
         }
