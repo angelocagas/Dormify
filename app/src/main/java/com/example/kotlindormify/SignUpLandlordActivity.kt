@@ -8,7 +8,9 @@ import android.provider.MediaStore
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.example.kotlindormify.databinding.ActivitySignUpBinding
 import com.example.kotlindormify.databinding.ActivitySignUpLandlordBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -50,6 +52,9 @@ class SignUpLandlordActivity : AppCompatActivity() {
 
 
         binding.loginCountrycode.setCountryForPhoneCode(63)
+        binding.imageView.setOnClickListener {
+            super.onBackPressed()
+        }
 
 
 
@@ -64,6 +69,7 @@ class SignUpLandlordActivity : AppCompatActivity() {
 
             val progressBar = binding.progressBar
             val cbAgreement = binding.cbAgreement
+
 
             if (username.isEmpty()) {
                 binding.usernameLayout.error = "Full name is required"
@@ -115,8 +121,11 @@ class SignUpLandlordActivity : AppCompatActivity() {
 
             // Check if an image has been selected
             if (!isImageSelected) {
-                Toast.makeText(this, "Please select an image", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener // Prevent further execution of the click listener
+                Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                return@setOnClickListener
+            }else{
+                binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
             }
             if (!cbAgreement.isChecked) {
                 Toast.makeText(
@@ -186,37 +195,27 @@ class SignUpLandlordActivity : AppCompatActivity() {
                                                                             this,
                                                                             SignInActivity::class.java
                                                                         )
-                                                                        startActivity(intent)
-                                                                        Toast.makeText(
-                                                                            this,
-                                                                            "User Registered Successfully",
-                                                                            Toast.LENGTH_SHORT
-                                                                        ).show()
-                                                                        finish()
+
+                                                                        AlertDialog.Builder(this)
+                                                                            .setMessage("User Registered successfully")
+                                                                            .setPositiveButton("OK") { dialog, _ ->
+                                                                                dialog.dismiss()
+                                                                                startActivity(intent)
+                                                                                finish()}
+                                                                            .show()
+
                                                                         progressDialog?.dismiss()
                                                                     }
                                                                     .addOnFailureListener { e ->
-                                                                        Toast.makeText(
-                                                                            this,
-                                                                            "Registration failed. Please try again.",
-                                                                            Toast.LENGTH_SHORT
-                                                                        ).show()
+                                                                        showAlert("Registration failed. Please try again.")
                                                                         progressDialog?.dismiss()
                                                                     }
                                                             } else {
-                                                                Toast.makeText(
-                                                                    this,
-                                                                    "Username already taken. Please choose a different one.",
-                                                                    Toast.LENGTH_SHORT
-                                                                ).show()
+                                                                showAlert("Username already taken. Please choose a different one.")
                                                                 progressDialog?.dismiss()
                                                             }
                                                         } else {
-                                                            Toast.makeText(
-                                                                this,
-                                                                "Error checking username uniqueness. Please try again.",
-                                                                Toast.LENGTH_SHORT
-                                                            ).show()
+                                                            showAlert("Error checking username uniqueness. Please try again.")
                                                             progressDialog?.dismiss()
                                                         }
                                                     }
@@ -337,6 +336,13 @@ class SignUpLandlordActivity : AppCompatActivity() {
         progressDialog?.setMessage("Signing Up ...") // Set the message you want to display
         progressDialog?.setCancelable(false) // Prevents user from dismissing the dialog by tapping outside
         progressDialog?.show()
+    }
+
+    fun showAlert(message: String) {
+        AlertDialog.Builder(this)
+            .setMessage(message)
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
+            .show()
     }
 
 

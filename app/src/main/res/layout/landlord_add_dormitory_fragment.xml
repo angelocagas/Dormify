@@ -490,7 +490,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/available_success"
                     android:textStyle="bold"
-                    android:text="Included" />
+                    android:text="Included in monthly bill" />
 
                 <RadioButton
                     android:id="@+id/radioExcluded"
@@ -498,7 +498,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="#EF3636"
-                    android:text="Excluded" />
+                    android:text="Excluded in monthly bill" />
 
 
             </RadioGroup>
@@ -540,7 +540,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/available_success"
                     android:textStyle="bold"
-                    android:text="Included" />
+                    android:text="Included in monthly bill" />
 
                 <RadioButton
                     android:id="@+id/radioWaterExcluded"
@@ -548,7 +548,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="#EF3636"
-                    android:text="Excluded" />
+                    android:text="Excluded in monthly bill" />
 
             </RadioGroup>
 
@@ -875,7 +875,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:fontFamily="@font/poppins"
-                    android:text="Upload Dormitory Profile"
+                    android:text="Upload Dormitory Images"
                     android:textSize="20sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -888,6 +888,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:visibility="gone"
                 android:background="@drawable/rectangle_radius_white_stroke_black"
                 android:paddingVertical="10dp"
                 app:layout_constraintEnd_toEndOf="parent"

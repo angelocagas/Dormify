@@ -112,7 +112,7 @@ class LandlordUnitsFragment : Fragment() {
                                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
                                     val numOfRooms =
                                         dormitoryDocument.getLong("numOfRooms")?.toInt()
-                                    val imageUrl = dormitoryDocument.getString("image")
+                                    val imageUrl = dormitoryDocument.get("image") as? List<String>
                                     val landlordId = dormitoryDocument.getString("landlordId")
                                     val qrCodeImageUrl =
                                         dormitoryDocument.getString("qrCodeImageUrl")
@@ -275,7 +275,7 @@ class LandlordUnitsFragment : Fragment() {
                         val dormPrice = dormitoryDocument.getString("price")
                         val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
                         val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
-                        val imageUrl = dormitoryDocument.getString("image")
+                        val imageUrl = dormitoryDocument.get("image") as? List<String>
                         val landlordId = dormitoryDocument.getString("landlordId")
                         val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
                         val latitude = dormitoryDocument.getDouble("latitude")

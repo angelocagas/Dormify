@@ -3,6 +3,7 @@ package com.example.kotlindormify
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.landlord.LandlordDashboardActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -33,6 +35,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
@@ -52,12 +56,17 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val btnRent = view.findViewById<Button>(R.id.inquirebtn)
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture)
 
+        val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
+        val tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
+
+
+
 
         // Retrieve dormitory data from arguments
         val dormName = arguments?.getString("dormName")
         val dormPrice = arguments?.getString("dormPrice")
         val dormitoryId = arguments?.getString("dormitoryId")
-        val imageUrl = arguments?.getString("imagesUrl")
+        val imageUrls: ArrayList<String>? = arguments?.getStringArrayList("imageUrls")
         val landlordId = arguments?.getString("landlordId")
         val dormRooms = arguments?.getInt("dormRooms")
         val qrCodeImageUrl = arguments?.getString("qrCodeImageUrl")
@@ -70,6 +79,14 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val electric = arguments?.getString("electric")
         val rentalTerm = arguments?.getString("rentalTerm")
         val bathroom = arguments?.getString("bathroom")
+
+        val imageSliderAdapter = ImageSliderAdapter(requireContext(), imageUrls ?: emptyList())
+        viewPager.adapter = imageSliderAdapter
+
+        // Connect ViewPager2 with TabLayout (optional)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            // Customize tab if needed
+        }.attach()
 
 
         //landlord details
@@ -89,7 +106,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         // Populate UI with dormitory details
         val dormNameTextView = view.findViewById<TextView>(R.id.textDormName)
         val dormPriceTextView = view.findViewById<TextView>(R.id.textDormPrice)
-        val dormImageView = view.findViewById<ImageView>(R.id.ivDormitoryImage)
+        //val dormImageView = view.findViewById<ImageView>(R.id.ivDormitoryImage)
       //  val recyclerView = view.findViewById<RecyclerView>(R.)
         val descriptionTextview = view.findViewById<TextView>(R.id.ViewContent)
         val addressTextView = view.findViewById<TextView>(R.id.textDormloc)
@@ -213,11 +230,13 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
 
         // Load and display the dormitory image using Picasso or Glide
-        if (imageUrl != null) {
-            Picasso.get().load(imageUrl).into(dormImageView)
+       /* if (imageUrls != null) {
+            Picasso.get().load(imageUrls[0]).into(dormImageView)
         } else {
             dormImageView.setImageResource(R.drawable.dormify_logo)
         }
+
+        */
 
         if (permitImage != null) {
             Picasso.get().load(permitImage).into(permitImageview)
@@ -430,7 +449,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
     }
 
-    private fun addDormitoryMarker(latitude: Double?, longitude: Double?, dormName: String?) {
+    private fun addDormitoryMarker(latitude: Double?, longitude: Double?, dormName: String?, address: String) {
         if (latitude != null && longitude != null) {
             // Create a LatLng object for the dormitory's location
             val dormitoryLocation = LatLng(latitude, longitude)
@@ -443,12 +462,45 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
                 .position(dormitoryLocation)
                 .title(dormName) // Use dormName without the $ symbol
                 .icon(customMarkerIcon)
+                .snippet(address)
                 .anchor(0.5f, 1.0f)
 // Add a marker for the dormitory's location with the custom icon
             val marker = googleMap?.addMarker(markerOptions)
 
+            googleMap?.setOnMarkerClickListener { marker ->
+                // Show the info window for the clicked marker
+                marker.showInfoWindow()
+
+                true
+            }
+
+            googleMap?.setOnInfoWindowClickListener { clickedMarker ->
+                val dormitoryLocation = clickedMarker.position // Get the LatLng of the clicked marker
+                val dormitoryName = clickedMarker.title ?: "Dormitory Name" // Use the dormitory's name as the label, or provide a default name
+                val dormitorySnippet = clickedMarker.snippet ?: "Dormitory Snippet" // Use the marker's snippet as the address, or provide a default snippet
+
+                // Create an Intent to open the Google Maps app with a pinned marker at the specified location
+                val gmmIntentUri = Uri.parse("geo:${dormitoryLocation.latitude},${dormitoryLocation.longitude}?z=15&q=${dormitoryLocation.latitude},${dormitoryLocation.longitude}(${Uri.encode(dormitoryName)})")
+
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps") // Specify the Google Maps package
+
+                // Check if the Google Maps app is installed
+                if (mapIntent.resolveActivity(requireContext().packageManager) != null) {
+                    startActivity(mapIntent)
+                } else {
+                    // If the Google Maps app is not installed, handle it accordingly
+                    // You can open a web-based map or prompt the user to install the app.
+                    // Example: Open a web-based map
+                    val webMapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/?api=1&query=${dormitoryLocation.latitude},${dormitoryLocation.longitude}"))
+                    startActivity(webMapIntent)
+                }
+            }
+
             // Move the camera to the dormitory's location
             googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(dormitoryLocation, 15f))
+
+            googleMap?.uiSettings?.isMapToolbarEnabled = false
 
             // Show the info window without the need for clicking the marker
             marker?.showInfoWindow()
@@ -476,7 +528,10 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val latitude = arguments?.getDouble("latitude")
         val longitude = arguments?.getDouble("longitude")
         val dormName = arguments?.getString("dormName")
-        addDormitoryMarker(latitude, longitude, dormName)
+        val address = arguments?.getString("address")
+        if (address != null) {
+            addDormitoryMarker(latitude, longitude, dormName, address)
+        }
 
         // Enable zoom controls
         googleMap!!.uiSettings.isZoomControlsEnabled = true

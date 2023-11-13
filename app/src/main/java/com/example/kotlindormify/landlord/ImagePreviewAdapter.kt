@@ -10,18 +10,16 @@ import com.bumptech.glide.Glide
 import com.example.kotlindormify.R
 
 class ImagePreviewAdapter(private val imageUris: List<Uri>) :
-    RecyclerView.Adapter<LandlordAddDormitoryFragment.ImagePreviewViewHolder>() {
+    RecyclerView.Adapter<ImagePreviewAdapter.ImagePreviewViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LandlordAddDormitoryFragment.ImagePreviewViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.image_preview_item, parent, false)
-        return LandlordAddDormitoryFragment.ImagePreviewViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImagePreviewViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        val itemView = inflater.inflate(R.layout.image_item, parent, false)
+        return ImagePreviewViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: LandlordAddDormitoryFragment.ImagePreviewViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ImagePreviewViewHolder, position: Int) {
         val imageUri = imageUris[position]
-
-
-        // Load the image from the URI and set it to the ImageView
         Glide.with(holder.itemView.context)
             .load(imageUri)
             .into(holder.imageView)
@@ -31,4 +29,7 @@ class ImagePreviewAdapter(private val imageUris: List<Uri>) :
         return imageUris.size
     }
 
+    class ImagePreviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.imageView)
+    }
 }
