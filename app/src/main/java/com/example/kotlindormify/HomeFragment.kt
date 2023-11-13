@@ -1,4 +1,3 @@
-
 package com.example.kotlindormify
 
 import android.content.Intent
@@ -468,62 +467,6 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
         }
     }
 
-<<<<<<< HEAD
-    private fun queryPotential(callback: (List<PotentialTenant>) -> Unit) {
-        // Query all dormitory details
-        val firestore = FirebaseFirestore.getInstance()
-        val potentialRef = firestore.collection("potential_tenant_details")
-
-        potentialRef
-            .get()
-            .addOnSuccessListener { potentialQuerySnapshot ->
-                val allPotential = mutableListOf<PotentialTenant>()
-                for (potentialDocument in potentialQuerySnapshot.documents) {
-                    // Retrieve individual potenital tentant data
-                    val address = potentialDocument.getString("address")
-                    val age = potentialDocument.getString("age")
-                    val email = potentialDocument.getString("email")
-                    val emergencyAddress = potentialDocument.getString("emergencyAddress")
-                    val emergencyEmail = potentialDocument.getString("emergencyEmail")
-                    val emergencyFullName = potentialDocument.getString("emergencyFullName")
-                    val emergencyPhoneNumber = potentialDocument.getString("emergencyPhoneNumber")
-                    val gender = potentialDocument.getString("gender")
-                    val phoneNumber = potentialDocument.getString("phoneNumber")
-                    val requesterFullName = potentialDocument.getString("requesterFullName")
-                    val timestamp = potentialDocument.getString("timestamp")
-
-
-
-
-                    // Add other dormitory fields as needed
-
-                    // Create a Dormitory object and add it to the list
-                    val potential = PotentialTenant(
-                        address,
-                        age,
-                        email,
-                        emergencyAddress,
-                        emergencyEmail,
-                        emergencyFullName,
-                        emergencyPhoneNumber,
-                        gender,
-                        phoneNumber,
-                        requesterFullName,
-                        timestamp
-
-                    )
-                    allPotential.add(potential)
-                }
-                callback(allPotential)
-            }
-            .addOnFailureListener { e ->
-                // Handle the failure to query all dormitories
-                callback(emptyList())
-            }
-    }
-
-
-=======
     private var sortingOptions = arrayOf(
         "Name (Z - A ↓)",
         "Name (A - Z ↑)",
@@ -590,6 +533,5 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
 
 
->>>>>>> gelo-updates
 
 }
