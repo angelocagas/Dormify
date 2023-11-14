@@ -13,9 +13,8 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+     android:layout_alignBottom="@id/left_chat_layout"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
         android:elevation="1dp"
         app:cardCornerRadius="18dp"
         app:layout_constraintTop_toTopOf="parent">
@@ -44,7 +43,7 @@
         <TextView
             android:id="@+id/item_chat_message_left"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/opo_msg_back"
             android:padding="20dp"
             android:text="This is opponent message"

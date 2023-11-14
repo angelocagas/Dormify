@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/right_chat_layout"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:layout_toStartOf="@+id/cardViewImage"
        android:paddingEnd="7dp"
         android:orientation="vertical">
@@ -30,10 +30,8 @@
         android:id="@+id/cardViewImage"
         android:layout_width="40dp"
         android:layout_height="40dp"
-
-        android:layout_alignParentTop="true"
+android:layout_alignBottom="@id/right_chat_layout"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="10dp"
         android:elevation="1dp"
         app:cardCornerRadius="18dp"
