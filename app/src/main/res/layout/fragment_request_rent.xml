@@ -236,26 +236,17 @@
             app:layout_constraintStart_toEndOf="@+id/lbletPhoneNumber"
             app:layout_constraintTop_toTopOf="@+id/lbletPhoneNumber" />
 
-        <com.hbb20.CountryCodePicker
-            android:id="@+id/login_countrycode"
-            android:layout_width="96dp"
-            android:layout_height="49dp"
-            android:paddingTop="10dp"
-            app:ccp_showFlag="false"
-            app:ccp_showNameCode="true"
-            app:layout_constraintEnd_toStartOf="@+id/etPhoneNumberLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lbletPhoneNumber" />
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etPhoneNumberLayout"
             style="@style/LoginTextInputOuterFieldStyle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="1dp"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/login_countrycode"
+        app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lbletPhoneNumber">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -266,6 +257,7 @@
                 android:hint="9123456789"
                 android:inputType="number"
                 android:maxLength="10"
+                android:paddingStart="100dp"
                 android:minHeight="48dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
@@ -275,6 +267,15 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/login_countrycode"
+            android:layout_width="96dp"
+            android:layout_height="49dp"
+            android:paddingTop="0dp"
+            app:ccp_showFlag="false"
+            app:ccp_showNameCode="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lbletPhoneNumber" />
         <!-- Email -->
         <TextView
             android:id="@+id/lbletEmail"

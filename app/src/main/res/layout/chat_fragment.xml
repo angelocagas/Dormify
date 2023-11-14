@@ -6,13 +6,76 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardviews"
+    android:layout_width="match_parent"
+    app:cardElevation="8dp"
+    android:layout_height="60dp">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/dorm_backbtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/cardViewImage"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:elevation="1dp"
+            app:cardCornerRadius="360dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivTopProfilePictureChat"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@drawable/person_icon" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/nameOfChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/karla"
+            android:text="Name Of Landlord"
+            android:textSize="20dp"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/cardViewImage"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="608dp"
         android:layout_above="@+id/messageInputLayout"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="30dp"
+        android:layout_below="@+id/cardviews"
+        android:layout_marginTop="1dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp" />
 
@@ -28,30 +91,44 @@
 
         <EditText
             android:id="@+id/messageEditText"
-            android:layout_width="0dp"
+            android:layout_width="294dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
+            android:background="@drawable/chatbox"
             android:hint="Type your message..."
-            android:background="@null"
-            android:padding="8dp"
+            android:paddingStart="20dp"
+            android:textSize="13sp"
             android:inputType="textMultiLine"
             android:maxLines="5"
-            android:layout_gravity="center_vertical" />
+            android:padding="8dp"
+            android:layout_marginStart="10dp" />
 
-        <Button
-            android:id="@+id/sendButton"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Send"
-            android:background="?attr/selectableItemBackground"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="8dp" />
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:layout_width="92dp"
+                android:layout_height="42dp"
+                android:src="@drawable/dorm_sendbtn"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/sendButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/sendButton"
+                android:layout_width="73dp"
+                android:layout_height="46dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="4dp"
+                android:background="@color/clear"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_editor_absoluteY="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView" />
 
 </RelativeLayout>
