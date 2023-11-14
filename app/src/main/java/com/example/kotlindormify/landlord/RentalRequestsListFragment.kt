@@ -103,6 +103,8 @@ class RentalRequestsListFragment : Fragment() {
     }
 
     private fun fetchRentalRequestsList(dormitoryId: String) {
+
+
         val firestore = FirebaseFirestore.getInstance()
         val requestsRef = firestore
             .collection("dormitories")

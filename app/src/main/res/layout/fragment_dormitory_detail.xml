@@ -223,10 +223,36 @@
                         android:text="Direct-to-owner transaction only (no agents/brokers). Fully Furnished with appliances and furniture (except for TV-not included and WIFI - personal account of tenant). Rent inclusive of association dues only, WIFI and utility bills not included."
                         android:textSize="15sp" />
 
+                    <TextView
+                        android:id="@+id/lblGenderRestrictions"
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ViewContent"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="21dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Gender Restrictions:"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvGenderRestriction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lblGenderRestrictions"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="15sp"
+                        android:text="sample"/>
+
+
+
                     <View
+                        android:id="@+id/dividerTop"
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_below="@+id/ViewContent"
+                        android:layout_below="@+id/tvGenderRestriction"
                         android:layout_marginTop="8dp"
                         android:background="#000000" />
 
@@ -236,7 +262,7 @@
                         android:id="@+id/amenitieslayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/ViewContent">
+                        android:layout_below="@+id/dividerTop">
 
 
                         <TextView

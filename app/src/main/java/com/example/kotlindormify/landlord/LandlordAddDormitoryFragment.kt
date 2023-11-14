@@ -15,7 +15,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -121,7 +120,12 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 binding.tvnoPin.visibility = View.GONE
             } else {
                 // Handle the case where the selected location is not initialized
-                Toast.makeText(requireContext(), "Select a location on the map first", Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Please select a location on the map first")
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
             }
         }
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -211,7 +215,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if(isChecked){
                 selectedAmenities.add("Laundry Area")
             }else{
-                selectedAmenities.remove("Laundry Area")
+                selectedAmenities.remove("Swimming Pool")
             }
         }
 
@@ -236,6 +240,20 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // Add more cases for other radio buttons if needed
             }
         }
+
+        var genderRestriction = "None"
+
+        binding.radioGroupRestrictions.setOnCheckedChangeListener { _, checkedId ->
+            // Check which radio button was selected
+            when (checkedId) {
+                R.id.rbMaleOnly -> genderRestriction = binding.rbMaleOnly.text.toString()
+                R.id.rbFemaleOnly -> genderRestriction = binding.rbFemaleOnly.text.toString()
+                R.id.rbCoed -> genderRestriction = binding.rbCoed.text.toString()
+                // Add more cases for other radio buttons if needed
+            }
+        }
+
+
 
         var selectedWater = "Included"
         binding.radioWater.setOnCheckedChangeListener { _, checkedId ->
@@ -281,6 +299,13 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val username = binding.etusername.text.toString()
 
             val cbAgreement = binding.cbAgreement
+            val cbKitchen = binding.cbKitchen
+            val cbLounge = binding.cbLounge
+            val cbWifi = binding.cbWifi
+            val cbSwimming = binding.cbSwimming
+            val cbFitness = binding.cbFitness
+            val cbParking = binding.cbParking
+            val cbCCTV = binding.cbCCTV
             var amenitiesString = binding.etAmenities.text.toString()
             var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
 
@@ -542,19 +567,23 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                         }
                     }
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Please agree to the terms and conditions",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    AlertDialog.Builder(requireContext())
+                        .setMessage("Please agree to the terms and conditions")
+                        .setPositiveButton("OK") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                     progressDialog?.dismiss()
                 }
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Please Fill Out All Fields",
-                    Toast.LENGTH_SHORT
-                ).show()
+
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Please Fill Out All Fields")
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+
                 progressDialog?.dismiss()
             }
         }
@@ -698,6 +727,10 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (data != null && data.clipData != null) {
                 // Multiple images selected
                 val clipData = data.clipData!!
+
+                // Clear the list before adding new images
+                selectedImageUris.clear()
+
                 for (i in 0 until clipData.itemCount) {
                     val imageUri = clipData.getItemAt(i).uri // Get the URI of each selected image
                     selectedImageUris.add(imageUri) // Add the URI to the list in the order they were selected
@@ -708,13 +741,19 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
             } else if (data != null && data.data != null) {
                 // Single image selected
+
+                // Clear the list before adding new images
+                selectedImageUris.clear()
+
                 val imageUri = data.data!! // Get the URI of the selected image
                 selectedImageUris.add(imageUri) // Add the URI to the list
                 binding.ivSelectedImage.setImageResource(R.drawable.check_icon)
                 binding.btnAddImage.isClickable = false
                 binding.textView4.text = "Dormitory Images selected"
+                binding.ivSelectedImage.setImageResource(R.drawable.check_icon)
             }
         }
+
 
 
 

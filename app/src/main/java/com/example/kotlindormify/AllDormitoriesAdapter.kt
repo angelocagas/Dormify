@@ -122,6 +122,7 @@ class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
                 bundle.putString("electric", clickedDormitory.electric)
                 bundle.putString("water", clickedDormitory.water)
                 bundle.putString("email", clickedDormitory.email)
+                bundle.putString("genderRestriction", clickedDormitory.genderRestriction)
 
 
                 val paymentOptionsList = clickedDormitory.paymentOptions?.toList()
