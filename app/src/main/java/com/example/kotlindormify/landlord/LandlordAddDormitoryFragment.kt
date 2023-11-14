@@ -284,6 +284,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val cbCCTV = binding.cbCCTV
             var amenitiesString = binding.etAmenities.text.toString()
             var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
+            var allAmenitiesList = selectedAmenities + amenitiesList
 
 
             // Check if an image has been selected
@@ -295,7 +296,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
-            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
+            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && allAmenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
                 if (cbAgreement.isChecked) {
                     showLoadingDialog()
                     val activity = requireActivity() as LandlordDashboardActivity
@@ -325,7 +326,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             selectedElectric,
                                             selectedWater,
                                             selectedPaymentOptions,
-                                            amenitiesList + selectedAmenities
+                                            allAmenitiesList
 
 
                                             )
