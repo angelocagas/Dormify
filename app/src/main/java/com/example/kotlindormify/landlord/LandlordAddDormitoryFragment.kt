@@ -118,7 +118,12 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 binding.tvnoPin.visibility = View.GONE
             } else {
                 // Handle the case where the selected location is not initialized
-                Toast.makeText(requireContext(), "Select a location on the map first", Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Please select a location on the map first")
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
             }
         }
         val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -289,7 +294,12 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
             // Check if an image has been selected
             if (!isPermitImageSelected) {
-                Toast.makeText(requireContext(), "Please select both Dormitory Image and Business Permit Image", Toast.LENGTH_SHORT).show()
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Please select both Dormitory Image and Business Permit Image")
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
                 return@setOnClickListener // Prevent further execution of the click listener
             }
 
@@ -439,19 +449,23 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                         }
                     }
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Please agree to the terms and conditions",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    AlertDialog.Builder(requireContext())
+                        .setMessage("Please agree to the terms and conditions")
+                        .setPositiveButton("OK") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
                     progressDialog?.dismiss()
                 }
             } else {
-                Toast.makeText(
-                    requireContext(),
-                    "Please Fill Out All Fields",
-                    Toast.LENGTH_SHORT
-                ).show()
+
+                AlertDialog.Builder(requireContext())
+                    .setMessage("Please Fill Out All Fields")
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .show()
+
                 progressDialog?.dismiss()
             }
         }
@@ -595,23 +609,32 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (data != null && data.clipData != null) {
                 // Multiple images selected
                 val clipData = data.clipData!!
+
+                // Clear the list before adding new images
+                selectedImageUris.clear()
+
                 for (i in 0 until clipData.itemCount) {
                     val imageUri = clipData.getItemAt(i).uri // Get the URI of each selected image
                     selectedImageUris.add(imageUri) // Add the URI to the list in the order they were selected
-                    binding.btnAddImage.isClickable = false
-                    binding.textView4.text = "Dormitory Images selected"
-                    binding.ivSelectedImage.setImageResource(R.drawable.check_icon)
                 }
 
             } else if (data != null && data.data != null) {
                 // Single image selected
+
+                // Clear the list before adding new images
+                selectedImageUris.clear()
+
                 val imageUri = data.data!! // Get the URI of the selected image
                 selectedImageUris.add(imageUri) // Add the URI to the list
-                binding.ivSelectedImage.setImageResource(R.drawable.check_icon)
-                binding.btnAddImage.isClickable = false
+            }
+
+            // Set the text and image for the latest selection
+            if (selectedImageUris.isNotEmpty()) {
                 binding.textView4.text = "Dormitory Images selected"
+                binding.ivSelectedImage.setImageResource(R.drawable.check_icon)
             }
         }
+
 
 
 
