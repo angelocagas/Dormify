@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -87,6 +88,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     private var isPermitImageSelected = false
     private var progressDialog: ProgressDialog? = null
     private var imageIndex = 1
+    private var ivSelectedImage = false
+    private var ivSelectedPermitImage = false
 
 
     override fun onCreateView(
@@ -152,7 +155,11 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+
+
         val selectedAmenities = mutableListOf<String>()
+        var amenities: List<String>? = null
+
 
 
         binding.cbKitchen.setOnCheckedChangeListener { _, isChecked ->
@@ -202,9 +209,9 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         }
         binding.cbSwimming.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked){
-                selectedAmenities.add("Swimming Pool")
+                selectedAmenities.add("Laundry Area")
             }else{
-                selectedAmenities.remove("Swimming Pool")
+                selectedAmenities.remove("Laundry Area")
             }
         }
 
@@ -272,16 +279,115 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val phoneNumber = binding.etPhoneNumber.text.toString()
             val email = binding.etEmail.text.toString()
             val username = binding.etusername.text.toString()
+
             val cbAgreement = binding.cbAgreement
-            val cbKitchen = binding.cbKitchen
-            val cbLounge = binding.cbLounge
-            val cbWifi = binding.cbWifi
-            val cbSwimming = binding.cbSwimming
-            val cbFitness = binding.cbFitness
-            val cbParking = binding.cbParking
-            val cbCCTV = binding.cbCCTV
             var amenitiesString = binding.etAmenities.text.toString()
             var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
+
+
+
+
+
+            if (dormName.isEmpty()) {
+                binding.etDormNameLayout.error = "Dormitory Name is required"
+                binding.lblDormName.text = "Dormitory Name is required" // Set error message in lblFullName
+                binding.lblDormName3.visibility = View.VISIBLE
+            } else {
+                binding.etDormNameLayout.error = null // Clear the error if not empty
+                binding.lblDormName.text = "Dormitory Name" // Clear the error message in lblFullName
+                binding.lblDormName3.visibility = View.INVISIBLE
+            }
+            if (numOfRooms.isEmpty()) {
+                binding.etRoomsLayout.error = "Number of Rooms is required"
+                binding.lblRoomsName.text = "Number of Rooms is required" // Set error message in lblFullName
+                binding.lblRoomsName2.visibility = View.VISIBLE
+            } else {
+                binding.etRoomsLayout.error = null // Clear the error if not empty
+                binding.lblRoomsName.text = "Number of Rooms" // Clear the error message in lblFullName
+                binding.lblRoomsName2.visibility = View.INVISIBLE
+            }
+            if (description.isEmpty()) {
+                binding.etDescriptionLayout.error = "Description is required"
+                binding.lblDescription.text = "Description is required" // Set error message in lblFullName
+                binding.lblAddress2.visibility = View.VISIBLE
+            } else {
+                binding.etDescriptionLayout.error = null // Clear the error if not empty
+                binding.lblDescription.text = "Description" // Clear the error message in lblFullName
+                binding.lblAddress2.visibility = View.INVISIBLE
+            }
+            if (address.isEmpty()) {
+                binding.etAddressLayout.error = "Address is required"
+                binding.lblAddress.text = "Address is required" // Set error message in lblFullName
+                binding.lblAddress2.visibility = View.VISIBLE
+            } else {
+                binding.etAddressLayout.error = null // Clear the error if not empty
+                binding.lblAddress.text = "Address" // Clear the error message in lblFullName
+                binding.lblAddress2.visibility = View.INVISIBLE
+            }
+
+
+            if (price.isEmpty()) {
+                binding.etPriceLayout.error = "Price (₱) is required"
+                binding.lblPrice.text = "Price (₱) is required" // Set error message in lblFullName
+                binding.lblPrice2.visibility = View.VISIBLE
+            } else {
+                binding.etPriceLayout.error = null // Clear the error if not empty
+                binding.lblPrice.text = "Price (₱)" // Clear the error message in lblFullName
+                binding.lblPrice2.visibility = View.INVISIBLE
+            }
+            if (phoneNumber.isEmpty()) {
+                binding.etPhoneNumLayout.error = "Phone Number is required"
+                binding.lblPhoneNumber.text = "Phone Number is required" // Set error message in lblFullName
+                binding.lblPhoneNumber2.visibility = View.VISIBLE
+            } else {
+                binding.etPhoneNumLayout.error = null // Clear the error if not empty
+                binding.lblPhoneNumber.text = "Phone Number" // Clear the error message in lblFullName
+                binding.lblPhoneNumber2.visibility = View.INVISIBLE
+            }
+            if (email.isEmpty()) {
+                binding.etEmailLayout.error = "Landlord Email is required"
+                binding.lblEmail.text = "Landlord Email is required" // Set error message in lblFullName
+                binding.lblEmail2.visibility = View.VISIBLE
+            } else {
+                binding.etEmailLayout.error = null // Clear the error if not empty
+                binding.lblEmail.text = "Landlord Email" // Clear the error message in lblFullName
+                binding.lblEmail2.visibility = View.INVISIBLE
+            }
+            if (username.isEmpty()) {
+                binding.etUsernameLayout.error = "Landlord Name is required"
+                binding.lblusername.text = "Landlord Name is required" // Set error message in lblFullName
+                binding.lblusername2.visibility = View.VISIBLE
+            } else {
+                binding.etUsernameLayout.error = null // Clear the error if not empty
+                binding.lblusername.text = "Landlord Name" // Clear the error message in lblFullName
+                binding.lblusername2.visibility = View.INVISIBLE
+            }
+
+
+
+            // Check if an image has been selected
+            if (!ivSelectedImage) {
+                Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                binding.textView4.text = "Upload Dormitory Images is required" // Set error message in lblFullName
+
+            } else {
+                binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                binding.textView4.text = "Upload Dormitory Images" // Clear the error message in lblFullName
+            }
+
+            if (!ivSelectedPermitImage) {
+                Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                binding.btnAddPermitImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                binding.tvAddPermitImage.text = "Upload Business Permit Photo is required" // Set error message in lblFullName
+
+                return@setOnClickListener
+            } else {
+                binding.btnAddPermitImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                binding.tvAddPermitImage.text = "Upload Business Permit Photo" // Clear the error message in lblFullName
+            }
+
+
 
 
             // Check if an image has been selected
@@ -293,7 +399,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
-            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, amenitiesString, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
+            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
                 if (cbAgreement.isChecked) {
                     showLoadingDialog()
                     val activity = requireActivity() as LandlordDashboardActivity
@@ -323,10 +429,10 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             selectedElectric,
                                             selectedWater,
                                             selectedPaymentOptions,
-                                            amenitiesList,
-                                            selectedAmenities,
+                                            amenitiesList + selectedAmenities
 
-                                        )
+
+                                            )
 
                                         // Add the dormitory information to Firestore
                                         val dormitoryDocRef =

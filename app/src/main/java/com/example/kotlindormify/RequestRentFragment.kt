@@ -28,8 +28,6 @@ import java.io.File
 
 class RequestRentFragment : Fragment() {
     private lateinit var binding: FragmentRequestRentBinding
-    private val PICK_IMAGE_REQUEST = 1
-    private lateinit var selectedImageUri: Uri
     private var isImageSelected = false
     private var progressDialog: ProgressDialog? = null
     private lateinit var idImageUrl: String
