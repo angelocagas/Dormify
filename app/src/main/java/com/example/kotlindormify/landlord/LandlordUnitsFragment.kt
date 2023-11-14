@@ -130,6 +130,7 @@ class LandlordUnitsFragment : Fragment() {
                                     val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
                                     val amenities = dormitoryDocument.get("amenities") as? List<String>
                                     val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
+                                    val genderRestriction = dormitoryDocument.getString("genderRestriction")
 
                                     // Add dormitory to the list
                                     dormitoriesList.add(
@@ -156,7 +157,8 @@ class LandlordUnitsFragment : Fragment() {
                                             water,
                                             paymentOptions,
                                             amenities,
-                                            amenities2
+                                            amenities2,
+                                            genderRestriction
                                         )
                                     )
                                 }
@@ -292,6 +294,8 @@ class LandlordUnitsFragment : Fragment() {
                         val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
                         val amenities = dormitoryDocument.get("amenities") as? List<String>
                         val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
+                        val genderRestriction = dormitoryDocument.getString("genderRestriction")
+
 
 
                         // Add dormitory to the list
@@ -319,7 +323,8 @@ class LandlordUnitsFragment : Fragment() {
                                 water,
                                 paymentOptions,
                                 amenities,
-                                amenities2
+                                amenities2,
+                                genderRestriction
                             )
                         )
                     }

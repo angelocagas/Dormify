@@ -23,6 +23,7 @@ data class Dormitory(
     var water: String?,
     var paymentOptions: List<String>?,
     var amenities: List<String>?,
-    var amenities2: List<String>?
+    var amenities2: List<String>?,
+    var genderRestriction: String?
 
 )

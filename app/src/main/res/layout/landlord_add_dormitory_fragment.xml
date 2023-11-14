@@ -208,6 +208,58 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/lblGenderRestrictions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Gender Restrictions"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDescriptionLayout" />
+
+            <TextView
+                android:id="@+id/lblGenderRestrictions2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:text="*"
+                android:textColor="@android:color/holo_red_light"
+                app:layout_constraintStart_toEndOf="@+id/lblGenderRestrictions"
+                app:layout_constraintTop_toTopOf="@+id/lblGenderRestrictions" />
+
+            <RadioGroup
+                android:id="@+id/radioGroupRestrictions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/lblGenderRestrictions">
+
+                <RadioButton
+                    android:id="@+id/rbMaleOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Male Only"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rbFemaleOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Female Only"
+                    />
+
+                <RadioButton
+                    android:id="@+id/rbCoed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mixed Genders"
+                    />
+
+            </RadioGroup>
+
+
+
+            <TextView
                 android:id="@+id/lblAmenities"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -331,7 +383,7 @@
                 android:text="Address"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etDescriptionLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupRestrictions" />
 
             <TextView
                 android:id="@+id/lblAddress2"

@@ -237,6 +237,20 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
+        var genderRestriction = "None"
+
+        binding.radioGroupRestrictions.setOnCheckedChangeListener { _, checkedId ->
+            // Check which radio button was selected
+            when (checkedId) {
+                R.id.rbMaleOnly -> genderRestriction = binding.rbMaleOnly.text.toString()
+                R.id.rbFemaleOnly -> genderRestriction = binding.rbFemaleOnly.text.toString()
+                R.id.rbCoed -> genderRestriction = binding.rbCoed.text.toString()
+                // Add more cases for other radio buttons if needed
+            }
+        }
+
+
+
         var selectedWater = "Included"
         binding.radioWater.setOnCheckedChangeListener { _, checkedId ->
             // Check which radio button was selected
@@ -336,7 +350,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             selectedElectric,
                                             selectedWater,
                                             selectedPaymentOptions,
-                                            allAmenitiesList
+                                            allAmenitiesList,
+                                            genderRestriction
 
 
                                             )

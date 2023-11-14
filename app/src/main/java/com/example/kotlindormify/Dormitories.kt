@@ -24,6 +24,7 @@ data class Dormitories(
     var water: String? = null,
     var paymentOptions: List<String>? = null,
     var amenities: List<String>? = null,
+    var genderRestriction: String? = null
 
 ) {
     // No-argument constructor
@@ -47,5 +48,6 @@ data class Dormitories(
         null,
         null,
         null,
+        null
     )
 }
