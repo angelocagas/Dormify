@@ -108,7 +108,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val dormNameTextView = view.findViewById<TextView>(R.id.textDormName)
         val dormPriceTextView = view.findViewById<TextView>(R.id.textDormPrice)
         //val dormImageView = view.findViewById<ImageView>(R.id.ivDormitoryImage)
-      //  val recyclerView = view.findViewById<RecyclerView>(R.)
+        //  val recyclerView = view.findViewById<RecyclerView>(R.)
         val descriptionTextview = view.findViewById<TextView>(R.id.ViewContent)
         val addressTextView = view.findViewById<TextView>(R.id.textDormloc)
         val numOfRoomsTextView = view.findViewById<TextView>(R.id.Availableroomtxt)
@@ -159,17 +159,6 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         perWhat.text = rentalTerm
 
 
-        if (amenities2 != null) {
-            // Do something with amenities, it's a list
-
-            val amenities2String = amenities2.joinToString("\n ✔ ")
-            AmenitiesListTextView.text = " ✔ $amenities2String"
-
-
-        } else {
-            Toast.makeText(requireContext(), "wala", Toast.LENGTH_SHORT).show()
-
-        }
         if (amenities != null) {
             // Do something with amenities, it's a list
 
@@ -248,13 +237,13 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
 
         // Load and display the dormitory image using Picasso or Glide
-       /* if (imageUrls != null) {
-            Picasso.get().load(imageUrls[0]).into(dormImageView)
-        } else {
-            dormImageView.setImageResource(R.drawable.dormify_logo)
-        }
+        /* if (imageUrls != null) {
+             Picasso.get().load(imageUrls[0]).into(dormImageView)
+         } else {
+             dormImageView.setImageResource(R.drawable.dormify_logo)
+         }
 
-        */
+         */
 
         if (permitImage != null) {
             Picasso.get().load(permitImage).into(permitImageview)

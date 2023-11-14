@@ -153,6 +153,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         }
 
         val selectedAmenities = mutableListOf<String>()
+        var amenities: List<String>? = null
+
 
 
         binding.cbKitchen.setOnCheckedChangeListener { _, isChecked ->
@@ -293,7 +295,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
-            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, amenitiesString, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
+            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && amenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
                 if (cbAgreement.isChecked) {
                     showLoadingDialog()
                     val activity = requireActivity() as LandlordDashboardActivity
@@ -323,10 +325,10 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             selectedElectric,
                                             selectedWater,
                                             selectedPaymentOptions,
-                                            amenitiesList,
-                                            selectedAmenities,
+                                            amenitiesList + selectedAmenities
 
-                                        )
+
+                                            )
 
                                         // Add the dormitory information to Firestore
                                         val dormitoryDocRef =
