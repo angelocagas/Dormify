@@ -35,7 +35,7 @@ class LandlordUnitsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = LandlordUnitsFragmentBinding.inflate(inflater, container, false)
         val activity = requireActivity() as LandlordDashboardActivity
         val userEmail = activity.userEmail
@@ -110,12 +110,10 @@ class LandlordUnitsFragment : Fragment() {
                                     val dormName = dormitoryDocument.getString("dormName")
                                     val dormPrice = dormitoryDocument.getString("price")
                                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
-                                    val numOfRooms =
-                                        dormitoryDocument.getLong("numOfRooms")?.toInt()
+                                    val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
                                     val imageUrl = dormitoryDocument.get("image") as? List<String>
                                     val landlordId = dormitoryDocument.getString("landlordId")
-                                    val qrCodeImageUrl =
-                                        dormitoryDocument.getString("qrCodeImageUrl")
+                                    val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
                                     val latitude = dormitoryDocument.getDouble("latitude")
                                     val longitude = dormitoryDocument.getDouble("longitude")
                                     val address = dormitoryDocument.getString("address")
@@ -124,16 +122,14 @@ class LandlordUnitsFragment : Fragment() {
                                     val username = dormitoryDocument.getString("username")
                                     val description = dormitoryDocument.getString("description")
                                     val permitImage = dormitoryDocument.getString("permitImage")
-                                    val pendingRequestsCount =
-                                        dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                                    val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                                     val rentalterm = dormitoryDocument.getString("rentalterm")
                                     val bathroom = dormitoryDocument.getString("bathroom")
                                     val electric = dormitoryDocument.getString("electric")
                                     val water = dormitoryDocument.getString("water")
-                                    val paymentOptions =
-                                        dormitoryDocument.get("paymentOptions") as? List<String>
-                                    val amenities =
-                                        dormitoryDocument.get("amenities") as? List<String>
+                                    val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
+                                    val amenities = dormitoryDocument.get("amenities") as? List<String>
+                                    val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
 
                                     // Add dormitory to the list
                                     dormitoriesList.add(
@@ -159,7 +155,8 @@ class LandlordUnitsFragment : Fragment() {
                                             electric,
                                             water,
                                             paymentOptions,
-                                            amenities
+                                            amenities,
+                                            amenities2
                                         )
                                     )
                                 }
@@ -292,9 +289,9 @@ class LandlordUnitsFragment : Fragment() {
                         val bathroom = dormitoryDocument.getString("bathroom")
                         val electric = dormitoryDocument.getString("electric")
                         val water = dormitoryDocument.getString("water")
-                        val paymentOptions =
-                            dormitoryDocument.get("paymentOptions") as? List<String>
+                        val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
                         val amenities = dormitoryDocument.get("amenities") as? List<String>
+                        val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
 
 
                         // Add dormitory to the list
@@ -321,7 +318,8 @@ class LandlordUnitsFragment : Fragment() {
                                 electric,
                                 water,
                                 paymentOptions,
-                                amenities
+                                amenities,
+                                amenities2
                             )
                         )
                     }

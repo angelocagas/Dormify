@@ -290,6 +290,8 @@ class SignUpTenantActivity : AppCompatActivity() {
                                                     R.id.rbLandlord -> 2 // Dorm Landlord
                                                     else -> 0 // Default or no selection
                                                 }
+
+
                                                 binding.loginCountrycode.setCountryForPhoneCode(63)
                                                 val selectedCountryCode = binding.loginCountrycode.selectedCountryCode
                                                 val phoneNumber = "+$selectedCountryCode$enteredPhoneNumber"

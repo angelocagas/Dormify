@@ -139,9 +139,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:hintEnabled="false"
+            app:boxStrokeColor="@color/violet"
+            app:errorTextColor="@color/clear"
+            app:boxStrokeErrorColor="@color/colorError"
+            app:hintTextColor="@color/violet"
             android:layout_marginTop="1dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/spinnerGendertenant"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerGender"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/lblAge">
@@ -151,13 +155,13 @@
                 style="LoginTextInputInnerFieldStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Your Age"
-                android:maxLength="3"
                 android:inputType="number"
+                android:maxLength="3"
                 android:minHeight="48dp"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 app:backgroundTint="@color/black"
+                android:layout_marginEnd="5dp"
                 app:backgroundTintMode="multiply" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -610,17 +614,47 @@
             app:layout_constraintStart_toEndOf="@+id/lblGender"
             app:layout_constraintTop_toTopOf="@+id/lblGender" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etGenderLayout"
+            style="@style/LoginTextInputOuterFieldStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:boxStrokeColor="@color/violet"
+            app:errorTextColor="@color/clear"
+            app:boxStrokeErrorColor="@color/colorError"
+            app:hintTextColor="@color/violet"
+            android:layout_marginTop="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/etAgeLayout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintTop_toBottomOf="@+id/lblAge">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etGender"
+                style="LoginTextInputInnerFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="3"
+                android:textColorHint="@color/black"
+                android:minHeight="48dp"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:backgroundTint="@color/black"
+                app:backgroundTintMode="multiply" />
+        </com.google.android.material.textfield.TextInputLayout>
         <Spinner
             android:id="@+id/spinnerGender"
-            android:layout_width="184dp"
-            android:layout_height="40dp"
+            android:layout_width="185dp"
+            android:layout_height="60dp"
             android:entries="@array/gender_choices"
             android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toBottomOf="@+id/etAgeLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginTop="3dp"
             app:layout_constraintStart_toEndOf="@+id/etAgeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/etFullNameLayout"
+            app:layout_constraintTop_toBottomOf="@+id/lblGender"
             app:layout_constraintVertical_bias="0.827" />
 
         <CheckBox

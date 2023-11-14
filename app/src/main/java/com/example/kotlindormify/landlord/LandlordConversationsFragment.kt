@@ -32,7 +32,7 @@ class LandlordConversationsFragment : Fragment(), LandlordConversationsAdapter.O
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = LandlordConversationsFragmentBinding.inflate(inflater, container, false)
 
         // Initialize the SwipeRefreshLayout

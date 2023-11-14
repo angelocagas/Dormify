@@ -7,6 +7,5 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.kotlindormify.R
 
-class PaymentFragment : Fragment(R.layout.payment_fragment) {
-}
+class PaymentFragment : Fragment(R.layout.payment_fragment)
 

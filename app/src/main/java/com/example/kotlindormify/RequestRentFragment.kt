@@ -36,7 +36,7 @@ class RequestRentFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRequestRentBinding.inflate(inflater, container, false)
         val dormName = arguments?.getString("dormName")
         val dormitoryId = arguments?.getString("dormitoryId")

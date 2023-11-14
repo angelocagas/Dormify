@@ -329,6 +329,10 @@
             app:tabTextColor="@color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:src="@drawable/maint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
