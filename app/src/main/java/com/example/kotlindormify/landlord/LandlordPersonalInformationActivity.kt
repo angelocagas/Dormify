@@ -52,7 +52,8 @@ class LandlordPersonalInformationActivity : AppCompatActivity() {
 
         userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
 
-        val usersCollection = FirebaseFirestore.getInstance().collection("users")
+        val usersCollection = FirebaseFirestore.getInstance().
+        collection("users")
         val userDocument = usersCollection.document(userId)
 
         countryCodePicker = findViewById(R.id.login_countrycode)
