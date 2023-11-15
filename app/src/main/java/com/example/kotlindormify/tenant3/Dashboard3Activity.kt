@@ -1,4 +1,4 @@
-package com.example.kotlindormify
+package com.example.kotlindormify.tenant3
 
 import android.os.Bundle
 import android.view.View
@@ -7,15 +7,16 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.kotlindormify.databinding.ActivityDashboardBinding
-import com.example.kotlindormify.tenant3.PaymentFragment
+import com.example.kotlindormify.PrefManager
+import com.example.kotlindormify.R
+import com.example.kotlindormify.databinding.ActivityDashboard3Binding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class DashboardActivity : AppCompatActivity() {
+class Dashboard3Activity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDashboardBinding
+    private lateinit var binding: ActivityDashboard3Binding
     private lateinit var userId: String
     private lateinit var ivProfilePicture: ImageView
 
@@ -24,7 +25,7 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDashboardBinding.inflate(layoutInflater)
+        binding = ActivityDashboard3Binding.inflate(layoutInflater)
         setContentView(binding.root)
         ivProfilePicture = binding.ivTopProfilePicture
         window.decorView.systemUiVisibility =
@@ -69,11 +70,10 @@ class DashboardActivity : AppCompatActivity() {
             }
 
 
-        val homeFragment = HomeFragment()
+        val homeFragment = DashboardPaymentTenantFragment()
         val paymentFragment = PaymentFragment()
-        val chatFragment = ChatFragment()
-        val saveFragment = SavedFragment()
-        val profileFragment = ProfileFragment()
+        val chatFragment = Chat3Fragment()
+        val profileFragment = Profile3Fragment()
 
         setCurrentFragment(homeFragment)
 
@@ -85,19 +85,17 @@ class DashboardActivity : AppCompatActivity() {
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
 
-
-
+                R.id.menu_payment -> {
+                    setCurrentFragment(paymentFragment)
+                    binding.tvDormify3.text = "Payment"
+                    binding.cardViewImage.visibility = View.VISIBLE
+                }
                 R.id.menu_chat -> {
                     setCurrentFragment(chatFragment)
                     binding.tvDormify3.text = "Messages"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
 
-                R.id.menu_save -> {
-                    setCurrentFragment(saveFragment)
-                    binding.tvDormify3.text = "Saved Dorms"
-                    binding.cardViewImage.visibility = View.VISIBLE
-                }
 
                 R.id.menu_person -> {
                     setCurrentFragment(profileFragment)

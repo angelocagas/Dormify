@@ -170,6 +170,54 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/lblMaxCapacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Room Max Capacity"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etRoomsLayout" />
+
+            <TextView
+                android:id="@+id/lblMaxCapacity2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:text="*"
+                android:textColor="@android:color/holo_red_light"
+                app:layout_constraintStart_toEndOf="@+id/lblMaxCapacity"
+                app:layout_constraintTop_toTopOf="@+id/lblMaxCapacity" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etMaxCapacityLayout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                app:boxStrokeColor="@color/violet"
+                app:boxStrokeErrorColor="@color/colorError"
+                app:errorTextColor="@color/clear"
+                app:hintTextColor="@color/violet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblMaxCapacity">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMaxCapacity"
+                    style="LoginTextInputInnerFieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:minHeight="48dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:backgroundTint="@color/black"
+                    app:backgroundTintMode="multiply" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
                 android:id="@+id/lblDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,7 +225,7 @@
                 android:text="Description"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etRoomsLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/etMaxCapacityLayout" />
 
             <TextView
                 android:id="@+id/lblDescription2"
@@ -228,7 +276,7 @@
                 android:text="Gender Restrictions"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAddressLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/etDescriptionLayout" />
 
             <TextView
                 android:id="@+id/lblGenderRestrictions2"
@@ -244,8 +292,7 @@
                 android:id="@+id/radioGroupRestrictions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/lblGenderRestrictions">
 
                 <RadioButton
@@ -281,7 +328,7 @@
                 android:text="Amenities"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroupRestrictions" />
+                app:layout_constraintTop_toBottomOf="@+id/etAddressLayout" />
 
             <TextView
                 android:id="@+id/lblAmenities2"
@@ -401,7 +448,7 @@
                 android:text="Address"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etDescriptionLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupRestrictions" />
 
             <TextView
                 android:id="@+id/lblAddress2"
@@ -513,8 +560,8 @@
                 android:id="@+id/radioRentalTerms"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/lblRentalTerms"
 
                 >
@@ -523,18 +570,21 @@
                     android:id="@+id/radioButtonMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Per Month" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSemester"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Per Semester" />
 
                 <RadioButton
                     android:id="@+id/radioButtonYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Per Year" />
             </RadioGroup>
 

@@ -1,4 +1,4 @@
-package com.example.kotlindormify.payment
+package com.example.kotlindormify.tenant3
 
 import android.os.Bundle
 import android.view.LayoutInflater

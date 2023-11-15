@@ -586,7 +586,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
-                android:text="Upload your Valid ID"
+                android:text="Upload your Student/Valid ID or COR"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

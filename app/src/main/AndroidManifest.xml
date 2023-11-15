@@ -28,15 +28,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Light">
         <activity
-            android:name=".payment.PaymentDetailsActivity"
+            android:name=".tenant3.PaymentDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".payment.DashboardPaymentTenantFragment"
+            android:name=".tenant3.DashboardPaymentTenantFragment"
             android:exported="false" />
         <activity
             android:name=".SignUpLandlordActivity"
             android:exported="false"
             android:theme="@style/Theme.LoginAndSignUp" />
+        <activity
+            android:name=".tenant3.Dashboard3Activity"
+            android:exported="false"
+            android:theme="@style/Theme.LoginAndSignUp" />
+
         <activity
             android:name=".SignUpTenantActivity"
             android:exported="false"

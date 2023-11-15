@@ -116,6 +116,7 @@ class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
                 bundle.putString("description", clickedDormitory.description)
                 bundle.putString("permitImage", clickedDormitory.permitImage)
                 bundle.putInt("dormRooms", clickedDormitory.dormRooms!!)
+                bundle.putInt("maxCapacity", clickedDormitory.maxCapacity!!)
                 bundle.putString("username", clickedDormitory.username)
                 bundle.putString("rentalTerm", clickedDormitory.rentalTerm)
                 bundle.putString("bathroom", clickedDormitory.bathroom)
