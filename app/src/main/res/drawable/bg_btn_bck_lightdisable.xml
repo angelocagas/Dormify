@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 90 degrees means top to bottom -->
+    <gradient  android:startColor="#666666"
+    android:endColor="#666666"
+    android:angle="90"
+    ></gradient>
+
+    <corners android:radius="20dp"></corners>
+</shape>

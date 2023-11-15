@@ -48,7 +48,7 @@ class LandlordChatAdapter :
         fun bind(message: ChatMessage) {
             messageText.text = message.text
             val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
-            val formattedDate = message.timestamp?.toDate()?.let { dateFormat.format(it) }
+            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
             timestamp.text = formattedDate        }
 
 

@@ -169,6 +169,7 @@
                             android:numStars="5"
                             android:progressTint="#FFBF00"
                             android:rating="4"
+                            android:allowClickWhenDisabled="false"
                             android:scaleX=".45"
                             android:scaleY=".45"
                             android:stepSize="1"

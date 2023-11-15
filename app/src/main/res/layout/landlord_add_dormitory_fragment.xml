@@ -276,7 +276,7 @@
                 android:text="Gender Restrictions"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etDescriptionLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/etAddressLayout" />
 
             <TextView
                 android:id="@+id/lblGenderRestrictions2"
@@ -292,11 +292,11 @@
                 android:id="@+id/radioGroupRestrictions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@id/lblGenderRestrictions">
 
                 <RadioButton
                     android:id="@+id/rbMaleOnly"
+                    style="@style/MyRadioButtonable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Male Only"
@@ -306,6 +306,7 @@
                     android:id="@+id/rbFemaleOnly"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/MyRadioButtonable"
                     android:text="Female Only"
                     />
 
@@ -313,6 +314,7 @@
                     android:id="@+id/rbCoed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    style="@style/MyRadioButtonable"
                     android:text="Mixed Genders"
                     />
 
@@ -328,7 +330,7 @@
                 android:text="Amenities"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAddressLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/radioGroupRestrictions" />
 
             <TextView
                 android:id="@+id/lblAmenities2"
@@ -448,7 +450,7 @@
                 android:text="Address"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroupRestrictions" />
+                app:layout_constraintTop_toBottomOf="@+id/etDescriptionLayout" />
 
             <TextView
                 android:id="@+id/lblAddress2"
@@ -561,7 +563,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                android:orientation="horizontal"
                 app:layout_constraintTop_toBottomOf="@+id/lblRentalTerms"
 
                 >
@@ -570,21 +571,18 @@
                     android:id="@+id/radioButtonMonth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Per Month" />
 
                 <RadioButton
                     android:id="@+id/radioButtonSemester"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Per Semester" />
 
                 <RadioButton
                     android:id="@+id/radioButtonYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:text="Per Year" />
             </RadioGroup>
 
@@ -1184,7 +1182,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSubmit"
-                android:layout_width="170dp"
+                android:layout_width="160dp"
                 android:layout_height="41dp"
                 android:background="@drawable/bg_btn_bck_light"
                 android:text="Submit"
@@ -1199,15 +1197,13 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnCancel"
-                android:layout_width="170dp"
+                android:layout_width="160dp"
                 android:layout_height="41dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/rectangle_radius_light_gray"
                 android:text="Cancel"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                android:backgroundTint="@color/clear"
-                android:clipToOutline="true"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cbAgreement"
