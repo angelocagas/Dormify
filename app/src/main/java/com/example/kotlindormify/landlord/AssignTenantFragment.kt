@@ -107,6 +107,22 @@ class AssignTenantFragment : Fragment() {
         val currentMonth = calendar.get(Calendar.MONTH)
         val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
+        val instructions = "Please choose the contract end date in the upcoming dialog box."
+
+        // Show AlertDialog with instructions
+        AlertDialog.Builder(requireContext())
+            .setMessage(instructions)
+            .setPositiveButton("OK") { _, _ ->
+                // User clicked OK, show DatePickerDialog
+                showDatePickerDialog(currentYear, currentMonth, currentDay)
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    private fun showDatePickerDialog(currentYear: Int, currentMonth: Int, currentDay: Int) {
+        val calendar = Calendar.getInstance()
+
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             { _, year, month, day ->
@@ -118,11 +134,15 @@ class AssignTenantFragment : Fragment() {
             currentDay
         )
 
-        // Set a minimum date if needed
-        // datePickerDialog.datePicker.minDate = System.currentTimeMillis() - 1000
+        // Set a minimum date to tomorrow
+        calendar.add(Calendar.DAY_OF_MONTH, 1)
+        datePickerDialog.datePicker.minDate = calendar.timeInMillis
 
         datePickerDialog.show()
     }
+
+
+
 
     private fun onDateSelected(year: Int, month: Int, day: Int) {
         if (selectedRoom != null) {
@@ -212,8 +232,8 @@ class AssignTenantFragment : Fragment() {
                                         // Clone the requester's data to the "tenant" collection
                                         val tenantRef = firestore.collection("tenant").document(requestId)
                                         val tenantData = mapOf(
-                                            "requesterFullName" to requesterFullName,
-                                            "requesterId" to requesterId,
+                                            "tenantFullName" to requesterFullName,
+                                            "tenantId" to requesterId,
                                             "dormitoryId" to dormitoryId,
                                             "age" to age,
                                             "address" to address,
@@ -223,10 +243,11 @@ class AssignTenantFragment : Fragment() {
                                             "emergencyAddress" to emergencyAddress,
                                             "emergencyPhoneNumber" to emergencyPhoneNumber,
                                             "emergencyEmail" to emergencyEmail,
-                                            "selectedGender" to selectedGender,
+                                            "gender" to selectedGender,
                                             "idImageUrl" to idImageUrl,
                                             "status" to "accepted",
                                             "acceptedDate" to FieldValue.serverTimestamp(),
+                                            "contractEndDate" to contractEndDate,
                                             "roomNumber" to selectedRoom!!.roomNumber
                                             // Add other fields similar to the "requester_data"
                                         )
