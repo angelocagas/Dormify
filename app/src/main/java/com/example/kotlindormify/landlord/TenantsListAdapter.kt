@@ -25,7 +25,7 @@ class TenantsListAdapter(private var tenantList: List<Tenant>) :
         val tenant = tenantList[position]
 
         // Bind room data to the views
-        holder.tenantName.text = tenant.requesterFullName
+        holder.tenantName.text = tenant.tenantFullName
         holder.roomNum.text = "Room number: ${tenant.roomNumber.toString()}"
 
 

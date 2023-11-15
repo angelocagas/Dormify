@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlindormify.R
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
@@ -150,6 +151,7 @@ class AssignTenantFragment : Fragment() {
             val calendar = Calendar.getInstance()
             calendar.set(year, month, day)
             val contractEndDate = calendar.time
+            val currentUserId = getCurrentUserId()
 
             // Update the request's status to "accepted" and set the acceptedDate
             val firestore = FirebaseFirestore.getInstance()
@@ -170,6 +172,7 @@ class AssignTenantFragment : Fragment() {
             val idImageUrl = arguments?.getString("idImageUrl")
             val status = arguments?.getString("status")
             val timestamp = arguments?.getString("timestamp")
+
 
 
 
@@ -248,7 +251,8 @@ class AssignTenantFragment : Fragment() {
                                             "status" to "accepted",
                                             "acceptedDate" to FieldValue.serverTimestamp(),
                                             "contractEndDate" to contractEndDate,
-                                            "roomNumber" to selectedRoom!!.roomNumber
+                                            "roomNumber" to selectedRoom!!.roomNumber,
+                                            "landlordId" to currentUserId
                                             // Add other fields similar to the "requester_data"
                                         )
                                         tenantRef.set(tenantData)
@@ -312,4 +316,10 @@ class AssignTenantFragment : Fragment() {
 
 
 }
+
+    private fun getCurrentUserId(): String? {
+        return FirebaseAuth.getInstance().currentUser?.uid
+
+    }
+
 }
