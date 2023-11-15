@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class ChatAdapter : ListAdapter<ChatMessage, ChatAdapter.MessageViewHolder>(DiffCallback()) {
 
@@ -37,10 +39,14 @@ class ChatAdapter : ListAdapter<ChatMessage, ChatAdapter.MessageViewHolder>(Diff
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val messageText: TextView = itemView.findViewById(R.id.item_chat_message_right)
+        private val timestamp: TextView = itemView.findViewById(R.id.tvtimestampright)
 
         fun bind(message: ChatMessage) {
             messageText.text = message.text
-        }
+            val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
+            val formattedDate = message.timestamp?.toDate()?.let { dateFormat.format(it) }
+            timestamp.text = formattedDate        }
+
     }
 
     private class DiffCallback : DiffUtil.ItemCallback<ChatMessage>() {

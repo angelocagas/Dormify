@@ -192,7 +192,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/Ratingbar"
                             android:background="#000000" />
 
@@ -251,7 +251,7 @@
                     <View
                         android:id="@+id/dividerTop"
                         android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                        android:layout_height="0.8dp"
                         android:layout_below="@+id/tvGenderRestriction"
                         android:layout_marginTop="8dp"
                         android:background="#000000" />
@@ -301,7 +301,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/AmenitiesListtxt"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
@@ -403,7 +403,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/Bathroomtxt"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
@@ -530,7 +530,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/Watertxt"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
@@ -584,7 +584,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/Exact"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
@@ -701,7 +701,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/emailtxt"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
@@ -756,7 +756,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/cardviewpermitImage"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
@@ -809,7 +809,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/cardviewqrcodeimage"
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="100dp"
