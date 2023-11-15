@@ -938,12 +938,14 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
                 val imageUri = data.data!! // Get the URI of the selected image
                 selectedImageUris.add(imageUri) // Add the URI to the list
+                isImageSelected = true
             }
 
             // Set the text and image for the latest selection
             if (selectedImageUris.isNotEmpty()) {
                 binding.textView4.text = "Dormitory Images selected"
                 binding.ivSelectedImage.setImageResource(R.drawable.check_icon)
+                isImageSelected = true
             }
         }
 
