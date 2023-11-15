@@ -339,7 +339,7 @@
                             android:layout_below="@id/Room"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
-                            android:text="Room Capacity"
+                            android:text="Max Capacity per Room"
                             android:textColor="#000000" />
 
                         <TextView
@@ -397,7 +397,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="40dp"
-                            android:text="Available Rooms"
+                            android:text="Rooms"
                             android:textColor="#000000" />
 
 

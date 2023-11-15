@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlindormify.databinding.ActivitySignInBinding
 import com.example.kotlindormify.landlord.LandlordDashboardActivity
+import com.example.kotlindormify.payment.DashboardPaymentTenantFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -108,6 +109,17 @@ class SignInActivity : AppCompatActivity() {
                                                                 2 -> {
                                                                     // Proceed to SecondaryActivity for Dorm Landlord
                                                                     val intent = Intent(this@SignInActivity, LandlordDashboardActivity::class.java)
+                                                                    val userEmail = email
+                                                                    val prefManager = PrefManager(this@SignInActivity)
+                                                                    prefManager.setUserEmail( userEmail )
+                                                                    startActivity(intent)
+                                                                    finish()
+                                                                    progressDialog?.dismiss()
+                                                                }
+
+                                                                3 -> {
+                                                                    // Proceed to SecondaryActivity for Dorm Landlord
+                                                                    val intent = Intent(this@SignInActivity, DashboardPaymentTenantFragment::class.java)
                                                                     val userEmail = email
                                                                     val prefManager = PrefManager(this@SignInActivity)
                                                                     prefManager.setUserEmail( userEmail )

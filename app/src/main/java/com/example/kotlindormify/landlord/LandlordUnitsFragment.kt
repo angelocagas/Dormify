@@ -111,6 +111,7 @@ class LandlordUnitsFragment : Fragment() {
                                     val dormPrice = dormitoryDocument.getString("price")
                                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
                                     val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
+                                    val maxCapacity = dormitoryDocument.getLong("maxCapacity")?.toInt()
                                     val imageUrl = dormitoryDocument.get("image") as? List<String>
                                     val landlordId = dormitoryDocument.getString("landlordId")
                                     val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
@@ -139,6 +140,7 @@ class LandlordUnitsFragment : Fragment() {
                                             dormPrice,
                                             dormitoryId,
                                             numOfRooms,
+                                            maxCapacity,
                                             imageUrl,
                                             landlordId,
                                             qrCodeImageUrl,
@@ -274,6 +276,7 @@ class LandlordUnitsFragment : Fragment() {
                         val dormPrice = dormitoryDocument.getString("price")
                         val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
                         val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
+                        val maxCapacity = dormitoryDocument.getLong("maxCapacity")?.toInt()
                         val imageUrl = dormitoryDocument.get("image") as? List<String>
                         val landlordId = dormitoryDocument.getString("landlordId")
                         val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
@@ -305,6 +308,7 @@ class LandlordUnitsFragment : Fragment() {
                                 dormPrice,
                                 dormitoryId,
                                 numOfRooms,
+                                maxCapacity,
                                 imageUrl,
                                 landlordId,
                                 qrCodeImageUrl,

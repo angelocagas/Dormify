@@ -70,6 +70,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val imageUrls: ArrayList<String>? = arguments?.getStringArrayList("imageUrls")
         val landlordId = arguments?.getString("landlordId")
         val dormRooms = arguments?.getInt("dormRooms")
+        val maxCapacity = arguments?.getInt("maxCapacity")
         val qrCodeImageUrl = arguments?.getString("qrCodeImageUrl")
         val latitude = arguments?.getDouble("latitude")
         val longitude = arguments?.getDouble("longitude")
@@ -147,7 +148,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val EmailTextView = view.findViewById<TextView>(R.id.emailtxt)
 
 
-
+        RoomCapacityTextView.text = "$maxCapacity"
         dormNameTextView.text = dormName
         dormPriceTextView.text = "₱ $dormPrice"
         descriptionTextview.text = description

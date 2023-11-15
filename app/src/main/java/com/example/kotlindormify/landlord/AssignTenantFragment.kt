@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -132,10 +133,25 @@ class AssignTenantFragment : Fragment() {
 
             // Update the request's status to "accepted" and set the acceptedDate
             val firestore = FirebaseFirestore.getInstance()
+            // Getting all values from the bundle
+            val requestId = arguments?.getString("requestId")
             val requesterFullName = arguments?.getString("requesterFullName")
             val requesterId = arguments?.getString("requesterId")
-            val requestId = arguments?.getString("requestId")
             val dormitoryId = arguments?.getString("dormitoryId")
+            val age = arguments?.getString("age")
+            val address = arguments?.getString("address")
+            val phoneNumber = arguments?.getString("phoneNumber")
+            val email = arguments?.getString("email")
+            val emergencyFullName = arguments?.getString("emergencyFullName")
+            val emergencyAddress = arguments?.getString("emergencyAddress")
+            val emergencyPhoneNumber = arguments?.getString("emergencyPhoneNumber")
+            val emergencyEmail = arguments?.getString("emergencyEmail")
+            val selectedGender = arguments?.getString("selectedGender")
+            val idImageUrl = arguments?.getString("idImageUrl")
+            val status = arguments?.getString("status")
+            val timestamp = arguments?.getString("timestamp")
+
+
 
             if (requestId != null && dormitoryId != null) {
                 // Update the request status in the main collection
@@ -156,7 +172,6 @@ class AssignTenantFragment : Fragment() {
                                 // Handle the successful update
 
                                 // Now update the room's availability to "occupied"
-                                // Now update the room's availability to "occupied"
                                 val roomNumber = selectedRoom!!.roomNumber
                                 val roomRef = firestore.collection("dormitories").document(dormitoryId)
                                     .collection("rooms")
@@ -167,15 +182,31 @@ class AssignTenantFragment : Fragment() {
                                         if (!querySnapshot.isEmpty) {
                                             val roomDocument = querySnapshot.documents[0]
 
-                                            val roomUpdateData = hashMapOf(
-                                                //if(capacity)
-                                                "availability" to "occupied",
-                                                "tenantId" to requesterId,
-                                                "tenantName" to requesterFullName,
-                                                "capacity" to FieldValue.increment(1)
-                                            )
+                                            val currentCapacity = roomDocument.getLong("capacity")?.toInt() ?: 0
+                                            val maxCapacity = roomDocument.getLong("maxCapacity")?.toInt() ?: 0
 
-                                            roomDocument.reference.update(roomUpdateData)
+                                            if (currentCapacity == (maxCapacity - 1)) {
+                                                // Room is at max capacity next, set availability to "occupied"
+                                                val roomUpdateData = hashMapOf(
+                                                    "availability" to "occupied",
+                                                    "tenantId" to requesterId,
+                                                    "tenantName" to requesterFullName,
+                                                    "capacity" to FieldValue.increment(1)
+                                                )
+
+                                                roomDocument.reference.update(roomUpdateData)
+                                            } else {
+                                                // Room is at not in max capacity next, set availability to still "available"
+                                                val roomUpdateData = hashMapOf(
+                                                    "availability" to "available",
+                                                    "tenantId" to requesterId,
+                                                    "tenantName" to requesterFullName,
+                                                    "capacity" to FieldValue.increment(1)
+
+                                                )
+
+                                                roomDocument.reference.update(roomUpdateData)
+                                            }
                                         }
 
                                         // Clone the requester's data to the "tenant" collection
@@ -184,16 +215,50 @@ class AssignTenantFragment : Fragment() {
                                             "requesterFullName" to requesterFullName,
                                             "requesterId" to requesterId,
                                             "dormitoryId" to dormitoryId,
-                                            "roomNumber" to roomNumber,
+                                            "age" to age,
+                                            "address" to address,
+                                            "phoneNumber" to phoneNumber,
+                                            "email" to email,
+                                            "emergencyFullName" to emergencyFullName,
+                                            "emergencyAddress" to emergencyAddress,
+                                            "emergencyPhoneNumber" to emergencyPhoneNumber,
+                                            "emergencyEmail" to emergencyEmail,
+                                            "selectedGender" to selectedGender,
+                                            "idImageUrl" to idImageUrl,
+                                            "status" to "accepted",
+                                            "acceptedDate" to FieldValue.serverTimestamp(),
+                                            "roomNumber" to selectedRoom!!.roomNumber
                                             // Add other fields similar to the "requester_data"
                                         )
                                         tenantRef.set(tenantData)
                                             .addOnSuccessListener {
-                                                Toast.makeText(
-                                                    requireContext(),
-                                                    "Request has been accepted",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+                                                // Update the user's role to 3 in the "users" collection
+                                                val userRef = firestore.collection("users").document(
+                                                    requesterId!!
+                                                )
+                                                val userUpdateData = mapOf(
+                                                    "role" to 3 // Update the role to the desired value
+                                                    // Add other fields similar to the "requester_data"
+                                                )
+                                                userRef.update(userUpdateData)
+                                                    .addOnSuccessListener {
+
+                                                        AlertDialog.Builder(requireContext())
+                                                            .setMessage("Request has been accepted")
+                                                            .setPositiveButton("OK") { dialog, _ ->
+                                                                dialog.dismiss()
+                                                                val fragmentManager: FragmentManager = requireActivity().supportFragmentManager
+                                                                fragmentManager.popBackStack()
+                                                            }
+                                                            .show()
+                                                    }
+                                                    .addOnFailureListener { e ->
+                                                        Toast.makeText(
+                                                            requireContext(),
+                                                            "Error updating user role",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                    }
                                             }
                                             .addOnFailureListener { e ->
                                                 Toast.makeText(
@@ -202,15 +267,6 @@ class AssignTenantFragment : Fragment() {
                                                     Toast.LENGTH_SHORT
                                                 ).show()
                                             }
-                                    }
-                                    .addOnFailureListener { e ->
-                                        // Handle the failure to query and update room availability
-                                        Toast.makeText(
-                                            requireContext(),
-                                            "Error accepting the request",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
 
                             }
                             .addOnFailureListener { e ->
@@ -234,4 +290,5 @@ class AssignTenantFragment : Fragment() {
     }
 
 
+}
 }

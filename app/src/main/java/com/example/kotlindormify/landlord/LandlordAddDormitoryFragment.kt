@@ -336,6 +336,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             newDormId,
                                             dormName,
                                             numOfRooms.toInt(),
+                                            maxCapacity.toInt(),
                                             price,
                                             address,
                                             phoneNumber,

@@ -5,6 +5,7 @@ data class Dormitory(
     val dormPrice: String?,
     val dormitoryId: String,
     val dormRooms: Int?,
+    val maxCapacity: Int?,
     val images: List<String>? = null,
     val landlordId: String?,
     val qrCodeImageUrl: String?,
