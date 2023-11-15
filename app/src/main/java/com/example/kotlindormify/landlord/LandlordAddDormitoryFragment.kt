@@ -277,8 +277,10 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         binding.checkBoxGcash.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 selectedPaymentOptions.add("Gcash")
+                binding.etGcashNumLayout.visibility = View.VISIBLE
             } else {
                 selectedPaymentOptions.remove("Gcash")
+                binding.etGcashNumLayout.visibility = View.GONE
             }
         }
 
@@ -290,6 +292,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val maxCapacity = binding.etMaxCapacity.text.toString()
             val description = binding.etDescription.text.toString()
             val price = binding.etPrice.text.toString()
+            val gcashNum = binding.etGcashNum.text.toString()
             val address = binding.etAddress.text.toString()
             val phoneNumber = binding.etPhoneNumber.text.toString()
             val email = binding.etEmail.text.toString()
@@ -338,6 +341,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             numOfRooms.toInt(),
                                             maxCapacity.toInt(),
                                             price,
+                                            gcashNum,
                                             address,
                                             phoneNumber,
                                             email,

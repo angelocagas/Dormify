@@ -787,6 +787,38 @@
                     android:text="Gcash" />
             </LinearLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etGcashNumLayout"
+                style="@style/LoginTextInputOuterFieldStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                android:visibility="gone"
+                app:boxStrokeColor="@color/violet"
+                app:boxStrokeErrorColor="@color/colorError"
+                app:errorTextColor="@color/clear"
+                app:hintTextColor="@color/violet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkGroupPayment">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etGcashNum"
+                    style="LoginTextInputInnerFieldStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="11"
+                    android:hint="Enter your Gcash Number (09123456789)"
+                    android:inputType="numberDecimal"
+                    android:minHeight="48dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:backgroundTint="@color/black"
+                    app:backgroundTintMode="multiply" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
             <TextView
                 android:id="@+id/lblMapLocation"
@@ -796,7 +828,7 @@
                 android:text="Pin the Dormitory Location \n (Long Press on the map to select location)"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkGroupPayment" />
+                app:layout_constraintTop_toBottomOf="@+id/etGcashNumLayout" />
 
             <TextView
                 android:id="@+id/lblMapLocation2"
