@@ -2,16 +2,14 @@ package com.example.kotlindormify
 
 import android.app.ProgressDialog
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.kotlindormify.databinding.ActivitySignInBinding
 import com.example.kotlindormify.landlord.LandlordDashboardActivity
-import com.example.kotlindormify.payment.DashboardPaymentTenantFragment
+import com.example.kotlindormify.tenant3.Dashboard3Activity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -119,7 +117,7 @@ class SignInActivity : AppCompatActivity() {
 
                                                                 3 -> {
                                                                     // Proceed to SecondaryActivity for Dorm Landlord
-                                                                    val intent = Intent(this@SignInActivity, DashboardPaymentTenantFragment::class.java)
+                                                                    val intent = Intent(this@SignInActivity, Dashboard3Activity::class.java)
                                                                     val userEmail = email
                                                                     val prefManager = PrefManager(this@SignInActivity)
                                                                     prefManager.setUserEmail( userEmail )

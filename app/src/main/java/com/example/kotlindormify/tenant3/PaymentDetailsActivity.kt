@@ -1,4 +1,4 @@
-package com.example.kotlindormify.payment
+package com.example.kotlindormify.tenant3
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
