@@ -94,6 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
+                android:enabled="false"
                 android:layout_marginTop="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -145,6 +146,7 @@
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
                 android:layout_marginTop="1dp"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblprofile_email">

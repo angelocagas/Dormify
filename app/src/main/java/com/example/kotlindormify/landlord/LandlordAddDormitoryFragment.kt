@@ -4,21 +4,26 @@ import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.app.ProgressDialog
+import android.content.ContextWrapper
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -67,6 +72,15 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     private lateinit var recyclerView: RecyclerView
     private var selectedImageUris: MutableList<Uri> = mutableListOf()
     private lateinit var adapter: ImagePreviewAdapter
+    private lateinit var radioGroupRestrictions: RadioGroup
+    private lateinit var radioBathroom: RadioGroup
+    private lateinit var radioRentalTerms: RadioGroup
+    private lateinit var radioWater: RadioGroup
+    private lateinit var radioElectricity: RadioGroup
+
+
+
+
 
 
     private val firestorePath = "dormitories"
@@ -134,7 +148,11 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
         recyclerView = binding.recyclerView
 
-
+        radioBathroom = binding.radioBathroom
+        radioRentalTerms = binding.radioRentalTerms
+        radioWater = binding.radioWater
+        radioElectricity = binding.radioElectricity
+        radioGroupRestrictions = binding.radioGroupRestrictions
 
         binding.btnAddImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -161,7 +179,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         }
 
 
-
+        val resolvedColor = ContextCompat.getColor(requireContext(), R.color.colorError)
+        val default = ContextCompat.getColor(requireContext(), R.color.black)
         val selectedAmenities = mutableListOf<String>()
         var amenities: List<String>? = null
 
@@ -216,7 +235,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if(isChecked){
                 selectedAmenities.add("Swimming Pool")
             }else{
-                selectedAmenities.remove("Swimming Pool")
+                selectedAmenities.remove("Laundry Area")
             }
         }
 
@@ -315,8 +334,17 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val email = binding.etEmail.text.toString()
             val username = binding.etusername.text.toString()
             val max = binding.etMaxCapacity.text.toString()
-
+            val etAmenities = binding.etAmenities.text.toString()
+            val cbKitchen = binding.cbKitchen
+            val cbLounge = binding.cbLounge
+            val cbWifi = binding.cbWifi
+            val cbSwimming = binding.cbSwimming
+            val cbFitness = binding.cbFitness
+            val cbParking = binding.cbParking
+            val cbCCTV = binding.cbCCTV
             val cbAgreement = binding.cbAgreement
+            val checkBoxGcash = binding.checkBoxGcash
+            val checkBoxCash = binding.checkBoxCash
 
 
             var amenitiesString = binding.etAmenities.text.toString()
@@ -330,6 +358,134 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 allAmenitiesList = selectedAmenities
             }
 
+
+
+
+
+            if (!cbKitchen.isChecked && !cbLounge.isChecked && !cbWifi.isChecked && !cbSwimming.isChecked && !cbFitness.isChecked && !cbParking.isChecked && !cbCCTV.isChecked && etAmenities.isEmpty()) {
+                binding.lblAmenities.text = "Amenities is required"  // Update UI element with an error message
+                binding.lblAmenities.setTextColor(resolvedColor)
+                binding.lblAmenities2.visibility = View.VISIBLE
+
+            } else {
+                binding.lblAmenities.text = "Amenities"  // Clear the error message
+                binding.lblAmenities.setTextColor(default)
+                binding.lblAmenities2.visibility = View.INVISIBLE
+
+            }
+
+
+            if (!checkBoxGcash.isChecked && !checkBoxCash.isChecked ) {
+                binding.lblPaymentOptions.text = "Payment Options is required"  // Update UI element with an error message
+                binding.lblPaymentOptions.setTextColor(resolvedColor)
+                binding.lblPaymentOptions2.visibility = View.VISIBLE
+
+            } else {
+                binding.lblPaymentOptions.text = "Payment Options"  // Clear the error message
+                binding.lblPaymentOptions.setTextColor(default)
+                binding.lblPaymentOptions2.visibility = View.INVISIBLE
+            }
+
+
+
+
+
+            if (radioBathroom.checkedRadioButtonId == -1) {
+                // No radio button is selected, highlight in red
+                // You can change the background color, set a red border, or any other visual indication
+
+                // None of the radio buttons is checked, show an error message
+                binding.lblBathroom.text = "Bathroom is required"
+                binding.lblBathroom.setTextColor(resolvedColor)
+                binding.lblBathroom2.visibility = View.VISIBLE
+
+
+            } else {
+                // Continue with form submission or other actions
+                // At least one radio button is checked, clear the error message
+                binding.lblBathroom.text = "Bathroom"
+                binding.lblBathroom.setTextColor(default)
+                binding.lblBathroom2.visibility = View.INVISIBLE
+
+            }
+
+
+
+            if (radioRentalTerms.checkedRadioButtonId == -1) {
+                // No radio button is selected, highlight in red
+                // You can change the background color, set a red border, or any other visual indication
+
+                // None of the radio buttons is checked, show an error message
+                binding.lblRentalTerms.text = "Rental Terms is required"
+                binding.lblRentalTerms.setTextColor(resolvedColor)
+                binding.lblRentalTerms2.visibility = View.VISIBLE
+
+
+            } else {
+                // Continue with form submission or other actions
+                // At least one radio button is checked, clear the error message
+                binding.lblRentalTerms.text = "Rental Terms"
+                binding.lblRentalTerms.setTextColor(default)
+                binding.lblRentalTerms2.visibility = View.INVISIBLE
+
+            }
+
+
+            if (radioWater.checkedRadioButtonId == -1) {
+                // No radio button is selected, highlight in red
+                // You can change the background color, set a red border, or any other visual indication
+
+                // None of the radio buttons is checked, show an error message
+                binding.lblWater.text = "Water Bill is required"
+                binding.lblWater.setTextColor(resolvedColor)
+                binding.lblWater2.visibility = View.VISIBLE
+
+
+            } else {
+                // Continue with form submission or other actions
+                // At least one radio button is checked, clear the error message
+                binding.lblWater.text = "Water Bill"
+                binding.lblWater.setTextColor(default)
+                binding.lblWater2.visibility = View.INVISIBLE
+
+            }
+
+            if (radioElectricity.checkedRadioButtonId == -1) {
+                // No radio button is selected, highlight in red
+                // You can change the background color, set a red border, or any other visual indication
+
+                // None of the radio buttons is checked, show an error message
+                binding.lblElectricity.text = "Electric Bill is required"
+                binding.lblElectricity.setTextColor(resolvedColor)
+                binding.lblElectricity2.visibility = View.VISIBLE
+
+            } else {
+                // Continue with form submission or other actions
+                // At least one radio button is checked, clear the error message
+                binding.lblElectricity.text = "Electric Bill"
+                binding.lblElectricity.setTextColor(default)
+                binding.lblElectricity2.visibility = View.INVISIBLE
+
+            }
+
+            if (radioGroupRestrictions.checkedRadioButtonId == -1) {
+                // No radio button is selected, highlight in red
+                // You can change the background color, set a red border, or any other visual indication
+
+                // None of the radio buttons is checked, show an error message
+                binding.lblGenderRestrictions.text = "Gender Restrictions is required"
+                binding.lblGenderRestrictions.setTextColor(resolvedColor)
+                binding.lblGenderRestrictions2.visibility = View.VISIBLE
+
+
+            } else {
+                // Continue with form submission or other actions
+                // At least one radio button is checked, clear the error message
+                binding.lblGenderRestrictions.text = "Gender Restrictions"
+                binding.lblGenderRestrictions.setTextColor(default)
+                binding.lblGenderRestrictions2.visibility = View.INVISIBLE
+
+            }
 
 
 
@@ -955,6 +1111,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             selectedTerms.remove(term)
         }
     }
+
 
 
 

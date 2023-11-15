@@ -89,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblDormName"
                 app:layout_constraintTop_toTopOf="@+id/lblDormName" />
@@ -137,6 +138,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblRoomsName"
                 app:layout_constraintTop_toTopOf="@+id/lblRoomsName" />
@@ -185,6 +187,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblMaxCapacity"
                 app:layout_constraintTop_toTopOf="@+id/lblMaxCapacity" />
@@ -233,6 +236,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblDescription"
                 app:layout_constraintTop_toTopOf="@+id/lblDescription" />
@@ -284,6 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblGenderRestrictions"
                 app:layout_constraintTop_toTopOf="@+id/lblGenderRestrictions" />
@@ -338,6 +343,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblAmenities"
                 app:layout_constraintTop_toTopOf="@+id/lblAmenities" />
@@ -348,13 +354,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:hintEnabled="false"
+                android:layout_marginTop="5dp"
                 app:boxStrokeColor="@color/violet"
                 app:boxStrokeErrorColor="@color/colorError"
                 app:errorTextColor="@color/clear"
                 app:hintTextColor="@color/violet"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblAmenitiesbc">
+                app:layout_constraintTop_toBottomOf="@+id/rdAmenities">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAmenities"
@@ -376,11 +383,12 @@
                 android:id="@+id/lblAmenitiesbc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="2dp"
                 android:text="Separate by comma (eg.,Free Wifi,Ref,Gym,etc.)"
+                android:textStyle="italic"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rdAmenities" />
+                app:layout_constraintTop_toBottomOf="@+id/etAmenitiesLayout" />
 
             <RadioGroup
                 android:id="@+id/rdAmenities"
@@ -458,6 +466,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblAddress"
                 app:layout_constraintTop_toTopOf="@+id/lblAddress" />
@@ -497,7 +506,7 @@
                 android:text="Bathroom"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/etAmenitiesLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/lblAmenitiesbc" />
 
             <TextView
                 android:id="@+id/lblBathroom2"
@@ -505,6 +514,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblBathroom"
                 app:layout_constraintTop_toTopOf="@+id/lblBathroom" />
@@ -553,6 +563,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblRentalTerms"
                 app:layout_constraintTop_toTopOf="@+id/lblRentalTerms" />
@@ -618,6 +629,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblPrice"
                 app:layout_constraintTop_toTopOf="@+id/lblPrice" />
@@ -666,6 +678,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblElectricity"
                 app:layout_constraintTop_toTopOf="@+id/lblElectricity" />
@@ -716,6 +729,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblWater"
                 app:layout_constraintTop_toTopOf="@+id/lblWater" />
@@ -765,6 +779,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblPaymentOptions"
                 app:layout_constraintTop_toTopOf="@+id/lblPaymentOptions" />
@@ -839,6 +854,7 @@
                 android:layout_marginTop="-2dp"
                 android:layout_marginStart="-113dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblMapLocation"
                 app:layout_constraintTop_toTopOf="@+id/lblMapLocation" />
@@ -948,6 +964,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblPhoneNumber"
                 app:layout_constraintTop_toTopOf="@+id/lblPhoneNumber" />
@@ -996,6 +1013,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblEmail"
                 app:layout_constraintTop_toTopOf="@+id/lblEmail" />
@@ -1042,6 +1060,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblusername"
                 app:layout_constraintTop_toTopOf="@+id/lblusername" />
