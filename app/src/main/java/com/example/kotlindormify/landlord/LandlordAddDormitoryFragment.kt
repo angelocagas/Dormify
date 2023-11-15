@@ -287,6 +287,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         binding.btnSubmit.setOnClickListener {
             val dormName = binding.etDormName.text.toString()
             val numOfRooms = binding.etNumOfRooms.text.toString()
+            val maxCapacity = binding.etMaxCapacity.text.toString()
             val description = binding.etDescription.text.toString()
             val price = binding.etPrice.text.toString()
             val address = binding.etAddress.text.toString()
@@ -365,7 +366,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                                     // Successfully added dormitory, now add rooms
                                                     addRoomsToDormitory(
                                                         newDormId,
-                                                        numOfRooms.toInt()
+                                                        numOfRooms.toInt(),
+                                                        maxCapacity.toInt()
                                                     )
                                                     uploadImages(newDormId)
                                                     uploadPermitImage(newDormId)
@@ -583,7 +585,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     }
 
     // Function to add rooms to the dormitory
-    private fun addRoomsToDormitory(dormitoryId: String, numOfRooms: Int) {
+    private fun addRoomsToDormitory(dormitoryId: String, numOfRooms: Int, maxCapacity: Int) {
         // Reference to the specific dormitory document in the Firestore collection
         val dormitoryDocRef = firestore.collection("dormitories").document(dormitoryId)
 
@@ -594,6 +596,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             // Create a new room document with its properties
             val roomData = hashMapOf(
                 "roomNumber" to roomNumber,
+                "capacity" to 0,
+                "maxCapacity" to maxCapacity,
                 "availability" to "available", // By default, all rooms are available
                 "tenantId" to "", // Use an empty string to indicate no tenant assigned
                 "tenantName" to "Vacant" // Use "Vacant" to indicate not occupied

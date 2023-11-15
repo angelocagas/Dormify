@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlindormify.R
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Calendar
@@ -33,7 +34,7 @@ class AssignTenantFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_assign_tenant, container, false)
         recyclerView = rootView.findViewById(R.id.recyclerRequestsList)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         roomListAdapter = RoomList2Adapter(roomList) { room ->
             selectedRoom = room
             showDateSelectionDialog()
@@ -78,10 +79,13 @@ class AssignTenantFragment : Fragment() {
                     val availability = roomDocument.getString("availability")
                     val tenantId = roomDocument.getString("tenantId")
                     val tenantName = roomDocument.getString("tenantName")
+                    val capacity = roomDocument.getLong("capacity")?.toInt()
+                    val maxCapacity = roomDocument.getLong("maxCapacity")?.toInt()
+
 
                     // Check the data type of roomNumber and ensure it's not null before adding it to the list
                     if (roomNumber != null && availability != null) {
-                        roomList.add(Room(roomNumber, availability, tenantId, tenantName))
+                        roomList.add(Room(roomNumber, availability, tenantId, tenantName, capacity, maxCapacity))
                     }
                 }
 
@@ -152,29 +156,30 @@ class AssignTenantFragment : Fragment() {
                                 // Handle the successful update
 
                                 // Now update the room's availability to "occupied"
+                                // Now update the room's availability to "occupied"
                                 val roomNumber = selectedRoom!!.roomNumber
-                                val roomRef =
-                                    firestore.collection("dormitories").document(dormitoryId)
-                                        .collection("rooms")
-                                        .whereEqualTo("roomNumber", roomNumber)
+                                val roomRef = firestore.collection("dormitories").document(dormitoryId)
+                                    .collection("rooms")
+                                    .whereEqualTo("roomNumber", roomNumber)
 
                                 roomRef.get()
                                     .addOnSuccessListener { querySnapshot ->
                                         if (!querySnapshot.isEmpty) {
                                             val roomDocument = querySnapshot.documents[0]
-                                            roomDocument.reference.update(
-                                                "availability",
-                                                "occupied",
-                                                "tenantId",
-                                                requesterId,
-                                                "tenantName",
-                                                requesterFullName
+
+                                            val roomUpdateData = hashMapOf(
+                                                //if(capacity)
+                                                "availability" to "occupied",
+                                                "tenantId" to requesterId,
+                                                "tenantName" to requesterFullName,
+                                                "capacity" to FieldValue.increment(1)
                                             )
+
+                                            roomDocument.reference.update(roomUpdateData)
                                         }
 
                                         // Clone the requester's data to the "tenant" collection
-                                        val tenantRef =
-                                            firestore.collection("tenant").document(requestId)
+                                        val tenantRef = firestore.collection("tenant").document(requestId)
                                         val tenantData = mapOf(
                                             "requesterFullName" to requesterFullName,
                                             "requesterId" to requesterId,
@@ -206,6 +211,7 @@ class AssignTenantFragment : Fragment() {
                                             Toast.LENGTH_SHORT
                                         ).show()
                                     }
+
                             }
                             .addOnFailureListener { e ->
                                 // Handle the failure to update the dormitory's rental request subcollection
