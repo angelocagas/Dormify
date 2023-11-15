@@ -78,8 +78,8 @@
         android:layout_height="25dp"
         android:layout_marginRight="10sp"
         android:scaleType="centerInside"
-        android:background="#00000000"
         android:visibility="invisible"
+        android:background="#00000000"
         android:src="@drawable/dorm_edit_mini"
         app:layout_constraintEnd_toStartOf="@+id/ibDelete"
         app:layout_constraintTop_toTopOf="parent" />
@@ -89,19 +89,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:fontFamily="@font/hind_guntur_bold"
-        android:paddingBottom="10sp"
-        android:maxLines="2"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:ellipsize="end"
+        android:fontFamily="@font/hind_guntur_bold"
+        android:maxLines="2"
+        android:paddingBottom="10sp"
         android:text="Dormitory Name ko taposasdsad dorm name moi"
         android:textColor="@color/dormify_clr"
-        android:layout_marginEnd="30dp"
 
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/ibEdit" />
 
     <TextView
         android:id="@+id/textDormPrice"
