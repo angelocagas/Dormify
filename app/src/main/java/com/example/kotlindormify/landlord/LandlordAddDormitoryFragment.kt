@@ -307,7 +307,15 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val cbCCTV = binding.cbCCTV
             var amenitiesString = binding.etAmenities.text.toString()
             var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
-            var allAmenitiesList = selectedAmenities + amenitiesList
+            var allAmenitiesList: List<String>
+
+            if (amenitiesString.isNotEmpty()){
+                allAmenitiesList = selectedAmenities + amenitiesList
+            }
+            else{
+                allAmenitiesList = selectedAmenities
+            }
+
 
 
             // Check if an image has been selected
@@ -358,7 +366,6 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             selectedPaymentOptions,
                                             allAmenitiesList,
                                             genderRestriction
-
 
                                             )
 
