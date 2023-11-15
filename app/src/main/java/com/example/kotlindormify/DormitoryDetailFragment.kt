@@ -249,7 +249,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
                                         }
                                         .show()
                                     btnRent.isClickable = false
-                                    btnRent.setBackgroundColor(resources.getColor(R.color.notClickable))
+                                    btnRent.background = resources.getDrawable(R.drawable.bg_btn_bck_lightdisable)
                                 }
                             }
                             else{

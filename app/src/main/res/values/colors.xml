@@ -10,7 +10,8 @@
     <color name="violet">#6f6ff4</color>
     <color name="colorError">#FF0000</color>
 
-
+    <color name="radiobtnable">#5E5E5E</color>
+    <color name="radiobtnerror">#FF0000</color>
 
     <color name="yellow">#FFC801</color>
     <color name="light_gray">#d4d4d4</color>

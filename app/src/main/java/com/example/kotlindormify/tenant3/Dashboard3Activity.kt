@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.PrefManager
@@ -20,6 +21,7 @@ class Dashboard3Activity : AppCompatActivity() {
     private lateinit var userId: String
     private lateinit var ivProfilePicture: ImageView
 
+
     var userEmail: String? = null // Initialize it as null
 
 
@@ -28,6 +30,7 @@ class Dashboard3Activity : AppCompatActivity() {
         binding = ActivityDashboard3Binding.inflate(layoutInflater)
         setContentView(binding.root)
         ivProfilePicture = binding.ivTopProfilePicture
+
         window.decorView.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
 
@@ -113,7 +116,11 @@ class Dashboard3Activity : AppCompatActivity() {
             binding.cardViewImage.visibility = View.GONE
         }
 
+
+
     }
+
+
 
     private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {
