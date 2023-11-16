@@ -199,6 +199,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="15dp"
+                    android:visibility="gone"
                     app:cardBackgroundColor="@color/security"
                     app:cardCornerRadius="360dp"
                     app:cardElevation="8dp"
@@ -228,6 +229,7 @@
                     android:text="Schedule"
                     android:textColor="@color/black"
                     android:textSize="13dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@id/ivschedule"
                     app:layout_constraintTop_toBottomOf="@id/ivschedule" />
@@ -241,6 +243,7 @@
                     app:cardBackgroundColor="@color/private_account"
                     app:cardCornerRadius="360dp"
                     app:cardElevation="8dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/ivschedule"
                     app:layout_constraintTop_toBottomOf="@id/cons">
@@ -265,6 +268,7 @@
                     android:text="Records"
                     android:textColor="@color/black"
                     android:textSize="13dp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@id/ivrecords"
                     app:layout_constraintTop_toBottomOf="@id/ivrecords" />
 
