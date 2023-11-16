@@ -20,10 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvSavedDormitories"
             android:paddingBottom="40dp"/>
+
 
         <TextView
             android:id="@+id/tvSavedDormitories"
@@ -202,6 +204,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
+            android:paddingStart="10dp"
             app:flow_horizontalAlign="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/clFilters" />

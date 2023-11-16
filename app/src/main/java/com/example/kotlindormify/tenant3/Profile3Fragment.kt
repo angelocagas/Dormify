@@ -1,4 +1,4 @@
-package com.example.kotlindormify.tenant3
+package com.example.kotlindormify
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,8 +10,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.PersonalInformationActivity
-import com.example.kotlindormify.R
-import com.example.kotlindormify.SignInActivity
 import com.example.kotlindormify.profile.AboutUs
 import com.example.kotlindormify.profile.TermsAndConditions
 import com.google.firebase.auth.FirebaseAuth
@@ -39,8 +37,8 @@ class Profile3Fragment : Fragment(R.layout.profile_fragment) {
         val usersCollection = FirebaseFirestore.getInstance().collection("users")
         val userDocument = usersCollection.document(userId)
         val btnPersonalInfo: View = view.findViewById(R.id.Personalinfo)
-        val btnTermsAndConditions: View = view.findViewById(R.id.btnTermsAndConditions)
-        val btnAbout: View = view.findViewById(R.id.btnAboutUs)
+        val btnTermsAndConditions: View = view.findViewById(R.id.btnTermsAndConditions2)
+        val btnAbout: View = view.findViewById(R.id.btnAboutUs2)
 
 
         userDocument.get()

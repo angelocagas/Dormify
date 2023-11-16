@@ -335,6 +335,7 @@
 
 
                         <TextView
+                            android:id="@+id/maxx"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/Room"
@@ -347,14 +348,15 @@
                             android:id="@+id/RoomCapacitytxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/Room"
+                            android:layout_below="@+id/maxx"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="25dp"
+                            android:layout_marginTop="0dp"
                             android:text="10"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/lblbath"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/RoomCapacitytxt"
@@ -368,10 +370,10 @@
                             android:id="@+id/Availableroomtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/Room"
+                            android:layout_below="@+id/roommm"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="25dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginEnd="40dp"
                             android:text="122222"
                             android:textColor="@color/chat_color_sender"
@@ -381,9 +383,9 @@
                             android:id="@+id/Bathroomtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/RoomCapacitytxt"
+                            android:layout_below="@+id/lblbath"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="0dp"
                             android:text="@string/shared_public"
                             android:textColor="@color/chat_color_sender"
                             android:textSize="11sp"
@@ -391,6 +393,7 @@
 
 
                         <TextView
+                            android:id="@+id/roommm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/Room"
@@ -436,7 +439,7 @@
 
 
                         <TextView
-
+android:id="@+id/lblpay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/pay"
@@ -448,9 +451,9 @@
                             android:id="@+id/PaymentMethodtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pay"
+                            android:layout_below="@+id/lblpay"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="0dp"
                             android:text="Cash On Hand\nGcash"
                             android:textColor="@color/chat_color_sender"
                             android:textSize="14sp"
@@ -458,7 +461,7 @@
 
 
                         <TextView
-
+android:id="@+id/lblrentalterms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/PaymentMethodtxt"
@@ -471,9 +474,9 @@
                             android:id="@+id/MinimumStaytxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/PaymentMethodtxt"
+                            android:layout_below="@+id/lblrentalterms"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="0dp"
                             android:text="6 Months"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
@@ -485,7 +488,7 @@
                             android:layout_below="@id/pay"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
+
                             android:layout_marginEnd="40dp"
                             android:text="Electricity Bills"
                             android:textColor="#000000" />
@@ -494,35 +497,35 @@
                             android:id="@+id/Electricitytxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pay"
+                            android:layout_below="@+id/lblpay"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginEnd="40dp"
                             android:text="INCLUDED"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
 
                         <TextView
-
+android:id="@+id/lblwaterr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/Electricitytxt"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
                             android:layout_marginEnd="40dp"
                             android:text="Water Bills"
+                            android:layout_alignTop="@+id/lblrentalterms"
                             android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/Watertxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/Electricitytxt"
+                            android:layout_below="@+id/lblwaterr"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginEnd="40dp"
                             android:text="EXCLUDED"
                             android:textColor="@color/chat_color_sender"
@@ -645,14 +648,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/Landlordinfo"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
                             android:layout_toEndOf="@+id/cardViewImage"
-                            android:text="Username"
+                            android:text="David Joshua Balaoro Carreon "
                             android:textColor="#000000"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
+                            android:maxLines="1"
+                            android:maxLength="28"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/contt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/cardViewImage"
@@ -665,10 +672,10 @@
                             android:id="@+id/contactTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/cardViewImage"
+                            android:layout_below="@+id/contt"
                             android:layout_alignParentStart="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="28dp"
+                            android:layout_marginTop="0dp"
                             android:text="09123456789"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
@@ -690,14 +697,14 @@
                             android:id="@+id/emailtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/cardViewImage"
-                            android:layout_alignParentEnd="true"
+                            android:layout_below="@+id/contt"
                             android:layout_alignStart="@id/emailview"
-                            android:layout_marginTop="27dp"
-                            android:textSize="11sp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="0dp"
                             android:maxLines="1"
                             android:text="sample1@gmail.com"
                             android:textColor="@color/chat_color_sender"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <View

@@ -125,10 +125,7 @@ class LandlordConversationsFragment : Fragment(), LandlordConversationsAdapter.O
         // Create a new instance of LandlordChatFragment and pass the conversation ID
         val chatFragment = LandlordChatFragment()
         val bundle = Bundle()
-        bundle.putString(
-            "conversationId",
-            conversation.title
-        ) // Assuming the conversation title is used as an ID
+        bundle.putString("conversationId", conversation.title) // Assuming the conversation title is used as an ID
         chatFragment.arguments = bundle
 
         // Navigate to the chat fragment

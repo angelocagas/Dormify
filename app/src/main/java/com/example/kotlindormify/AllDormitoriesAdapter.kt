@@ -162,7 +162,7 @@ class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dormitory = dormitoriesList[position]
         holder.textDormName.text = dormitory.dormName
-        holder.textDormPrice.text = "₱ ${dormitory.dormPrice}"
+        holder.textDormPrice.text = "₱  ${dormitory.dormPrice}"
         holder.tvRentalTerm.text = dormitory.rentalTerm
 
         //distance of dorm from dhvsu

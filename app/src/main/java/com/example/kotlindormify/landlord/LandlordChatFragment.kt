@@ -39,6 +39,7 @@ class LandlordChatFragment : Fragment() {
         // Load messages for the given conversation ID
         loadChatMessages(conversationId)
 
+
         return view
     }
 

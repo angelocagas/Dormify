@@ -49,7 +49,7 @@
         android:id="@+id/txtviewdormify"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
+        android:layout_marginEnd="58dp"
         android:fontFamily="sans-serif-black"
         android:text="@string/app_name"
         android:textAllCaps="true"
@@ -82,6 +82,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnAddImage"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.504" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
