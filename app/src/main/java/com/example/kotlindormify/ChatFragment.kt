@@ -14,19 +14,26 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import java.sql.Timestamp
 
 class ChatFragment : Fragment() {
 
+    // Firebase variables
     private lateinit var firestore: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
+
+    // User and conversation information
     private lateinit var currentUserUid: String
     private lateinit var conversationId: String
     private var landlordId: String? = null
     private var dormName: String? = null
+
+    // RecyclerView and Adapter
     private var adapter = ChatAdapter()
     private lateinit var recyclerView: RecyclerView
     private lateinit var tvDormName: TextView
 
+    // ...
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +41,7 @@ class ChatFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.chat_fragment, container, false)
 
+        // Retrieve arguments passed to the fragment
         arguments?.let {
             landlordId = it.getString("landlordId")
             dormName = it.getString("dormName")
@@ -57,8 +65,10 @@ class ChatFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
+        // Set dorm name in the TextView
         tvDormName = view.findViewById(R.id.nameOfChat)
         tvDormName.text = dormName
+
         // Load chat messages
         loadChatMessages()
 
@@ -68,6 +78,7 @@ class ChatFragment : Fragment() {
         sendButton.setOnClickListener {
             val messageText = messageEditText.text.toString().trim()
             if (messageText.isNotEmpty()) {
+                // Send the message and clear the input field
                 sendMessage(messageText)
                 messageEditText.text.clear()
             }
@@ -76,6 +87,7 @@ class ChatFragment : Fragment() {
         return view
     }
 
+    // Function to load chat messages from Firestore
     private fun loadChatMessages() {
         firestore.collection("conversations")
             .document(conversationId)
@@ -89,32 +101,41 @@ class ChatFragment : Fragment() {
 
                 val messages = mutableListOf<ChatMessage>()
                 for (document in querySnapshot?.documents ?: emptyList()) {
+                    // Extract message details from Firestore document
                     val sender = document.getString("sender") ?: ""
+                    val receiver = document.getString("receiver") ?: ""
                     val text = document.getString("text") ?: ""
                     val timestamp = document.getTimestamp("timestamp")
 
-                    if (sender.isNotEmpty() && text.isNotEmpty() && timestamp != null) {
-                        val message = ChatMessage(sender, text, timestamp)
+                    if (sender.isNotEmpty() && receiver.isNotEmpty() && text.isNotEmpty() && timestamp != null) {
+                        // Pass receiver information to ChatMessage constructor
+                        val message = ChatMessage(sender, receiver, text, timestamp)
                         messages.add(message)
                     }
                 }
 
+                // Update the RecyclerView with the new list of messages
                 adapter.submitList(messages)
                 recyclerView.scrollToPosition(messages.size - 1)
             }
+
+
+
     }
 
+    // Function to send a new message to Firestore
     private fun sendMessage(messageText: String) {
         val messageTimestamp = FieldValue.serverTimestamp()
-        val messageSenderId = currentUserUid
-        val messageReceiverId = landlordId
 
+        // Create a new message data structure
         val newMessage = hashMapOf(
-            "sender" to messageSenderId,
+            "sender" to currentUserUid,
             "text" to messageText,
+            "receiver" to landlordId,
             "timestamp" to messageTimestamp
         )
 
+        // Add the new message to the "messages" collection in Firestore
         firestore.collection("conversations")
             .document(conversationId)
             .collection("messages")
@@ -126,14 +147,18 @@ class ChatFragment : Fragment() {
                 // Handle the failure to send the message
             }
 
-        // Update conversation data
+        // Update conversation data with information about the last message
         val conversationData = hashMapOf(
             "lastMessage" to messageText,
-            "lastMessageSenderId" to messageSenderId,
+            "lastMessageSenderId" to currentUserUid,
+            "lastMessagReceiverId" to landlordId,
             "lastMessageTimestamp" to messageTimestamp,
+            "Tenant" to currentUserUid,
+            "Landlord" to landlordId,
             "userIds" to listOf(currentUserUid, landlordId)
         )
 
+        // Update the conversation data in the "conversations" collection in Firestore
         firestore.collection("conversations")
             .document(conversationId)
             .set(conversationData, SetOptions.merge())
@@ -144,5 +169,4 @@ class ChatFragment : Fragment() {
                 // Handle the failure to update conversation data
             }
     }
-
 }
