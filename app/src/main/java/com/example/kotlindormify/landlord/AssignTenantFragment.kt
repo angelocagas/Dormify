@@ -233,7 +233,9 @@ class AssignTenantFragment : Fragment() {
                                         }
 
                                         // Clone the requester's data to the "tenant" collection
-                                        val tenantRef = firestore.collection("tenant").document(requestId)
+                                        val tenantRef = firestore.collection("tenant").document(
+                                            requesterId.toString()
+                                        )
                                         val tenantData = mapOf(
                                             "tenantFullName" to requesterFullName,
                                             "tenantId" to requesterId,
