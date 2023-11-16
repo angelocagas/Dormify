@@ -99,48 +99,63 @@ class LandlordChatFragment : Fragment() {
     private fun sendMessage(messageText: String, conversationId: String?) {
         if (conversationId != null) {
 
-
-
-            val messageTimestamp = FieldValue.serverTimestamp()
-            val messageSenderId = currentUserUid
-
-
-            val newMessage = hashMapOf(
-                "sender" to messageSenderId,
-                "text" to messageText,
-                "receiver" to "messageReceiverId",
-                "timestamp" to messageTimestamp
-            )
-
+            // Retrieve Tenant from the conversation
             firestore.collection("conversations")
                 .document(conversationId)
-                .collection("messages")
-                .add(newMessage)
-                .addOnSuccessListener {
-                    // Message sent successfully
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        val tenant = documentSnapshot.getString("Tenant")
+
+                        // Check if the Tenant value is not null before proceeding
+                        if (tenant != null) {
+                            val messageTimestamp = FieldValue.serverTimestamp()
+                            val messageSenderId = currentUserUid
+
+                            val newMessage = hashMapOf(
+                                "sender" to messageSenderId,
+                                "text" to messageText,
+                                "receiver" to tenant, // Use the Tenant as the receiver
+                                "timestamp" to messageTimestamp
+                            )
+
+                            firestore.collection("conversations")
+                                .document(conversationId)
+                                .collection("messages")
+                                .add(newMessage)
+                                .addOnSuccessListener {
+                                    // Message sent successfully
+                                }
+                                .addOnFailureListener { exception ->
+                                    // Handle the failure to send the message
+                                }
+
+                            // Update conversation data
+                            val conversationData = hashMapOf(
+                                "lastMessage" to messageText,
+                                "lastMessageSenderId" to messageSenderId,
+                                "lastMessageReceiverId" to tenant, // Update the receiver ID
+                                "lastMessageTimestamp" to messageTimestamp
+                            )
+
+                            db.collection("conversations")
+                                .document(conversationId)
+                                .set(conversationData, SetOptions.merge())
+                                .addOnSuccessListener {
+                                    // Conversation data updated successfully
+                                }
+                                .addOnFailureListener { exception ->
+                                    // Handle the failure to update conversation data
+                                }
+                        } else {
+                            // Handle the case where Tenant is null
+                        }
+                    } else {
+                        // Handle the case where the conversation document does not exist
+                    }
                 }
                 .addOnFailureListener { exception ->
-                    // Handle the failure to send the message
-                }
-
-            // Update conversation data
-            val conversationData = hashMapOf(
-                "lastMessage" to messageText,
-                "lastMessageSenderId" to messageSenderId,
-                "lastMessageReceiverId" to "messageReceiverId",
-                "lastMessageTimestamp" to messageTimestamp,
-
-
-                )
-
-            db.collection("conversations")
-                .document(conversationId)
-                .set(conversationData, SetOptions.merge())
-                .addOnSuccessListener {
-                    // Conversation data updated successfully
-                }
-                .addOnFailureListener { exception ->
-                    // Handle the failure to update conversation data
+                    // Handle the failure to retrieve conversation data
                 }
         }
     }
