@@ -78,7 +78,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
-                android:visibility="invisible"
+
                 app:layout_constraintStart_toEndOf="@+id/lbletEmergencyFullName"
                 app:layout_constraintTop_toTopOf="@+id/lbletEmergencyFullName" />
 
@@ -125,7 +125,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
-                android:visibility="invisible"
+
                 app:layout_constraintStart_toEndOf="@+id/lbletemailLayout"
                 app:layout_constraintTop_toTopOf="@+id/lbletemailLayout" />
 
@@ -174,7 +174,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
-                android:visibility="invisible"
+
                 app:layout_constraintStart_toEndOf="@+id/lbletpasswordLayout"
                 app:layout_constraintTop_toTopOf="@+id/lbletpasswordLayout" />
 
@@ -223,7 +223,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
-                android:visibility="invisible"
+
                 app:layout_constraintStart_toEndOf="@+id/lblphoneNumberLayout"
                 app:layout_constraintTop_toTopOf="@+id/lblphoneNumberLayout" />
 
@@ -284,7 +284,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
-                android:visibility="invisible"
+
                 app:layout_constraintStart_toEndOf="@+id/lbletpassword2Layout"
                 app:layout_constraintTop_toTopOf="@+id/lbletpassword2Layout" />
 
@@ -359,7 +359,7 @@
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
-                android:visibility="invisible"
+
                 app:layout_constraintStart_toEndOf="@+id/lbletbtnAddImage"
                 app:layout_constraintTop_toTopOf="@+id/lbletbtnAddImage" />
 

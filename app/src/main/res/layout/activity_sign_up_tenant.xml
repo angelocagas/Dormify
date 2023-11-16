@@ -106,7 +106,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
-                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblFullName"
                 app:layout_constraintTop_toTopOf="@+id/lblFullName" />
@@ -159,7 +158,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
-                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblAge"
                 app:layout_constraintTop_toTopOf="@+id/lblAge" />
@@ -213,7 +211,7 @@
                 android:id="@+id/lblAddress2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
+
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
@@ -265,7 +263,7 @@
                 android:id="@+id/lbletPhoneNumber2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
+
                 android:layout_marginTop="-2dp"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
@@ -331,7 +329,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
+
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lbletEmail"
@@ -381,7 +379,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lbletpassword"
@@ -428,7 +425,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
+
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lbletrepassword"
@@ -489,7 +486,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
+
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lbletEmergencyFullName"
@@ -540,7 +537,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
+
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lbletEmergencyAddress"
@@ -591,7 +588,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
+
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lbletEmergencyPhoneNumber"
@@ -657,7 +654,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
+
 
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
@@ -710,7 +707,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
+
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblid"
@@ -782,7 +779,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
-                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblGender"
                 app:layout_constraintTop_toTopOf="@+id/lblGender" />
@@ -861,7 +857,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
-                android:visibility="invisible"
+
                 android:text="*"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lbletprof"

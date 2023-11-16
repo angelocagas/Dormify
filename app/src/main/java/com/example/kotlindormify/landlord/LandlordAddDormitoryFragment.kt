@@ -357,7 +357,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (!cbKitchen.isChecked && !cbLounge.isChecked && !cbWifi.isChecked && !cbSwimming.isChecked && !cbFitness.isChecked && !cbParking.isChecked && !cbCCTV.isChecked && etAmenities.isEmpty()) {
                 binding.lblAmenities.text = "Amenities is required"  // Update UI element with an error message
                 binding.lblAmenities.setTextColor(resolvedColor)
-                binding.lblAmenities2.visibility = View.VISIBLE
+
 
             } else {
                 binding.lblAmenities.text = "Amenities"  // Clear the error message
@@ -370,12 +370,12 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (!checkBoxGcash.isChecked && !checkBoxCash.isChecked ) {
                 binding.lblPaymentOptions.text = "Payment Options is required"  // Update UI element with an error message
                 binding.lblPaymentOptions.setTextColor(resolvedColor)
-                binding.lblPaymentOptions2.visibility = View.VISIBLE
+
 
             } else {
                 binding.lblPaymentOptions.text = "Payment Options"  // Clear the error message
                 binding.lblPaymentOptions.setTextColor(default)
-                binding.lblPaymentOptions2.visibility = View.INVISIBLE
+
             }
 
 
@@ -389,7 +389,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // None of the radio buttons is checked, show an error message
                 binding.lblBathroom.text = "Bathroom is required"
                 binding.lblBathroom.setTextColor(resolvedColor)
-                binding.lblBathroom2.visibility = View.VISIBLE
+
 
 
             } else {
@@ -397,7 +397,6 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // At least one radio button is checked, clear the error message
                 binding.lblBathroom.text = "Bathroom"
                 binding.lblBathroom.setTextColor(default)
-                binding.lblBathroom2.visibility = View.INVISIBLE
 
             }
 
@@ -410,7 +409,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // None of the radio buttons is checked, show an error message
                 binding.lblRentalTerms.text = "Rental Terms is required"
                 binding.lblRentalTerms.setTextColor(resolvedColor)
-                binding.lblRentalTerms2.visibility = View.VISIBLE
+
 
 
             } else {
@@ -418,7 +417,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // At least one radio button is checked, clear the error message
                 binding.lblRentalTerms.text = "Rental Terms"
                 binding.lblRentalTerms.setTextColor(default)
-                binding.lblRentalTerms2.visibility = View.INVISIBLE
+
 
             }
 
@@ -430,7 +429,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // None of the radio buttons is checked, show an error message
                 binding.lblWater.text = "Water Bill is required"
                 binding.lblWater.setTextColor(resolvedColor)
-                binding.lblWater2.visibility = View.VISIBLE
+
 
 
             } else {
@@ -438,7 +437,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // At least one radio button is checked, clear the error message
                 binding.lblWater.text = "Water Bill"
                 binding.lblWater.setTextColor(default)
-                binding.lblWater2.visibility = View.INVISIBLE
+
 
             }
 
@@ -449,7 +448,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // None of the radio buttons is checked, show an error message
                 binding.lblElectricity.text = "Electric Bill is required"
                 binding.lblElectricity.setTextColor(resolvedColor)
-                binding.lblElectricity2.visibility = View.VISIBLE
+
 
             } else {
                 // Continue with form submission or other actions
@@ -467,7 +466,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // None of the radio buttons is checked, show an error message
                 binding.lblGenderRestrictions.text = "Gender Restrictions is required"
                 binding.lblGenderRestrictions.setTextColor(resolvedColor)
-                binding.lblGenderRestrictions2.visibility = View.VISIBLE
+
 
 
             } else {
@@ -475,7 +474,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // At least one radio button is checked, clear the error message
                 binding.lblGenderRestrictions.text = "Gender Restrictions"
                 binding.lblGenderRestrictions.setTextColor(default)
-                binding.lblGenderRestrictions2.visibility = View.INVISIBLE
+
 
             }
 
@@ -485,7 +484,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (dormName.isEmpty()) {
                 binding.etDormNameLayout.error = "Dormitory Name is required"
                 binding.lblDormName.text = "Dormitory Name is required" // Set error message in lblFullName
-                binding.lblDormName3.visibility = View.VISIBLE
+
             } else {
                 binding.etDormNameLayout.error = null // Clear the error if not empty
                 binding.lblDormName.text = "Dormitory Name" // Clear the error message in lblFullName
@@ -494,16 +493,16 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (numOfRooms.isEmpty()) {
                 binding.etRoomsLayout.error = "Number of Rooms is required"
                 binding.lblRoomsName.text = "Number of Rooms is required" // Set error message in lblFullName
-                binding.lblRoomsName2.visibility = View.VISIBLE
+
             } else {
                 binding.etRoomsLayout.error = null // Clear the error if not empty
                 binding.lblRoomsName.text = "Number of Rooms" // Clear the error message in lblFullName
-                binding.lblRoomsName2.visibility = View.INVISIBLE
+
             }
             if (description.isEmpty()) {
                 binding.etDescriptionLayout.error = "Description is required"
                 binding.lblDescription.text = "Description is required" // Set error message in lblFullName
-                binding.lblAddress2.visibility = View.VISIBLE
+
             } else {
                 binding.etDescriptionLayout.error = null // Clear the error if not empty
                 binding.lblDescription.text = "Description" // Clear the error message in lblFullName
@@ -512,59 +511,59 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (address.isEmpty()) {
                 binding.etAddressLayout.error = "Address is required"
                 binding.lblAddress.text = "Address is required" // Set error message in lblFullName
-                binding.lblAddress2.visibility = View.VISIBLE
+
             } else {
                 binding.etAddressLayout.error = null // Clear the error if not empty
                 binding.lblAddress.text = "Address" // Clear the error message in lblFullName
-                binding.lblAddress2.visibility = View.INVISIBLE
+
             }
 
 
             if (price.isEmpty()) {
                 binding.etPriceLayout.error = "Price (₱) is required"
                 binding.lblPrice.text = "Price (₱) is required" // Set error message in lblFullName
-                binding.lblPrice2.visibility = View.VISIBLE
+
             } else {
                 binding.etPriceLayout.error = null // Clear the error if not empty
                 binding.lblPrice.text = "Price (₱)" // Clear the error message in lblFullName
-                binding.lblPrice2.visibility = View.INVISIBLE
+
             }
             if (phoneNumber.isEmpty()) {
                 binding.etPhoneNumLayout.error = "Phone Number is required"
                 binding.lblPhoneNumber.text = "Phone Number is required" // Set error message in lblFullName
-                binding.lblPhoneNumber2.visibility = View.VISIBLE
+
             } else {
                 binding.etPhoneNumLayout.error = null // Clear the error if not empty
                 binding.lblPhoneNumber.text = "Phone Number" // Clear the error message in lblFullName
-                binding.lblPhoneNumber2.visibility = View.INVISIBLE
+
             }
             if (email.isEmpty()) {
                 binding.etEmailLayout.error = "Landlord Email is required"
                 binding.lblEmail.text = "Landlord Email is required" // Set error message in lblFullName
-                binding.lblEmail2.visibility = View.VISIBLE
+
             } else {
                 binding.etEmailLayout.error = null // Clear the error if not empty
                 binding.lblEmail.text = "Landlord Email" // Clear the error message in lblFullName
-                binding.lblEmail2.visibility = View.INVISIBLE
+
             }
             if (username.isEmpty()) {
                 binding.etUsernameLayout.error = "Landlord Name is required"
                 binding.lblusername.text = "Landlord Name is required" // Set error message in lblFullName
-                binding.lblusername2.visibility = View.VISIBLE
+
             } else {
                 binding.etUsernameLayout.error = null // Clear the error if not empty
                 binding.lblusername.text = "Landlord Name" // Clear the error message in lblFullName
-                binding.lblusername2.visibility = View.INVISIBLE
+
             }
 
             if (max.isEmpty()) {
                 binding.etMaxCapacityLayout.error = "Number of Rooms is required"
                 binding.lblMaxCapacity.text = "Number of Rooms is required" // Set error message in lblFullName
-                binding.lblMaxCapacity2.visibility = View.VISIBLE
+
             } else {
                 binding.etMaxCapacityLayout.error = null // Clear the error if not empty
                 binding.lblMaxCapacity.text = "Number of Rooms" // Clear the error message in lblFullName
-                binding.lblMaxCapacity2.visibility = View.INVISIBLE
+
             }
 
 
