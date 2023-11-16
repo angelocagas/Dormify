@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Gcash receipt proof"
+            android:text="Payment receipt proof"
             android:textColor="#000000"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/btnAddImage"
+            android:id="@+id/btnAddReceipt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins"
-                android:text="Upload the Gcash receipt"
+                android:text="Upload the payment receipt"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -247,10 +247,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
-                android:text="Cash\nGcash"
+                android:text="1\n2"
                 android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintTop_toBottomOf="@id/lblpaymentmethods" />
+
+            <TextView
+                android:id="@+id/tvGcashNum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="Gcash Number:"
+                android:visibility="gone"
+                android:textColor="@color/black"
+                android:textSize="14dp"
+                app:layout_constraintTop_toBottomOf="@id/tvpaymentmehtods" />
 
 
             <ProgressBar
