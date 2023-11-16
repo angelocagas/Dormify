@@ -74,48 +74,48 @@ class SignUpLandlordActivity : AppCompatActivity() {
             if (username.isEmpty()) {
                 binding.usernameLayout.error = "Full name is required"
                 binding.lbletEmergencyFullName.text = "Full name is required" // Set error message in lblFullName
-                binding.lbletEmergencyFullName2.visibility = View.VISIBLE
+
             } else {
                 binding.usernameLayout.error = null // Clear the error if not empty
                 binding.lbletEmergencyFullName.text = "Full Name" // Clear the error message in lblFullName
-                binding.lbletEmergencyFullName2.visibility = View.INVISIBLE
+
             }
 
             if (phoneNumber.isEmpty()) {
                 binding.phoneNumberLayout.error = "Phone number is required"
                 binding.lblphoneNumberLayout.text = "Phone Number is required" // Set error message in lblFullName
-                binding.lblphoneNumberLayout2.visibility = View.VISIBLE
+
             } else {
                 binding.phoneNumberLayout.error = null // Clear the error if not empty
                 binding.lblphoneNumberLayout.text = "Phone Number" // Clear the error message in lblFullName
-                binding.lblphoneNumberLayout2.visibility = View.INVISIBLE
+
             }
             if (email.isEmpty()) {
                 binding.emailLayout.error = "Email is required"
                 binding.lbletemailLayout.text = "Email is required" // Set error message in lblFullName
-                binding.lbletemailLayout2.visibility = View.VISIBLE
+
             } else {
                 binding.emailLayout.error = null // Clear the error if not empty
                 binding.lbletemailLayout.text = "Email" // Clear the error message in lblFullName
-                binding.lbletemailLayout2.visibility = View.INVISIBLE
+
             }
             if (password.isEmpty()) {
                 binding.passwordLayout.error = "Password is required"
                 binding.lbletpasswordLayout.text = "Password is required" // Set error message in lblFullName
-                binding.lbletpasswordLayout2.visibility = View.VISIBLE
+
             } else {
                 binding.passwordLayout.error = null // Clear the error if not empty
                 binding.lbletpasswordLayout.text = "Password" // Clear the error message in lblFullName
-                binding.lbletpasswordLayout2.visibility = View.INVISIBLE
+
             }
             if (confirmPassword.isEmpty()) {
                 binding.confirmPasswordLayout.error = "Confirm Password is required"
                 binding.lbletpassword2Layout.text = "Re-type Password is required" // Set error message in lblFullName
-                binding.lbletpassword2Layout2.visibility = View.VISIBLE
+
             } else {
                 binding.confirmPasswordLayout.error = null // Clear the error if not empty
                 binding.lbletpassword2Layout.text = "Re-type Password" // Clear the error message in lblFullName
-                binding.lbletpassword2Layout2.visibility = View.INVISIBLE
+
             }
 
 
@@ -124,12 +124,12 @@ class SignUpLandlordActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
                 binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
                 binding.lbletbtnAddImage.text = "Upload Profile Photo is required" // Set error message in lblFullName
-                binding.lbletbtnAddImage2.visibility = View.VISIBLE
+
                 return@setOnClickListener
             }else{
                 binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
                 binding.lbletbtnAddImage.text = "Upload Profile Photo" // Clear the error message in lblFullName
-                binding.lbletbtnAddImage2.visibility = View.INVISIBLE
+
             }
             if (!cbAgreement.isChecked) {
                 Toast.makeText(this, "Please agree to the terms and conditions to continue", Toast.LENGTH_SHORT
