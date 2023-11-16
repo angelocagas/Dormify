@@ -920,6 +920,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 for (i in 0 until clipData.itemCount) {
                     val imageUri = clipData.getItemAt(i).uri // Get the URI of each selected image
                     selectedImageUris.add(imageUri) // Add the URI to the list in the order they were selected
+                    isImageSelected = true
                 }
 
             } else if (data != null && data.data != null) {
@@ -930,6 +931,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
                 val imageUri = data.data!! // Get the URI of the selected image
                 selectedImageUris.add(imageUri) // Add the URI to the list
+                isImageSelected = true
             }
 
             // Set the text and image for the latest selection
