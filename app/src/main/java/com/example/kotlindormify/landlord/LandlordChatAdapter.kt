@@ -13,21 +13,23 @@ import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class LandlordChatAdapter : ListAdapter<ChatMessage, LandlordChatAdapter.MessageViewHolder>(DiffCallback()) {
+class LandlordChatAdapter : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(DiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = if (viewType == VIEW_TYPE_USER_MESSAGE) {
-            inflater.inflate(R.layout.item_chat_message_right, parent, false)
+        return if (viewType == VIEW_TYPE_USER_MESSAGE) {
+            UserMessageViewHolder(inflater.inflate(R.layout.item_chat_message_right, parent, false))
         } else {
-            inflater.inflate(R.layout.item_chat_message_left, parent, false)
+            OtherMessageViewHolder(inflater.inflate(R.layout.item_chat_message_left, parent, false))
         }
-        return MessageViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: MessageViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val message = getItem(position)
-        holder.bind(message)
+        when (holder) {
+            is UserMessageViewHolder -> holder.bind(message)
+            is OtherMessageViewHolder -> holder.bind(message)
+        }
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -39,16 +41,29 @@ class LandlordChatAdapter : ListAdapter<ChatMessage, LandlordChatAdapter.Message
         }
     }
 
-    inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val messageText: TextView = itemView.findViewById(R.id.item_chat_message_left)
-
-
+    inner class UserMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val messageSender: TextView = itemView.findViewById(R.id.item_chat_message_right)
+        private val timestamp: TextView = itemView.findViewById(R.id.tvtimestampright)
 
         fun bind(message: ChatMessage) {
-            messageText.text = message.text
-                  }
+            messageSender.text = message.text
+            val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
+            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
+            timestamp.text = formattedDate
 
+        }
+    }
 
+    inner class OtherMessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val messageReceiver: TextView = itemView.findViewById(R.id.item_chat_message_left)
+        private val timestamp2: TextView = itemView.findViewById(R.id.tvtimestampleft)
+
+        fun bind(message: ChatMessage) {
+            messageReceiver.text = message.text
+            val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
+            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
+            timestamp2.text = formattedDate
+        }
     }
 
     private class DiffCallback : DiffUtil.ItemCallback<ChatMessage>() {
@@ -65,5 +80,10 @@ class LandlordChatAdapter : ListAdapter<ChatMessage, LandlordChatAdapter.Message
         private const val VIEW_TYPE_USER_MESSAGE = 1
         private const val VIEW_TYPE_OTHER_MESSAGE = 2
         private val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+
+        private fun formatDate(timestamp: Long): String {
+            // Implement date formatting logic
+            return SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(timestamp)
+        }
     }
 }

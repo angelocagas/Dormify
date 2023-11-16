@@ -116,115 +116,114 @@ class SignUpTenantActivity : AppCompatActivity() {
             if (username.isEmpty()) {
                 binding.etFullNameLayout.error = "Full name is required"
                 binding.lblFullName.text = "Full name is required" // Set error message in lblFullName
-                binding.lblFullName2.visibility = View.VISIBLE
+
             } else {
                 binding.etFullNameLayout.error = null // Clear the error if not empty
                 binding.lblFullName.text = "Full Name" // Clear the error message in lblFullName
-                binding.lblFullName2.visibility = View.INVISIBLE
+
             }
             if (age.isEmpty()) {
                 binding.etAgeLayout.error = "Age is required"
                 binding.lblAge.text = "Age is required" // Set error message in lblFullName
-                binding.lblAge2.visibility = View.VISIBLE
+
             } else {
                 binding.etAgeLayout.error = null // Clear the error if not empty
                 binding.lblAge.text = "Age" // Clear the error message in lblFullName
-                binding.lblAge2.visibility = View.INVISIBLE
+
             }
             if (address.isEmpty()) {
                 binding.etAddressLayout.error = "Address is required"
                 binding.lblAddress.text = "Address is required" // Set error message in lblFullName
-                binding.lblAddress2.visibility = View.VISIBLE
+
             } else {
                 binding.etAddressLayout.error = null // Clear the error if not empty
                 binding.lblAddress.text = "Address" // Clear the error message in lblFullName
-                binding.lblAddress2.visibility = View.INVISIBLE
+
             }
             if (phoneNumber.isEmpty()) {
                 binding.etPhoneNumberLayout.error = "Phone number is required"
                 binding.lbletPhoneNumber.text = "Phone Number is required" // Set error message in lblFullName
-                binding.lbletPhoneNumber2.visibility = View.VISIBLE
             } else {
                 binding.etPhoneNumberLayout.error = null // Clear the error if not empty
                 binding.lbletPhoneNumber.text = "Phone Number" // Clear the error message in lblFullName
-                binding.lbletPhoneNumber2.visibility = View.INVISIBLE
+
             }
             if (email.isEmpty()) {
                 binding.etEmailLayout.error = "Email is required"
                 binding.lbletEmail.text = "Email is required" // Set error message in lblFullName
-                binding.lbletEmail2.visibility = View.VISIBLE
+
             } else {
                 binding.etEmailLayout.error = null // Clear the error if not empty
                 binding.lbletEmail.text = "Email" // Clear the error message in lblFullName
-                binding.lbletEmail2.visibility = View.INVISIBLE
+
             }
             if (password.isEmpty()) {
                 binding.passwordLayout.error = "Password is required"
                 binding.lbletpassword.text = "Password is required" // Set error message in lblFullName
-                binding.lbletpassword2.visibility = View.VISIBLE
+
             } else {
                 binding.passwordLayout.error = null // Clear the error if not empty
                 binding.lbletpassword.text = "Password" // Clear the error message in lblFullName
-                binding.lbletpassword2.visibility = View.INVISIBLE
+
             }
             if (confirmPassword.isEmpty()) {
                 binding.confirmPasswordLayout.error = "Confirm Password is required"
                 binding.lbletrepassword.text = "Confirm Password is required" // Set error message in lblFullName
-                binding.lbletrepassword2.visibility = View.VISIBLE
+
             } else {
                 binding.confirmPasswordLayout.error = null // Clear the error if not empty
                 binding.lbletrepassword.text = "Confirm Password" // Clear the error message in lblFullName
-                binding.lbletrepassword2.visibility = View.INVISIBLE
+
             }
 
             if (selectedGenderPosition == 0 ) {
                 binding.etGenderLayout.error = "Sex is required"
                 binding.lblGender.text = "Sex is required" // Set error message in lblFullName
-                binding.Gender2.visibility = View.VISIBLE
+
             } else {
                 binding.etGenderLayout.error = null // Clear the error if not empty
                 binding.lblGender.text = "Sex" // Clear the error message in lblFullName
-                binding.Gender2.visibility = View.INVISIBLE
+
             }
 
 
             if (fullName.isEmpty()) {
                 binding.etEmergencyFullNameLayout.error = "Full name is required"
                 binding.lbletEmergencyFullName.text = "Full name is required" // Set error message in lblFullName
-                binding.lbletEmergencyFullName2.visibility = View.VISIBLE
+
             } else {
                 binding.etEmergencyFullNameLayout.error = null // Clear the error if not empty
                 binding.lbletEmergencyFullName.text = "Full Name" // Clear the error message in lblFullName
-                binding.lbletEmergencyFullName2.visibility = View.INVISIBLE
+
             }
             if (emAddress.isEmpty()) {
                 binding.etEmergencyAddressLayout.error = "Address is required"
                 binding.lbletEmergencyAddress.text = "Address is required" // Set error message in lblFullName
-                binding.lbletEmergencyAddress2.visibility = View.VISIBLE
+
             } else {
                 binding.etEmergencyAddressLayout.error = null // Clear the error if not empty
                 binding.lbletEmergencyAddress.text = "Address" // Clear the error message in lblFullName
-                binding.lbletEmergencyAddress2.visibility = View.INVISIBLE
+
 
             }
             if (emphoneNumber.isEmpty()) {
                 binding.etEmergencyPhoneNumberLayout.error = "Phone Number is required"
                 binding.lbletEmergencyPhoneNumber.text = "Phone Number is required" // Set error message in lblFullName
-                binding.lbletEmergencyPhoneNumber2.visibility = View.VISIBLE
+
             } else {
                 binding.etEmergencyPhoneNumberLayout.error = null // Clear the error if not empty
                 binding.lbletEmergencyPhoneNumber.text = "Phone Numberd" // Clear the error message in lblFullName
-                binding.lbletEmergencyPhoneNumber2.visibility = View.INVISIBLE
+
 
             }
             if (emEmail.isEmpty()) {
                 binding.etEmergencyEmailLayout.error = "Email is required"
                 binding.lbletEmergencyEmail.text = "Email is required" // Set error message in lblFullName
-                binding.lbletEmergencyEmail2.visibility = View.VISIBLE
+
             } else {
                 binding.etEmergencyEmailLayout.error = null // Clear the error if not empty
                 binding.lbletEmergencyEmail.text = "Email" // Clear the error message in lblFullName
-                binding.lbletEmergencyEmail2.visibility = View.INVISIBLE
+
             }
 
             // Check if an image has been selected
@@ -232,11 +231,11 @@ class SignUpTenantActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
                 binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
                 binding.lblid.text = "Upload your Student I.D or COR below is required" // Set error message in lblFullName
-                binding.lblid2.visibility = View.VISIBLE
+
             }else{
                 binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
                 binding.lblid.text = "Upload your Student ID or COR below" // Clear the error message in lblFullName
-                binding.lblid2 .visibility = View.INVISIBLE
+
 
             }
 
@@ -244,13 +243,13 @@ class SignUpTenantActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please fill all fields.", Toast.LENGTH_SHORT).show()
                 binding.btnAddImage2.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
                 binding.lbletprof.text = "Upload profile is required" // Set error message in lblFullName
-                binding.lbletprof2.visibility = View.VISIBLE
+
                 return@setOnClickListener
             }
             else{
                 binding.btnAddImage2.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
                 binding.lbletprof.text = "Upload profile" // Clear the error message in lblFullName
-                binding.lbletprof2.visibility = View.INVISIBLE
+
             }
             if (!cbAgreement.isChecked) {
                 Toast.makeText(
