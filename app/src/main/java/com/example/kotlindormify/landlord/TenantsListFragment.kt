@@ -63,9 +63,11 @@ class TenantsListFragment : Fragment() {
                     // Retrieve tenant data and add it to the list
                     val tenantFullName = tenantDocument.getString("tenantFullName")
                     val roomNumber = tenantDocument.getLong("roomNumber")?.toInt()
+                    val dormitoryId = tenantDocument.getString("dormitoryId")
+                    val tenantId = tenantDocument.getString("tenantId")
 
                     if (tenantFullName != null && roomNumber != null) {
-                        tenantList.add(Tenant(roomNumber, tenantFullName))
+                        tenantList.add(Tenant(roomNumber, tenantFullName, dormitoryId, tenantId))
                     }
                 }
 
