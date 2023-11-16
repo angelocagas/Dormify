@@ -24,6 +24,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/dorm_backbtn"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/karla"
-                android:text="Name Of Landlord dporm asd as"
+                android:text="Joshua Balaoro"
                 android:textSize="20dp"
                 android:maxLength="20"
                 android:maxLines="1"

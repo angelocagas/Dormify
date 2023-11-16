@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlindormify.ChatFragment
+import com.example.kotlindormify.ChatMessage
 import com.example.kotlindormify.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
@@ -41,8 +43,15 @@ class Chat3Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.chat_fragment, container, false)
+
+
+        val bundle = Bundle()
+        bundle.putString("dormName", dormName)
+        bundle.putString("landlordId", landlordId)
+
+        var chatFragment = ChatFragment()
+        chatFragment.arguments = bundle
 
         // Retrieve arguments passed to the fragment
         arguments?.let {
@@ -65,10 +74,10 @@ class Chat3Fragment : Fragment() {
 
         // Initialize RecyclerView and Adapter
         recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
 
-        // Set the dorm name in the TextView
+        // Set dorm name in the TextView
         tvDormName = view.findViewById(R.id.nameOfChat)
         tvDormName.text = dormName
 
@@ -81,6 +90,7 @@ class Chat3Fragment : Fragment() {
         sendButton.setOnClickListener {
             val messageText = messageEditText.text.toString().trim()
             if (messageText.isNotEmpty()) {
+                // Send the message and clear the input field
                 sendMessage(messageText)
                 messageEditText.text.clear()
             }
@@ -89,7 +99,7 @@ class Chat3Fragment : Fragment() {
         return view
     }
 
-    // Function to load chat messages from Firebase Firestore
+    // Function to load chat messages from Firestore
     private fun loadChatMessages() {
         firestore.collection("conversations")
             .document(conversationId)
@@ -101,37 +111,39 @@ class Chat3Fragment : Fragment() {
                     return@addSnapshotListener
                 }
 
-                // Process the received messages
-                val messages = mutableListOf<Chat3Message>()
+                val messages = mutableListOf<ChatMessage>()
                 for (document in querySnapshot?.documents ?: emptyList()) {
+                    // Extract message details from Firestore document
                     val sender = document.getString("sender") ?: ""
+                    val receiver = document.getString("receiver") ?: ""
                     val text = document.getString("text") ?: ""
                     val timestamp = document.getTimestamp("timestamp")
 
-                    // Check for valid sender, text, and timestamp
-                    if (sender.isNotEmpty() && text.isNotEmpty() && timestamp != null) {
-                        val message = Chat3Message(sender, text, timestamp)
+                    if (sender.isNotEmpty() && receiver.isNotEmpty() && text.isNotEmpty() && timestamp != null) {
+                        // Pass receiver information to ChatMessage constructor
+                        val message = ChatMessage(sender, receiver, text, timestamp)
                         messages.add(message)
                     }
                 }
 
-                // Update the RecyclerView with the new messages
+                // Update the RecyclerView with the new list of messages
                 adapter.submitList(messages)
                 recyclerView.scrollToPosition(messages.size - 1)
             }
+
+
+
     }
 
-    // Function to send a new chat message to Firebase Firestore
+    // Function to send a new message to Firestore
     private fun sendMessage(messageText: String) {
         val messageTimestamp = FieldValue.serverTimestamp()
-        val messageSenderId = currentUserUid
-        val messageReceiverId = landlordId
 
-        // Create a new message map
+        // Create a new message data structure
         val newMessage = hashMapOf(
-            "sender" to messageSenderId,
-            "receiver" to messageReceiverId,
+            "sender" to currentUserUid,
             "text" to messageText,
+            "receiver" to landlordId,
             "timestamp" to messageTimestamp
         )
 
@@ -147,12 +159,14 @@ class Chat3Fragment : Fragment() {
                 // Handle the failure to send the message
             }
 
-        // Update conversation data
+        // Update conversation data with information about the last message
         val conversationData = hashMapOf(
             "lastMessage" to messageText,
-            "lastMessageSenderId" to messageSenderId,
-            "lastMessageReceiverId" to messageReceiverId,
+            "lastMessageSenderId" to currentUserUid,
+            "lastMessagReceiverId" to landlordId,
             "lastMessageTimestamp" to messageTimestamp,
+            "Tenant" to currentUserUid,
+            "Landlord" to landlordId,
             "userIds" to listOf(currentUserUid, landlordId)
         )
 

@@ -5,11 +5,11 @@ import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.kotlindormify.ChatFragment
 import com.example.kotlindormify.PrefManager
-import com.example.kotlindormify.Profile3Fragment
+import com.example.kotlindormify.ProfileFragment
 import com.example.kotlindormify.R
 import com.example.kotlindormify.databinding.ActivityDashboard3Binding
 import com.google.firebase.auth.FirebaseAuth
@@ -77,7 +77,7 @@ class Dashboard3Activity : AppCompatActivity() {
         val homeFragment = DashboardPaymentTenantFragment()
         val paymentFragment = PaymentFragment()
         val chatFragment = Chat3Fragment()
-        val profileFragment = Profile3Fragment()
+        val profileFragment = ProfileFragment()
 
         setCurrentFragment(homeFragment)
 
