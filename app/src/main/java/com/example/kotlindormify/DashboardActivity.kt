@@ -70,7 +70,6 @@ class DashboardActivity : AppCompatActivity() {
 
 
         val homeFragment = HomeFragment()
-        val paymentFragment = PaymentFragment()
         val chatFragment = ChatFragment()
         val saveFragment = SavedFragment()
         val profileFragment = ProfileFragment()

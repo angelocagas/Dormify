@@ -217,21 +217,10 @@ class RequestRentFragment : Fragment() {
                                         )
 
                                         val doubleCheckDialog = AlertDialog.Builder(requireContext())
-                                            .setTitle("Double Check")
                                             .setMessage(
-                                                "Please double-check your information before submitting.\n\n" +
-                                                        "Full Name: $requesterFullName\n" +
-                                                        "Age: $age\n" +
-                                                        "Gender: $selectedGender\n" +
-                                                        "Address: $address\n" +
-                                                        "Phone Number: $phoneNumber\n" +
-                                                        "Email: $email\n" +
-                                                        "Emergency Contact Name: $emergencyFullName\n" +
-                                                        "Emergency Contact Address: $emergencyAddress\n" +
-                                                        "Emergency Contact Phone: $emergencyPhoneNumber\n" +
-                                                        "Emergency Contact Email: $emergencyEmail\n"
+                                                "Confirm rental request for $dormName"
                                             )
-                                            .setPositiveButton("Submit") { _, _ ->
+                                            .setPositiveButton("Confirm") { _, _ ->
                                                 // Store the rental request in Firestore under the document with requestId
                                                 firestore.collection("rental_requests")
                                                     .document(requestId)

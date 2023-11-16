@@ -150,10 +150,9 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
         RoomCapacityTextView.text = "$maxCapacity"
         dormNameTextView.text = dormName
-        dormPriceTextView.text = "₱ $dormPrice"
+        dormPriceTextView.text = "Php $dormPrice"
         descriptionTextview.text = description
         addressTextView.text = address
-
         numOfRoomsTextView.text = "$dormRooms"
         TvUserNameTextView.text = username
         ContactTextView.text = phoneNumber

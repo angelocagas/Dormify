@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="10dp"
     tools:context=".DashboardActivity">
 
 
@@ -65,9 +66,9 @@
             <!--landlord-->
 
 
-            <!--night,notif-->
 
-            <!--personal,sec,lang-->
+
+            <!--terms,about-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -111,91 +112,11 @@
 
                 </RelativeLayout>
 
-                <!--Security-->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
-
-
-                    <ImageView
-                        android:id="@+id/securityIcon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/round_back_security"
-                        android:padding="12dp"
-                        android:src="@drawable/security_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@+id/securityIcon"
-                        android:text="Security &amp; Privacy"
-                        android:textColor="#000000"
-                        android:textStyle="bold" />
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_icon" />
-
-                </RelativeLayout>
-
-                <!--Language-->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp">
-
-
-                    <ImageView
-                        android:id="@+id/languageIcon"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="@drawable/round_back_security"
-                        android:padding="12dp"
-                        android:src="@drawable/language_icon" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="20dp"
-                        android:layout_toEndOf="@+id/languageIcon"
-                        android:text="Language"
-                        android:textColor="#000000"
-                        android:textStyle="bold" />
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:src="@drawable/right_arrow_icon" />
-
-                </RelativeLayout>
-
-
-            </LinearLayout>
-
-            <!--terms,about-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/round_back_white10_20"
-                android:orientation="vertical"
-                android:padding="15dp">
-
                 <!--term and con-->
                 <RelativeLayout
+                    android:id="@+id/btnTermsAndConditions2"
                     android:layout_width="match_parent"
+                    android:layout_marginTop="7dp"
                     android:layout_height="wrap_content">
 
 
@@ -229,6 +150,7 @@
 
                 <!--about-->
                 <RelativeLayout
+                    android:id="@+id/btnAboutUs2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="7dp">
@@ -238,7 +160,7 @@
                         android:id="@+id/btnAboutUs"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:background="@drawable/round_back_private_account"
+                        android:background="@drawable/round_back_notification"
                         android:padding="12dp"
                         android:src="@drawable/about_icon" />
 

@@ -84,6 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblprofile_username"
                 app:layout_constraintTop_toTopOf="@+id/lblprofile_username" />
@@ -135,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblprofile_email"
                 app:layout_constraintTop_toTopOf="@+id/lblprofile_email" />
@@ -185,6 +187,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lbllogin_mobile_number"
                 app:layout_constraintTop_toTopOf="@+id/lbllogin_mobile_number" />
@@ -209,6 +212,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="9123456789"
+                    app:boxStrokeColor="@color/violet"
+                    app:boxStrokeErrorColor="@color/colorError"
+                    app:errorTextColor="@color/clear"
+                    app:hintTextColor="@color/violet"
                     android:inputType="number"
                     android:maxLength="10"
                     android:paddingStart="100dp"
@@ -236,7 +243,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Your Password"
+                android:text="Password"
                 android:textColor="#000000"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/login_mobile_numberLayout" />
@@ -247,6 +254,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-2dp"
                 android:text="*"
+                android:visibility="invisible"
                 android:textColor="@android:color/holo_red_light"
                 app:layout_constraintStart_toEndOf="@+id/lblconfirmPassword"
                 app:layout_constraintTop_toTopOf="@+id/lblconfirmPassword" />
@@ -268,6 +276,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Please enter your Password"
+                    app:boxStrokeColor="@color/violet"
+                    app:boxStrokeErrorColor="@color/colorError"
+                    app:errorTextColor="@color/clear"
+                    app:hintTextColor="@color/violet"
                     android:inputType="textPassword"
                     android:minHeight="48dp"
                     android:textColor="@color/black"

@@ -13,8 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class LandlordChatAdapter :
-    ListAdapter<ChatMessage, LandlordChatAdapter.MessageViewHolder>(DiffCallback()) {
+class LandlordChatAdapter : ListAdapter<ChatMessage, LandlordChatAdapter.MessageViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MessageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -42,14 +41,12 @@ class LandlordChatAdapter :
 
     inner class MessageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val messageText: TextView = itemView.findViewById(R.id.item_chat_message_left)
-        private val timestamp: TextView = itemView.findViewById(R.id.tvtimestampright)
+
 
 
         fun bind(message: ChatMessage) {
             messageText.text = message.text
-            val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
-            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
-            timestamp.text = formattedDate        }
+                  }
 
 
     }

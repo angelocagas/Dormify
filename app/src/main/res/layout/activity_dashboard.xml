@@ -46,16 +46,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+
         <androidx.cardview.widget.CardView
 
             android:id="@+id/cardViewImage"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_alignTop="@+id/tvDormify3"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:elevation="1dp"
             app:cardCornerRadius="18dp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 

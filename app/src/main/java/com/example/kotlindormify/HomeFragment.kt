@@ -32,8 +32,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.location.Geocoder
 import android.net.Uri
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.kotlindormify.databinding.ActivityMainBinding
 
 
 class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
@@ -74,6 +77,9 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             )
         }
 
+
+
+
         val firestore = FirebaseFirestore.getInstance()
         val dormitoriesRef = firestore.collection("dormitories")
 
@@ -101,8 +107,11 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
         val tvExpandList = view.findViewById<TextView>(R.id.tvSeeAll)
         val btnSort = view.findViewById<ConstraintLayout>(R.id.clFilters)
-
         tvSort = view.findViewById<TextView>(R.id.tvAllDormitories2)
+
+
+
+
 
         btnSort.setOnClickListener {
             showSortOptionsDialog()

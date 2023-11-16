@@ -9,6 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.PrefManager
+import com.example.kotlindormify.Profile3Fragment
 import com.example.kotlindormify.R
 import com.example.kotlindormify.databinding.ActivityDashboard3Binding
 import com.google.firebase.auth.FirebaseAuth
