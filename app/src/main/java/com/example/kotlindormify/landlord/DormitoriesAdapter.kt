@@ -5,10 +5,13 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Environment
+import android.text.InputFilter
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
@@ -95,8 +98,48 @@ class DormitoriesAdapter(private val dormitoriesList: MutableList<Dormitory>) :
         }
 
         holder.btnEdit.setOnClickListener {
-            Toast.makeText(holder.itemView.context, "wow", Toast.LENGTH_SHORT).show()
+            val builder = AlertDialog.Builder(holder.itemView.context)
+            builder.setTitle("Update Dormitory Price")
+
+            // Set up the input
+            val input = EditText(holder.itemView.context)
+            input.inputType = InputType.TYPE_CLASS_NUMBER
+            input.setText("${dormitory.dormPrice}")
+
+            // Set a maximum length filter
+            val maxLength = 5
+            val filters = arrayOf<InputFilter>(InputFilter.LengthFilter(maxLength))
+            input.filters = filters
+
+            builder.setView(input)
+
+            // Set up the buttons
+            builder.setPositiveButton("Update") { _, _ ->
+                // Show a confirmation dialog before updating the price
+                AlertDialog.Builder(holder.itemView.context)
+                    .setMessage("Are you sure you want to update the dormitory price?")
+                    .setPositiveButton("Yes") { _, _ ->
+                        // Update the price when the positive button is clicked
+                        val newPrice = input.text.toString()
+                        if (newPrice.isNotBlank()) {
+                            // Handle the case when the input is not empty
+                            updatePrice(newPrice, dormitory.dormitoryId, holder.itemView.context)
+                        } else {
+                            // Handle the case when the input is empty
+                            Toast.makeText(holder.itemView.context, "Please enter a valid price", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    .setNegativeButton("No") { _, _ ->
+                        // Handle the case when the user cancels the update
+                    }
+                    .create()
+                    .show()
+            }.setNegativeButton("Cancel") { _, _ ->
+                // Handle the case when the user cancels the update
+            }
+            builder.show()
         }
+
 
         holder.btnRequests.setOnClickListener {
             // Open the RentalRequests ListFragment and pass the dormitory ID
@@ -347,6 +390,53 @@ class DormitoriesAdapter(private val dormitoriesList: MutableList<Dormitory>) :
                 callback(pendingRequestsCount)
             }
     }
+
+    private fun updatePrice(newPrice: String, dormId: String, context: Context) {
+        // Reference to the Firestore collection containing dormitories
+        val firestore = FirebaseFirestore.getInstance()
+        val dormitoriesRef = firestore.collection("dormitories")
+
+        // Reference to the specific dormitory document to update
+        val dormitoryDocRef = dormitoriesRef.document(dormId)
+
+        // Convert the new price to a String
+        val stringNewPrice = newPrice.toString()
+
+        // Update the dormitory document with the new price
+        dormitoryDocRef
+            .update("price", stringNewPrice)
+            .addOnSuccessListener {
+                // Successfully updated the price
+                // Show an alert message
+                val successMessage = "Dormitory price updated successfully."
+                showAlertDialog("Success", successMessage, context)
+                notifyDataSetChanged() // Notify the adapter to update the UI
+            }
+            .addOnFailureListener { e ->
+                // Handle the failure to update the price
+                // You might want to log the error or show an error message to the user
+                val errorMessage = "Failed to update dormitory price"
+                showAlertDialog("Error", errorMessage, context)
+            }
+        notifyDataSetChanged() // Notify the adapter to update the UI
+    }
+
+
+
+    private fun showAlertDialog(title: String, message: String, context: Context) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle(title)
+        builder.setMessage(message)
+        builder.setPositiveButton("OK") { _, _ -> }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+
+
+
+
 
 
 }

@@ -349,7 +349,15 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
             var amenitiesString = binding.etAmenities.text.toString()
             var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
-            var allAmenitiesList = selectedAmenities + amenitiesList
+            var allAmenitiesList: List<String>
+
+            if (amenitiesString.isNotEmpty()){
+                allAmenitiesList = selectedAmenities + amenitiesList
+            }
+            else{
+                allAmenitiesList = selectedAmenities
+            }
+
 
 
 
@@ -638,7 +646,6 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             selectedPaymentOptions,
                                             allAmenitiesList,
                                             genderRestriction
-
 
                                             )
 
@@ -938,6 +945,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (selectedImageUris.isNotEmpty()) {
                 binding.textView4.text = "Dormitory Images selected"
                 binding.ivSelectedImage.setImageResource(R.drawable.check_icon)
+                isImageSelected = true
             }
         }
 
