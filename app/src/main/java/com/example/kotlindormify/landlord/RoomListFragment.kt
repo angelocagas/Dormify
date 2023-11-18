@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlindormify.R
 import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 
 class RoomListFragment : Fragment() {
@@ -28,7 +29,7 @@ class RoomListFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_room_list, container, false)
         recyclerView = rootView.findViewById(R.id.recyclerRequestsList)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         roomListAdapter = RoomListAdapter(roomList)
         recyclerView.adapter = roomListAdapter
         btnAvailable = rootView.findViewById(R.id.btnAvailable)
@@ -113,14 +114,17 @@ class RoomListFragment : Fragment() {
                 roomList.clear()
 
                 for (roomDocument in querySnapshot.documents) {
-                    val roomNumber = roomDocument.getLong("roomNumber")?.toInt() // Retrieve as Long and convert to Int
+                    val roomNumber = roomDocument.getLong("roomNumber")
+                        ?.toInt() // Retrieve as Long and convert to Int
                     val availability = roomDocument.getString("availability")
                     val tenantId = roomDocument.getString("tenantId")
                     val tenantName = roomDocument.getString("tenantName")
+                    val capacity = roomDocument.getLong("capacity")?.toInt()
+                    val maxCapacity = roomDocument.getLong("maxCapacity")?.toInt()
 
                     // Check the data type of roomNumber and ensure it's not null before adding it to the list
                     if (roomNumber != null && availability != null) {
-                        roomList.add(Room(roomNumber, availability, tenantId, tenantName))
+                        roomList.add(Room(roomNumber, availability, tenantId, tenantName, capacity, maxCapacity))
                     }
                 }
 

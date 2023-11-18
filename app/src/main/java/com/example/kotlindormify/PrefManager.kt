@@ -5,7 +5,8 @@ import android.content.SharedPreferences
 
 class PrefManager(context: Context) {
     private val prefName = "MyAppPref"
-    private val pref: SharedPreferences = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+    private val pref: SharedPreferences =
+        context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
 
 
     fun setFreshInstall(isFreshInstall: Boolean) {

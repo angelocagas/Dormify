@@ -18,13 +18,15 @@
             android:layout_height="wrap_content">
 
 
-            <ImageView
-                android:id="@+id/imageView"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/backbtn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_centerVertical="true"
+                android:background="@drawable/dorm_backbtn"
+                android:backgroundTint="@color/black"
                 android:layout_marginStart="17dp"
-                android:src="@drawable/dorm_backbtn" />
+                android:layout_centerVertical="true"  />
+
 
             <TextView
                 android:id="@+id/tvAddTenants"

@@ -16,8 +16,8 @@
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/tvDormListings2"
             app:cardElevation="8dp"
-            android:layout_height="wrap_content">
 
+            android:layout_height="wrap_content">
 
 
             <TextView
@@ -25,7 +25,7 @@
                 android:id="@+id/tvDormListings"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="30dp"
                 android:text="My Dormitories"
                 android:textColor="@color/black"
                 android:textSize="26sp"
@@ -40,20 +40,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="24dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
             android:paddingVertical="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDormListings2" />
 
 
-
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnAdd"
             android:layout_width="50dp"
+         android:layout_marginEnd="45dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="76dp"
-            android:background="@drawable/bg_btn_bck_light"
+            android:layout_marginBottom="75dp"
+            android:background="@drawable/add"
             android:fontFamily="@font/poppins"
             android:text="+"
             android:textColor="#FFFFFF"

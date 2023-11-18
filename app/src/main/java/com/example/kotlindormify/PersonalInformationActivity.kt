@@ -5,12 +5,15 @@ import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -23,6 +26,15 @@ class PersonalInformationActivity : AppCompatActivity() {
     private lateinit var emailEditText: EditText
     private lateinit var mobileEditText: EditText
     private lateinit var confirmPassword: EditText
+    private lateinit var passwordLayout: TextInputLayout
+    private lateinit var  lbletpassword: TextView
+    private lateinit var lbletpassword2: TextView
+    private lateinit var backButton: Button
+
+
+    private lateinit var login_mobile_numberLayout: TextInputLayout
+    private lateinit var  lbllogin_mobile_number: TextView
+    private lateinit var lbllogin_mobile_number2: TextView
     private lateinit var updateButton: Button
     private lateinit var userId: String
     private val db = FirebaseFirestore.getInstance()
@@ -47,6 +59,13 @@ class PersonalInformationActivity : AppCompatActivity() {
         mobileEditText = findViewById(R.id.login_mobile_number)
         updateButton = findViewById(R.id.profle_update_btn)
         confirmPassword = findViewById(R.id.confirmPassword)
+       passwordLayout =findViewById(R.id.confirmPasswordLayout)
+        lbletpassword = findViewById(R.id.lblconfirmPassword)
+        lbletpassword2 = findViewById(R.id.lblconfirmPassword2)
+        login_mobile_numberLayout =findViewById(R.id.login_mobile_numberLayout)
+        lbllogin_mobile_number = findViewById(R.id.lbllogin_mobile_number)
+        lbllogin_mobile_number2 = findViewById(R.id.lbllogin_mobile_number2)
+        backButton = findViewById(R.id.backbtn)
 
         userId = FirebaseAuth.getInstance().currentUser?.uid ?: ""
 
@@ -72,11 +91,32 @@ class PersonalInformationActivity : AppCompatActivity() {
                 // Handle any errors while fetching user data
             }
 
+
+
         updateButton.setOnClickListener {
             val username = usernameEditText.text.toString()
             val email = emailEditText.text.toString()
             val mobileNumber = mobileEditText.text.toString()
             val password = confirmPassword.text.toString()
+
+            if (password.isEmpty()) {
+               passwordLayout.error = "Password is required"
+               lbletpassword.text = "Password is required" // Set error message in lblFullName
+              lbletpassword2.visibility = View.VISIBLE
+            } else {
+              passwordLayout.error = null // Clear the error if not empty
+               lbletpassword.text = "Password" // Clear the error message in lblFullName
+                lbletpassword2.visibility = View.INVISIBLE
+            }
+            if (mobileNumber.isEmpty()) {
+                login_mobile_numberLayout.error = "Phone number is required"
+                lbllogin_mobile_number.text = "Phone Number is required" // Set error message in lblFullName
+                lbllogin_mobile_number2.visibility = View.VISIBLE
+            } else {
+                login_mobile_numberLayout.error = null // Clear the error if not empty
+                lbllogin_mobile_number.text = "Phone Number" // Clear the error message in
+                lbllogin_mobile_number2.visibility = View.INVISIBLE
+            }
 
             if (username.isBlank() || email.isBlank() || mobileNumber.isBlank() || password.isBlank()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
@@ -139,7 +179,8 @@ class PersonalInformationActivity : AppCompatActivity() {
                 finish()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Failed to update profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Failed to update profile: ${e.message}", Toast.LENGTH_SHORT)
+                    .show()
             }
     }
 
@@ -171,9 +212,21 @@ class PersonalInformationActivity : AppCompatActivity() {
                     Toast.makeText(this, "Failed to fetch user data", Toast.LENGTH_SHORT).show()
                 }
         }
+
+
+        backButton.setOnClickListener {
+            // Call the onBackPressed function to simulate the back button press
+            onBackPressed()
+        }
     }
 
-    private fun updateUserData(username: String, email: String, mobileNumber: String, password: String, profilePictureUri: Uri?) {
+    private fun updateUserData(
+        username: String,
+        email: String,
+        mobileNumber: String,
+        password: String,
+        profilePictureUri: Uri?
+    ) {
         val user = auth.currentUser
 
         if (user != null) {
@@ -197,16 +250,28 @@ class PersonalInformationActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 finish()
                                 progressDialog?.dismiss()
-                                Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this,
+                                    "Profile updated successfully",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                         .addOnFailureListener { e ->
-                            Toast.makeText(this, "Failed to update profile: ${e.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                this,
+                                "Failed to update profile: ${e.message}",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             progressDialog?.dismiss()
                         }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(this, "Reauthentication failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this,
+                        "Password incorrect! : ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     progressDialog?.dismiss()
                 }
         } else {
@@ -220,4 +285,5 @@ class PersonalInformationActivity : AppCompatActivity() {
         progressDialog?.setCancelable(false) // Prevents user from dismissing the dialog by tapping outside
         progressDialog?.show()
     }
+
 }

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:layout_marginHorizontal="15dp"
+    android:background="@drawable/rectangle_radius_super_light_gray"
+    android:padding="15dp"
+    android:layout_marginTop="15dp"
+    android:elevation="4dp">
+
+    <TextView
+        android:id="@+id/textAvailability"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="dasdasd"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textRoomNumber" />
+
+    <ImageButton
+        android:id="@+id/ibDelete"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="#00000000"
+        android:scaleType="centerInside"
+        android:src="@drawable/dorm_delete_mini"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/ibEdit"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="10sp"
+        android:background="#00000000"
+        android:scaleType="centerInside"
+        android:visibility="invisible"
+        android:src="@drawable/dorm_edit_mini"
+        app:layout_constraintEnd_toStartOf="@+id/ibDelete"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textRoomNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/hind_guntur_bold"
+        android:paddingBottom="10sp"
+        android:text="Room Name"
+        android:textColor="@color/dormify_clr"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

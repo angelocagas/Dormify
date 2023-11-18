@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toStartOf="@+id/clRentedUnits"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDashboard" >
+        app:layout_constraintTop_toBottomOf="@+id/tvDashboard">
 
         <TextView
             android:id="@+id/tvTotalUnits"
@@ -96,6 +96,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clTotalEarnings"
+        android:visibility="gone"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:layout_marginTop="10dp"
@@ -329,7 +330,11 @@
             app:tabTextColor="@color/black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <ImageView
+        android:visibility="gone"
+        android:src="@drawable/maint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

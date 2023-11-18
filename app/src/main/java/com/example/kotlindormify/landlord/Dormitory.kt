@@ -5,7 +5,8 @@ data class Dormitory(
     val dormPrice: String?,
     val dormitoryId: String,
     val dormRooms: Int?,
-    val image: String?,
+    val maxCapacity: Int?,
+    val images: List<String>? = null,
     val landlordId: String?,
     val qrCodeImageUrl: String?,
     var latitude: Double? = 0.0, // Add latitude
@@ -22,6 +23,8 @@ data class Dormitory(
     var electric: String?,
     var water: String?,
     var paymentOptions: List<String>?,
-    var amenities: List<String>?
+    var amenities: List<String>?,
+    var amenities2: List<String>?,
+    var genderRestriction: String?
 
 )

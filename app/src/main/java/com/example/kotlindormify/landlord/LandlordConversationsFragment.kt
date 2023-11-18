@@ -32,7 +32,7 @@ class LandlordConversationsFragment : Fragment(), LandlordConversationsAdapter.O
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = LandlordConversationsFragmentBinding.inflate(inflater, container, false)
 
         // Initialize the SwipeRefreshLayout
@@ -84,7 +84,8 @@ class LandlordConversationsFragment : Fragment(), LandlordConversationsAdapter.O
                     // Iterate through matching conversations
                     for (conversationDocument in querySnapshot.documents) {
                         // Retrieve individual conversation data
-                        val conversationTitle = conversationDocument.id // You may need to adapt this based on your data model
+                        val conversationTitle =
+                            conversationDocument.id // You may need to adapt this based on your data model
                         val lastMessage = conversationDocument.getString("lastMessage") ?: ""
 
                         // Add conversation to the list

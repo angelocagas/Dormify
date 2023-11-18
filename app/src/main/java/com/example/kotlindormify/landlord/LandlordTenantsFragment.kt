@@ -16,7 +16,7 @@ class LandlordTenantsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout using ViewBinding
         binding = LandlordTenantsFragmentBinding.inflate(inflater, container, false)
         return binding.root
@@ -24,10 +24,4 @@ class LandlordTenantsFragment : Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        // Now you can access views in your layout using binding, e.g., binding.textViewId.text = "Hello, World!"
-
-    }
 }

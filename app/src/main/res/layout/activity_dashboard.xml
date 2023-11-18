@@ -46,16 +46,20 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+
         <androidx.cardview.widget.CardView
 
             android:id="@+id/cardViewImage"
             android:layout_width="35dp"
             android:layout_height="35dp"
+            android:layout_alignTop="@+id/tvDormify3"
             android:layout_alignParentEnd="true"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
             android:elevation="1dp"
             app:cardCornerRadius="18dp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -85,10 +89,6 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
-
-
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -101,7 +101,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:elevation="10dp"/>
+        android:elevation="10dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

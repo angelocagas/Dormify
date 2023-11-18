@@ -3,10 +3,6 @@
 
 
     <item android:icon="@drawable/dorm_home"
-        android:id="@+id/landlord_menu_home"
-        android:title="Home"/>
-
-    <item android:icon="@drawable/dorm_box"
         android:id="@+id/landlord_menu_units"
         android:title="Units"/>
 
