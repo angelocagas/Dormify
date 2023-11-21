@@ -969,6 +969,17 @@
                 app:layout_constraintStart_toEndOf="@+id/lblPhoneNumber"
                 app:layout_constraintTop_toTopOf="@+id/lblPhoneNumber" />
 
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/login_countrycode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                app:ccp_showFlag="false"
+                app:ccp_showNameCode="true"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblPhoneNumber" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etPhoneNumLayout"
                 style="@style/LoginTextInputOuterFieldStyle"
@@ -1104,6 +1115,43 @@
                 app:layout_constraintTop_toBottomOf="@+id/etUsernameLayout" />
 
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btnAddImagefront"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/rectangle_radius_white_stroke_black"
+                android:paddingVertical="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblDormSupporting">
+
+
+                <ImageView
+                    android:id="@+id/ivSelectedImagefront"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/dormpictureplaceholder"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="Upload Dormitory Profile"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSelectedImagefront" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/btnAddImage"
@@ -1114,7 +1162,7 @@
                 android:paddingVertical="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblDormSupporting">
+                app:layout_constraintTop_toBottomOf="@+id/btnAddImagefront">
 
 
                 <ImageView
