@@ -969,16 +969,7 @@
                 app:layout_constraintStart_toEndOf="@+id/lblPhoneNumber"
                 app:layout_constraintTop_toTopOf="@+id/lblPhoneNumber" />
 
-            <com.hbb20.CountryCodePicker
-                android:id="@+id/login_countrycode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                app:ccp_showFlag="false"
-                app:ccp_showNameCode="true"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblPhoneNumber" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etPhoneNumLayout"
@@ -1001,6 +992,8 @@
                     android:layout_height="wrap_content"
                     android:maxLength="10"
                     android:inputType="number"
+                    android:paddingStart="100dp"
+                    android:text="92312312312312"
                     android:minHeight="48dp"
                     android:textColor="@color/black"
                     android:textSize="18sp"
@@ -1008,6 +1001,16 @@
                     app:backgroundTintMode="multiply" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/login_countrycode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                app:ccp_showFlag="false"
+                app:ccp_showNameCode="true"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblPhoneNumber" />
             <TextView
                 android:id="@+id/lblEmail"
                 android:layout_width="wrap_content"

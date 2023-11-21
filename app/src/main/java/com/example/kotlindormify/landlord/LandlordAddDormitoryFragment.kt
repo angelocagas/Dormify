@@ -38,6 +38,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.CollectionReference
@@ -252,7 +253,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             }
         }
 
-
+        binding.loginCountrycode.setCountryForPhoneCode(63)
+        val selectedCountryCode = binding.loginCountrycode.selectedCountryCode
 
         var selectedBathroom = "Separate (Private)"
         binding.radioBathroom.setOnCheckedChangeListener { _, checkedId ->
@@ -335,6 +337,41 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            firestore.collection("users").document(currentUser.uid)
+                .get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        val phoneNumber = documentSnapshot.getString("phoneNumber")
+
+                        // Check if phoneNumber is not null and has at least 3 characters before attempting to remove the first 3 characters
+                        if (!phoneNumber.isNullOrBlank() && phoneNumber.length >= 3) {
+                            val formattedPhoneNumber = phoneNumber.substring(3)
+                            val email = documentSnapshot.getString("email")
+                            val username = documentSnapshot.getString("username")
+
+                            // Assuming etPhoneNumber, etEmail, and etUsername are your EditText widgets
+                            binding.etPhoneNumber.setText(formattedPhoneNumber)
+                            binding.etEmail.setText(email)
+                            binding.etusername.setText(username)
+                        } else {
+                            Toast.makeText(requireContext(), "Invalid phone number", Toast.LENGTH_SHORT).show()
+                        }
+
+                    } else {
+                        Toast.makeText(requireContext(), "User data not found", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(requireContext(), "Failed to retrieve user data: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+
+
+
         binding.btnSubmit.setOnClickListener {
             val dormName = binding.etDormName.text.toString()
             val numOfRooms = binding.etNumOfRooms.text.toString()
@@ -343,7 +380,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val price = binding.etPrice.text.toString()
             val gcashNum = binding.etGcashNum.text.toString()
             val address = binding.etAddress.text.toString()
-            val phoneNumber = binding.etPhoneNumber.text.toString()
+            val enteredPhoneNumber  = binding.etPhoneNumber.text.toString()
             val email = binding.etEmail.text.toString()
             val username = binding.etusername.text.toString()
             val max = binding.etMaxCapacity.text.toString()
@@ -358,7 +395,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val cbAgreement = binding.cbAgreement
             val checkBoxGcash = binding.checkBoxGcash
             val checkBoxCash = binding.checkBoxCash
-
+            val phoneNumber = "+$selectedCountryCode$enteredPhoneNumber"
 
             var amenitiesString = binding.etAmenities.text.toString()
             var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
