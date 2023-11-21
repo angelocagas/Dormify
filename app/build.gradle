@@ -92,10 +92,10 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.1.0-alpha01"
 
 
-    implementation("io.coil-kt:coil:1.2.1")
+
     implementation 'com.daimajia.slider:library:1.1.5@aar'
 
-
+    implementation("io.coil-kt:coil:1.2.1")
 
 
 

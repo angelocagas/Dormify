@@ -77,6 +77,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val address = arguments?.getString("address")
         val description = arguments?.getString("description")
         val permitImage = arguments?.getString("permitImage")
+        val profileImage = arguments?.getString("profileImage")
         val water = arguments?.getString("water")
         val electric = arguments?.getString("electric")
         val rentalTerm = arguments?.getString("rentalTerm")
@@ -84,9 +85,18 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val genderRestriction = arguments?.getString("genderRestriction")
 
 
-        val imageSliderAdapter = ImageSliderAdapter(requireContext(), imageUrls ?: emptyList())
-        viewPager.adapter = imageSliderAdapter
+        // Create the list of imageUrls with profileImage as the first element
+        val allImageUrls = mutableListOf<String>()
+        profileImage?.let {
+            allImageUrls.add(it)
+        }
+        imageUrls?.let {
+            allImageUrls.addAll(it)
+        }
 
+// Create the ImageSliderAdapter
+        val imageSliderAdapter = ImageSliderAdapter(requireContext(), allImageUrls)
+        viewPager.adapter = imageSliderAdapter
         // Connect ViewPager2 with TabLayout (optional)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             // Customize tab if needed
@@ -118,6 +128,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val addressTextView = view.findViewById<TextView>(R.id.textDormloc)
         val numOfRoomsTextView = view.findViewById<TextView>(R.id.Availableroomtxt)
         val permitImageview = view.findViewById<ImageView>(R.id.permitImage)
+        val lordview = view.findViewById<ImageView>(R.id.lord)
         val qrcodeImageView = view.findViewById<ImageView>(R.id.qrcodeimage)
         val backBtn = view.findViewById<Button>(R.id.backbtn)
 
@@ -342,6 +353,11 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         } else {
             permitImageview.setImageResource(R.drawable.dormify_logo)
         }
+
+
+
+
+
 
         if (qrCodeImageUrl != null) {
             Picasso.get().load(qrCodeImageUrl).into(qrcodeImageView)

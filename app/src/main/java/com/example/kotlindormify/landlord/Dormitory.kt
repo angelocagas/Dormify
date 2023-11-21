@@ -17,6 +17,7 @@ data class Dormitory(
     var username: String?,
     var description: String?,
     var permitImage: String?,
+    var profileImage: String?,
     var pendingRequestsCount: Int?,
     var rentalTerm: String? = null,
     var bathroom: String?,

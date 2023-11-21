@@ -376,6 +376,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val username = dormitoryDocument.getString("username")
                     val description = dormitoryDocument.getString("description")
                     val permitImage = dormitoryDocument.getString("permitImage")
+                    val profileImage = dormitoryDocument.getString("profileImage")
                     val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                     val rentalTerm = dormitoryDocument.getString("rentalTerm")
                     val bathroom = dormitoryDocument.getString("bathroom")
@@ -387,12 +388,10 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val genderRestriction = dormitoryDocument.getString("genderRestriction")
 
 
-
-
                     // Add other dormitory fields as needed
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, maxCapacity, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities, amenities2, genderRestriction)
+                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, maxCapacity, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, profileImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities, amenities2, genderRestriction)
                     allDormitories.add(dormitory)
                 }
                 callback(allDormitories)
@@ -454,6 +453,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val username = dormitoryDocument.getString("username")
                     val description = dormitoryDocument.getString("description")
                     val permitImage = dormitoryDocument.getString("permitImage")
+                    val profileImage = dormitoryDocument.getString("profileImage")
                     val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                     val rentalTerm = dormitoryDocument.getString("rentalTerm")
                     val bathroom = dormitoryDocument.getString("bathroom")
@@ -468,7 +468,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, maxCapacity, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount, rentalTerm, bathroom, electric, water, paymentOptions, amenities, amenities2, genderRestriction)
+                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, maxCapacity, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, profileImage, pendingRequestsCount, rentalTerm, bathroom, electric, water, paymentOptions, amenities, amenities2, genderRestriction)
                     dormitoriesList.add(dormitory)
 
 

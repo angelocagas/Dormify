@@ -48,7 +48,7 @@ class Chat3Adapter : ListAdapter<ChatMessage, Chat3Adapter.MessageViewHolder>(Di
         fun bind(message: ChatMessage) {
             messageReceiver.text = message.text
             val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
-            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
+            val formattedDate = message.timestamp.toDate().let { dateFormat.format(it) }
             timestamp.text = formattedDate
         }
     }
@@ -60,7 +60,7 @@ class Chat3Adapter : ListAdapter<ChatMessage, Chat3Adapter.MessageViewHolder>(Di
         fun bind(message: ChatMessage) {
             messageSender.text = message.text
             val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
-            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
+            val formattedDate = message.timestamp.toDate().let { dateFormat.format(it) }
             timestamp.text = formattedDate
         }
     }

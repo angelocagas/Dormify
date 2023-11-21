@@ -175,6 +175,15 @@
                             android:stepSize="1"
                             android:transformPivotX="1dp" />
 
+
+                        <ImageView
+                            android:id="@+id/lord"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/Ratingbar"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="246dp"
+                            android:layout_marginBottom="131dp" />
                         <TextView
                             android:id="@+id/Ratingtxt"
                             android:layout_width="wrap_content"

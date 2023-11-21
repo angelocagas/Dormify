@@ -46,7 +46,7 @@ class ChatAdapter : ListAdapter<ChatMessage, ChatAdapter.MessageViewHolder>(Diff
         fun bind(message: ChatMessage) {
             messageReceiver.text = message.text
             val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
-            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
+            val formattedDate = message.timestamp.toDate().let { dateFormat.format(it) }
             timestamp.text = formattedDate
         }
     }
@@ -58,7 +58,7 @@ class ChatAdapter : ListAdapter<ChatMessage, ChatAdapter.MessageViewHolder>(Diff
         fun bind(message: ChatMessage) {
             messageSender.text = message.text
             val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
-            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
+            val formattedDate = message.timestamp.toDate().let { dateFormat.format(it) }
             timestamp.text = formattedDate
         }
     }

@@ -97,6 +97,11 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     private lateinit var selectedImageUri: Uri
     private var isImageSelected = false
 
+        private val PICK_IMAGE_REQUEST2 = 1
+        private lateinit var selectedImageUri2: Uri
+        private var isImageSelected2 = false
+
+
     private val PICK_PERMIT_IMAGE_REQUEST = 2
     private lateinit var selectedPermitImageUri: Uri
     private var isPermitImageSelected = false
@@ -167,6 +172,14 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(Intent.createChooser(intent, "Select Business Permit Photo"), PICK_PERMIT_IMAGE_REQUEST)
         }
+
+        binding.btnAddImagefront.setOnClickListener {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            startActivityForResult(Intent.createChooser(intent, "Select Business Permit Photo"),PICK_IMAGE_REQUEST2 )
+        }
+
         var selectedRentalTerm = "Per Month"
         binding.radioRentalTerms.setOnCheckedChangeListener { _, checkedId ->
             // Check which radio button was selected
@@ -587,6 +600,17 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 binding.textView4.text = "Upload Dormitory Images" // Clear the error message in lblFullName
             }
 
+            // Check if an image has been selected
+            if (!isImageSelected2) {
+                Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                    binding.btnAddImagefront.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                binding.textView7.text = "Upload Dormitory Images is required" // Set error message in lblFullName
+
+            } else {
+                binding.btnAddImagefront.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                binding.textView7.text = "Upload Dormitory Images" // Clear the error message in lblFullName
+            }
+
             if (!isPermitImageSelected) {
                 Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
                 binding.btnAddPermitImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
@@ -663,6 +687,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                                     )
                                                     uploadImages(newDormId)
                                                     uploadPermitImage(newDormId)
+                                                    uploadProfileImage(newDormId)
 
                                                     val qrCodeText = "Dormitory Info:\n\n" +
                                                             "Name: $dormName\n" +
@@ -954,7 +979,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
-        if (requestCode == PICK_PERMIT_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.data != null) {
+        if (requestCode ==PICK_PERMIT_IMAGE_REQUEST  && resultCode == RESULT_OK && data != null && data.data != null) {
             selectedPermitImageUri = data.data!!
             try {
                 val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedPermitImageUri)
@@ -962,6 +987,19 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 binding.ivSelectedPermitImage.visibility = View.VISIBLE
 
                 isPermitImageSelected = true
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+        }
+
+        if (requestCode == PICK_IMAGE_REQUEST2  && resultCode == RESULT_OK && data != null && data.data != null) {
+            selectedImageUri2 = data.data!!
+            try {
+                val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImageUri2)
+                binding.ivSelectedImagefront.setImageBitmap(bitmap)
+                binding.ivSelectedImagefront.visibility = View.VISIBLE
+
+                isImageSelected2 = true
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -1033,7 +1071,6 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-
     private fun uploadPermitImage(dormitoryId: String) {
         if (::selectedPermitImageUri.isInitialized) {
             val imageRef = storageRef.child("business_permits/$dormitoryId-business_permit.jpg")
@@ -1056,10 +1093,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                     // Handle permit image upload failure
                 }
         }
+
     }
-
-// Update the storeImageUrlInFirestore method to store permit image URL:
-
     private fun storePermitImageUrlInFirestore(dormitoryId: String, permitImageUrl: String) {
         val dormitoryDocRef = dormitoriesCollection.document(dormitoryId)
 
@@ -1072,6 +1107,51 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 // Handle permit image URL update failure
             }
     }
+
+
+
+
+
+    private fun uploadProfileImage(dormitoryId: String) {
+        if (::selectedImageUri2.isInitialized) {
+            val imageRef = storageRef.child("profile_dorms/$dormitoryId-profile_dorms.jpg")
+
+            imageRef.putFile(selectedImageUri2)
+                .addOnSuccessListener { taskSnapshot ->
+                    // Image uploaded successfully, get the download URL
+                    imageRef.downloadUrl.addOnCompleteListener { downloadUrlTask ->
+                        if (downloadUrlTask.isSuccessful) {
+                            val profileImageUrl = downloadUrlTask.result.toString()
+
+                            // Now, store the permit image URL in Firestore
+                            storeProfileImageUrlInFirestore(dormitoryId, profileImageUrl)
+                        } else {
+                            // Handle error while getting the permit image URL
+                        }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // Handle permit image upload failure
+                }
+        }
+    }
+
+// Update the storeImageUrlInFirestore method to store permit image URL:
+// Update the storeImageUrlInFirestore method to store permit image URL:
+
+    private fun storeProfileImageUrlInFirestore(dormitoryId: String, profileImageUrl: String) {
+        val dormitoryDocRef = dormitoriesCollection.document(dormitoryId)
+
+
+        dormitoryDocRef.update("profileImage", profileImageUrl)
+            .addOnSuccessListener {
+                // Permit Image URL updated successfully
+            }
+            .addOnFailureListener { e ->
+                // Handle permit image URL update failure
+            }
+    }
+
 
 
     private fun generateQRCode(text: String): Bitmap {

@@ -104,10 +104,7 @@ class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
                 bundle.putString("dormPrice", clickedDormitory.dormPrice)
                 bundle.putString("dormitoryId", clickedDormitory.dormitoryId)
                 bundle.putString("landlordId", clickedDormitory.landlordId)
-                clickedDormitory.images?.let {
-                    bundle.putStringArrayList("imageUrls", ArrayList(it))
-                }
-
+                clickedDormitory.images?.let { bundle.putStringArrayList("imageUrls", ArrayList(it)) }
                 bundle.putString("qrCodeImageUrl", clickedDormitory.qrCodeImageUrl)
                 bundle.putDouble("latitude", clickedDormitory.latitude!!)
                 bundle.putDouble("longitude", clickedDormitory.longitude!!)
@@ -115,6 +112,7 @@ class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
                 bundle.putString("phoneNumber", clickedDormitory.phoneNumber)
                 bundle.putString("description", clickedDormitory.description)
                 bundle.putString("permitImage", clickedDormitory.permitImage)
+                bundle.putString("profileImage", clickedDormitory.profileImage)
                 bundle.putInt("dormRooms", clickedDormitory.dormRooms!!)
                 bundle.putInt("maxCapacity", clickedDormitory.maxCapacity!!)
                 bundle.putString("username", clickedDormitory.username)
@@ -183,12 +181,13 @@ class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
 
 
 
-        if (dormitory.images?.isNotEmpty() == true) {
-            Picasso.get().load(dormitory.images[0]).into(holder.dormImage)
+        if (dormitory.profileImage?.isNotEmpty() == true) {
+            Picasso.get().load(dormitory.profileImage).into(holder.dormImage)
         } else {
             // Handle the case where there's no image URL provided
             // You can set a default image or hide the ImageView
         }
+
 
         // Bind other dormitory data to views as needed based on your layout
     }
