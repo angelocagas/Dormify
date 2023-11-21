@@ -685,9 +685,8 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                                         numOfRooms.toInt(),
                                                         maxCapacity.toInt()
                                                     )
-                                                    uploadImages(newDormId)
+                                                    uploadImagesAndProfileImage(newDormId)
                                                     uploadPermitImage(newDormId)
-                                                    uploadProfileImage(newDormId)
 
                                                     val qrCodeText = "Dormitory Info:\n\n" +
                                                             "Name: $dormName\n" +
@@ -1006,10 +1005,40 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    // Function to upload the selected image to Firebase Storage
-    private fun uploadImages(dormitoryId: String) {
+    // Function to upload the profile image to Firebase Storage and store its URL in Firestore
+    private fun uploadProfileImage(dormitoryId: String, regularImageUrls: List<String>) {
+        if (::selectedImageUri2.isInitialized) {
+            val fileName = "${dormitoryId}_0${System.currentTimeMillis()}.jpg" // Add a prefix to identify it as a profile image
+            val imageRef = storageRef.child("$dormitoryId/$fileName")
+
+            imageRef.putFile(selectedImageUri2)
+                .addOnSuccessListener { taskSnapshot ->
+                    // Profile image uploaded successfully, get the download URL
+                    imageRef.downloadUrl.addOnCompleteListener { downloadUrlTask ->
+                        if (downloadUrlTask.isSuccessful) {
+                            val profileImageUrl = downloadUrlTask.result.toString()
+
+                            // Add the profile image URL to the list of regular image URLs
+                            val allImageUrls = listOf(profileImageUrl) + regularImageUrls
+
+                            // Now, store all image URLs in Firestore
+                            storeImageUrlsInFirestore(dormitoryId, allImageUrls)
+
+                        } else {
+                            // Handle error while getting the profile image URL
+                        }
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // Handle profile image upload failure
+                }
+        }
+    }
+
+    private fun uploadImagesAndProfileImage(dormitoryId: String) {
         val uploadedImageUrls = mutableListOf<String>()
 
+        // Upload regular images
         if (selectedImageUris.isNotEmpty()) {
             val uploadTasks = mutableListOf<Task<Uri>>()
 
@@ -1039,16 +1068,22 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                         }
                     }
 
-                    // All images are uploaded, now you have the URLs in the order of selection
-                    storeImageUrlsInFirestore(dormitoryId, uploadedImageUrls)
+                    // All images (including regular and profile) are uploaded, now you have the URLs in the order of selection
+                    // Upload profile image
+                    uploadProfileImage(dormitoryId, uploadedImageUrls)
                 }
                 .addOnFailureListener { exception ->
                     // Handle error
                 }
         } else {
-            // Handle the case when no images are selected
+            // Handle the case when no images (excluding the profile image) are selected
         }
     }
+
+
+
+
+
 
 
 
@@ -1112,45 +1147,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
 
 
-    private fun uploadProfileImage(dormitoryId: String) {
-        if (::selectedImageUri2.isInitialized) {
-            val imageRef = storageRef.child("profile_dorms/$dormitoryId-profile_dorms.jpg")
 
-            imageRef.putFile(selectedImageUri2)
-                .addOnSuccessListener { taskSnapshot ->
-                    // Image uploaded successfully, get the download URL
-                    imageRef.downloadUrl.addOnCompleteListener { downloadUrlTask ->
-                        if (downloadUrlTask.isSuccessful) {
-                            val profileImageUrl = downloadUrlTask.result.toString()
-
-                            // Now, store the permit image URL in Firestore
-                            storeProfileImageUrlInFirestore(dormitoryId, profileImageUrl)
-                        } else {
-                            // Handle error while getting the permit image URL
-                        }
-                    }
-                }
-                .addOnFailureListener { e ->
-                    // Handle permit image upload failure
-                }
-        }
-    }
-
-// Update the storeImageUrlInFirestore method to store permit image URL:
-// Update the storeImageUrlInFirestore method to store permit image URL:
-
-    private fun storeProfileImageUrlInFirestore(dormitoryId: String, profileImageUrl: String) {
-        val dormitoryDocRef = dormitoriesCollection.document(dormitoryId)
-
-
-        dormitoryDocRef.update("profileImage", profileImageUrl)
-            .addOnSuccessListener {
-                // Permit Image URL updated successfully
-            }
-            .addOnFailureListener { e ->
-                // Handle permit image URL update failure
-            }
-    }
 
 
 

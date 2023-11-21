@@ -123,7 +123,6 @@ class LandlordUnitsFragment : Fragment() {
                                     val username = dormitoryDocument.getString("username")
                                     val description = dormitoryDocument.getString("description")
                                     val permitImage = dormitoryDocument.getString("permitImage")
-                                    val profileImage = dormitoryDocument.getString("profileImage")
                                     val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                                     val rentalterm = dormitoryDocument.getString("rentalterm")
                                     val bathroom = dormitoryDocument.getString("bathroom")
@@ -153,7 +152,6 @@ class LandlordUnitsFragment : Fragment() {
                                             username,
                                             description,
                                             permitImage,
-                                            profileImage,
                                             pendingRequestsCount,
                                             rentalterm,
                                             bathroom,
@@ -290,8 +288,8 @@ class LandlordUnitsFragment : Fragment() {
                         val username = dormitoryDocument.getString("username")
                         val description = dormitoryDocument.getString("description")
                         val permitImage = dormitoryDocument.getString("permitImage")
-                        val profileImage = dormitoryDocument.getString("profileImage")
-                        val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                        val pendingRequestsCount =
+                            dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                         val rentalterm = dormitoryDocument.getString("rentalterm")
                         val bathroom = dormitoryDocument.getString("bathroom")
                         val electric = dormitoryDocument.getString("electric")
@@ -322,7 +320,6 @@ class LandlordUnitsFragment : Fragment() {
                                 username,
                                 description,
                                 permitImage,
-                                profileImage,
                                 pendingRequestsCount,
                                 rentalterm,
                                 bathroom,

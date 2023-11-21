@@ -77,7 +77,6 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val address = arguments?.getString("address")
         val description = arguments?.getString("description")
         val permitImage = arguments?.getString("permitImage")
-        val profileImage = arguments?.getString("profileImage")
         val water = arguments?.getString("water")
         val electric = arguments?.getString("electric")
         val rentalTerm = arguments?.getString("rentalTerm")
@@ -85,18 +84,9 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val genderRestriction = arguments?.getString("genderRestriction")
 
 
-        // Create the list of imageUrls with profileImage as the first element
-        val allImageUrls = mutableListOf<String>()
-        profileImage?.let {
-            allImageUrls.add(it)
-        }
-        imageUrls?.let {
-            allImageUrls.addAll(it)
-        }
-
-// Create the ImageSliderAdapter
-        val imageSliderAdapter = ImageSliderAdapter(requireContext(), allImageUrls)
+        val imageSliderAdapter = ImageSliderAdapter(requireContext(), imageUrls ?: emptyList())
         viewPager.adapter = imageSliderAdapter
+
         // Connect ViewPager2 with TabLayout (optional)
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             // Customize tab if needed
