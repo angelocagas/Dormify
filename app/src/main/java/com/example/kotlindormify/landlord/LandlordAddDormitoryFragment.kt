@@ -397,7 +397,18 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val checkBoxCash = binding.checkBoxCash
             val phoneNumber = "+$selectedCountryCode$enteredPhoneNumber"
 
-            var amenitiesString = binding.etAmenities.text.toString()
+            if (enteredPhoneNumber.length < 10) {
+                // Show an error message or handle the error appropriately
+
+                binding.etPhoneNumLayout.error = "Phone Number is required"
+                binding.lblPhoneNumber.text = "Phone Number is Invalid" // Set error message in lblFullName
+            } else {
+                // Proceed with the rest of your code
+                // ...
+                binding.etPhoneNumLayout.error = null // Clear the error if not empty
+                binding.lblPhoneNumber.text = "Phone Number"
+
+                var amenitiesString = binding.etAmenities.text.toString()
             var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
             var allAmenitiesList: List<String>
 
@@ -588,7 +599,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             }
             if (phoneNumber.isEmpty()) {
                 binding.etPhoneNumLayout.error = "Phone Number is required"
-                binding.lblPhoneNumber.text = "Phone Number is required" // Set error message in lblFullName
+                binding.lblPhoneNumber.text = "Phone Number is required"
 
             } else {
                 binding.etPhoneNumLayout.error = null // Clear the error if not empty
@@ -795,11 +806,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                                             // Handle failure to upload QR code image
                                                         }
                                                 } else {
-                                                    Toast.makeText(
-                                                        requireContext(),
-                                                        "Failed to add dormitory. Please try again.",
-                                                        Toast.LENGTH_SHORT
-                                                    ).show()
+                                                    Toast.makeText(requireContext(), "Failed to add dormitory. Please try again.", Toast.LENGTH_SHORT).show()
                                                     progressDialog?.dismiss()
                                                 }
                                             }
@@ -838,6 +845,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
                 progressDialog?.dismiss()
             }
+        }
         }
 
 
