@@ -153,7 +153,7 @@ class PaymentFragment : Fragment(R.layout.payment_fragment) {
 
                         if (gcashNum != null){
                             tvGcashNum.visibility = View.VISIBLE
-                            tvGcashNum.text = "Gcash Number: $gcashNum"
+                            tvGcashNum.text = " ($gcashNum)"
                         }
                         else{
                             tvGcashNum.visibility = View.GONE

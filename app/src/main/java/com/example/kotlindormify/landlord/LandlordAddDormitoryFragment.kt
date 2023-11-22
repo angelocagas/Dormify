@@ -652,11 +652,11 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             if (!isImageSelected2) {
                 Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
                     binding.btnAddImagefront.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
-                binding.textView7.text = "Upload Dormitory Images is required" // Set error message in lblFullName
+                binding.textView7.text = "Upload Dormitory Profile is required" // Set error message in lblFullName
 
             } else {
                 binding.btnAddImagefront.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
-                binding.textView7.text = "Upload Dormitory Images" // Clear the error message in lblFullName
+                binding.textView7.text = "Upload Dormitory Profile" // Clear the error message in lblFullName
             }
 
             if (!isPermitImageSelected) {
@@ -1011,11 +1011,12 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             }
 
             // Set the text and image for the latest selection
-            if (selectedImageUris.isNotEmpty()) {
+            if (selectedImageUris.size > 1) {
                 binding.textView4.text = "Dormitory Images selected"
                 binding.ivSelectedImage.setImageResource(R.drawable.check_icon)
                 isImageSelected = true
             }
+
         }
 
 
