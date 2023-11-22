@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.squareup.picasso.Picasso
 import java.sql.Timestamp
 
 class LandlordChatFragment : Fragment() {
@@ -27,6 +29,7 @@ class LandlordChatFragment : Fragment() {
 
     private var Tenant: String? = null
     private lateinit var nameOfChat: TextView
+    private lateinit var profilePic: ImageView
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: LandlordChatAdapter
     private val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid
@@ -49,6 +52,17 @@ class LandlordChatFragment : Fragment() {
         val conversationId = arguments?.getString("conversationId")
         userId = arguments?.getString("sender")
         Tenant = arguments?.getString("tenant")
+
+        val username = arguments?.getString("username")
+        val userPic = arguments?.getString("userPic")
+
+        nameOfChat = view.findViewById(R.id.nameOfChat)
+        profilePic = view.findViewById(R.id.ivTopProfilePictureChat)
+
+        nameOfChat.text = username
+        Picasso.get().load(userPic)
+            .error(R.drawable.error_image) // Add an error placeholder drawable
+            .into(profilePic)
 
 
         // Initialize Firebase Firestore and Firebase Authentication

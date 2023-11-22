@@ -45,8 +45,8 @@
 
                 <ImageView
                     android:id="@+id/ivTopProfilePictureChat"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
                     android:src="@drawable/person_icon" />
