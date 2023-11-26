@@ -186,7 +186,6 @@ class PaymentFragment : Fragment(R.layout.payment_fragment) {
         ivSelectedImage = dialogView.findViewById(R.id.ivSelectedImage)
         etNote = dialogView.findViewById(R.id.etNote)
 
-
         btnAddReceipt.setOnClickListener {
             // Open image picker
             val intent = Intent()
@@ -195,11 +194,28 @@ class PaymentFragment : Fragment(R.layout.payment_fragment) {
             startActivityForResult(Intent.createChooser(intent, "Select Receipt Photo"), PICK_RECEIPT_IMAGE_REQUEST)
         }
 
-
         builder.setView(dialogView)
         builder.setTitle("Payment Process")
 
         builder.setPositiveButton("Send") { _, _ ->
+            // Show confirmation dialog before sending
+            showConfirmationDialog()
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            // Handle negative button click (Cancel)
+            dialog.dismiss()
+        }
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun showConfirmationDialog() {
+        val confirmationBuilder = AlertDialog.Builder(requireContext())
+        confirmationBuilder.setTitle("Confirm Payment")
+        confirmationBuilder.setMessage("Are you sure you want to send the payment?")
+        confirmationBuilder.setPositiveButton("Yes") { _, _ ->
             // Handle positive button click (Upload)
             // Add your logic here to handle image upload
             if (isImageSelected) {
@@ -231,19 +247,17 @@ class PaymentFragment : Fragment(R.layout.payment_fragment) {
                     }
                     .show()
             }
-
-
-
         }
 
-        builder.setNegativeButton("Cancel") { dialog, _ ->
+        confirmationBuilder.setNegativeButton("Cancel") { dialog, _ ->
             // Handle negative button click (Cancel)
             dialog.dismiss()
         }
 
-        val alertDialog: AlertDialog = builder.create()
-        alertDialog.show()
+        val confirmationDialog: AlertDialog = confirmationBuilder.create()
+        confirmationDialog.show()
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

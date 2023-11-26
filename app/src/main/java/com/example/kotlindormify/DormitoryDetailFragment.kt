@@ -117,6 +117,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val descriptionTextview = view.findViewById<TextView>(R.id.ViewContent)
         val addressTextView = view.findViewById<TextView>(R.id.textDormloc)
         val numOfRoomsTextView = view.findViewById<TextView>(R.id.Availableroomtxt)
+        val availableRoomsTextView = view.findViewById<TextView>(R.id.occupiedtxt)
+
         val permitImageview = view.findViewById<ImageView>(R.id.permitImage)
         val lordview = view.findViewById<ImageView>(R.id.lord)
         val qrcodeImageView = view.findViewById<ImageView>(R.id.qrcodeimage)
@@ -155,6 +157,30 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         descriptionTextview.text = description
         addressTextView.text = address
         numOfRoomsTextView.text = "$dormRooms"
+
+        val db = FirebaseFirestore.getInstance()
+
+// Step 1: Get a reference to the dormitory document
+        val dormitoryRef = db.collection("dormitories").document(dormitoryId ?: "")
+
+// Step 2: Query the subcollection of rooms with availability set to "available"
+        dormitoryRef.collection("rooms")
+            .whereEqualTo("availability", "available")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                // Step 3: Count the number of available rooms
+                val availableRoomsCount = querySnapshot.size()
+
+                // Step 4: Display the count in the TextView
+                availableRoomsTextView.text = "$availableRoomsCount"
+            }
+            .addOnFailureListener { exception ->
+                // Handle any errors that occurred during the query
+                // For example, log the error or display an error message
+            }
+
+
+
         TvUserNameTextView.text = username
         ContactTextView.text = phoneNumber
         EmailTextView.text = email
