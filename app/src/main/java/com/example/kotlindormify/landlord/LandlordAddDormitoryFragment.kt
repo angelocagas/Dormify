@@ -377,6 +377,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
             val numOfRooms = binding.etNumOfRooms.text.toString()
             val maxCapacity = binding.etMaxCapacity.text.toString()
             val description = binding.etDescription.text.toString()
+            val previousPrice = "0"
             val price = binding.etPrice.text.toString()
             val gcashNum = binding.etGcashNum.text.toString()
             val address = binding.etAddress.text.toString()
@@ -700,6 +701,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             dormName,
                                             numOfRooms.toInt(),
                                             maxCapacity.toInt(),
+                                            previousPrice,
                                             price,
                                             gcashNum,
                                             address,

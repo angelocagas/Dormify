@@ -41,6 +41,10 @@
             android:name=".tenant3.Dashboard3Activity"
             android:exported="false"
             android:theme="@style/Theme.LoginAndSignUp" />
+        <activity
+            android:name=".admin.DashboardAdminActivity"
+            android:exported="false"
+            android:theme="@style/Theme.LoginAndSignUp" />
 
         <activity
             android:name=".SignUpTenantActivity"

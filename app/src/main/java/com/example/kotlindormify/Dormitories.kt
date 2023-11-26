@@ -9,6 +9,7 @@ data class Dormitories(
     var dormName: String? = null,
     var numOfRooms: Int? = null,
     val maxCapacity: Int?,
+    var previousPrice: String? = null,
     var price: String? = null,
     var gcashNum: String? = null,
     var address: String? = null,

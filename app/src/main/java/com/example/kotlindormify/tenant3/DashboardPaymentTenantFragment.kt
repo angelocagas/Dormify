@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -156,11 +157,44 @@ class DashboardPaymentTenantFragment : Fragment() {
                     val dormName = dormDocument.getString("dormName")
                     val imageUrl = dormDocument.get("images") as? List<String>
                     val price = dormDocument.getString("price")
+                    val previousPrice = dormDocument.getString("previousPrice")
 
                     // Show dormName as a toast message
                     dormName?.let {
                         // Set the dormName to the TextView
                         tvDormName.text = dormName
+                        if(previousPrice != "0"){
+                            if (previousPrice != price){
+                                val alertDialogBuilder = AlertDialog.Builder(requireContext())
+                                alertDialogBuilder.setTitle("Dormitory Price Update!")
+
+                                val message = "$dormName has updated its price.\n\nPrevious:  Php $previousPrice\nCurrent:  Php $price"
+                                alertDialogBuilder.setMessage(message)
+
+                                alertDialogBuilder.setPositiveButton("Okay") { dialog, which ->
+                                    // Update previousPrice to the current price in the Firestore document
+                                    dormitoryId?.let {
+                                        val dormitoryDocRef = firestore.collection("dormitories").document(it)
+                                        dormitoryDocRef
+                                            .update("previousPrice", price)
+                                            .addOnSuccessListener {
+                                                // Successfully updated previousPrice
+                                                // You can add any additional logic here if needed
+                                            }
+                                            .addOnFailureListener { e ->
+                                                // Handle the failure to update previousPrice
+                                                // You might want to log the error or show an error message to the user
+                                            }
+                                    }
+                                }
+
+                                val alertDialog = alertDialogBuilder.create()
+                                alertDialog.show()
+                            }
+                        }
+
+
+
                         tvDuePayment.text = price
 
 
@@ -175,6 +209,21 @@ class DashboardPaymentTenantFragment : Fragment() {
                     // Handle errors
                 }
         }
+    }
+
+    private fun showPriceUpdateDialog(dormName: String?, previousPrice: String, currentPrice: String) {
+        val alertDialogBuilder = AlertDialog.Builder(requireContext())
+        alertDialogBuilder.setTitle("Dormitory Price Update")
+
+        val message = "$dormName has updated its price.\nPrevious: $previousPrice\nCurrent: $currentPrice"
+        alertDialogBuilder.setMessage(message)
+
+        alertDialogBuilder.setPositiveButton("Okay") { dialog, which ->
+            // Handle the "Okay" button click if needed
+        }
+
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     private fun showToast(message: String) {
