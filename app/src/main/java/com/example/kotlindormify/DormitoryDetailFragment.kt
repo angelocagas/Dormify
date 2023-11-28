@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -45,6 +46,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
     private lateinit var userId: String
     private lateinit var ivProfilePicture: ImageView
     private var googleMap: GoogleMap? = null
+    private val firestore = FirebaseFirestore.getInstance()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,8 +62,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
         val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
         val tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
-
-
+        var ratingBar: RatingBar = view.findViewById(R.id.Ratingbar)
 
 
         // Retrieve dormitory data from arguments
@@ -82,6 +84,56 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val rentalTerm = arguments?.getString("rentalTerm")
         val bathroom = arguments?.getString("bathroom")
         val genderRestriction = arguments?.getString("genderRestriction")
+
+        //Ratings
+
+        val dormitoryCollection = firestore.collection("dormitories")
+
+// Query for the specific dormitoryId
+        dormitoryCollection.document(dormitoryId!!).get()
+            .addOnSuccessListener { dormDocument ->
+                if (dormDocument.exists()) {
+                    var ratingBar: RatingBar = view.findViewById(R.id.Ratingbar)
+                    var txtRating: TextView = view.findViewById(R.id.Ratingtxt)
+
+                    val numOfRatings = dormDocument.getDouble("numOfRatings") ?: 0.0
+                    val numOfStars = dormDocument.getDouble("numOfStars") ?: 0.0
+                    var updatedRatings: Double = 0.0
+
+                    if (numOfRatings > 0) {
+                        updatedRatings = numOfStars / numOfRatings
+                        ratingBar.rating = updatedRatings.toFloat()
+                        txtRating.text = "$updatedRatings / 5.0"
+                    } else {
+                        txtRating.text = "No ratings yet"
+                        ratingBar.rating = 0.0F
+                    }
+
+                    // Limit updatedRatings to 2 decimal places
+                    updatedRatings = String.format("%.2f", updatedRatings).toDouble()
+
+
+                    // Create a map with the updated values
+                    val updatedValues = mapOf(
+                        "ratings" to updatedRatings
+                    )
+
+                    // Update the specific document
+                    dormitoryCollection.document(dormitoryId).update(updatedValues)
+
+                } else {
+                    Toast.makeText(requireContext(), "Document does not exist", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error getting document: $e", Toast.LENGTH_SHORT).show()
+            }
+
+
+
+
+
+
 
 
         val imageSliderAdapter = ImageSliderAdapter(requireContext(), imageUrls ?: emptyList())

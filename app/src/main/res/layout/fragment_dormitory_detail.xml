@@ -168,11 +168,11 @@
                             android:layout_marginStart="3dp"
                             android:numStars="5"
                             android:progressTint="#FFBF00"
-                            android:rating="4"
-                            android:allowClickWhenDisabled="false"
+                            android:rating="0"
                             android:scaleX=".45"
+                            android:isIndicator="true"
                             android:scaleY=".45"
-                            android:stepSize="1"
+                            android:stepSize=".5"
                             android:transformPivotX="1dp" />
 
 
@@ -190,13 +190,13 @@
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@id/Ratingbar"
                             android:layout_marginBottom="10dp"
-                            android:text="4 out of 5 Rating"
+                            android:text="Loading"
                             android:layout_marginTop="4dp"
                             android:layout_toEndOf="@id/Ratingbar"
                             android:layout_marginStart="-130dp"
                             android:textAlignment="viewStart"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
