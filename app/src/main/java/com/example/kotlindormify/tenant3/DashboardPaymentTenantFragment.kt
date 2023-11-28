@@ -105,60 +105,62 @@ class DashboardPaymentTenantFragment : Fragment() {
         // Current user's UID
         val currentUserId = FirebaseAuth.getInstance().currentUser?.uid
 
-        // Fetch all documents in the "tenant" collection
-        tenantCollection.get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    // Access data from each document
-                    val tenantId = document.getString("tenantId")
-                    val dormitoryId = document.getString("dormitoryId")
-                    // Retrieve the timestamp as a Date object
-                    val acceptedDateTimestamp = document.getTimestamp("acceptedDate")
-                    val contractEndDate = document.getTimestamp("contractEndDate")
+        // Check if the current user's UID is not null
+        currentUserId?.let {
+            // Fetch the document for the current user only
+            tenantCollection.document(it).get()
+                .addOnSuccessListener { document ->
+                    if (document.exists()) {
+                        // Access data from the document
+                        val tenantId = document.getString("tenantId")
+                        val dormitoryId = document.getString("dormitoryId")
+                        // Retrieve the timestamp as a Date object
+                        val acceptedDateTimestamp = document.getTimestamp("acceptedDate")
+                        val contractEndDate = document.getTimestamp("contractEndDate")
 
-// Check if acceptedDateTimestamp is not null
-                    acceptedDateTimestamp?.let {
-                        // Add one month to the accepted date
-                        val nextMonthDate = Calendar.getInstance()
-                        nextMonthDate.time = it.toDate()
-                        nextMonthDate.add(Calendar.MONTH, 1)
+                        // Check if acceptedDateTimestamp is not null
+                        acceptedDateTimestamp?.let {
+                            // Add one month to the accepted date
+                            val nextMonthDate = Calendar.getInstance()
+                            nextMonthDate.time = it.toDate()
+                            nextMonthDate.add(Calendar.MONTH, 1)
 
-                        // Create a SimpleDateFormat with the desired pattern
-                        val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+                            // Create a SimpleDateFormat with the desired pattern
+                            val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
 
-                        // Format the timestamp to a string
-                        val nextMonthDateString = dateFormat.format(nextMonthDate.time)
+                            // Format the timestamp to a string
+                            val nextMonthDateString = dateFormat.format(nextMonthDate.time)
 
-                        // Set the formatted string to the TextView
-                        tvDueDate.text = nextMonthDateString
-                    }
+                            // Set the formatted string to the TextView
+                            tvDueDate.text = nextMonthDateString
+                        }
 
-                    contractEndDate?.let {
-                        // Create a SimpleDateFormat with the desired pattern
-                        val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+                        contractEndDate?.let {
+                            // Create a SimpleDateFormat with the desired pattern
+                            val dateFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
 
-                        // Format the timestamp to a string
-                        val endDateString = dateFormat.format(it.toDate())
+                            // Format the timestamp to a string
+                            val endDateString = dateFormat.format(it.toDate())
 
-                        // Set the formatted string to the TextView for contractEndDate
-                        // If you have a different TextView for contractEndDate, replace tvDueDate with the appropriate TextView
-                        tvEndContractDate.text = endDateString
-                    }
+                            // Set the formatted string to the TextView for contractEndDate
+                            // If you have a different TextView for contractEndDate, replace tvDueDate with the appropriate TextView
+                            tvEndContractDate.text = endDateString
+                        }
 
-
-
-
-
-                    // Check if the current user's UID matches the tenantId
-                    if (currentUserId == tenantId) {
-                        fetchDormInfo(dormitoryId, tvDormName, imgDormProfile, tvDuePayment)
+                        // Check if the current user's UID matches the tenantId
+                        if (currentUserId == tenantId) {
+                            fetchDormInfo(dormitoryId, tvDormName, imgDormProfile, tvDuePayment)
+                        }
+                    } else {
+                        // Handle the case where the document for the current user doesn't exist
                     }
                 }
-            }
-            .addOnFailureListener { exception ->
-                // Handle errors
-            }
+                .addOnFailureListener { exception ->
+                    // Handle errors
+                }
+        }
     }
+
 
     private fun fetchDormInfo(dormitoryId: String?, tvDormName: TextView, imgDormProfile: ImageView, tvDuePayment:TextView) {
         // Check if dormitoryId is not null

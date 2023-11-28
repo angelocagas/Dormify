@@ -719,7 +719,10 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                                             selectedWater,
                                             selectedPaymentOptions,
                                             allAmenitiesList,
-                                            genderRestriction
+                                            genderRestriction,
+                                            0.0,
+                                            0.0,
+                                            0.0
 
                                             )
 

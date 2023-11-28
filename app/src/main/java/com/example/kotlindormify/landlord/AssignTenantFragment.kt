@@ -254,7 +254,8 @@ class AssignTenantFragment : Fragment() {
                                             "acceptedDate" to FieldValue.serverTimestamp(),
                                             "contractEndDate" to contractEndDate,
                                             "roomNumber" to selectedRoom!!.roomNumber,
-                                            "landlordId" to currentUserId
+                                            "landlordId" to currentUserId,
+                                            "hasRated" to false
                                             // Add other fields similar to the "requester_data"
                                         )
                                         tenantRef.set(tenantData)
