@@ -726,9 +726,12 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
 
                                             )
 
+                                        val checkDormitoriesCollection = firestore.collection("check_dormitories")
+
+
                                         // Add the dormitory information to Firestore
                                         val dormitoryDocRef =
-                                            dormitoriesCollection.document(newDormId)
+                                            checkDormitoriesCollection.document(newDormId)
                                         dormitoryDocRef.set(dormitory)
                                             .addOnCompleteListener { task ->
                                                 if (task.isSuccessful) {
@@ -953,7 +956,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     // Function to add rooms to the dormitory
     private fun addRoomsToDormitory(dormitoryId: String, numOfRooms: Int, maxCapacity: Int) {
         // Reference to the specific dormitory document in the Firestore collection
-        val dormitoryDocRef = firestore.collection("dormitories").document(dormitoryId)
+        val dormitoryDocRef = firestore.collection("check_dormitories").document(dormitoryId)
 
         // Initialize a batch write to efficiently write multiple documents
         val batch = firestore.batch()
