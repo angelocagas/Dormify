@@ -98,9 +98,9 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     private lateinit var selectedImageUri: Uri
     private var isImageSelected = false
 
-        private val PICK_IMAGE_REQUEST2 = 1
-        private lateinit var selectedImageUri2: Uri
-        private var isImageSelected2 = false
+    private val PICK_IMAGE_REQUEST2 = 1
+    private lateinit var selectedImageUri2: Uri
+    private var isImageSelected2 = false
 
 
     private val PICK_PERMIT_IMAGE_REQUEST = 2
@@ -289,16 +289,16 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
         }
 
 
-     /*   if (genderRestriction.isEmpty()) {
-            // Handle the case when no radio button is selected
-            binding.lblGenderRestrictions.text = "Gender Restrictions is required"  // Update UI element with an error message
-            binding.lblDormName3.visibility = View.VISIBLE
+        /*   if (genderRestriction.isEmpty()) {
+               // Handle the case when no radio button is selected
+               binding.lblGenderRestrictions.text = "Gender Restrictions is required"  // Update UI element with an error message
+               binding.lblDormName3.visibility = View.VISIBLE
 
-        } else {
-            // Clear error messages or update UI elements accordingly
-            binding.lblGenderRestrictions.text = "Gender Restrictions"  // Clear the error message
-            binding.lblDormName3.visibility = View.INVISIBLE
-        }*/
+           } else {
+               // Clear error messages or update UI elements accordingly
+               binding.lblGenderRestrictions.text = "Gender Restrictions"  // Clear the error message
+               binding.lblDormName3.visibility = View.INVISIBLE
+           }*/
 
 
 
@@ -410,450 +410,448 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
                 binding.lblPhoneNumber.text = "Phone Number"
 
                 var amenitiesString = binding.etAmenities.text.toString()
-            var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
-            var allAmenitiesList: List<String>
+                var amenitiesList = amenitiesString.split(",").map { it.trim() }.toMutableList()
+                var allAmenitiesList: List<String>
 
-            if (amenitiesString.isNotEmpty()){
-                allAmenitiesList = selectedAmenities + amenitiesList
-            }
-            else{
-                allAmenitiesList = selectedAmenities
-            }
+                if (amenitiesString.isNotEmpty()){
+                    allAmenitiesList = selectedAmenities + amenitiesList
+                }
+                else{
+                    allAmenitiesList = selectedAmenities
+                }
 
 
 
 
 
-            if (!cbKitchen.isChecked && !cbLounge.isChecked && !cbWifi.isChecked && !cbSwimming.isChecked && !cbFitness.isChecked && !cbParking.isChecked && !cbCCTV.isChecked && etAmenities.isEmpty()) {
-                binding.lblAmenities.text = "Amenities is required"  // Update UI element with an error message
-                binding.lblAmenities.setTextColor(resolvedColor)
+                if (!cbKitchen.isChecked && !cbLounge.isChecked && !cbWifi.isChecked && !cbSwimming.isChecked && !cbFitness.isChecked && !cbParking.isChecked && !cbCCTV.isChecked && etAmenities.isEmpty()) {
+                    binding.lblAmenities.text = "Amenities is required"  // Update UI element with an error message
+                    binding.lblAmenities.setTextColor(resolvedColor)
 
 
-            } else {
-                binding.lblAmenities.text = "Amenities"  // Clear the error message
-                binding.lblAmenities.setTextColor(default)
-                binding.lblAmenities2.visibility = View.INVISIBLE
-
-            }
-
-
-            if (!checkBoxGcash.isChecked && !checkBoxCash.isChecked ) {
-                binding.lblPaymentOptions.text = "Payment Options is required"  // Update UI element with an error message
-                binding.lblPaymentOptions.setTextColor(resolvedColor)
-
-
-            } else {
-                binding.lblPaymentOptions.text = "Payment Options"  // Clear the error message
-                binding.lblPaymentOptions.setTextColor(default)
-
-            }
-
-
-
-
-
-            if (radioBathroom.checkedRadioButtonId == -1) {
-                // No radio button is selected, highlight in red
-                // You can change the background color, set a red border, or any other visual indication
-
-                // None of the radio buttons is checked, show an error message
-                binding.lblBathroom.text = "Bathroom is required"
-                binding.lblBathroom.setTextColor(resolvedColor)
-
-
-
-            } else {
-                // Continue with form submission or other actions
-                // At least one radio button is checked, clear the error message
-                binding.lblBathroom.text = "Bathroom"
-                binding.lblBathroom.setTextColor(default)
-
-            }
-
-
-
-            if (radioRentalTerms.checkedRadioButtonId == -1) {
-                // No radio button is selected, highlight in red
-                // You can change the background color, set a red border, or any other visual indication
-
-                // None of the radio buttons is checked, show an error message
-                binding.lblRentalTerms.text = "Rental Terms is required"
-                binding.lblRentalTerms.setTextColor(resolvedColor)
-
-
-
-            } else {
-                // Continue with form submission or other actions
-                // At least one radio button is checked, clear the error message
-                binding.lblRentalTerms.text = "Rental Terms"
-                binding.lblRentalTerms.setTextColor(default)
-
-
-            }
-
-
-            if (radioWater.checkedRadioButtonId == -1) {
-                // No radio button is selected, highlight in red
-                // You can change the background color, set a red border, or any other visual indication
-
-                // None of the radio buttons is checked, show an error message
-                binding.lblWater.text = "Water Bill is required"
-                binding.lblWater.setTextColor(resolvedColor)
-
-
-
-            } else {
-                // Continue with form submission or other actions
-                // At least one radio button is checked, clear the error message
-                binding.lblWater.text = "Water Bill"
-                binding.lblWater.setTextColor(default)
-
-
-            }
-
-            if (radioElectricity.checkedRadioButtonId == -1) {
-                // No radio button is selected, highlight in red
-                // You can change the background color, set a red border, or any other visual indication
-
-                // None of the radio buttons is checked, show an error message
-                binding.lblElectricity.text = "Electric Bill is required"
-                binding.lblElectricity.setTextColor(resolvedColor)
-
-
-            } else {
-                // Continue with form submission or other actions
-                // At least one radio button is checked, clear the error message
-                binding.lblElectricity.text = "Electric Bill"
-                binding.lblElectricity.setTextColor(default)
-                binding.lblElectricity2.visibility = View.INVISIBLE
-
-            }
-
-            if (radioGroupRestrictions.checkedRadioButtonId == -1) {
-                // No radio button is selected, highlight in red
-                // You can change the background color, set a red border, or any other visual indication
-
-                // None of the radio buttons is checked, show an error message
-                binding.lblGenderRestrictions.text = "Gender Restrictions is required"
-                binding.lblGenderRestrictions.setTextColor(resolvedColor)
-
-
-
-            } else {
-                // Continue with form submission or other actions
-                // At least one radio button is checked, clear the error message
-                binding.lblGenderRestrictions.text = "Gender Restrictions"
-                binding.lblGenderRestrictions.setTextColor(default)
-
-
-            }
-
-
-
-
-            if (dormName.isEmpty()) {
-                binding.etDormNameLayout.error = "Dormitory Name is required"
-                binding.lblDormName.text = "Dormitory Name is required" // Set error message in lblFullName
-
-            } else {
-                binding.etDormNameLayout.error = null // Clear the error if not empty
-                binding.lblDormName.text = "Dormitory Name" // Clear the error message in lblFullName
-                binding.lblDormName3.visibility = View.INVISIBLE
-            }
-            if (numOfRooms.isEmpty()) {
-                binding.etRoomsLayout.error = "Number of Rooms is required"
-                binding.lblRoomsName.text = "Number of Rooms is required" // Set error message in lblFullName
-
-            } else {
-                binding.etRoomsLayout.error = null // Clear the error if not empty
-                binding.lblRoomsName.text = "Number of Rooms" // Clear the error message in lblFullName
-
-            }
-            if (description.isEmpty()) {
-                binding.etDescriptionLayout.error = "Description is required"
-                binding.lblDescription.text = "Description is required" // Set error message in lblFullName
-
-            } else {
-                binding.etDescriptionLayout.error = null // Clear the error if not empty
-                binding.lblDescription.text = "Description" // Clear the error message in lblFullName
-                binding.lblAddress2.visibility = View.INVISIBLE
-            }
-            if (address.isEmpty()) {
-                binding.etAddressLayout.error = "Address is required"
-                binding.lblAddress.text = "Address is required" // Set error message in lblFullName
-
-            } else {
-                binding.etAddressLayout.error = null // Clear the error if not empty
-                binding.lblAddress.text = "Address" // Clear the error message in lblFullName
-
-            }
-
-
-            if (price.isEmpty()) {
-                binding.etPriceLayout.error = "Price (₱) is required"
-                binding.lblPrice.text = "Price (₱) is required" // Set error message in lblFullName
-
-            } else {
-                binding.etPriceLayout.error = null // Clear the error if not empty
-                binding.lblPrice.text = "Price (₱)" // Clear the error message in lblFullName
-
-            }
-            if (phoneNumber.isEmpty()) {
-                binding.etPhoneNumLayout.error = "Phone Number is required"
-                binding.lblPhoneNumber.text = "Phone Number is required"
-
-            } else {
-                binding.etPhoneNumLayout.error = null // Clear the error if not empty
-                binding.lblPhoneNumber.text = "Phone Number" // Clear the error message in lblFullName
-
-            }
-            if (email.isEmpty()) {
-                binding.etEmailLayout.error = "Landlord Email is required"
-                binding.lblEmail.text = "Landlord Email is required" // Set error message in lblFullName
-
-            } else {
-                binding.etEmailLayout.error = null // Clear the error if not empty
-                binding.lblEmail.text = "Landlord Email" // Clear the error message in lblFullName
-
-            }
-            if (username.isEmpty()) {
-                binding.etUsernameLayout.error = "Landlord Name is required"
-                binding.lblusername.text = "Landlord Name is required" // Set error message in lblFullName
-
-            } else {
-                binding.etUsernameLayout.error = null // Clear the error if not empty
-                binding.lblusername.text = "Landlord Name" // Clear the error message in lblFullName
-
-            }
-
-            if (max.isEmpty()) {
-                binding.etMaxCapacityLayout.error = "Number of Rooms is required"
-                binding.lblMaxCapacity.text = "Number of Rooms is required" // Set error message in lblFullName
-
-            } else {
-                binding.etMaxCapacityLayout.error = null // Clear the error if not empty
-                binding.lblMaxCapacity.text = "Number of Rooms" // Clear the error message in lblFullName
-
-            }
-
-
-
-            // Check if an image has been selected
-            if (!isImageSelected) {
-                Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
-                binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
-                binding.textView4.text = "Upload Dormitory Images is required" // Set error message in lblFullName
-
-            } else {
-                binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
-                binding.textView4.text = "Upload Dormitory Images" // Clear the error message in lblFullName
-            }
-
-            // Check if an image has been selected
-            if (!isImageSelected2) {
-                Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
-                    binding.btnAddImagefront.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
-                binding.textView7.text = "Upload Dormitory Profile is required" // Set error message in lblFullName
-
-            } else {
-                binding.btnAddImagefront.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
-                binding.textView7.text = "Upload Dormitory Profile" // Clear the error message in lblFullName
-            }
-
-            if (!isPermitImageSelected) {
-                Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
-                binding.btnAddPermitImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
-                binding.tvAddPermitImage.text = "Upload Business Permit Photo is required" // Set error message in lblFullName
-
-                return@setOnClickListener
-            } else {
-                binding.btnAddPermitImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
-                binding.tvAddPermitImage.text = "Upload Business Permit Photo" // Clear the error message in lblFullName
-            }
-
-            // Check if an image has been selected
-            if (!isPermitImageSelected) {
-                AlertDialog.Builder(requireContext())
-                    .setMessage("Please select both Dormitory Image and Business Permit Image")
-                    .setPositiveButton("OK") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .show()
-                return@setOnClickListener // Prevent further execution of the click listener
-            }
-
-
-
-
-            if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && allAmenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
-                if (cbAgreement.isChecked) {
-                    showLoadingDialog()
-                    val activity = requireActivity() as LandlordDashboardActivity
-                    val userEmail = activity.userEmail
-
-                    if (userEmail != null) {
-                        fetchCurrentUserUid(userEmail) { userId ->
-                            if (binding.etLatitude.text.isNotEmpty() && binding.etLongitude.text.isNotEmpty()) {
-                                if (userId != null) {
-                                    generateUniqueDormId { newDormId ->
-                                        val dormitory = Dormitories(
-                                            newDormId,
-                                            dormName,
-                                            numOfRooms.toInt(),
-                                            maxCapacity.toInt(),
-                                            previousPrice,
-                                            price,
-                                            gcashNum,
-                                            address,
-                                            phoneNumber,
-                                            email,
-                                            username,
-                                            description,
-                                            userId,
-                                            selectedLocation.latitude,
-                                            selectedLocation.longitude,
-                                            emptyList(),
-                                            selectedRentalTerm,
-                                            selectedBathroom,
-                                            selectedElectric,
-                                            selectedWater,
-                                            selectedPaymentOptions,
-                                            allAmenitiesList,
-                                            genderRestriction,
-                                            0.0,
-                                            0.0,
-                                            0.0
-
-                                            )
-
-                                        val checkDormitoriesCollection = firestore.collection("check_dormitories")
-
-
-                                        // Add the dormitory information to Firestore
-                                        val dormitoryDocRef =
-                                            checkDormitoriesCollection.document(newDormId)
-                                        dormitoryDocRef.set(dormitory)
-                                            .addOnCompleteListener { task ->
-                                                if (task.isSuccessful) {
-                                                    // Successfully added dormitory, now add rooms
-                                                    addRoomsToDormitory(
-                                                        newDormId,
-                                                        numOfRooms.toInt(),
-                                                        maxCapacity.toInt()
-                                                    )
-                                                    uploadImagesAndProfileImage(newDormId)
-                                                    uploadPermitImage(newDormId)
-
-                                                    val qrCodeText = "Dormitory Info:\n\n" +
-                                                            "Name: $dormName\n" +
-                                                            "Address: $address\n" +
-                                                            "Description: $description\n" +
-                                                            "Number of Rooms: $numOfRooms\n" +
-                                                            "Price: ₱$price" +
-                                                            "Rental Term: $selectedRentalTerm\n\n" +
-                                                            "Contact \nPhone Number: $phoneNumber\n" +
-                                                            "Name: $username\n"
-
-
-                                                    val qrCodeBitmap = generateQRCode(qrCodeText)
-
-                                                    // Upload the QR code image to Firebase Storage
-                                                    val qrCodeImageRef =
-                                                        storageRef.child("dormitory_qr/$newDormId-qr_code.jpg")
-                                                    val baos = ByteArrayOutputStream()
-                                                    qrCodeBitmap.compress(
-                                                        Bitmap.CompressFormat.JPEG,
-                                                        100,
-                                                        baos
-                                                    )
-                                                    val data = baos.toByteArray()
-
-                                                    qrCodeImageRef.putBytes(data)
-                                                        .addOnSuccessListener { _ ->
-                                                            // QR code image uploaded successfully
-                                                            // Now, you can get the download URL of the QR code image
-                                                            qrCodeImageRef.downloadUrl
-                                                                .addOnSuccessListener { downloadUrl ->
-                                                                    val qrCodeImageUrl =
-                                                                        downloadUrl.toString()
-
-                                                                    // Store the QR code image URL in Firestore
-                                                                    dormitoryDocRef.update(
-                                                                        "qrCodeImageUrl", qrCodeImageUrl,
-                                                                        "dormCreatedTimestamp",
-                                                                        FieldValue.serverTimestamp()
-                                                                    )
-                                                                        .addOnSuccessListener { _ ->
-                                                                            // Dormitory information updated with QR code image URL
-                                                                            // Continue with other operations and show success dialog
-                                                                            val successDialog =
-                                                                                AlertDialog.Builder(
-                                                                                    requireContext()
-                                                                                )
-                                                                                    .setTitle("Success!")
-                                                                                    .setMessage("You've added a dormitory.")
-                                                                                    .setPositiveButton(
-                                                                                        "OK"
-                                                                                    ) { _, _ ->
-                                                                                        requireActivity().supportFragmentManager.popBackStack()
-                                                                                    }
-                                                                                    .create()
-                                                                            progressDialog?.dismiss()
-
-                                                                            successDialog.show()
-                                                                        }
-                                                                        .addOnFailureListener { e ->
-                                                                            // Handle failure to update dormitory information with QR code image URL
-                                                                        }
-                                                                }
-                                                                .addOnFailureListener { e ->
-                                                                    // Handle failure to get the download URL of the QR code image
-                                                                }
-                                                        }
-                                                        .addOnFailureListener { e ->
-                                                            // Handle failure to upload QR code image
-                                                        }
-                                                } else {
-                                                    Toast.makeText(requireContext(), "Failed to add dormitory. Please try again.", Toast.LENGTH_SHORT).show()
-                                                    progressDialog?.dismiss()
-                                                }
-                                            }
-                                    }
-                                } else {
-                                    Toast.makeText(
-                                        requireContext(),
-                                        "User not found with the specified email. Please try again.",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                    progressDialog?.dismiss()
-                                }
-                            } else {
-                                Toast.makeText(requireContext(), "Pin the dormitory location on the map first to continue (Long press on the map)", Toast.LENGTH_SHORT).show()
-                                progressDialog?.dismiss()
-                            }
-                        }
-                    }
                 } else {
+                    binding.lblAmenities.text = "Amenities"  // Clear the error message
+                    binding.lblAmenities.setTextColor(default)
+                    binding.lblAmenities2.visibility = View.INVISIBLE
+
+                }
+
+
+                if (!checkBoxGcash.isChecked && !checkBoxCash.isChecked ) {
+                    binding.lblPaymentOptions.text = "Payment Options is required"  // Update UI element with an error message
+                    binding.lblPaymentOptions.setTextColor(resolvedColor)
+
+
+                } else {
+                    binding.lblPaymentOptions.text = "Payment Options"  // Clear the error message
+                    binding.lblPaymentOptions.setTextColor(default)
+
+                }
+
+
+
+
+
+                if (radioBathroom.checkedRadioButtonId == -1) {
+                    // No radio button is selected, highlight in red
+                    // You can change the background color, set a red border, or any other visual indication
+
+                    // None of the radio buttons is checked, show an error message
+                    binding.lblBathroom.text = "Bathroom is required"
+                    binding.lblBathroom.setTextColor(resolvedColor)
+
+
+
+                } else {
+                    // Continue with form submission or other actions
+                    // At least one radio button is checked, clear the error message
+                    binding.lblBathroom.text = "Bathroom"
+                    binding.lblBathroom.setTextColor(default)
+
+                }
+
+
+
+                if (radioRentalTerms.checkedRadioButtonId == -1) {
+                    // No radio button is selected, highlight in red
+                    // You can change the background color, set a red border, or any other visual indication
+
+                    // None of the radio buttons is checked, show an error message
+                    binding.lblRentalTerms.text = "Rental Terms is required"
+                    binding.lblRentalTerms.setTextColor(resolvedColor)
+
+
+
+                } else {
+                    // Continue with form submission or other actions
+                    // At least one radio button is checked, clear the error message
+                    binding.lblRentalTerms.text = "Rental Terms"
+                    binding.lblRentalTerms.setTextColor(default)
+
+
+                }
+
+
+                if (radioWater.checkedRadioButtonId == -1) {
+                    // No radio button is selected, highlight in red
+                    // You can change the background color, set a red border, or any other visual indication
+
+                    // None of the radio buttons is checked, show an error message
+                    binding.lblWater.text = "Water Bill is required"
+                    binding.lblWater.setTextColor(resolvedColor)
+
+
+
+                } else {
+                    // Continue with form submission or other actions
+                    // At least one radio button is checked, clear the error message
+                    binding.lblWater.text = "Water Bill"
+                    binding.lblWater.setTextColor(default)
+
+
+                }
+
+                if (radioElectricity.checkedRadioButtonId == -1) {
+                    // No radio button is selected, highlight in red
+                    // You can change the background color, set a red border, or any other visual indication
+
+                    // None of the radio buttons is checked, show an error message
+                    binding.lblElectricity.text = "Electric Bill is required"
+                    binding.lblElectricity.setTextColor(resolvedColor)
+
+
+                } else {
+                    // Continue with form submission or other actions
+                    // At least one radio button is checked, clear the error message
+                    binding.lblElectricity.text = "Electric Bill"
+                    binding.lblElectricity.setTextColor(default)
+                    binding.lblElectricity2.visibility = View.INVISIBLE
+
+                }
+
+                if (radioGroupRestrictions.checkedRadioButtonId == -1) {
+                    // No radio button is selected, highlight in red
+                    // You can change the background color, set a red border, or any other visual indication
+
+                    // None of the radio buttons is checked, show an error message
+                    binding.lblGenderRestrictions.text = "Gender Restrictions is required"
+                    binding.lblGenderRestrictions.setTextColor(resolvedColor)
+
+
+
+                } else {
+                    // Continue with form submission or other actions
+                    // At least one radio button is checked, clear the error message
+                    binding.lblGenderRestrictions.text = "Gender Restrictions"
+                    binding.lblGenderRestrictions.setTextColor(default)
+
+
+                }
+
+
+
+
+                if (dormName.isEmpty()) {
+                    binding.etDormNameLayout.error = "Dormitory Name is required"
+                    binding.lblDormName.text = "Dormitory Name is required" // Set error message in lblFullName
+
+                } else {
+                    binding.etDormNameLayout.error = null // Clear the error if not empty
+                    binding.lblDormName.text = "Dormitory Name" // Clear the error message in lblFullName
+                    binding.lblDormName3.visibility = View.INVISIBLE
+                }
+                if (numOfRooms.isEmpty()) {
+                    binding.etRoomsLayout.error = "Number of Rooms is required"
+                    binding.lblRoomsName.text = "Number of Rooms is required" // Set error message in lblFullName
+
+                } else {
+                    binding.etRoomsLayout.error = null // Clear the error if not empty
+                    binding.lblRoomsName.text = "Number of Rooms" // Clear the error message in lblFullName
+
+                }
+                if (description.isEmpty()) {
+                    binding.etDescriptionLayout.error = "Description is required"
+                    binding.lblDescription.text = "Description is required" // Set error message in lblFullName
+
+                } else {
+                    binding.etDescriptionLayout.error = null // Clear the error if not empty
+                    binding.lblDescription.text = "Description" // Clear the error message in lblFullName
+                    binding.lblAddress2.visibility = View.INVISIBLE
+                }
+                if (address.isEmpty()) {
+                    binding.etAddressLayout.error = "Address is required"
+                    binding.lblAddress.text = "Address is required" // Set error message in lblFullName
+
+                } else {
+                    binding.etAddressLayout.error = null // Clear the error if not empty
+                    binding.lblAddress.text = "Address" // Clear the error message in lblFullName
+
+                }
+
+
+                if (price.isEmpty()) {
+                    binding.etPriceLayout.error = "Price (₱) is required"
+                    binding.lblPrice.text = "Price (₱) is required" // Set error message in lblFullName
+
+                } else {
+                    binding.etPriceLayout.error = null // Clear the error if not empty
+                    binding.lblPrice.text = "Price (₱)" // Clear the error message in lblFullName
+
+                }
+                if (phoneNumber.isEmpty()) {
+                    binding.etPhoneNumLayout.error = "Phone Number is required"
+                    binding.lblPhoneNumber.text = "Phone Number is required"
+
+                } else {
+                    binding.etPhoneNumLayout.error = null // Clear the error if not empty
+                    binding.lblPhoneNumber.text = "Phone Number" // Clear the error message in lblFullName
+
+                }
+                if (email.isEmpty()) {
+                    binding.etEmailLayout.error = "Landlord Email is required"
+                    binding.lblEmail.text = "Landlord Email is required" // Set error message in lblFullName
+
+                } else {
+                    binding.etEmailLayout.error = null // Clear the error if not empty
+                    binding.lblEmail.text = "Landlord Email" // Clear the error message in lblFullName
+
+                }
+                if (username.isEmpty()) {
+                    binding.etUsernameLayout.error = "Landlord Name is required"
+                    binding.lblusername.text = "Landlord Name is required" // Set error message in lblFullName
+
+                } else {
+                    binding.etUsernameLayout.error = null // Clear the error if not empty
+                    binding.lblusername.text = "Landlord Name" // Clear the error message in lblFullName
+
+                }
+
+                if (max.isEmpty()) {
+                    binding.etMaxCapacityLayout.error = "Number of Rooms is required"
+                    binding.lblMaxCapacity.text = "Number of Rooms is required" // Set error message in lblFullName
+
+                } else {
+                    binding.etMaxCapacityLayout.error = null // Clear the error if not empty
+                    binding.lblMaxCapacity.text = "Number of Rooms" // Clear the error message in lblFullName
+
+                }
+
+
+
+                // Check if an image has been selected
+                if (!isImageSelected) {
+                    Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                    binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                    binding.textView4.text = "Upload Dormitory Images is required" // Set error message in lblFullName
+
+                } else {
+                    binding.btnAddImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                    binding.textView4.text = "Upload Dormitory Images" // Clear the error message in lblFullName
+                }
+
+                // Check if an image has been selected
+                if (!isImageSelected2) {
+                    Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                    binding.btnAddImagefront.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                    binding.textView7.text = "Upload Dormitory Profile is required" // Set error message in lblFullName
+
+                } else {
+                    binding.btnAddImagefront.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                    binding.textView7.text = "Upload Dormitory Profile" // Clear the error message in lblFullName
+                }
+
+                if (!isPermitImageSelected) {
+                    Toast.makeText(requireContext(), "Please fill all fields.", Toast.LENGTH_SHORT).show()
+                    binding.btnAddPermitImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_blackerror)
+                    binding.tvAddPermitImage.text = "Upload Business Permit Photo is required" // Set error message in lblFullName
+
+                    return@setOnClickListener
+                } else {
+                    binding.btnAddPermitImage.setBackgroundResource(R.drawable.rectangle_radius_white_stroke_black)
+                    binding.tvAddPermitImage.text = "Upload Business Permit Photo" // Clear the error message in lblFullName
+                }
+
+                // Check if an image has been selected
+                if (!isPermitImageSelected) {
                     AlertDialog.Builder(requireContext())
-                        .setMessage("Please agree to the terms and conditions")
+                        .setMessage("Please select both Dormitory Image and Business Permit Image")
                         .setPositiveButton("OK") { dialog, _ ->
                             dialog.dismiss()
                         }
                         .show()
+                    return@setOnClickListener // Prevent further execution of the click listener
+                }
+
+
+
+
+                if (listOf(dormName, numOfRooms, price, address, phoneNumber, email, username, description, selectedRentalTerm, selectedBathroom, selectedElectric, selectedWater,).all { it.isNotEmpty() } && selectedPaymentOptions.isNotEmpty() && allAmenitiesList.isNotEmpty() && selectedAmenities.isNotEmpty()) {
+                    if (cbAgreement.isChecked) {
+                        showLoadingDialog()
+                        val activity = requireActivity() as LandlordDashboardActivity
+                        val userEmail = activity.userEmail
+
+                        if (userEmail != null) {
+                            fetchCurrentUserUid(userEmail) { userId ->
+                                if (binding.etLatitude.text.isNotEmpty() && binding.etLongitude.text.isNotEmpty()) {
+                                    if (userId != null) {
+                                        generateUniqueDormId { newDormId ->
+                                            val dormitory = Dormitories(
+                                                newDormId,
+                                                dormName,
+                                                numOfRooms.toInt(),
+                                                maxCapacity.toInt(),
+                                                previousPrice,
+                                                price,
+                                                gcashNum,
+                                                address,
+                                                phoneNumber,
+                                                email,
+                                                username,
+                                                description,
+                                                userId,
+                                                selectedLocation.latitude,
+                                                selectedLocation.longitude,
+                                                emptyList(),
+                                                selectedRentalTerm,
+                                                selectedBathroom,
+                                                selectedElectric,
+                                                selectedWater,
+                                                selectedPaymentOptions,
+                                                allAmenitiesList,
+                                                genderRestriction,
+                                                0.0,
+                                                0.0,
+                                                0.0,
+                                                "pending"
+
+                                            )
+
+                                            // Add the dormitory information to Firestore
+                                            val dormitoryDocRef =
+                                                dormitoriesCollection.document(newDormId)
+                                            dormitoryDocRef.set(dormitory)
+                                                .addOnCompleteListener { task ->
+                                                    if (task.isSuccessful) {
+                                                        // Successfully added dormitory, now add rooms
+                                                        addRoomsToDormitory(
+                                                            newDormId,
+                                                            numOfRooms.toInt(),
+                                                            maxCapacity.toInt()
+                                                        )
+                                                        uploadImagesAndProfileImage(newDormId)
+                                                        uploadPermitImage(newDormId)
+
+                                                        val qrCodeText = "Dormitory Info:\n\n" +
+                                                                "Name: $dormName\n" +
+                                                                "Address: $address\n" +
+                                                                "Description: $description\n" +
+                                                                "Number of Rooms: $numOfRooms\n" +
+                                                                "Price: ₱$price" +
+                                                                "Rental Term: $selectedRentalTerm\n\n" +
+                                                                "Contact \nPhone Number: $phoneNumber\n" +
+                                                                "Name: $username\n"
+
+
+                                                        val qrCodeBitmap = generateQRCode(qrCodeText)
+
+                                                        // Upload the QR code image to Firebase Storage
+                                                        val qrCodeImageRef =
+                                                            storageRef.child("dormitory_qr/$newDormId-qr_code.jpg")
+                                                        val baos = ByteArrayOutputStream()
+                                                        qrCodeBitmap.compress(
+                                                            Bitmap.CompressFormat.JPEG,
+                                                            100,
+                                                            baos
+                                                        )
+                                                        val data = baos.toByteArray()
+
+                                                        qrCodeImageRef.putBytes(data)
+                                                            .addOnSuccessListener { _ ->
+                                                                // QR code image uploaded successfully
+                                                                // Now, you can get the download URL of the QR code image
+                                                                qrCodeImageRef.downloadUrl
+                                                                    .addOnSuccessListener { downloadUrl ->
+                                                                        val qrCodeImageUrl =
+                                                                            downloadUrl.toString()
+
+                                                                        // Store the QR code image URL in Firestore
+                                                                        dormitoryDocRef.update(
+                                                                            "qrCodeImageUrl", qrCodeImageUrl,
+                                                                            "dormCreatedTimestamp",
+                                                                            FieldValue.serverTimestamp()
+                                                                        )
+                                                                            .addOnSuccessListener { _ ->
+                                                                                // Dormitory information updated with QR code image URL
+                                                                                // Continue with other operations and show success dialog
+                                                                                val successDialog =
+                                                                                    AlertDialog.Builder(
+                                                                                        requireContext()
+                                                                                    )
+                                                                                        .setTitle("Success!")
+                                                                                        .setMessage("Dormitory details successfully submitted for approval.")
+                                                                                        .setPositiveButton(
+                                                                                            "OK"
+                                                                                        ) { _, _ ->
+                                                                                            requireActivity().supportFragmentManager.popBackStack()
+                                                                                        }
+                                                                                        .create()
+                                                                                progressDialog?.dismiss()
+
+                                                                                successDialog.show()
+                                                                            }
+                                                                            .addOnFailureListener { e ->
+                                                                                // Handle failure to update dormitory information with QR code image URL
+                                                                            }
+                                                                    }
+                                                                    .addOnFailureListener { e ->
+                                                                        // Handle failure to get the download URL of the QR code image
+                                                                    }
+                                                            }
+                                                            .addOnFailureListener { e ->
+                                                                // Handle failure to upload QR code image
+                                                            }
+                                                    } else {
+                                                        Toast.makeText(requireContext(), "Failed to add dormitory. Please try again.", Toast.LENGTH_SHORT).show()
+                                                        progressDialog?.dismiss()
+                                                    }
+                                                }
+                                        }
+                                    } else {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "User not found with the specified email. Please try again.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        progressDialog?.dismiss()
+                                    }
+                                } else {
+                                    Toast.makeText(requireContext(), "Pin the dormitory location on the map first to continue (Long press on the map)", Toast.LENGTH_SHORT).show()
+                                    progressDialog?.dismiss()
+                                }
+                            }
+                        }
+                    } else {
+                        AlertDialog.Builder(requireContext())
+                            .setMessage("Please agree to the terms and conditions")
+                            .setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                        progressDialog?.dismiss()
+                    }
+                } else {
+
+                    AlertDialog.Builder(requireContext())
+                        .setMessage("Please Fill Out All Fields")
+                        .setPositiveButton("OK") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .show()
+
                     progressDialog?.dismiss()
                 }
-            } else {
-
-                AlertDialog.Builder(requireContext())
-                    .setMessage("Please Fill Out All Fields")
-                    .setPositiveButton("OK") { dialog, _ ->
-                        dialog.dismiss()
-                    }
-                    .show()
-
-                progressDialog?.dismiss()
             }
-        }
         }
 
 
@@ -956,7 +954,7 @@ class LandlordAddDormitoryFragment : Fragment(), OnMapReadyCallback {
     // Function to add rooms to the dormitory
     private fun addRoomsToDormitory(dormitoryId: String, numOfRooms: Int, maxCapacity: Int) {
         // Reference to the specific dormitory document in the Firestore collection
-        val dormitoryDocRef = firestore.collection("check_dormitories").document(dormitoryId)
+        val dormitoryDocRef = firestore.collection("dormitories").document(dormitoryId)
 
         // Initialize a batch write to efficiently write multiple documents
         val batch = firestore.batch()

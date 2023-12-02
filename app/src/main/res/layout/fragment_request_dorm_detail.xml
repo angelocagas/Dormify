@@ -48,7 +48,7 @@
 
             <TextView
                 android:id="@+id/tvDormitoryName"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="90dp"
                 android:text=""
@@ -70,13 +70,13 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Landlord Name"
+                android:text="Price"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvDormitoryName" />
 
             <TextView
-                android:id="@+id/tvLandlordName"
+                android:id="@+id/tvPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="90dp"
@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.4dp"
                 android:background="#000000"
-                app:layout_constraintTop_toBottomOf="@+id/tvLandlordName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
 
 
@@ -107,7 +107,7 @@
                 android:text="Phone Number"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvLandlordName" />
+                app:layout_constraintTop_toBottomOf="@+id/tvPrice" />
 
             <TextView
                 android:id="@+id/tvPhoneNumber"
@@ -223,7 +223,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Gender"
+                android:text="Gender Restriction"
                 android:textSize="15sp"
 
                 app:layout_constraintStart_toStartOf="parent"
@@ -371,7 +371,7 @@
                 android:layout_marginStart="15dp"
                 android:background="@drawable/rectangle_radius_super_light_gray2"
                 android:elevation="4dp"
-                android:text="Accept"
+                android:text="Approve"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -384,7 +384,7 @@
                 android:layout_marginEnd="15dp"
                 android:layout_toEndOf="@+id/btnAccept"
                 android:background="@drawable/rectangle_radius_super_light_gray3"
-                android:text="Decline"
+                android:text="Deny"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold" />

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingHorizontal="15dp">
 
 
     <androidx.cardview.widget.CardView
@@ -20,7 +21,8 @@
             android:layout_marginStart="5dp"
             android:src="@drawable/dorm_backbtn"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:visibility="gone"/>
 
 
         <TextView
@@ -36,7 +38,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAll"
+        android:id="@+id/btnPending"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -45,7 +47,7 @@
         android:background="@drawable/bg_btn_bck_light"
         android:fontFamily="@font/poppins_bold"
         android:padding="5dp"
-        android:text="All"
+        android:text="Pending"
         android:textColor="@color/white"
         android:textSize="10sp"
         app:layout_constraintEnd_toStartOf="@+id/btnApproved"
@@ -67,7 +69,7 @@
         android:textSize="10sp"
         app:layout_constraintEnd_toStartOf="@+id/btnDenied"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/btnAll"
+        app:layout_constraintStart_toEndOf="@+id/btnPending"
         app:layout_constraintTop_toBottomOf="@+id/card" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -92,7 +94,7 @@
         android:id="@+id/recyclerRequestsList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="120dp"
         android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

@@ -4,12 +4,12 @@
 
     <item android:icon="@drawable/dorm_home"
         android:id="@+id/menu_request"
-        android:title="Request"/>
+        android:title="Dormitory Requests"/>
 
 
 
-    <item android:icon="@drawable/dorm_contacts"
+    <!-- <item android:icon="@drawable/dorm_contacts"
         android:id="@+id/menu_list"
-        android:title="List"/>
+        android:title="List"/> -->
 
 </menu>

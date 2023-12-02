@@ -355,6 +355,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
         val dormitoriesRef = firestore.collection("dormitories")
 
         dormitoriesRef
+            .whereEqualTo("status", "accepted") // Add this filter for accepted dormitories
             .get()
             .addOnSuccessListener { dormQuerySnapshot ->
                 val allDormitories = mutableListOf<Dormitory>()

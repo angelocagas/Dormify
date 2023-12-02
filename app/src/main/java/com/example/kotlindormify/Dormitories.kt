@@ -30,11 +30,13 @@ data class Dormitories(
     var genderRestriction: String? = null,
     var numOfStars: Double = 0.0,
     var numOfRatings: Double = 0.0,
-    var ratings: Double = 0.0
+    var ratings: Double = 0.0,
+    var status: String? = null
 
 ) {
     // No-argument constructor
     constructor() : this(
+        null,
         null,
         null,
         null,

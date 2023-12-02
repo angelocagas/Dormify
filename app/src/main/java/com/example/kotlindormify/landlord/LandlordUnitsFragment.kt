@@ -110,11 +110,14 @@ class LandlordUnitsFragment : Fragment() {
                                     val dormName = dormitoryDocument.getString("dormName")
                                     val dormPrice = dormitoryDocument.getString("price")
                                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
-                                    val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
-                                    val maxCapacity = dormitoryDocument.getLong("maxCapacity")?.toInt()
+                                    val numOfRooms =
+                                        dormitoryDocument.getLong("numOfRooms")?.toInt()
+                                    val maxCapacity =
+                                        dormitoryDocument.getLong("maxCapacity")?.toInt()
                                     val imageUrl = dormitoryDocument.get("image") as? List<String>
                                     val landlordId = dormitoryDocument.getString("landlordId")
-                                    val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
+                                    val qrCodeImageUrl =
+                                        dormitoryDocument.getString("qrCodeImageUrl")
                                     val latitude = dormitoryDocument.getDouble("latitude")
                                     val longitude = dormitoryDocument.getDouble("longitude")
                                     val address = dormitoryDocument.getString("address")
@@ -123,50 +126,60 @@ class LandlordUnitsFragment : Fragment() {
                                     val username = dormitoryDocument.getString("username")
                                     val description = dormitoryDocument.getString("description")
                                     val permitImage = dormitoryDocument.getString("permitImage")
-                                    val pendingRequestsCount = dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
+                                    val pendingRequestsCount =
+                                        dormitoryDocument.getLong("pendingRequestsCount")?.toInt()
                                     val rentalterm = dormitoryDocument.getString("rentalterm")
                                     val bathroom = dormitoryDocument.getString("bathroom")
                                     val electric = dormitoryDocument.getString("electric")
                                     val water = dormitoryDocument.getString("water")
-                                    val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
-                                    val amenities = dormitoryDocument.get("amenities") as? List<String>
-                                    val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
-                                    val genderRestriction = dormitoryDocument.getString("genderRestriction")
+                                    val paymentOptions =
+                                        dormitoryDocument.get("paymentOptions") as? List<String>
+                                    val amenities =
+                                        dormitoryDocument.get("amenities") as? List<String>
+                                    val amenities2 =
+                                        dormitoryDocument.get("amenities2") as? List<String>
+                                    val genderRestriction =
+                                        dormitoryDocument.getString("genderRestriction")
+                                    val status = dormitoryDocument.getString("status")
 
-                                    // Add dormitory to the list
-                                    dormitoriesList.add(
-                                        Dormitory(
-                                            dormName,
-                                            dormPrice,
-                                            dormitoryId,
-                                            numOfRooms,
-                                            maxCapacity,
-                                            imageUrl,
-                                            landlordId,
-                                            qrCodeImageUrl,
-                                            latitude,
-                                            longitude,
-                                            address,
-                                            phoneNumber,
-                                            email,
-                                            username,
-                                            description,
-                                            permitImage,
-                                            pendingRequestsCount,
-                                            rentalterm,
-                                            bathroom,
-                                            electric,
-                                            water,
-                                            paymentOptions,
-                                            amenities,
-                                            amenities2,
-                                            genderRestriction
+                                    if (status == "accepted") {
+
+
+                                        // Add dormitory to the list
+                                        dormitoriesList.add(
+                                            Dormitory(
+                                                dormName,
+                                                dormPrice,
+                                                dormitoryId,
+                                                numOfRooms,
+                                                maxCapacity,
+                                                imageUrl,
+                                                landlordId,
+                                                qrCodeImageUrl,
+                                                latitude,
+                                                longitude,
+                                                address,
+                                                phoneNumber,
+                                                email,
+                                                username,
+                                                description,
+                                                permitImage,
+                                                pendingRequestsCount,
+                                                rentalterm,
+                                                bathroom,
+                                                electric,
+                                                water,
+                                                paymentOptions,
+                                                amenities,
+                                                amenities2,
+                                                genderRestriction
+                                            )
                                         )
-                                    )
-                                }
+                                    }
 
-                                // Notify the adapter that data has changed
-                                dormitoriesAdapter.notifyDataSetChanged()
+                                    // Notify the adapter that data has changed
+                                    dormitoriesAdapter.notifyDataSetChanged()
+                                }
 
                             } else {
                                 // Handle the case when there are no matching dormitories
@@ -275,11 +288,14 @@ class LandlordUnitsFragment : Fragment() {
                         val dormName = dormitoryDocument.getString("dormName")
                         val dormPrice = dormitoryDocument.getString("price")
                         val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
-                        val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
-                        val maxCapacity = dormitoryDocument.getLong("maxCapacity")?.toInt()
+                        val numOfRooms =
+                            dormitoryDocument.getLong("numOfRooms")?.toInt()
+                        val maxCapacity =
+                            dormitoryDocument.getLong("maxCapacity")?.toInt()
                         val imageUrl = dormitoryDocument.get("image") as? List<String>
                         val landlordId = dormitoryDocument.getString("landlordId")
-                        val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
+                        val qrCodeImageUrl =
+                            dormitoryDocument.getString("qrCodeImageUrl")
                         val latitude = dormitoryDocument.getDouble("latitude")
                         val longitude = dormitoryDocument.getDouble("longitude")
                         val address = dormitoryDocument.getString("address")
@@ -294,47 +310,55 @@ class LandlordUnitsFragment : Fragment() {
                         val bathroom = dormitoryDocument.getString("bathroom")
                         val electric = dormitoryDocument.getString("electric")
                         val water = dormitoryDocument.getString("water")
-                        val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
-                        val amenities = dormitoryDocument.get("amenities") as? List<String>
-                        val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
-                        val genderRestriction = dormitoryDocument.getString("genderRestriction")
+                        val paymentOptions =
+                            dormitoryDocument.get("paymentOptions") as? List<String>
+                        val amenities =
+                            dormitoryDocument.get("amenities") as? List<String>
+                        val amenities2 =
+                            dormitoryDocument.get("amenities2") as? List<String>
+                        val genderRestriction =
+                            dormitoryDocument.getString("genderRestriction")
+                        val status = dormitoryDocument.getString("status")
+
+                        if (status == "accepted") {
 
 
-
-                        // Add dormitory to the list
-                        dormitoriesList.add(
-                            Dormitory(
-                                dormName,
-                                dormPrice,
-                                dormitoryId,
-                                numOfRooms,
-                                maxCapacity,
-                                imageUrl,
-                                landlordId,
-                                qrCodeImageUrl,
-                                latitude,
-                                longitude,
-                                address,
-                                phoneNumber,
-                                email,
-                                username,
-                                description,
-                                permitImage,
-                                pendingRequestsCount,
-                                rentalterm,
-                                bathroom,
-                                electric,
-                                water,
-                                paymentOptions,
-                                amenities,
-                                amenities2,
-                                genderRestriction
+                            // Add dormitory to the list
+                            dormitoriesList.add(
+                                Dormitory(
+                                    dormName,
+                                    dormPrice,
+                                    dormitoryId,
+                                    numOfRooms,
+                                    maxCapacity,
+                                    imageUrl,
+                                    landlordId,
+                                    qrCodeImageUrl,
+                                    latitude,
+                                    longitude,
+                                    address,
+                                    phoneNumber,
+                                    email,
+                                    username,
+                                    description,
+                                    permitImage,
+                                    pendingRequestsCount,
+                                    rentalterm,
+                                    bathroom,
+                                    electric,
+                                    water,
+                                    paymentOptions,
+                                    amenities,
+                                    amenities2,
+                                    genderRestriction
+                                )
                             )
-                        )
+                        }
+
+                        // Notify the adapter that data has changed
+                        dormitoriesAdapter.notifyDataSetChanged()
                     }
 
-                    // Notify the adapter that data has changed
-                    dormitoriesAdapter.notifyDataSetChanged()
                 } else {
                     // Handle the case when there are no matching dormitories
                     // For example, display a message or handle it as needed

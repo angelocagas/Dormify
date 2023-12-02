@@ -73,25 +73,27 @@ class DashboardAdminActivity : AppCompatActivity() {
 
 
         val homeFragment = HomeAdminFragment()
-        val chatFragment = AdminListFragment()
+        val dormRequestsFragment = AdminListFragment()
 
-        setCurrentFragment(homeFragment)
+        setCurrentFragment(dormRequestsFragment)
 
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.menu_request -> {
-                    setCurrentFragment(homeFragment)
+                    setCurrentFragment(dormRequestsFragment)
                     binding.tvDormify3.text = "Dormify"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
 
 
 
-                R.id.menu_list -> {
-                    setCurrentFragment(chatFragment)
+                /*R.id.menu_list -> {
+                    setCurrentFragment(dormRequestsFragment)
                     binding.tvDormify3.text = "Messages"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
+
+                 */
 
             }
             true
