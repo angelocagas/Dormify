@@ -261,7 +261,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins"
                 android:text=""
-                android:textColor="@color/black"
+                android:textColor="@color/chat_color_sender"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/tvpaymentmehtods" />
