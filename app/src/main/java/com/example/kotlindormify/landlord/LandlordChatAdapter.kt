@@ -48,7 +48,7 @@ class LandlordChatAdapter : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(Di
         fun bind(message: ChatMessage) {
             messageSender.text = message.text
             val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
-            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
+            val formattedDate = message.timestamp.toDate().let { dateFormat.format(it) }
             timestamp.text = formattedDate
 
         }
@@ -61,7 +61,7 @@ class LandlordChatAdapter : ListAdapter<ChatMessage, RecyclerView.ViewHolder>(Di
         fun bind(message: ChatMessage) {
             messageReceiver.text = message.text
             val dateFormat = SimpleDateFormat("MMM d, yyyy h:mm a", Locale.getDefault())
-            val formattedDate = message.timestamp.toDate()?.let { dateFormat.format(it) }
+            val formattedDate = message.timestamp.toDate().let { dateFormat.format(it) }
             timestamp2.text = formattedDate
         }
     }

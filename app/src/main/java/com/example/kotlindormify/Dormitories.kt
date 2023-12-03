@@ -9,6 +9,7 @@ data class Dormitories(
     var dormName: String? = null,
     var numOfRooms: Int? = null,
     val maxCapacity: Int?,
+    var previousPrice: String? = null,
     var price: String? = null,
     var gcashNum: String? = null,
     var address: String? = null,
@@ -26,11 +27,16 @@ data class Dormitories(
     var water: String? = null,
     var paymentOptions: List<String>? = null,
     var amenities: List<String>? = null,
-    var genderRestriction: String? = null
+    var genderRestriction: String? = null,
+    var numOfStars: Double = 0.0,
+    var numOfRatings: Double = 0.0,
+    var ratings: Double = 0.0,
+    var status: String? = null
 
 ) {
     // No-argument constructor
     constructor() : this(
+        null,
         null,
         null,
         null,

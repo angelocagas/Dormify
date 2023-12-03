@@ -227,44 +227,51 @@
                 app:layout_constraintStart_toEndOf="@+id/lblphoneNumberLayout"
                 app:layout_constraintTop_toTopOf="@+id/lblphoneNumberLayout" />
 
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/phoneNumberLayout"
                 style="@style/LoginTextInputOuterFieldStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
                 app:boxStrokeColor="@color/violet"
+                app:errorTextColor="@color/clear"
                 app:boxStrokeErrorColor="@color/colorError"
                 app:hintTextColor="@color/violet"
-                app:errorTextColor="@color/clear"
+                android:layout_marginTop="1dp"
+                app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/lblphoneNumberLayout">
-
+               app:layout_constraintTop_toBottomOf="@+id/lblphoneNumberLayout">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/phoneNumberEt"
-                    style="@style/LoginTextInputInnerFieldStyle"
+                    style="LoginTextInputInnerFieldStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:inputType="number"
+                    android:maxLength="10"
                     android:paddingStart="100dp"
-                    android:inputType="phone"
-                    android:maxLength="10" />
+                    android:minHeight="48dp"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    app:backgroundTint="@color/black"
+                    app:backgroundTintMode="multiply" />
 
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.hbb20.CountryCodePicker
                 android:id="@+id/login_countrycode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_width="96dp"
+                android:layout_height="49dp"
+                android:paddingTop="10dp"
                 app:ccp_showFlag="false"
                 app:ccp_showNameCode="true"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/lblphoneNumberLayout" />
+
+
 
             <!-- Emergency Full Name -->
             <TextView

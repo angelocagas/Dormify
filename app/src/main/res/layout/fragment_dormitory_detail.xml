@@ -168,26 +168,35 @@
                             android:layout_marginStart="3dp"
                             android:numStars="5"
                             android:progressTint="#FFBF00"
-                            android:rating="4"
-                            android:allowClickWhenDisabled="false"
+                            android:rating="0"
                             android:scaleX=".45"
+                            android:isIndicator="true"
                             android:scaleY=".45"
-                            android:stepSize="1"
+                            android:stepSize=".5"
                             android:transformPivotX="1dp" />
 
+
+                        <ImageView
+                            android:id="@+id/lord"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/Ratingbar"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="246dp"
+                            android:layout_marginBottom="131dp" />
                         <TextView
                             android:id="@+id/Ratingtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@id/Ratingbar"
                             android:layout_marginBottom="10dp"
-                            android:text="4 out of 5 Rating"
+                            android:text="Loading"
                             android:layout_marginTop="4dp"
                             android:layout_toEndOf="@id/Ratingbar"
                             android:layout_marginStart="-130dp"
                             android:textAlignment="viewStart"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
@@ -352,7 +361,7 @@
                             android:layout_below="@+id/maxx"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="0dp"
-                            android:text="10"
+                            android:text="5"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
 
@@ -376,7 +385,7 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="0dp"
                             android:layout_marginEnd="40dp"
-                            android:text="122222"
+                            android:text="8"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
 
@@ -389,7 +398,7 @@
                             android:layout_marginTop="0dp"
                             android:text="@string/shared_public"
                             android:textColor="@color/chat_color_sender"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
@@ -412,6 +421,34 @@
                             android:layout_below="@+id/Bathroomtxt"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
+
+
+                        <TextView
+                            android:id="@+id/availabelbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/Room"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="40dp"
+                            android:text="Available Rooms"
+                            android:layout_alignTop="@+id/lblbath"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/occupiedtxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/roommm"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_alignTop="@+id/Bathroomtxt"
+                            android:layout_marginEnd="40dp"
+                            android:text="7"
+                            android:textColor="@color/chat_color_sender"
+                            android:textStyle="bold" />
+
 
                     </RelativeLayout>
 

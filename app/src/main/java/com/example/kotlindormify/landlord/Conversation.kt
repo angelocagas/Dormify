@@ -5,6 +5,10 @@ import com.google.firebase.Timestamp
 data class Conversation(
     val title: String,
     val lastMessage: String,
-    val timestamp: Timestamp = Timestamp.now()
+    val Tenant: String,
+    val username: String,
+    val userPic: String,
+    val lastMessageTimestamp: Timestamp
+
 )
 

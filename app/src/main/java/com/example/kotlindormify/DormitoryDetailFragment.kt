@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -45,6 +46,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
     private lateinit var userId: String
     private lateinit var ivProfilePicture: ImageView
     private var googleMap: GoogleMap? = null
+    private val firestore = FirebaseFirestore.getInstance()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,8 +62,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
         val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
         val tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
-
-
+        var ratingBar: RatingBar = view.findViewById(R.id.Ratingbar)
 
 
         // Retrieve dormitory data from arguments
@@ -82,6 +84,56 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val rentalTerm = arguments?.getString("rentalTerm")
         val bathroom = arguments?.getString("bathroom")
         val genderRestriction = arguments?.getString("genderRestriction")
+
+        //Ratings
+
+        val dormitoryCollection = firestore.collection("dormitories")
+
+// Query for the specific dormitoryId
+        dormitoryCollection.document(dormitoryId!!).get()
+            .addOnSuccessListener { dormDocument ->
+                if (dormDocument.exists()) {
+                    var ratingBar: RatingBar = view.findViewById(R.id.Ratingbar)
+                    var txtRating: TextView = view.findViewById(R.id.Ratingtxt)
+
+                    val numOfRatings = dormDocument.getDouble("numOfRatings") ?: 0.0
+                    val numOfStars = dormDocument.getDouble("numOfStars") ?: 0.0
+                    var updatedRatings: Double = 0.0
+
+                    if (numOfRatings > 0) {
+                        updatedRatings = numOfStars / numOfRatings
+                        ratingBar.rating = updatedRatings.toFloat()
+                        txtRating.text = "$updatedRatings / 5.0"
+                    } else {
+                        txtRating.text = "No ratings yet"
+                        ratingBar.rating = 0.0F
+                    }
+
+                    // Limit updatedRatings to 2 decimal places
+                    updatedRatings = String.format("%.2f", updatedRatings).toDouble()
+
+
+                    // Create a map with the updated values
+                    val updatedValues = mapOf(
+                        "ratings" to updatedRatings
+                    )
+
+                    // Update the specific document
+                    dormitoryCollection.document(dormitoryId).update(updatedValues)
+
+                } else {
+                    Toast.makeText(requireContext(), "Document does not exist", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error getting document: $e", Toast.LENGTH_SHORT).show()
+            }
+
+
+
+
+
+
 
 
         val imageSliderAdapter = ImageSliderAdapter(requireContext(), imageUrls ?: emptyList())
@@ -117,7 +169,10 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val descriptionTextview = view.findViewById<TextView>(R.id.ViewContent)
         val addressTextView = view.findViewById<TextView>(R.id.textDormloc)
         val numOfRoomsTextView = view.findViewById<TextView>(R.id.Availableroomtxt)
+        val availableRoomsTextView = view.findViewById<TextView>(R.id.occupiedtxt)
+
         val permitImageview = view.findViewById<ImageView>(R.id.permitImage)
+        val lordview = view.findViewById<ImageView>(R.id.lord)
         val qrcodeImageView = view.findViewById<ImageView>(R.id.qrcodeimage)
         val backBtn = view.findViewById<Button>(R.id.backbtn)
 
@@ -154,6 +209,30 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         descriptionTextview.text = description
         addressTextView.text = address
         numOfRoomsTextView.text = "$dormRooms"
+
+        val db = FirebaseFirestore.getInstance()
+
+// Step 1: Get a reference to the dormitory document
+        val dormitoryRef = db.collection("dormitories").document(dormitoryId ?: "")
+
+// Step 2: Query the subcollection of rooms with availability set to "available"
+        dormitoryRef.collection("rooms")
+            .whereEqualTo("availability", "available")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                // Step 3: Count the number of available rooms
+                val availableRoomsCount = querySnapshot.size()
+
+                // Step 4: Display the count in the TextView
+                availableRoomsTextView.text = "$availableRoomsCount"
+            }
+            .addOnFailureListener { exception ->
+                // Handle any errors that occurred during the query
+                // For example, log the error or display an error message
+            }
+
+
+
         TvUserNameTextView.text = username
         ContactTextView.text = phoneNumber
         EmailTextView.text = email
@@ -342,6 +421,11 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         } else {
             permitImageview.setImageResource(R.drawable.dormify_logo)
         }
+
+
+
+
+
 
         if (qrCodeImageUrl != null) {
             Picasso.get().load(qrCodeImageUrl).into(qrcodeImageView)

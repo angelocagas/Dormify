@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.kotlindormify.admin.DashboardAdminActivity
 import com.example.kotlindormify.databinding.ActivitySignInBinding
 import com.example.kotlindormify.landlord.LandlordDashboardActivity
 import com.example.kotlindormify.tenant3.Dashboard3Activity
@@ -95,7 +96,7 @@ class SignInActivity : AppCompatActivity() {
                                                             val selectedRole = user.role
                                                             when (selectedRole) {
                                                                 1 -> {
-                                                                    // Proceed to MainActivity for Tenant
+                                                                    // Proceed to MainActivity for Prospective Tenant
                                                                     val intent = Intent( this@SignInActivity, DashboardActivity::class.java )
                                                                     val userEmail = email
                                                                     val prefManager = PrefManager(this@SignInActivity)
@@ -116,8 +117,18 @@ class SignInActivity : AppCompatActivity() {
                                                                 }
 
                                                                 3 -> {
-                                                                    // Proceed to SecondaryActivity for Dorm Landlord
+                                                                    // Proceed to SecondaryActivity for Tenant
                                                                     val intent = Intent(this@SignInActivity, Dashboard3Activity::class.java)
+                                                                    val userEmail = email
+                                                                    val prefManager = PrefManager(this@SignInActivity)
+                                                                    prefManager.setUserEmail( userEmail )
+                                                                    startActivity(intent)
+                                                                    finish()
+                                                                    progressDialog?.dismiss()
+                                                                }
+                                                                99 -> {
+                                                                    // Proceed to SecondaryActivity for Dormify Admin
+                                                                    val intent = Intent(this@SignInActivity, DashboardAdminActivity::class.java)
                                                                     val userEmail = email
                                                                     val prefManager = PrefManager(this@SignInActivity)
                                                                     prefManager.setUserEmail( userEmail )

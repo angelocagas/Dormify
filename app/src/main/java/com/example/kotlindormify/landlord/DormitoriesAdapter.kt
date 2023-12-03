@@ -399,27 +399,39 @@ class DormitoriesAdapter(private val dormitoriesList: MutableList<Dormitory>) :
         // Reference to the specific dormitory document to update
         val dormitoryDocRef = dormitoriesRef.document(dormId)
 
-        // Convert the new price to a String
-        val stringNewPrice = newPrice.toString()
+        // Retrieve the current price before updating
+        dormitoryDocRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val previousPrice = documentSnapshot.getString("price")
 
-        // Update the dormitory document with the new price
-        dormitoryDocRef
-            .update("price", stringNewPrice)
-            .addOnSuccessListener {
-                // Successfully updated the price
-                // Show an alert message
-                val successMessage = "Dormitory price updated successfully."
-                showAlertDialog("Success", successMessage, context)
-                notifyDataSetChanged() // Notify the adapter to update the UI
+                    // Store the original price in the "previousPrice" field
+                    dormitoryDocRef.update("previousPrice", previousPrice)
+                        .addOnSuccessListener {
+                            // Convert the new price to a String
+                            val stringNewPrice = newPrice.toString()
+
+                            // Update the dormitory document with the new price
+                            dormitoryDocRef
+                                .update("price", stringNewPrice)
+                                .addOnSuccessListener {
+                                    // Successfully updated the price
+                                    // Show an alert message
+                                    val successMessage = "Dormitory price updated successfully."
+                                    showAlertDialog("Success", successMessage, context)
+                                    notifyDataSetChanged() // Notify the adapter to update the UI
+                                }
+                                .addOnFailureListener { e ->
+                                    // Handle the failure to update the price
+                                    // You might want to log the error or show an error message to the user
+                                    val errorMessage = "Failed to update dormitory price"
+                                    showAlertDialog("Error", errorMessage, context)
+                                }
+                        }
+                }
             }
-            .addOnFailureListener { e ->
-                // Handle the failure to update the price
-                // You might want to log the error or show an error message to the user
-                val errorMessage = "Failed to update dormitory price"
-                showAlertDialog("Error", errorMessage, context)
-            }
-        notifyDataSetChanged() // Notify the adapter to update the UI
     }
+
 
 
 

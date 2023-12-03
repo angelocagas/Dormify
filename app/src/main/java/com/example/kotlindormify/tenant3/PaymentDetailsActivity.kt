@@ -7,6 +7,6 @@ import com.example.kotlindormify.R
 class PaymentDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_payment_details)
+        setContentView(R.layout.payment_fragment)
     }
 }

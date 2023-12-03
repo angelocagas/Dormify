@@ -1,4 +1,4 @@
-package com.example.kotlindormify.tenant3
+package com.example.kotlindormify.admin
 
 import android.os.Bundle
 import android.view.View
@@ -7,31 +7,29 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.kotlindormify.ChatFragment
 import com.example.kotlindormify.PrefManager
-import com.example.kotlindormify.ProfileFragment
 import com.example.kotlindormify.R
-import com.example.kotlindormify.databinding.ActivityDashboard3Binding
+import com.example.kotlindormify.databinding.ActivityAdminDashboardBinding
+import com.example.kotlindormify.databinding.ActivityDashboardBinding
+import com.example.kotlindormify.tenant3.PaymentFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class Dashboard3Activity : AppCompatActivity() {
+class DashboardAdminActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDashboard3Binding
+    private lateinit var binding: ActivityAdminDashboardBinding
     private lateinit var userId: String
     private lateinit var ivProfilePicture: ImageView
-
 
     var userEmail: String? = null // Initialize it as null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDashboard3Binding.inflate(layoutInflater)
+        binding = ActivityAdminDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ivProfilePicture = binding.ivTopProfilePicture
-
         window.decorView.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
 
@@ -74,54 +72,35 @@ class Dashboard3Activity : AppCompatActivity() {
             }
 
 
-        val homeFragment = DashboardPaymentTenantFragment()
-        val paymentFragment = PaymentFragment()
-        val chatFragment = Chat3Fragment()
-        val profileFragment = ProfileFragment()
+        val homeFragment = HomeAdminFragment()
+        val dormRequestsFragment = AdminListFragment()
 
-        setCurrentFragment(homeFragment)
+        setCurrentFragment(dormRequestsFragment)
 
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_home -> {
-                    setCurrentFragment(homeFragment)
+                R.id.menu_request -> {
+                    setCurrentFragment(dormRequestsFragment)
                     binding.tvDormify3.text = "Dormify"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
 
-                R.id.menu_payment -> {
-                    setCurrentFragment(paymentFragment)
-                    binding.tvDormify3.text = "Payment"
-                    binding.cardViewImage.visibility = View.VISIBLE
-                }
-                R.id.menu_chat -> {
-                    setCurrentFragment(chatFragment)
+
+
+                /*R.id.menu_list -> {
+                    setCurrentFragment(dormRequestsFragment)
                     binding.tvDormify3.text = "Messages"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
 
+                 */
 
-                R.id.menu_person -> {
-                    setCurrentFragment(profileFragment)
-                    binding.tvDormify3.text = "Profile"
-                    binding.cardViewImage.visibility = View.GONE
-                }
             }
             true
         }
 
-        ivProfilePicture.setOnClickListener {
-            setCurrentFragment(profileFragment)
-            binding.tvDormify3.text = "Profile"
-            binding.bottomNavigation.menu.findItem(R.id.menu_person).isChecked = true
-            binding.cardViewImage.visibility = View.GONE
-        }
-
-
 
     }
-
-
 
     private fun setCurrentFragment(fragment: Fragment) =
         supportFragmentManager.beginTransaction().apply {

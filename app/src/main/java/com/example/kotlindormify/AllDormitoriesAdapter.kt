@@ -104,10 +104,7 @@ class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
                 bundle.putString("dormPrice", clickedDormitory.dormPrice)
                 bundle.putString("dormitoryId", clickedDormitory.dormitoryId)
                 bundle.putString("landlordId", clickedDormitory.landlordId)
-                clickedDormitory.images?.let {
-                    bundle.putStringArrayList("imageUrls", ArrayList(it))
-                }
-
+                clickedDormitory.images?.let { bundle.putStringArrayList("imageUrls", ArrayList(it)) }
                 bundle.putString("qrCodeImageUrl", clickedDormitory.qrCodeImageUrl)
                 bundle.putDouble("latitude", clickedDormitory.latitude!!)
                 bundle.putDouble("longitude", clickedDormitory.longitude!!)
