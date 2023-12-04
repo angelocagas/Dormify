@@ -98,8 +98,10 @@ class AdminListFragment : Fragment(R.layout.fragment_admin_list) {
                 for (document in documents) {
                     val dormId = document.id
                     val dormName = document.getString("dormName") ?: ""
+                    val address = document.getString("address") ?: ""
+
                     // Get other fields as needed
-                    dormList.add(DormitoryItem(dormId, dormName, status))
+                    dormList.add(DormitoryItem(dormId, dormName, status, address))
                 }
                 updateUI(dormList)
             }

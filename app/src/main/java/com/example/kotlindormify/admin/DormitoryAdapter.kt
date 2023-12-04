@@ -44,12 +44,12 @@ class DormitoryAdapter(private val onItemClickListener: (DormitoryItem) -> Unit)
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val textDormName: TextView = itemView.findViewById(R.id.tvRequestDormitory)
-        private val textDormId: TextView = itemView.findViewById(R.id.tvRequestDate)
+        private val textDormAddress: TextView = itemView.findViewById(R.id.tvRequestDate)
         //private val textStatus: TextView = itemView.findViewById(R.id.)
 
         fun bind(item: DormitoryItem) {
             textDormName.text = item.dormName
-            //textDormId.text = item.status
+            textDormAddress.text = item.address
             //textStatus.text = item.status
         }
     }

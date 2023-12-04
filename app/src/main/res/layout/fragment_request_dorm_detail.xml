@@ -263,11 +263,10 @@
                 android:id="@+id/ivDormitoryProfile"
                 android:layout_width="350dp"
                 android:layout_height="350dp"
-                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIdImageUrlLabel"
-                app:srcCompat="@drawable/logo_no_bg"
-                android:layout_marginLeft="50dp"/>
+                app:srcCompat="@drawable/logo_no_bg" />
 
 
             <View
@@ -296,11 +295,10 @@
                 android:id="@+id/ivBusinessPermit"
                 android:layout_width="350dp"
                 android:layout_height="350dp"
-                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewIdImageUrlLabel2"
-                app:srcCompat="@drawable/logo_no_bg"
-                android:layout_marginLeft="50dp"/>
+                app:srcCompat="@drawable/logo_no_bg" />
 
             <View
                 android:layout_width="match_parent"

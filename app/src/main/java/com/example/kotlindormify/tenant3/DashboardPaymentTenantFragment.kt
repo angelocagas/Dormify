@@ -77,11 +77,13 @@ class DashboardPaymentTenantFragment : Fragment() {
         }
 
         if (hasUserRated()) {
-            btnRateDorm.isClickable = false
-        }
-
-        btnRateDorm.setOnClickListener {
-            showRatingDialog()
+            btnRateDorm.setOnClickListener {
+                Toast.makeText(requireContext(), "You already rated this dormitory.", Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            btnRateDorm.setOnClickListener {
+                showRatingDialog()
+            }
         }
 
 

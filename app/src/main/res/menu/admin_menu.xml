@@ -8,8 +8,8 @@
 
 
 
-    <!-- <item android:icon="@drawable/dorm_contacts"
-        android:id="@+id/menu_list"
-        android:title="List"/> -->
+    <item android:icon="@drawable/dorm_logout"
+        android:id="@+id/menu_logout"
+        android:title="Logout"/>
 
 </menu>

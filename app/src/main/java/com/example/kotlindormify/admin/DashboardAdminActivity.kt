@@ -1,5 +1,6 @@
 package com.example.kotlindormify.admin
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.PrefManager
 import com.example.kotlindormify.R
+import com.example.kotlindormify.SignInActivity
 import com.example.kotlindormify.databinding.ActivityAdminDashboardBinding
 import com.example.kotlindormify.databinding.ActivityDashboardBinding
 import com.example.kotlindormify.tenant3.PaymentFragment
@@ -72,7 +74,6 @@ class DashboardAdminActivity : AppCompatActivity() {
             }
 
 
-        val homeFragment = HomeAdminFragment()
         val dormRequestsFragment = AdminListFragment()
 
         setCurrentFragment(dormRequestsFragment)
@@ -87,13 +88,37 @@ class DashboardAdminActivity : AppCompatActivity() {
 
 
 
-                /*R.id.menu_list -> {
-                    setCurrentFragment(dormRequestsFragment)
-                    binding.tvDormify3.text = "Messages"
-                    binding.cardViewImage.visibility = View.VISIBLE
+                R.id.menu_logout -> {
+                    val alertDialogBuilder = AlertDialog.Builder(this)
+
+                    // Set the title and message for the dialog
+                    alertDialogBuilder.setTitle("Logout")
+                    alertDialogBuilder.setMessage("Are you sure you want to logout?")
+
+                    // Set a positive button and its click listener
+                    alertDialogBuilder.setPositiveButton("Yes") { _, _ ->
+                        // User clicked Yes, perform logout
+                        FirebaseAuth.getInstance().signOut()
+
+                        // Clear any session or user data if applicable
+
+                        // Navigate to the SignInActivity
+                        val intent = Intent(this, SignInActivity::class.java)
+                        startActivity(intent)
+                        this.finish() // Close the current activity
+                    }
+
+                    // Set a negative button and its click listener
+                    alertDialogBuilder.setNegativeButton("No") { _, _ ->
+                        // User clicked No, do nothing or dismiss the dialog
+                    }
+
+                    // Create and show the alert dialog
+                    val alertDialog = alertDialogBuilder.create()
+                    alertDialog.show()
                 }
 
-                 */
+
 
             }
             true
