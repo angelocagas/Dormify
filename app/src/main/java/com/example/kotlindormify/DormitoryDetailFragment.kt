@@ -212,24 +212,33 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
         val db = FirebaseFirestore.getInstance()
 
-// Step 1: Get a reference to the dormitory document
         val dormitoryRef = db.collection("dormitories").document(dormitoryId ?: "")
 
-// Step 2: Query the subcollection of rooms with availability set to "available"
         dormitoryRef.collection("rooms")
             .whereEqualTo("availability", "available")
             .get()
             .addOnSuccessListener { querySnapshot ->
-                // Step 3: Count the number of available rooms
                 val availableRoomsCount = querySnapshot.size()
 
-                // Step 4: Display the count in the TextView
                 availableRoomsTextView.text = "$availableRoomsCount"
+
+                if (availableRoomsCount == 0) {
+                    btnRent.setOnClickListener {
+                        AlertDialog.Builder(requireContext())
+                            .setMessage("Sorry, this dormitory has no avaialble rooms. Please try again next time.")
+                            .setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                        btnRent.isClickable = false
+                        btnRent.background = resources.getDrawable(R.drawable.bg_btn_bck_lightdisable)
+                    }
+                }
             }
             .addOnFailureListener { exception ->
-                // Handle any errors that occurred during the query
-                // For example, log the error or display an error message
+
             }
+
 
 
 

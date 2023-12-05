@@ -99,11 +99,19 @@ class AdminListFragment : Fragment(R.layout.fragment_admin_list) {
                     val dormId = document.id
                     val dormName = document.getString("dormName") ?: ""
                     val address = document.getString("address") ?: ""
+                    val permitImage = document.getString("permitImage") ?: ""
+                    val imageUrl = (document["images"] as? List<String>)
+                    if (imageUrl != null) {
+                        if (imageUrl.isNotEmpty() && permitImage.isNotEmpty()){
+                            // Get other fields as needed
+                            dormList.add(DormitoryItem(dormId, dormName, status, address))
+                        }
 
-                    // Get other fields as needed
-                    dormList.add(DormitoryItem(dormId, dormName, status, address))
+
+                    }
                 }
                 updateUI(dormList)
+                binding.progressBar.visibility = View.GONE
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error fetching data: ${e.message}", Toast.LENGTH_SHORT).show()
