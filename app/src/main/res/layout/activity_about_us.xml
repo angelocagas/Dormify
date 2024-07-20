@@ -87,34 +87,9 @@
                 android:id="@+id/asad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="4dp"
                 android:fontFamily="@font/poppins"
-                android:text="Dormify application is a user-friendly dormitory
-finder and management system with geofencing technology for dormitories near Don
-Honorio Ventura State University (DHVSU) in Bacolor, Pampanga, Philippines.
-DHVSU, a public university with diverse courses, experiences a high demand for
-dormitory accommodations from potential tenants, including students and faculty
-members. Finding suitable dormitories relies on traditional methods that are time-
-consuming and may not provide accurate or complete information. Additionally,
-dormitory landlords need help managing their properties.
-To address these challenges, the Dormify application will provide an online
-platform where potential tenants, current tenants and dormitory landlords can connect
-and manage dormitory accommodations near DHVSU. With a user-friendly interface,
-students and faculties can easily search and filter dormitories based on their preferences
-and financial constraints. Integrating GCash into the payment process will facilitate
-seamless and cashless transactions, billing and payment records for landlords and tenants.
-The system will also incorporate a rating feature, allowing tenants to provide feedback
-on their dormitory and landlords, fostering continuous service improvement. A
-messaging module will enable tenants to communicate with landlords for inquiries or
-emergencies.\n\n\n
-
-Balaoro, David Joshua C.\n\n
-Bernal, Denisse Jasmine V.\n\n
-Cagas, Christian Angelo D.\n\n
-Gomez, John Ceazar Ashley G.\n\n
-Maglangit, Shaila Nicole D.\n\n
-Mercado, Eugene Renz T.\n\n
-Ocampo, John Miguel C.\n\n"
+                android:text="In common usage, randomness is the apparent or actual lack of definite pattern or predictability in information. A random sequence of events, symbols or steps often has no order and does not follow an intelligible pattern or combination"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"

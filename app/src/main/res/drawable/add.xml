@@ -2,8 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- 90 degrees means top to bottom -->
-    <gradient  android:startColor="#453D78"
-    android:endColor="#8B46A0"
+    <gradient  android:startColor="#0063a3"
+    android:endColor="#217cbb"
     android:angle="90"
     ></gradient>
 

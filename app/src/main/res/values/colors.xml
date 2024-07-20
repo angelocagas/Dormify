@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
+    <color name="purple_200">#dcedf9</color>
+    <color name="purple_500">#217cbb</color>
+    <color name="purple_700">#0063a3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="violet">#6f6ff4</color>
+    <color name="violet">#217cbb</color>
     <color name="colorError">#FF0000</color>
 
     <color name="radiobtnable">#5E5E5E</color>
@@ -33,7 +33,7 @@
     <color name="dormify_clr">#22215B</color>
     <color name="find_clr">#7B7F9E</color>
     <color name="txt_box">#F2F3F3</color>
-    <color name="Signup_btn">#4516A7</color>
+    <color name="Signup_btn">#217cbb</color>
     <color name="available_success">#4BB543</color>FF7276
     <color name="occupied_error">#FF7276</color>
     <color name="bg_clr_light">#f1f2f4</color>
@@ -41,7 +41,7 @@
     <color name="txt_clr">#000000</color>
     <color name="txt_clr2">#22215B</color>
 
-    <color name="my_primary">#FFBB86FC</color>
+    <color name="my_primary">#217cbb</color>
     <color name="my_secondary">#FFE74C</color>
 
     <color name="chat_color_sender">#1E88E5</color>
