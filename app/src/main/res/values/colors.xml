@@ -30,7 +30,7 @@
 
     //DORMIFY COLORS LIGHT MODE
     <color name="clear">#00FFFFFF</color>
-    <color name="dormify_clr">#22215B</color>
+    <color name="dormify_clr">#004f83</color>
     <color name="find_clr">#7B7F9E</color>
     <color name="txt_box">#F2F3F3</color>
     <color name="Signup_btn">#217cbb</color>
