@@ -342,7 +342,7 @@
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins"
                 android:minHeight="48dp"
-                android:text=" I agree to the terms and condition of Dormify"
+                android:text=" I agree to the terms and condition of Dormy-hunt"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
