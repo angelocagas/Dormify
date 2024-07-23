@@ -290,7 +290,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             val dormitoryLocation = LatLng(latitude, longitude)
 
             // Create a custom marker icon
-            val customMarkerIcon = BitmapDescriptorFactory.fromResource(R.drawable.logo_on_map)
+            val customMarkerIcon = BitmapDescriptorFactory.fromResource(R.drawable.logo_no_bg_onmap)
 
             // Create marker options
             val markerOptions = MarkerOptions()
