@@ -232,7 +232,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
         // Fetch all dormitory details
         queryAllDormitories { allDormitories ->
-            val customMarkerIcon = BitmapDescriptorFactory.fromResource(R.drawable.logo_on_map)
+            val customMarkerIcon = BitmapDescriptorFactory.fromResource(R.drawable.logo_no_bg_onmap)
 
             // Create a LatLngBounds builder
             val boundsBuilder = LatLngBounds.builder()
