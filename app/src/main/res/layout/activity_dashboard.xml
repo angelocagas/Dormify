@@ -30,22 +30,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
             android:id="@+id/tvDormify3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@+id/ivDormifyIcon"
             android:fontFamily="@font/hind_guntur_bold"
             android:gravity="center"
-            android:text="@string/app_name"
+            android:text="Dormy-hunt"
             android:textColor="@color/dormify_clr"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent" />
-
-
 
         <androidx.cardview.widget.CardView
 

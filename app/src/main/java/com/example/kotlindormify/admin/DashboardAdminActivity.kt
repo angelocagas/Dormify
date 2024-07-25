@@ -82,7 +82,7 @@ class DashboardAdminActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.menu_request -> {
                     setCurrentFragment(dormRequestsFragment)
-                    binding.tvDormify3.text = "Dormify"
+                    binding.tvDormify3.text = "Dormy-hunt"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
 

@@ -108,31 +108,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/a" />
 
-            <TextView
-                android:id="@+id/asad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="@font/poppins"
-                android:text="Welcome to Dormify, a dormitory finder and management system with geofencing technology for Don Honorio Ventura State University (DHVSU) Main Campus. By accessing or using the Dormify application, you agree to comply with and be bound by the following terms and conditions. Please read these terms carefully."
-                android:textColor="#000000"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/aa" />
-
 
             <TextView
                 android:id="@+id/a2a"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="TABLE OF CONTENTS"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/asad" />
+                tools:layout_editor_absoluteY="462dp" />
 
             <TextView
                 android:id="@+id/a22"
@@ -160,41 +147,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/a22" />
 
             <TextView
-                android:id="@+id/a1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="   By accessing or using the Dormify application, you acknowledge that you have read, understood, and agree to be bound by these terms and conditions. If you do not agree with any part of these terms, you must refrain from using the application."
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/a2a2" />
-
-            <TextView
                 android:id="@+id/b2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="2. USER ELIGIBILITY"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/a1" />
-
-            <TextView
-                android:id="@+id/a222"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst3"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/b2" />
-
-
+                tools:layout_editor_absoluteY="949dp" />
 
 
             <TextView
@@ -202,53 +164,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="3. APPLICATION USAGE"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/a222" />
-
-            <TextView
-                android:id="@+id/ad1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="A. Dormify is designed to facilitate the search for dormitory accommodations near DHVSU Main Campus.\n
-B. Users can search, view, and connect with dormitory landlords or tenants through the application.\n
-C. Payment processing through GCash is integrated into the system for financial transactions.\n
-"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/a2da2" />
+                tools:layout_editor_absoluteY="1093dp" />
 
             <TextView
                 android:id="@+id/pruch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="4. USER RESPONSIBILITIES"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ad1" />
-
-            <TextView
-                android:id="@+id/purch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text=" A. Users are responsible for the accuracy of information provided in their profiles and listings.\n
-B. Users must adhere to local laws, regulations, and policies, including those related to dormitory accommodations.\n
-C. Users are encouraged to provide accurate and constructive feedback through the application's rating feature.\n"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pruch" />
+                tools:layout_editor_absoluteY="1316dp" />
 
 
             <!--cancel-->
@@ -258,24 +191,12 @@ C. Users are encouraged to provide accurate and constructive feedback through th
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="5. PRIVACY POLICY"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/purch" />
-
-            <TextView
-                android:id="@+id/cancel1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst6"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cancel" />
+                tools:layout_editor_absoluteY="1559dp" />
 
 
             <TextView
@@ -283,96 +204,48 @@ C. Users are encouraged to provide accurate and constructive feedback through th
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="6. PAYMENT AND BILLING"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cancel1" />
-
-            <TextView
-                android:id="@+id/j7a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst7"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j7" />
+                tools:layout_editor_absoluteY="1703dp" />
 
             <TextView
                 android:id="@+id/j8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="7. FEEDBACK AND COMMUNICATION"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j7a" />
-
-            <TextView
-                android:id="@+id/j8a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst8"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j8" />
+                tools:layout_editor_absoluteY="1906dp" />
 
             <TextView
                 android:id="@+id/j9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="8. INTELLECTUAL PROPERTY"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j8a" />
-
-            <TextView
-                android:id="@+id/j9a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst9"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j9" />
+                tools:layout_editor_absoluteY="2114dp" />
 
             <TextView
                 android:id="@+id/j10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="9. TERMINATION"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j9a" />
-
-            <TextView
-                android:id="@+id/j10a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst10"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j10" />
+                tools:layout_editor_absoluteY="2244dp" />
 
 
             <TextView
@@ -380,25 +253,12 @@ C. Users are encouraged to provide accurate and constructive feedback through th
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="10. LIMITATION OF LIABILITY"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j10a" />
-
-
-            <TextView
-                android:id="@+id/j11a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst11"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j11" />
+                tools:layout_editor_absoluteY="2373dp" />
 
 
             <TextView
@@ -406,24 +266,12 @@ C. Users are encouraged to provide accurate and constructive feedback through th
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="11. GOVERNING LAW"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j11a" />
-
-            <TextView
-                android:id="@+id/j12a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst12"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j12" />
+                tools:layout_editor_absoluteY="2502dp" />
 
 
             <TextView
@@ -431,26 +279,12 @@ C. Users are encouraged to provide accurate and constructive feedback through th
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="15dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="12.CONTACT INFORMATION"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j12a" />
-
-            <TextView
-                android:id="@+id/j122a"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:text="@string/termsfirst13"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/j13" />
-
-
+                tools:layout_editor_absoluteY="2691dp" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

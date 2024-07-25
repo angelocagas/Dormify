@@ -46,55 +46,6 @@ The Services are intended for users who are at least 13 years of age. All users 
     </string>
 
 
-    <string name="termsfirst3">
-    Dormify is intended for use by individuals who are at least 18 years old or the legal age of majority in their jurisdiction. By using Dormify, you represent and warrant that you meet these eligibility requirements.
-        </string>
-
-
-
-    <string name="termsfirst6">
-  A. Dormify respects your privacy. Please review our Privacy Policy for information on how we collect, use, and disclose your personal information.\n
-
-        </string>
-    <string name="termsfirst7">
-        A. Dormify may facilitate financial transactions through GCash. Users agree to abide by GCash terms and conditions when using this service.\n
-        B. Dormitory landlords and tenants are responsible for maintaining accurate billing and payment records through the application.\n
-
-        </string>
-
-    <string name="termsfirst8">
-   A. Users can communicate with dormitory landlords through the application for inquiries or emergencies.\n\n\n
-B. Users are encouraged to provide feedback on dormitories and landlords, contributing to service improvement.\n
-
-           </string>
-    <string name="termsfirst9">
-     All content and intellectual property rights in the Dormify application, including logos, designs, and software, are owned by Dormify and protected by applicable intellectual property laws.
- </string>
-
-
-
-    <string name="termsfirst10">
-      Dormify reserves the right to terminate or suspend user accounts for violations of these terms and conditions or for any other reason at its sole discretion.
-   </string>
-
-
-    <string name="termsfirst11">
-       Dormify is not responsible for the quality, safety, or legality of dormitory accommodations. Users acknowledge and assume all risks associated with using the application.
-  </string>
-
-
-    <string name="termsfirst12">These terms and conditions are governed by the laws of the Philippines. Any disputes will be subject to the exclusive jurisdiction of the courts in the Philippines. be updated from time to time. Users are encouraged to review them regularly. Your continued use of Dormify after any changes to these terms indicates your acceptance of the updated terms.
-
-           </string>
-
-<string name="termsfirst13">
-For inquiries or feedback, please contact us at dormifyapp@gmail.com\n
-
-These terms and conditions may be updated from time to time. Users are encouraged to review them regularly. Your continued use of Dormify after any changes to these terms indicates your acceptance of the updated terms.
-
-           </string>
-
-
     <string name="shared_public">Shared(Public)</string>
     <string name="when_you_post_contributions_you_grant_us_a_license_including_use_of_your_name_trademarks_and_logos">When you post Contributions, you grant us a license (including use of your name, trademarks, and logos):</string>
     <string name="all_purchases_are_non_refundable_you_can_cancel_your_subscription_at_any_time_by_contacting_us_using_the_contact_information_provided_below_your_cancellation_will_take_effect_at_the_end_of_the_current_paid_term_if_you_are_unsatisfied_with_our_services_please_email_us_at_dormify_gmail_com">All purchases are non-refundable. You can cancel your subscription at any time by contacting us using the contact information provided below. Your cancellation will take effect at the end of the current paid term.If you are unsatisfied with our Services, please email us at Dormify@gmail.com</string>
