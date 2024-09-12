@@ -43,6 +43,10 @@
         <item name="android:fontFamily">@font/poppins</item>
 
     </style>
+
+    <style name="ovalShapeAppearance">
+        <item name="cornerSize">50%</item>
+    </style>
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your light mode attributes here -->
         <item name="android:fontFamily">@font/poppins</item>

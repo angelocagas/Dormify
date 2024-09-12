@@ -3,12 +3,12 @@ package com.example.kotlindormify
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.databinding.ActivityDashboardBinding
+import com.example.kotlindormify.tenant3.PaymentFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -27,8 +27,8 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ivProfilePicture = binding.ivTopProfilePicture
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-
+        window.decorView.systemUiVisibility =
+            (View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
 
 
         val prefManager = PrefManager(this) // Initialize PrefManager with the context
@@ -69,10 +69,7 @@ class DashboardActivity : AppCompatActivity() {
             }
 
 
-
-
         val homeFragment = HomeFragment()
-        val paymentFragment = PaymentFragment()
         val chatFragment = ChatFragment()
         val saveFragment = SavedFragment()
         val profileFragment = ProfileFragment()
@@ -80,27 +77,27 @@ class DashboardActivity : AppCompatActivity() {
         setCurrentFragment(homeFragment)
 
         binding.bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.menu_home -> {
                     setCurrentFragment(homeFragment)
                     binding.tvDormify3.text = "Dormify"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
-                R.id.menu_payment -> {
-                    setCurrentFragment(paymentFragment)
-                    binding.tvDormify3.text = "Payment"
-                    binding.cardViewImage.visibility = View.VISIBLE
-                }
+
+
+
                 R.id.menu_chat -> {
                     setCurrentFragment(chatFragment)
                     binding.tvDormify3.text = "Messages"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
+
                 R.id.menu_save -> {
                     setCurrentFragment(saveFragment)
                     binding.tvDormify3.text = "Saved Dorms"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
+
                 R.id.menu_person -> {
                     setCurrentFragment(profileFragment)
                     binding.tvDormify3.text = "Profile"
@@ -110,7 +107,7 @@ class DashboardActivity : AppCompatActivity() {
             true
         }
 
-        ivProfilePicture.setOnClickListener{
+        ivProfilePicture.setOnClickListener {
             setCurrentFragment(profileFragment)
             binding.tvDormify3.text = "Profile"
             binding.bottomNavigation.menu.findItem(R.id.menu_person).isChecked = true
@@ -146,9 +143,6 @@ class DashboardActivity : AppCompatActivity() {
                 .show()
         }
     }
-
-
-
 
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:icon="@drawable/dorm_home"
+        android:id="@+id/menu_home"
+        android:title="Home"/>
+
+    <item android:icon="@drawable/dorm_wallet"
+        android:id="@+id/menu_payment"
+        android:title="Payment"/>
+
+    <item android:icon="@drawable/dorm_message"
+        android:id="@+id/menu_chat"
+        android:title="Chat"/>
+
+
+    <item android:icon="@drawable/dorm_contacts"
+        android:id="@+id/menu_person"
+        android:title="Profile"/>
+
+</menu>

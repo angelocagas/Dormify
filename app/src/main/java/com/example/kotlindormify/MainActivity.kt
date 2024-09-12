@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseApp.initializeApp(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
 
 
         prefManager = PrefManager(this)

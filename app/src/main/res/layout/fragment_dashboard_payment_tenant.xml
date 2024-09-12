@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" tools:context=".tenant3.DashboardPaymentTenantFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"
+            app:layout_constraintTop_toBottomOf="@+id/tvlistdate"
+            tools:layout_editor_absoluteX="20dp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="8dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cons"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/txt_clr_dark">
+
+
+                    <ImageView
+                        android:id="@+id/dormprofile"
+                        android:layout_width="100dp"
+                        android:layout_height="90dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/dormify_logo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tvlandlordname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="5dp"
+                        android:ellipsize="end"
+                        android:maxLength="17"
+                        android:text="Loading..."
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/dormprofile"
+                        app:layout_constraintStart_toStartOf="@+id/dormprofile"
+                        app:layout_constraintTop_toBottomOf="@id/dormprofile" />
+
+                    <TextView
+                        android:id="@+id/duepayment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Due Payment"
+                        android:textSize="12dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/dormprofile"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/php"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="30dp"
+                        android:text="PHP"
+                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/dormprofile"
+                        app:layout_constraintTop_toBottomOf="@id/duepayment" />
+
+                    <TextView
+                        android:id="@+id/tvduepayment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:text="Loading..."
+                        android:textColor="#000000"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@id/php"
+                        app:layout_constraintTop_toBottomOf="@id/duepayment" />
+
+                    <TextView
+                        android:id="@+id/duedate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="30dp"
+                        android:text="Pay on or before"
+                        android:textSize="11sp"
+                        app:layout_constraintStart_toEndOf="@id/dormprofile"
+                        app:layout_constraintTop_toBottomOf="@id/php" />
+
+                    <TextView
+                        android:id="@+id/tvduedate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Loading..."
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/duedate"
+                        app:layout_constraintTop_toBottomOf="@id/duedate" />
+
+
+                    <TextView
+                        android:id="@+id/refnum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="18dp"
+                        android:text="Contract End Date"
+                        android:textSize="11sp"
+                        app:layout_constraintStart_toEndOf="@id/duedate"
+                        app:layout_constraintTop_toBottomOf="@id/php" />
+
+                    <TextView
+                        android:id="@+id/tvrendcontractdate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Loading..."
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@id/refnum"
+                        app:layout_constraintTop_toBottomOf="@id/refnum" />
+
+                    <View
+                        android:id="@+id/view"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@color/black"
+                        app:layout_constraintTop_toBottomOf="@id/tvlandlordname" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivpay"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    app:cardBackgroundColor="@color/secondary"
+                    app:cardCornerRadius="360dp"
+                    android:layout_marginLeft="90dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cons">
+
+
+                    <ImageView
+                        android:id="@+id/ivpaybg"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="3dp"
+                        android:src="@drawable/dorm_payments"
+                        app:layout_constraintEnd_toStartOf="@id/ivschedule"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/ivpay" />
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivrate"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="90dp"
+                    android:layout_marginTop="15dp"
+                    app:cardBackgroundColor="@color/private_account"
+                    app:cardCornerRadius="360dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cons">
+
+
+                    <ImageView
+                        android:id="@+id/ivratebg"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/dorm_star"
+                        app:layout_constraintEnd_toStartOf="@id/ivschedule"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/ivpay" />
+                </androidx.cardview.widget.CardView>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Pay Now"
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    app:layout_constraintEnd_toEndOf="@+id/ivpay"
+                    app:layout_constraintStart_toStartOf="@id/ivpay"
+                    app:layout_constraintTop_toBottomOf="@id/ivpay" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Rate"
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    app:layout_constraintEnd_toEndOf="@+id/ivrate"
+                    app:layout_constraintStart_toStartOf="@id/ivrate"
+                    app:layout_constraintTop_toBottomOf="@id/ivrate" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivschedule"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/security"
+                    app:cardCornerRadius="360dp"
+                    app:cardElevation="8dp"
+                    app:layout_constraintEnd_toStartOf="@id/ivrecords"
+                    app:layout_constraintStart_toEndOf="@id/ivpay"
+                    app:layout_constraintTop_toBottomOf="@id/cons">
+
+
+                    <ImageView
+                        android:id="@+id/ivschedulebg"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginTop="6dp"
+                        android:src="@drawable/dorm_schedule"
+                        app:layout_constraintEnd_toStartOf="@id/ivrecords"
+                        app:layout_constraintStart_toEndOf="@id/ivpay"
+                        app:layout_constraintTop_toTopOf="@id/ivschedule" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="-3dp"
+                    android:layout_marginBottom="15dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Schedule"
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/ivschedule"
+                    app:layout_constraintTop_toBottomOf="@id/ivschedule" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivrecords"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="15dp"
+                    app:cardBackgroundColor="@color/private_account"
+                    app:cardCornerRadius="360dp"
+                    app:cardElevation="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ivschedule"
+                    app:layout_constraintTop_toBottomOf="@id/cons">
+
+
+                    <ImageView
+                        android:id="@+id/ivrecordsbg"
+                        android:layout_width="37dp"
+                        android:layout_height="37dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:src="@drawable/dorm_records"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/ivschedule"
+                        app:layout_constraintTop_toTopOf="@id/ivrecords" />
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="Records"
+                    android:textColor="@color/black"
+                    android:textSize="13dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="@id/ivrecords"
+                    app:layout_constraintTop_toBottomOf="@id/ivrecords" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/tvlistpaid"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Note"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/tvlistdate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card" />
+
+        <TextView
+            android:id="@+id/tvlistdate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Date"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/card"
+            app:layout_constraintTop_toBottomOf="@id/card" />
+
+        <TextView
+            android:id="@+id/tvlistreference"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Payment Id"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvlistdate"
+            app:layout_constraintTop_toBottomOf="@id/card" />
+
+        <TextView
+            android:id="@+id/tvlistapprove"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Status"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="@+id/card"
+            app:layout_constraintTop_toBottomOf="@id/card" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerpayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+
+        <CalendarView
+            android:id="@+id/calendar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recyclerpayment" />
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/violet"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

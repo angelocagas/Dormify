@@ -48,7 +48,8 @@ class RentalRequestsAdapter(private var rentalRequestsList: List<RentalRequest>)
             fragment.arguments = bundle
 
 
-            val fragmentManager = (holder.itemView.context as AppCompatActivity).supportFragmentManager
+            val fragmentManager =
+                (holder.itemView.context as AppCompatActivity).supportFragmentManager
             fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)

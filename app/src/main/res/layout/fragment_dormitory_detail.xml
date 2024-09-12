@@ -45,18 +45,45 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
                             android:background="@drawable/dorm_backbtn"
-                            android:backgroundTint="@color/white" />
+                            android:backgroundTint="@color/dormify_clr" />
 
-                        <ImageView
-                            android:id="@+id/ivDormitoryImage"
+                        <!--   <androidx.recyclerview.widget.RecyclerView
+                             android:id="@+id/displayRecyclerViews"
+                             android:layout_width="match_parent"
+                             android:layout_height="200dp"
+                             android:layout_centerHorizontal="true"
+                             android:scaleType="centerCrop"
+                              />
+ -->
+
+
+                      <!--<ImageView
+                         android:id="@+id/ivDormitoryImage"
+                         android:layout_width="match_parent"
+                         android:layout_height="200dp"
+                         android:layout_centerHorizontal="true"
+                         android:contentDescription="Dormitory Image"
+                         android:scaleType="centerCrop"
+                         android:src="@drawable/dormify_logo" /> -->
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tabLayout"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_centerHorizontal="true"
-                            android:contentDescription="Dormitory Image"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/dormify_logo" />
-                    </androidx.cardview.widget.CardView>
-                    <!-- Dormitory Image -->
+                            android:layout_height="match_parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:tabGravity="center"
+                            app:tabMode="scrollable"/>
+
+                        <!-- ViewPager2 for image slider -->
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/viewPager"
+                            android:layout_width="match_parent"
+                            android:layout_height="190dp"
+                            app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                            app:layout_constraintBottom_toBottomOf="parent" />
+
+
+                </androidx.cardview.widget.CardView>
+                <!-- Dormitory Image -->
 
                     <RelativeLayout
                         android:id="@+id/dorminfolayout"
@@ -76,7 +103,6 @@
                             android:textColor="#000000"
                             android:textSize="22sp"
                             android:textStyle="bold" />
-
 
 
                         <TextView
@@ -142,32 +168,41 @@
                             android:layout_marginStart="3dp"
                             android:numStars="5"
                             android:progressTint="#FFBF00"
-                            android:rating="4"
+                            android:rating="0"
                             android:scaleX=".45"
+                            android:isIndicator="true"
                             android:scaleY=".45"
-                            android:stepSize="1"
-                            android:transformPivotX="1dp"
-                            />
+                            android:stepSize=".5"
+                            android:transformPivotX="1dp" />
 
+
+                        <ImageView
+                            android:id="@+id/lord"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignEnd="@+id/Ratingbar"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="246dp"
+                            android:layout_marginBottom="131dp" />
                         <TextView
                             android:id="@+id/Ratingtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                           android:layout_alignTop="@id/Ratingbar"
+                            android:layout_alignTop="@id/Ratingbar"
                             android:layout_marginBottom="10dp"
-                            android:text="4 out of 5 Rating"
+                            android:text="Loading"
                             android:layout_marginTop="4dp"
                             android:layout_toEndOf="@id/Ratingbar"
                             android:layout_marginStart="-130dp"
                             android:textAlignment="viewStart"
                             android:textColor="@color/black"
-                            android:textSize="10sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/Ratingbar"
                             android:background="#000000" />
 
@@ -198,10 +233,36 @@
                         android:text="Direct-to-owner transaction only (no agents/brokers). Fully Furnished with appliances and furniture (except for TV-not included and WIFI - personal account of tenant). Rent inclusive of association dues only, WIFI and utility bills not included."
                         android:textSize="15sp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
+                    <TextView
+                        android:id="@+id/lblGenderRestrictions"
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
                         android:layout_below="@+id/ViewContent"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginStart="21dp"
+                        android:layout_marginTop="5dp"
+                        android:text="Gender Restrictions:"
+                        android:textColor="#000000"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvGenderRestriction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/lblGenderRestrictions"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="15sp"
+                        android:text="sample"/>
+
+
+
+                    <View
+                        android:id="@+id/dividerTop"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.8dp"
+                        android:layout_below="@+id/tvGenderRestriction"
                         android:layout_marginTop="8dp"
                         android:background="#000000" />
 
@@ -211,7 +272,7 @@
                         android:id="@+id/amenitieslayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/ViewContent">
+                        android:layout_below="@+id/dividerTop">
 
 
                         <TextView
@@ -225,23 +286,33 @@
                             android:textColor="#000000"
                             android:textSize="18sp"
                             android:textStyle="bold" />
-
-
                         <TextView
-                            android:id="@+id/AmenitiesListtxt"
+                            android:id="@+id/Amenities2Listtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/Amenities"
                             android:layout_alignParentStart="true"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="5dp"
-                            android:text="Parking\nFree Internet Access\nFitness Gym\nStudy Hub\nRoof Deck"
+                            android:text=""
+                            android:textColor="@color/chat_color_sender" />
+
+
+                        <TextView
+                            android:id="@+id/AmenitiesListtxt"
+                            android:layout_width="wrap_content"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/Amenities2Listtxt"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="20dp"
+                            android:text=""
                             android:textColor="@color/chat_color_sender" />
 
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/AmenitiesListtxt"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
@@ -274,26 +345,28 @@
 
 
                         <TextView
+                            android:id="@+id/maxx"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/Room"
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
-                            android:text="Room Capacity"
+                            android:text="Max Capacity per Room"
                             android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/RoomCapacitytxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/Room"
+                            android:layout_below="@+id/maxx"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="25dp"
-                            android:text="10"
+                            android:layout_marginTop="0dp"
+                            android:text="5"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/lblbath"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/RoomCapacitytxt"
@@ -307,12 +380,12 @@
                             android:id="@+id/Availableroomtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/Room"
+                            android:layout_below="@+id/roommm"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="25dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginEnd="40dp"
-                            android:text="122222"
+                            android:text="8"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
 
@@ -320,16 +393,17 @@
                             android:id="@+id/Bathroomtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/RoomCapacitytxt"
+                            android:layout_below="@+id/lblbath"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="0dp"
                             android:text="@string/shared_public"
                             android:textColor="@color/chat_color_sender"
-                            android:textSize="11sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
 
                         <TextView
+                            android:id="@+id/roommm"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/Room"
@@ -337,16 +411,44 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="40dp"
-                            android:text="Available Rooms"
+                            android:text="Rooms"
                             android:textColor="#000000" />
 
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/Bathroomtxt"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
+
+
+                        <TextView
+                            android:id="@+id/availabelbl"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/Room"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="40dp"
+                            android:text="Available Rooms"
+                            android:layout_alignTop="@+id/lblbath"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/occupiedtxt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/roommm"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="0dp"
+                            android:layout_alignTop="@+id/Bathroomtxt"
+                            android:layout_marginEnd="40dp"
+                            android:text="7"
+                            android:textColor="@color/chat_color_sender"
+                            android:textStyle="bold" />
+
 
                     </RelativeLayout>
 
@@ -375,7 +477,7 @@
 
 
                         <TextView
-
+android:id="@+id/lblpay"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/pay"
@@ -387,9 +489,9 @@
                             android:id="@+id/PaymentMethodtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pay"
+                            android:layout_below="@+id/lblpay"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="0dp"
                             android:text="Cash On Hand\nGcash"
                             android:textColor="@color/chat_color_sender"
                             android:textSize="14sp"
@@ -397,7 +499,7 @@
 
 
                         <TextView
-
+android:id="@+id/lblrentalterms"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/PaymentMethodtxt"
@@ -410,9 +512,9 @@
                             android:id="@+id/MinimumStaytxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/PaymentMethodtxt"
+                            android:layout_below="@+id/lblrentalterms"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="0dp"
                             android:text="6 Months"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
@@ -424,7 +526,7 @@
                             android:layout_below="@id/pay"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
+
                             android:layout_marginEnd="40dp"
                             android:text="Electricity Bills"
                             android:textColor="#000000" />
@@ -433,35 +535,35 @@
                             android:id="@+id/Electricitytxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/pay"
+                            android:layout_below="@+id/lblpay"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginEnd="40dp"
                             android:text="INCLUDED"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
 
                         <TextView
-
+android:id="@+id/lblwaterr"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/Electricitytxt"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
                             android:layout_marginEnd="40dp"
                             android:text="Water Bills"
+                            android:layout_alignTop="@+id/lblrentalterms"
                             android:textColor="#000000" />
 
                         <TextView
                             android:id="@+id/Watertxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/Electricitytxt"
+                            android:layout_below="@+id/lblwaterr"
                             android:layout_alignParentEnd="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="30dp"
+                            android:layout_marginTop="0dp"
                             android:layout_marginEnd="40dp"
                             android:text="EXCLUDED"
                             android:textColor="@color/chat_color_sender"
@@ -470,7 +572,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/Watertxt"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
@@ -524,7 +626,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/Exact"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
@@ -584,14 +686,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/Landlordinfo"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="12dp"
                             android:layout_toEndOf="@+id/cardViewImage"
-                            android:text="Username"
+                            android:text="David Joshua Balaoro Carreon "
                             android:textColor="#000000"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
+                            android:maxLines="1"
+                            android:maxLength="28"
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/contt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/cardViewImage"
@@ -604,10 +710,10 @@
                             android:id="@+id/contactTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/cardViewImage"
+                            android:layout_below="@+id/contt"
                             android:layout_alignParentStart="true"
                             android:layout_marginStart="20dp"
-                            android:layout_marginTop="28dp"
+                            android:layout_marginTop="0dp"
                             android:text="09123456789"
                             android:textColor="@color/chat_color_sender"
                             android:textStyle="bold" />
@@ -629,19 +735,19 @@
                             android:id="@+id/emailtxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/cardViewImage"
-                            android:layout_alignParentEnd="true"
+                            android:layout_below="@+id/contt"
                             android:layout_alignStart="@id/emailview"
-                            android:layout_marginTop="27dp"
-                            android:textSize="11sp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="0dp"
                             android:maxLines="1"
                             android:text="sample1@gmail.com"
                             android:textColor="@color/chat_color_sender"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/emailtxt"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
@@ -696,7 +802,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/cardviewpermitImage"
                             android:layout_marginTop="10dp"
                             android:background="#000000" />
@@ -749,7 +855,7 @@
 
                         <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
+                            android:layout_height="0.8dp"
                             android:layout_below="@+id/cardviewqrcodeimage"
                             android:layout_marginTop="20dp"
                             android:layout_marginBottom="100dp"
@@ -808,6 +914,7 @@
 
                 <TextView
                     android:id="@+id/monthlytxt"
+                    android:visibility="invisible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"

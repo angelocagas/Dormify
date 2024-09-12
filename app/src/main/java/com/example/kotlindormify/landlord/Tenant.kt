@@ -2,5 +2,7 @@ package com.example.kotlindormify.landlord
 
 data class Tenant(
     val roomNumber: Int?,
-    val requesterFullName: String?
+    val tenantFullName: String?,
+    val dormitoryId: String?,
+    val tenantId: String?
 )

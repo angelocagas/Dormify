@@ -1,4 +1,3 @@
-
 package com.example.kotlindormify
 
 import android.content.Intent
@@ -32,6 +31,12 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.location.Geocoder
 import android.net.Uri
+import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.appcompat.app.AlertDialog
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.kotlindormify.databinding.ActivityMainBinding
 
 
 class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
@@ -45,13 +50,18 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
     private var isMapExpanded = false
     private var listExpanded = false
+    private lateinit var allDormitoriesAdapter: AllDormitoriesAdapter
+
     private lateinit var allDormitoriesRecyclerView: RecyclerView
     private lateinit var allDormitoriesLayoutManager: LinearLayoutManager
     private lateinit var allDormitoriesLayoutManager2: GridLayoutManager
 
+    private lateinit var tvSort: TextView
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
 
         // Check and request location permission
@@ -67,6 +77,9 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             )
         }
 
+
+
+
         val firestore = FirebaseFirestore.getInstance()
         val dormitoriesRef = firestore.collection("dormitories")
 
@@ -79,21 +92,56 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
 
         allDormitoriesLayoutManager2 = GridLayoutManager(requireContext(), 2)
 
-
-
-
         val savedDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         savedDormitoriesRecyclerView.layoutManager = savedDormitoriesLayoutManager
 
         val allDormitoriesList: MutableList<Dormitory> = mutableListOf()
         val savedDormitoriesList: MutableList<Dormitory> = mutableListOf()
 
-        val allDormitoriesAdapter = AllDormitoriesAdapter(allDormitoriesList)
+        allDormitoriesAdapter = AllDormitoriesAdapter(allDormitoriesList)
         val savedDormitoriesAdapter = AllDormitoriesAdapter(savedDormitoriesList)
 
         allDormitoriesRecyclerView.adapter = allDormitoriesAdapter
         savedDormitoriesRecyclerView.adapter = savedDormitoriesAdapter
 
+
+        val tvExpandList = view.findViewById<TextView>(R.id.tvSeeAll)
+        val btnSort = view.findViewById<ConstraintLayout>(R.id.clFilters)
+        tvSort = view.findViewById<TextView>(R.id.tvAllDormitories2)
+
+
+
+
+
+        btnSort.setOnClickListener {
+            showSortOptionsDialog()
+        }
+
+        tvExpandList.setOnClickListener {
+            if (!listExpanded) {
+                // Set the layoutManager when the list is expanded
+                allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager2
+
+                // Add margins to the left and right
+                val layoutParams = allDormitoriesRecyclerView.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.setMargins(50, 0, 0, 0)
+
+                // Update the text and flag
+                tvExpandList.text = "Collapse List"
+                listExpanded = true
+            } else {
+                // If the list is collapsed, remove margins
+                val layoutParams = allDormitoriesRecyclerView.layoutParams as ViewGroup.MarginLayoutParams
+                layoutParams.setMargins(0, 0, 0, 0)
+
+                // Set the original layoutManager
+                allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager
+
+                // Update the text and flag
+                tvExpandList.text = "Expand List"
+                listExpanded = false
+            }
+        }
 
         val activity = requireActivity() as DashboardActivity
         val currentUserEmail = activity.userEmail
@@ -111,28 +159,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
             }
         }
 
-        val tvExpandList = view.findViewById<TextView>(R.id.tvSeeAll)
-
-        
-        tvExpandList.setOnClickListener{
-            if(!listExpanded){
-                allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager2
-
-                tvExpandList.text = "Collapse List"
-                listExpanded = true
-
-            }else{
-                allDormitoriesLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                allDormitoriesRecyclerView.layoutManager = allDormitoriesLayoutManager
-
-                tvExpandList.text = "Expand List"
-                listExpanded = false
-            }
-        }
 
         val tvSeeAllSaved = view.findViewById<TextView>(R.id.tvSeeAllSaved)
-
-
         val spannableString = SpannableString("View All Saved")
         spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         tvSeeAllSaved.text = spannableString
@@ -155,8 +183,10 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
         // Query and display all dormitories
         queryAllDormitories { allDormitories ->
             allDormitoriesList.addAll(allDormitories)
+            allDormitoriesAdapter.sortByDistanceAscending()
             allDormitoriesAdapter.notifyDataSetChanged()
         }
+
 
 
         // Initialize the map
@@ -325,6 +355,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
         val dormitoriesRef = firestore.collection("dormitories")
 
         dormitoriesRef
+            .whereEqualTo("status", "accepted") // Add this filter for accepted dormitories
             .get()
             .addOnSuccessListener { dormQuerySnapshot ->
                 val allDormitories = mutableListOf<Dormitory>()
@@ -334,7 +365,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val dormPrice = dormitoryDocument.getString("price")
                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
                     val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
-                    val imageUrl = dormitoryDocument.getString("image")
+                    val maxCapacity = dormitoryDocument.getLong("maxCapacity")?.toInt()
+                    val imageUrl = dormitoryDocument.get("images") as? List<String>
                     val landlordId = dormitoryDocument.getString("landlordId")
                     val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
                     val latitude = dormitoryDocument.getDouble("latitude")
@@ -352,6 +384,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val water = dormitoryDocument.getString("water")
                     val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
                     val amenities = dormitoryDocument.get("amenities") as? List<String>
+                    val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
+                    val genderRestriction = dormitoryDocument.getString("genderRestriction")
 
 
 
@@ -359,7 +393,7 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     // Add other dormitory fields as needed
 
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities)
+                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, maxCapacity, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount,rentalTerm, bathroom, electric, water, paymentOptions, amenities, amenities2, genderRestriction)
                     allDormitories.add(dormitory)
                 }
                 callback(allDormitories)
@@ -409,7 +443,8 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val dormPrice = dormitoryDocument.getString("price")
                     val dormitoryId = dormitoryDocument.getString("dormId") ?: ""
                     val numOfRooms = dormitoryDocument.getLong("numOfRooms")?.toInt()
-                    val imageUrl = dormitoryDocument.getString("image")
+                    val maxCapacity = dormitoryDocument.getLong("maxCapacity")?.toInt()
+                    val imageUrl = dormitoryDocument.get("images") as? List<String>
                     val landlordId = dormitoryDocument.getString("landlordId")
                     val qrCodeImageUrl = dormitoryDocument.getString("qrCodeImageUrl")
                     val latitude = dormitoryDocument.getDouble("latitude")
@@ -427,10 +462,14 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     val water = dormitoryDocument.getString("water")
                     val paymentOptions = dormitoryDocument.get("paymentOptions") as? List<String>
                     val amenities = dormitoryDocument.get("amenities") as? List<String>
+                    val amenities2 = dormitoryDocument.get("amenities2") as? List<String>
+                    val genderRestriction = dormitoryDocument.getString("genderRestriction")
                     // Add other dormitory fields as needed
 
+
+
                     // Create a Dormitory object and add it to the list
-                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount, rentalTerm, bathroom, electric, water, paymentOptions, amenities)
+                    val dormitory = Dormitory(dormName, dormPrice, dormitoryId, numOfRooms, maxCapacity, imageUrl, landlordId, qrCodeImageUrl, latitude, longitude, address, phoneNumber, email, username, description, permitImage, pendingRequestsCount, rentalTerm, bathroom, electric, water, paymentOptions, amenities, amenities2, genderRestriction)
                     dormitoriesList.add(dormitory)
 
 
@@ -438,12 +477,74 @@ class HomeFragment : Fragment(R.layout.home_fragment), OnMapReadyCallback {
                     if (dormitoriesList.size == dormitoryIds.size) {
                         callback(dormitoriesList)
                     }
+
                 }
                 .addOnFailureListener { e ->
                     // Handle the failure to query dormitory details
                     callback(emptyList())
                 }
         }
+    }
+
+    private var sortingOptions = arrayOf(
+        "Name (Z - A ↓)",
+        "Name (A - Z ↑)",
+        "Price (Lowest - Highest ↑)",
+        "Price (Highest to Lowest ↓)",
+        "Distance (Closest to DHVSU)",
+        "Distance (Farthest from DHVSU)"
+    )
+
+    private fun showSortOptionsDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Sort By:")
+            .setItems(sortingOptions) { _, which ->
+                when (which) {
+                    0 -> {
+                        allDormitoriesAdapter.sortByNameDescending()
+                        tvSort.text = "Sorted by Name (Z - A)"
+                        updateSortingOptionText(0)
+
+                    }
+                    1 -> {
+                        allDormitoriesAdapter.sortByNameAscending()
+                        tvSort.text = "Sorted by Name (A - Z)"
+                        updateSortingOptionText(1)
+                    }
+                    2 -> {
+                        allDormitoriesAdapter.sortByPriceAscending()
+                        tvSort.text = "Sorted by Price (Lowest - Highest)"
+                        updateSortingOptionText(2)
+                    }
+                    3 -> {
+                        allDormitoriesAdapter.sortByPriceDescending()
+                        tvSort.text = "Sorted by Price (Highest to Lowest)"
+                        updateSortingOptionText(3)
+                    }
+                    4 -> {
+                        allDormitoriesAdapter.sortByDistanceAscending()
+                        tvSort.text = "Sorted by Distance (Closest to DHVSU)"
+                        updateSortingOptionText(4)
+                    }
+                    5 -> {
+                        allDormitoriesAdapter.sortByDistanceDescending()
+                        tvSort.text = "Sorted by Distance (Farthest from DHVSU)"
+                        updateSortingOptionText(5)
+                    }
+
+                }
+            }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun updateSortingOptionText(selectedIndex: Int) {
+        // Remove "(Selected)" from all options
+        sortingOptions = sortingOptions.map { it.replace("  ✔", "") }.toTypedArray()
+
+        // Update the text of the selected option
+        sortingOptions[selectedIndex] += "  ✔"
+        // Update the dialog with the modified options
     }
 
 

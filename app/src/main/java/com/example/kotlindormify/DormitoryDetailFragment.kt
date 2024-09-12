@@ -3,6 +3,7 @@ package com.example.kotlindormify
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,8 +11,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -23,6 +26,8 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.example.kotlindormify.landlord.LandlordDashboardActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,7 +37,8 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
@@ -40,6 +46,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
     private lateinit var userId: String
     private lateinit var ivProfilePicture: ImageView
     private var googleMap: GoogleMap? = null
+    private val firestore = FirebaseFirestore.getInstance()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,19 +60,19 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val btnRent = view.findViewById<Button>(R.id.inquirebtn)
         ivProfilePicture = view.findViewById(R.id.ivProfilePicture)
 
-
-
-
-
+        val viewPager: ViewPager2 = view.findViewById(R.id.viewPager)
+        val tabLayout: TabLayout = view.findViewById(R.id.tabLayout)
+        var ratingBar: RatingBar = view.findViewById(R.id.Ratingbar)
 
 
         // Retrieve dormitory data from arguments
         val dormName = arguments?.getString("dormName")
         val dormPrice = arguments?.getString("dormPrice")
         val dormitoryId = arguments?.getString("dormitoryId")
-        val imageUrl = arguments?.getString("imageUrl")
+        val imageUrls: ArrayList<String>? = arguments?.getStringArrayList("imageUrls")
         val landlordId = arguments?.getString("landlordId")
         val dormRooms = arguments?.getInt("dormRooms")
+        val maxCapacity = arguments?.getInt("maxCapacity")
         val qrCodeImageUrl = arguments?.getString("qrCodeImageUrl")
         val latitude = arguments?.getDouble("latitude")
         val longitude = arguments?.getDouble("longitude")
@@ -75,6 +83,66 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val electric = arguments?.getString("electric")
         val rentalTerm = arguments?.getString("rentalTerm")
         val bathroom = arguments?.getString("bathroom")
+        val genderRestriction = arguments?.getString("genderRestriction")
+
+        //Ratings
+
+        val dormitoryCollection = firestore.collection("dormitories")
+
+// Query for the specific dormitoryId
+        dormitoryCollection.document(dormitoryId!!).get()
+            .addOnSuccessListener { dormDocument ->
+                if (dormDocument.exists()) {
+                    var ratingBar: RatingBar = view.findViewById(R.id.Ratingbar)
+                    var txtRating: TextView = view.findViewById(R.id.Ratingtxt)
+
+                    val numOfRatings = dormDocument.getDouble("numOfRatings") ?: 0.0
+                    val numOfStars = dormDocument.getDouble("numOfStars") ?: 0.0
+                    var updatedRatings: Double = 0.0
+
+                    if (numOfRatings > 0) {
+                        updatedRatings = numOfStars / numOfRatings
+                        ratingBar.rating = updatedRatings.toFloat()
+                        txtRating.text = "$updatedRatings / 5.0"
+                    } else {
+                        txtRating.text = "No ratings yet"
+                        ratingBar.rating = 0.0F
+                    }
+
+                    // Limit updatedRatings to 2 decimal places
+                    updatedRatings = String.format("%.2f", updatedRatings).toDouble()
+
+
+                    // Create a map with the updated values
+                    val updatedValues = mapOf(
+                        "ratings" to updatedRatings
+                    )
+
+                    // Update the specific document
+                    dormitoryCollection.document(dormitoryId).update(updatedValues)
+
+                } else {
+                    Toast.makeText(requireContext(), "Document does not exist", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error getting document: $e", Toast.LENGTH_SHORT).show()
+            }
+
+
+
+
+
+
+
+
+        val imageSliderAdapter = ImageSliderAdapter(requireContext(), imageUrls ?: emptyList())
+        viewPager.adapter = imageSliderAdapter
+
+        // Connect ViewPager2 with TabLayout (optional)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            // Customize tab if needed
+        }.attach()
 
 
         //landlord details
@@ -83,10 +151,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val username = arguments?.getString("username")
         val amenities = arguments?.getStringArrayList("amenities")
         val paymentOptions = arguments?.getStringArrayList("paymentOptions")
-
-
-
-
+        val amenities2 = arguments?.getStringArrayList("amenities2")
 
 
         val activity = requireActivity() as DashboardActivity
@@ -98,11 +163,16 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         // Populate UI with dormitory details
         val dormNameTextView = view.findViewById<TextView>(R.id.textDormName)
         val dormPriceTextView = view.findViewById<TextView>(R.id.textDormPrice)
-        val dormImageView = view.findViewById<ImageView>(R.id.ivDormitoryImage)
+        val genderRestrictionTextview = view.findViewById<TextView>(R.id.tvGenderRestriction)
+        //val dormImageView = view.findViewById<ImageView>(R.id.ivDormitoryImage)
+        //  val recyclerView = view.findViewById<RecyclerView>(R.)
         val descriptionTextview = view.findViewById<TextView>(R.id.ViewContent)
         val addressTextView = view.findViewById<TextView>(R.id.textDormloc)
         val numOfRoomsTextView = view.findViewById<TextView>(R.id.Availableroomtxt)
+        val availableRoomsTextView = view.findViewById<TextView>(R.id.occupiedtxt)
+
         val permitImageview = view.findViewById<ImageView>(R.id.permitImage)
+        val lordview = view.findViewById<ImageView>(R.id.lord)
         val qrcodeImageView = view.findViewById<ImageView>(R.id.qrcodeimage)
         val backBtn = view.findViewById<Button>(R.id.backbtn)
 
@@ -114,6 +184,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         //new features for better application
         //Amenities & Features
         val AmenitiesListTextView = view.findViewById<TextView>(R.id.AmenitiesListtxt)
+        val Amenities2ListTextView = view.findViewById<TextView>(R.id.Amenities2Listtxt)
         val perWhat = view.findViewById<TextView>(R.id.monthlytxt)
 
         //Room Information
@@ -132,12 +203,45 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val EmailTextView = view.findViewById<TextView>(R.id.emailtxt)
 
 
+        RoomCapacityTextView.text = "$maxCapacity"
         dormNameTextView.text = dormName
-        dormPriceTextView.text = "₱ $dormPrice"
+        dormPriceTextView.text = "Php $dormPrice"
         descriptionTextview.text = description
         addressTextView.text = address
-
         numOfRoomsTextView.text = "$dormRooms"
+
+        val db = FirebaseFirestore.getInstance()
+
+        val dormitoryRef = db.collection("dormitories").document(dormitoryId ?: "")
+
+        dormitoryRef.collection("rooms")
+            .whereEqualTo("availability", "available")
+            .get()
+            .addOnSuccessListener { querySnapshot ->
+                val availableRoomsCount = querySnapshot.size()
+
+                availableRoomsTextView.text = "$availableRoomsCount"
+
+                if (availableRoomsCount == 0) {
+                    btnRent.setOnClickListener {
+                        AlertDialog.Builder(requireContext())
+                            .setMessage("Sorry, this dormitory has no avaialble rooms. Please try again next time.")
+                            .setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                            }
+                            .show()
+                        btnRent.isClickable = false
+                        btnRent.background = resources.getDrawable(R.drawable.bg_btn_bck_lightdisable)
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+
+            }
+
+
+
+
         TvUserNameTextView.text = username
         ContactTextView.text = phoneNumber
         EmailTextView.text = email
@@ -146,6 +250,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         BathroomTextView.text = bathroom
         MinimumStayTextView.text = rentalTerm
         perWhat.text = rentalTerm
+        genderRestrictionTextview.text = genderRestriction
+
 
 
 
@@ -153,11 +259,15 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             // Do something with amenities, it's a list
 
             val amenitiesString = amenities.joinToString("\n ✔ ")
-            AmenitiesListTextView.text = " ✔ $amenitiesString"
+            Amenities2ListTextView.text = " ✔ $amenitiesString"
+
+
         } else {
             Toast.makeText(requireContext(), "wala", Toast.LENGTH_SHORT).show()
 
         }
+
+        
 
         if (paymentOptions != null) {
             // Do something with paymentOptions, it's a list
@@ -170,7 +280,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         }
 
         // Initialize the map
-        val mapFragment = childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         // Check if latitude and longitude are available
@@ -192,45 +303,138 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
 
             // Move the camera to the dormitory's location
             googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(dormitoryLocation, 15f))
-        }else{
+        } else {
             Toast.makeText(requireContext(), "wala yung lat long", Toast.LENGTH_SHORT).show()
         }
 
+        // Initialize Firebase Firestore
+        val firestore = FirebaseFirestore.getInstance()
+
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            // Query Firestore to get user data based on the current user ID
+            firestore.collection("potential_tenant_details")
+                .whereEqualTo("userId", currentUser.uid)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    // Check if any documents were found
+                    if (!querySnapshot.isEmpty) {
+                        // Get the first document (assuming there's only one document per user)
+                        val documentSnapshot = querySnapshot.documents[0]
+
+                        // Retrieve data from the document
+                        val selectedGender = documentSnapshot.getString("gender")
+
+                        if(selectedGender == "Male"){
+                            //User is Male
+                            if(genderRestriction == "Female Only"){
+                                btnRent.setOnClickListener {
+                                    AlertDialog.Builder(requireContext())
+                                        .setMessage("Sorry, this dormitory is exclusively for female tenants only.")
+                                        .setPositiveButton("OK") { dialog, _ ->
+                                            dialog.dismiss()
+                                        }
+                                        .show()
+                                    btnRent.isClickable = false
+                                    btnRent.background = resources.getDrawable(R.drawable.bg_btn_bck_lightdisable)
+                                }
+                            }
+                            else{
+                                btnRent.setOnClickListener {
+                                    val bundle = Bundle()
+                                    bundle.putString("dormitoryId", dormitoryId)
+                                    bundle.putString("dormName", dormName)
 
 
+                                    val requestRentFragment = RequestRentFragment()
+                                    requestRentFragment.arguments = bundle
+                                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                                    transaction.replace(R.id.fragment_container, requestRentFragment)
+                                    transaction.addToBackStack(null) // Optional: Add to the back stack if needed
+                                    transaction.commit()
+                                }
+                            }
+                        }
+                        else if(selectedGender == "Female"){
+                            //User is Female
+                            if(genderRestriction == "Male Only"){
+                                btnRent.setOnClickListener {
+                                    AlertDialog.Builder(requireContext())
+                                        .setMessage("Sorry, this dormitory is exclusively for male tenants only.")
+                                        .setPositiveButton("OK") { dialog, _ ->
+                                            dialog.dismiss()
+                                        }
+                                        .show()
+                                    btnRent.isClickable = false
+                                    btnRent.setBackgroundColor(resources.getColor(R.color.notClickable))
+                                }
+                            }
+                            else{
+                                btnRent.setOnClickListener {
+                                    val bundle = Bundle()
+                                    bundle.putString("dormitoryId", dormitoryId)
+                                    bundle.putString("dormName", dormName)
 
 
+                                    val requestRentFragment = RequestRentFragment()
+                                    requestRentFragment.arguments = bundle
+                                    val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                                    transaction.replace(R.id.fragment_container, requestRentFragment)
+                                    transaction.addToBackStack(null) // Optional: Add to the back stack if needed
+                                    transaction.commit()
+                                }
+                            }
+
+                        }
+                        
 
 
-
-
-        btnRent.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("dormitoryId", dormitoryId)
-            bundle.putString("dormName", dormName)
-
-
-            val requestRentFragment = RequestRentFragment()
-            requestRentFragment.arguments = bundle
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, requestRentFragment )
-            transaction.addToBackStack(null) // Optional: Add to the back stack if needed
-            transaction.commit()
+                    } else {
+                        // Handle the case where no data is found for the current user
+                        Toast.makeText(requireContext(), "User data not found", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .addOnFailureListener { e ->
+                    // Handle the failure to retrieve user data
+                    Toast.makeText(requireContext(), "Failed to retrieve user data", Toast.LENGTH_SHORT).show()
+                }
         }
+        
+        
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
 
 
         // Load and display the dormitory image using Picasso or Glide
-        if (imageUrl != null) {
-            Picasso.get().load(imageUrl).into(dormImageView)
-        } else {
-            dormImageView.setImageResource(R.drawable.dormify_logo)
-        }
+        /* if (imageUrls != null) {
+             Picasso.get().load(imageUrls[0]).into(dormImageView)
+         } else {
+             dormImageView.setImageResource(R.drawable.dormify_logo)
+         }
+
+         */
 
         if (permitImage != null) {
             Picasso.get().load(permitImage).into(permitImageview)
         } else {
             permitImageview.setImageResource(R.drawable.dormify_logo)
         }
+
+
+
+
+
 
         if (qrCodeImageUrl != null) {
             Picasso.get().load(qrCodeImageUrl).into(qrcodeImageView)
@@ -239,15 +443,7 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         }
 
 
-
-
-
-
-
-
-        // Initialize Firebase Firestore
-        val firestore = FirebaseFirestore.getInstance()
-
+       
 
 
         // Check if the dormitory is already saved for the current user
@@ -320,14 +516,14 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             chatFragment.arguments = bundle
 
 
-
 // Replace the current fragment with ChatFragment using a fragment transaction
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.fragment_container, chatFragment)
             transaction.addToBackStack(null) // Optional: Add to back stack for navigation
             transaction.commit()
 
-            val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
+            val bottomNavigationView =
+                requireActivity().findViewById<BottomNavigationView>(R.id.bottom_navigation)
             bottomNavigationView.menu.findItem(R.id.menu_chat).isChecked = true
 
         }
@@ -343,7 +539,11 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         return view
     }
 
-    private fun checkIfDormitoryIsSaved(userEmail: String, dormitoryId: String, callback: (Boolean) -> Unit) {
+    private fun checkIfDormitoryIsSaved(
+        userEmail: String,
+        dormitoryId: String,
+        callback: (Boolean) -> Unit
+    ) {
         val firestore = FirebaseFirestore.getInstance()
         // Query user document by email
         firestore.collection("users")
@@ -352,7 +552,8 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             .addOnSuccessListener { querySnapshot ->
                 if (!querySnapshot.isEmpty) {
                     val userDocument = querySnapshot.documents[0]
-                    val savedDormitories = userDocument["savedDormitories"] as? List<String> ?: emptyList()
+                    val savedDormitories =
+                        userDocument["savedDormitories"] as? List<String> ?: emptyList()
                     // Check if the dormitoryId is in the list of saved dormitories
                     val isSaved = savedDormitories.contains(dormitoryId)
                     callback(isSaved)
@@ -407,7 +608,11 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             }
     }
 
-    private fun removeDormitoryFromSaved(userEmail: String, dormitoryId: String, callback: () -> Unit) {
+    private fun removeDormitoryFromSaved(
+        userEmail: String,
+        dormitoryId: String,
+        callback: () -> Unit
+    ) {
         val firestore = FirebaseFirestore.getInstance()
         // Fetch the user's ID based on their email
         fetchUserIdFromFirestore(userEmail) { userId ->
@@ -428,12 +633,14 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
+
     private fun initMap() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
+        val mapFragment =
+            childFragmentManager.findFragmentById(R.id.ivMapView) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }
 
-    private fun addDormitoryMarker(latitude: Double?, longitude: Double?, dormName: String?) {
+    private fun addDormitoryMarker(latitude: Double?, longitude: Double?, dormName: String?, address: String) {
         if (latitude != null && longitude != null) {
             // Create a LatLng object for the dormitory's location
             val dormitoryLocation = LatLng(latitude, longitude)
@@ -446,17 +653,54 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
                 .position(dormitoryLocation)
                 .title(dormName) // Use dormName without the $ symbol
                 .icon(customMarkerIcon)
+                .snippet(address)
                 .anchor(0.5f, 1.0f)
 // Add a marker for the dormitory's location with the custom icon
             val marker = googleMap?.addMarker(markerOptions)
 
+            googleMap?.setOnMarkerClickListener { marker ->
+                // Show the info window for the clicked marker
+                marker.showInfoWindow()
+
+                true
+            }
+
+            googleMap?.setOnInfoWindowClickListener { clickedMarker ->
+                val dormitoryLocation = clickedMarker.position // Get the LatLng of the clicked marker
+                val dormitoryName = clickedMarker.title ?: "Dormitory Name" // Use the dormitory's name as the label, or provide a default name
+                val dormitorySnippet = clickedMarker.snippet ?: "Dormitory Snippet" // Use the marker's snippet as the address, or provide a default snippet
+
+                // Create an Intent to open the Google Maps app with a pinned marker at the specified location
+                val gmmIntentUri = Uri.parse("geo:${dormitoryLocation.latitude},${dormitoryLocation.longitude}?z=15&q=${dormitoryLocation.latitude},${dormitoryLocation.longitude}(${Uri.encode(dormitoryName)})")
+
+                val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                mapIntent.setPackage("com.google.android.apps.maps") // Specify the Google Maps package
+
+                // Check if the Google Maps app is installed
+                if (mapIntent.resolveActivity(requireContext().packageManager) != null) {
+                    startActivity(mapIntent)
+                } else {
+                    // If the Google Maps app is not installed, handle it accordingly
+                    // You can open a web-based map or prompt the user to install the app.
+                    // Example: Open a web-based map
+                    val webMapIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com/maps/search/?api=1&query=${dormitoryLocation.latitude},${dormitoryLocation.longitude}"))
+                    startActivity(webMapIntent)
+                }
+            }
+
             // Move the camera to the dormitory's location
             googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(dormitoryLocation, 15f))
+
+            googleMap?.uiSettings?.isMapToolbarEnabled = false
 
             // Show the info window without the need for clicking the marker
             marker?.showInfoWindow()
         } else {
-            Toast.makeText(requireContext(), "Latitude and longitude not available", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Latitude and longitude not available",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -475,7 +719,10 @@ class DormitoryDetailFragment : Fragment(), OnMapReadyCallback {
         val latitude = arguments?.getDouble("latitude")
         val longitude = arguments?.getDouble("longitude")
         val dormName = arguments?.getString("dormName")
-        addDormitoryMarker(latitude, longitude, dormName)
+        val address = arguments?.getString("address")
+        if (address != null) {
+            addDormitoryMarker(latitude, longitude, dormName, address)
+        }
 
         // Enable zoom controls
         googleMap!!.uiSettings.isZoomControlsEnabled = true

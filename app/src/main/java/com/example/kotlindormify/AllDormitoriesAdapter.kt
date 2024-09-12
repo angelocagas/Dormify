@@ -16,19 +16,79 @@ import com.squareup.picasso.Picasso
 import kotlin.math.*
 
 
-class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
+class AllDormitoriesAdapter(private var dormitoriesList: List<Dormitory>) :
     RecyclerView.Adapter<AllDormitoriesAdapter.ViewHolder>() {
 
+    private enum class SortType {
+        NONE, NAME_ASCENDING, NAME_DESCENDING, PRICE_ASCENDING, PRICE_DESCENDING, DISTANCE_ASCENDING, DISTANCE_DESCENDING
+    }
+
+    private var currentSortType = SortType.NONE
+
+    fun sortByNameAscending() {
+        currentSortType = SortType.NAME_ASCENDING
+        dormitoriesList = dormitoriesList.sortedWith(compareBy { it.dormName?.lowercase() })
+        notifyDataSetChanged()
+    }
+
+    fun sortByNameDescending() {
+        currentSortType = SortType.NAME_DESCENDING
+        dormitoriesList = dormitoriesList.sortedWith(compareByDescending { it.dormName?.lowercase() })
+        notifyDataSetChanged()
+    }
+
+
+    fun sortByPriceAscending() {
+        currentSortType = SortType.PRICE_ASCENDING
+        dormitoriesList = dormitoriesList.sortedBy { it.dormPrice?.toDouble() }
+        notifyDataSetChanged()
+    }
+
+    fun sortByPriceDescending() {
+        currentSortType = SortType.PRICE_DESCENDING
+        dormitoriesList = dormitoriesList.sortedByDescending { it.dormPrice?.toDouble() }
+        notifyDataSetChanged()
+    }
+
+
+    fun sortByDistanceAscending() {
+        currentSortType = SortType.DISTANCE_ASCENDING
+        dormitoriesList = dormitoriesList.sortedBy { dormitory ->
+            calculateDistance(
+                dormitory.latitude ?: 0.0,
+                dormitory.longitude ?: 0.0,
+                14.998027206214473,
+                120.65611294250105
+            )
+        }
+        notifyDataSetChanged()
+    }
+
+    fun sortByDistanceDescending() {
+        currentSortType = SortType.DISTANCE_DESCENDING
+        dormitoriesList = dormitoriesList.sortedByDescending { dormitory ->
+            calculateDistance(
+                dormitory.latitude ?: 0.0,
+                dormitory.longitude ?: 0.0,
+                14.998027206214473,
+                120.65611294250105
+            )
+        }
+        notifyDataSetChanged()
+    }
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val DEFAULT_LATITUDE = 14.998027206214473 // Replace with your desired default latitude
-        private val DEFAULT_LONGITUDE = 120.65611294250105 // Replace with your desired default longitude
+        private val DEFAULT_LATITUDE =
+            14.998027206214473 // Replace with your desired default latitude
+        private val DEFAULT_LONGITUDE =
+            120.65611294250105 // Replace with your desired default longitude
 
         val textDormName: TextView = itemView.findViewById(R.id.textDormName)
         val textDormPrice: TextView = itemView.findViewById(R.id.textDormPrice)
         val tvRentalTerm: TextView = itemView.findViewById(R.id.tvRentalTerm)
         val tvDistance: TextView = itemView.findViewById(R.id.tvDorm2Distance)
 
-        val dormImage : ImageView = itemView.findViewById(R.id.ivDorm2)
+        val dormImage: ImageView = itemView.findViewById(R.id.ivDorm2)
         // Add other views as needed based on your layout
 
         init {
@@ -43,8 +103,8 @@ class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
                 bundle.putString("dormName", clickedDormitory.dormName)
                 bundle.putString("dormPrice", clickedDormitory.dormPrice)
                 bundle.putString("dormitoryId", clickedDormitory.dormitoryId)
-                bundle.putString("imageUrl", clickedDormitory.image)
                 bundle.putString("landlordId", clickedDormitory.landlordId)
+                clickedDormitory.images?.let { bundle.putStringArrayList("imageUrls", ArrayList(it)) }
                 bundle.putString("qrCodeImageUrl", clickedDormitory.qrCodeImageUrl)
                 bundle.putDouble("latitude", clickedDormitory.latitude!!)
                 bundle.putDouble("longitude", clickedDormitory.longitude!!)
@@ -53,12 +113,14 @@ class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
                 bundle.putString("description", clickedDormitory.description)
                 bundle.putString("permitImage", clickedDormitory.permitImage)
                 bundle.putInt("dormRooms", clickedDormitory.dormRooms!!)
+                bundle.putInt("maxCapacity", clickedDormitory.maxCapacity!!)
                 bundle.putString("username", clickedDormitory.username)
                 bundle.putString("rentalTerm", clickedDormitory.rentalTerm)
                 bundle.putString("bathroom", clickedDormitory.bathroom)
                 bundle.putString("electric", clickedDormitory.electric)
                 bundle.putString("water", clickedDormitory.water)
                 bundle.putString("email", clickedDormitory.email)
+                bundle.putString("genderRestriction", clickedDormitory.genderRestriction)
 
 
                 val paymentOptionsList = clickedDormitory.paymentOptions?.toList()
@@ -66,10 +128,6 @@ class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
 
                 val amenitiesList = clickedDormitory.amenities?.toList()
                 bundle.putStringArrayList("amenities", ArrayList(amenitiesList))
-
-
-
-
 
 
                 //info of the landlord
@@ -92,7 +150,6 @@ class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
     }
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.all_dormitory_item_layout, parent, false)
@@ -102,7 +159,7 @@ class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dormitory = dormitoriesList[position]
         holder.textDormName.text = dormitory.dormName
-        holder.textDormPrice.text = "₱ ${dormitory.dormPrice}"
+        holder.textDormPrice.text = "₱  ${dormitory.dormPrice}"
         holder.tvRentalTerm.text = dormitory.rentalTerm
 
         //distance of dorm from dhvsu
@@ -123,8 +180,8 @@ class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
 
 
 
-        if (dormitory.image?.isNotEmpty() == true) {
-            Picasso.get().load(dormitory.image).into(holder.dormImage)
+        if (dormitory.images?.isNotEmpty() == true) {
+            Picasso.get().load(dormitory.images[0]).into(holder.dormImage)
         } else {
             // Handle the case where there's no image URL provided
             // You can set a default image or hide the ImageView
@@ -134,11 +191,11 @@ class AllDormitoriesAdapter(private val dormitoriesList: List<Dormitory>) :
     }
 
 
-
     override fun getItemCount(): Int {
         return dormitoriesList.size
 
     }
+
     fun calculateDistance(lat1: Double, lon1: Double, lat2: Double, lon2: Double): Double {
         val R = 6371.0 // Earth's radius in kilometers
 

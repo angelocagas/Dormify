@@ -31,6 +31,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/textViewFullNameLabel"
                 android:layout_width="wrap_content"
@@ -58,7 +59,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFullName" />
 
@@ -87,7 +88,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewAge" />
 
@@ -118,7 +119,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewAddress" />
 
@@ -149,7 +150,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPhoneNumber" />
 
@@ -191,7 +192,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEmail" />
             <!-- EmergencyFullName -->
@@ -220,7 +221,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEmergencyFullName" />
             <!-- EmergencyAddress -->
@@ -249,7 +250,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEmergencyAddress" />
             <!-- EmergencyPhoneNumber -->
@@ -278,7 +279,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEmergencyPhoneNumber" />
             <!-- EmergencyEmail -->
@@ -307,7 +308,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEmergencyEmail" />
             <!-- SelectedGender -->
@@ -336,7 +337,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSelectedGender" />
             <!-- IdImageUrl -->
@@ -347,7 +348,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="ID Image URL:"
+                android:text="ID Image:"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSelectedGender" />
@@ -365,21 +366,20 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
-                app:layout_constraintTop_toBottomOf="@+id/textViewIdImageUrl" />
+                app:layout_constraintTop_toBottomOf="@+id/imgId" />
             <!-- Status -->
             <TextView
                 android:id="@+id/textViewStatusLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Status:"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewIdImageUrl" />
+                app:layout_constraintTop_toBottomOf="@+id/imgId" />
 
             <TextView
                 android:id="@+id/textViewStatus"
@@ -394,7 +394,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 app:layout_constraintTop_toBottomOf="@+id/textViewStatus" />
             <!-- Timestamp -->
@@ -405,7 +405,7 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Timestamp:"
+                android:text="Time of Request:"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewStatus" />
@@ -423,10 +423,20 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="0.4dp"
                 android:background="#000000"
                 android:paddingBottom="50dp"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTimestamp" />
+
+            <ImageView
+                android:id="@+id/imgId"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewIdImageUrlLabel"
+                app:srcCompat="@drawable/logo_no_bg"
+                android:layout_marginLeft="50dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

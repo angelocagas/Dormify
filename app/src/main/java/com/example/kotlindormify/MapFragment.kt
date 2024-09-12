@@ -24,7 +24,8 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallback: LocationCallback
     private lateinit var refreshButton: FloatingActionButton
-    private var currentLocationMarker: Marker? = null // To keep track of the current location marker
+    private var currentLocationMarker: Marker? =
+        null // To keep track of the current location marker
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

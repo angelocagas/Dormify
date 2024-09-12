@@ -9,6 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.kotlindormify.R
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.example.kotlindormify.LandlordProfileFragment
 import com.example.kotlindormify.PrefManager
 import com.example.kotlindormify.databinding.ActivityLandlordDashboardBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -65,37 +66,34 @@ class LandlordDashboardActivity : AppCompatActivity() {
 
 
 
-
-        val homeFragment = LandlordHomeFragment()
         val unitsFragment = LandlordUnitsFragment()
         val tenantsFragment = TenantsListFragment()
         val messagesFragment = LandlordConversationsFragment()
         val profileFragment = LandlordProfileFragment()
 
-        setCurrentFragment(homeFragment)
+        setCurrentFragment(unitsFragment)
 
         binding.bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.landlord_menu_home -> {
-                    setCurrentFragment(homeFragment)
-                    binding.tvDormify3.text = "Dormify"
-                    binding.cardViewImage.visibility = View.VISIBLE
-                }
+            when (it.itemId) {
+
                 R.id.landlord_menu_units -> {
                     setCurrentFragment(unitsFragment)
                     binding.tvDormify3.text = "Dormitory"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
+
                 R.id.landlord_menu_tenants -> {
                     setCurrentFragment(tenantsFragment)
                     binding.tvDormify3.text = "Tenants"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
+
                 R.id.landlord_menu_messages -> {
                     setCurrentFragment(messagesFragment)
                     binding.tvDormify3.text = "Messages"
                     binding.cardViewImage.visibility = View.VISIBLE
                 }
+
                 R.id.landlord_menu_profile -> {
                     setCurrentFragment(profileFragment)
                     binding.tvDormify3.text = "Profile"
@@ -106,7 +104,7 @@ class LandlordDashboardActivity : AppCompatActivity() {
             true
         }
 
-        ivProfilePicture.setOnClickListener{
+        ivProfilePicture.setOnClickListener {
             setCurrentFragment(profileFragment)
             binding.tvDormify3.text = "Profile"
             binding.bottomNavigation.menu.findItem(R.id.landlord_menu_profile).isChecked = true

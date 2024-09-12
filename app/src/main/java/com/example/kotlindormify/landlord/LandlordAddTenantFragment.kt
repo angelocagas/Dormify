@@ -45,7 +45,11 @@ class LandlordAddTenantFragment : Fragment() {
                     for (document in querySnapshot.documents) {
                         // You can access the userId from the document
                         landlordId = document.id
-                        Toast.makeText(requireContext(), "$landlordId $userEmail", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "$landlordId $userEmail",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }
                 } else {

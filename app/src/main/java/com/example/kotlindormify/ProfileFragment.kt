@@ -37,8 +37,8 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         val usersCollection = FirebaseFirestore.getInstance().collection("users")
         val userDocument = usersCollection.document(userId)
         val btnPersonalInfo: View = view.findViewById(R.id.Personalinfo)
-        val btnTermsAndConditions: View = view.findViewById(R.id.btnTermsAndConditions)
-        val btnAbout: View = view.findViewById(R.id.btnAboutUs)
+        val btnTermsAndConditions: View = view.findViewById(R.id.btnTermsAndConditions2)
+        val btnAbout: View = view.findViewById(R.id.btnAboutUs2)
 
 
         userDocument.get()
@@ -116,6 +116,7 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
             navigateToAbout()
         }
 
+
     }
 
     // Function to navigate to PersonalInformationActivity
@@ -134,5 +135,6 @@ class ProfileFragment : Fragment(R.layout.profile_fragment) {
         val intent = Intent(requireContext(), AboutUs::class.java)
         startActivity(intent)
     }
+
 
 }

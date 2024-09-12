@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.kotlindormify.R
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 // RequestDetailFragment.kt
 
@@ -31,6 +35,7 @@ class RequestDetailFragment : Fragment() {
     private lateinit var textViewStatus: TextView
     private lateinit var textViewTimestamp: TextView
     private lateinit var textViewRequesterId: TextView
+    private lateinit var idImage: ImageView
 
 
     override fun onCreateView(
@@ -53,6 +58,7 @@ class RequestDetailFragment : Fragment() {
         textViewStatus = rootView.findViewById(R.id.textViewStatus)
         textViewTimestamp = rootView.findViewById(R.id.textViewTimestamp)
         textViewRequesterId = rootView.findViewById(R.id.textViewrequesterId)
+        idImage = rootView.findViewById(R.id.imgId)
         val btnDeclineRequest = rootView.findViewById<Button>(R.id.btnDecline)
         val btnAcceptRequest = rootView.findViewById<Button>(R.id.btnAccept)
 
@@ -83,7 +89,8 @@ class RequestDetailFragment : Fragment() {
                         val email = documentSnapshot.getString("email")
                         val emergencyFullName = documentSnapshot.getString("emergencyFullName")
                         val emergencyAddress = documentSnapshot.getString("emergencyAddress")
-                        val emergencyPhoneNumber = documentSnapshot.getString("emergencyPhoneNumber")
+                        val emergencyPhoneNumber =
+                            documentSnapshot.getString("emergencyPhoneNumber")
                         val emergencyEmail = documentSnapshot.getString("emergencyEmail")
                         val selectedGender = documentSnapshot.getString("gender")
                         val idImageUrl = documentSnapshot.getString("idImageUrl")
@@ -101,11 +108,18 @@ class RequestDetailFragment : Fragment() {
                         textViewEmergencyPhoneNumber.text = " $emergencyPhoneNumber"
                         textViewEmergencyEmail.text = " $emergencyEmail"
                         textViewSelectedGender.text = " $selectedGender"
-                        textViewIdImageUrl.text = " $idImageUrl"
+                        if (idImageUrl != null) {
+                            // Load the selected image into the ImageView using Glide
+                            Glide.with(requireContext())
+                                .load(idImageUrl)
+                                .error(R.drawable.error_image) // Optional error image
+                                .into(idImage)
+
+                        }
                         textViewStatus.text = " $status"
-                        textViewTimestamp.text = " $timestamp"
+                        textViewTimestamp.text = formatTimestamp(timestamp)
                         textViewRequesterId.text = requesterId
-                        if (status != "pending"){
+                        if (status != "pending") {
                             btnDeclineRequest.visibility = View.GONE
                             btnAcceptRequest.visibility = View.GONE
                         }
@@ -133,7 +147,8 @@ class RequestDetailFragment : Fragment() {
                 val firestore = FirebaseFirestore.getInstance()
 
                 if (requestId != null) {
-                    val rentalRequestRef = firestore.collection("rental_requests").document(requestId)
+                    val rentalRequestRef =
+                        firestore.collection("rental_requests").document(requestId)
 
                     val updateData = mapOf(
                         "status" to "declined",
@@ -146,13 +161,18 @@ class RequestDetailFragment : Fragment() {
 
                             val dormitoryId = arguments?.getString("dormitoryId")
                             if (dormitoryId != null) {
-                                val dormitoryRequestsRef = firestore.collection("dormitories").document(dormitoryId)
-                                    .collection("rental_requests")
+                                val dormitoryRequestsRef =
+                                    firestore.collection("dormitories").document(dormitoryId)
+                                        .collection("rental_requests")
                                 dormitoryRequestsRef.document(requestId)
                                     .update(updateData)
                                     .addOnSuccessListener {
                                         // Successfully updated the dormitory with the declined request
-                                        Toast.makeText(requireContext(), "Request has been declined", Toast.LENGTH_SHORT).show()
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Request has been declined",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
                                         requireActivity().supportFragmentManager.popBackStack()
                                     }
                                     .addOnFailureListener { e ->
@@ -175,29 +195,51 @@ class RequestDetailFragment : Fragment() {
 
         btnAcceptRequest.setOnClickListener {
             // Check if the status is "pending" (only allow accepting if the request is pending)
-                // Navigate to the AssignTenantFragment and pass the selected request details
-                val args = Bundle()
-                val dormitoryId = arguments?.getString("dormitoryId")
-                val requesterFullName = textViewFullName.text.toString()
-                val requesterId = textViewRequesterId.text.toString()
+            // Navigate to the AssignTenantFragment and pass the selected request details
+            val args = Bundle()
+            val dormitoryId = arguments?.getString("dormitoryId")
+            val requesterFullName = textViewFullName.text.toString()
+            val requesterId = textViewRequesterId.text.toString()
+            val age = textViewAge.text.toString()
+            val address = textViewAddress.text.toString()
+            val phoneNumber = textViewPhoneNumber.text.toString()
+            val email = textViewEmail.text.toString()
+            val emergencyFullName = textViewEmergencyFullName.text.toString()
+            val emergencyAddress = textViewEmergencyAddress.text.toString()
+            val emergencyPhoneNumber = textViewEmergencyPhoneNumber.text.toString()
+            val emergencyEmail = textViewEmergencyEmail.text.toString()
+            val selectedGender = textViewSelectedGender.text.toString()
+            val idImageUrl = textViewIdImageUrl.text.toString()
+            val status = textViewStatus.text.toString()
+            val timestamp = textViewTimestamp.text.toString()
+
             args.putString("requestId", requestId)
-
-                args.putString("requesterFullName", requesterFullName)
+            args.putString("requesterFullName", requesterFullName)
             args.putString("requesterId", requesterId)
-                args.putString("dormitoryId", dormitoryId)
-
-
+            args.putString("dormitoryId", dormitoryId)
+            args.putString("age", age)
+            args.putString("address", address)
+            args.putString("phoneNumber", phoneNumber)
+            args.putString("email", email)
+            args.putString("emergencyFullName", emergencyFullName)
+            args.putString("emergencyAddress", emergencyAddress)
+            args.putString("emergencyPhoneNumber", emergencyPhoneNumber)
+            args.putString("emergencyEmail", emergencyEmail)
+            args.putString("selectedGender", selectedGender)
+            args.putString("idImageUrl", idImageUrl)
+            args.putString("status", status)
+            args.putString("timestamp", timestamp)
 
 
             val assignTenantFragment = AssignTenantFragment()
-                assignTenantFragment.arguments = args
+            assignTenantFragment.arguments = args
 
-                // Use FragmentManager to navigate to the AssignTenantFragment
-                val fragmentManager = requireActivity().supportFragmentManager
-                fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, assignTenantFragment)
-                    .addToBackStack(null)
-                    .commit()
+            // Use FragmentManager to navigate to the AssignTenantFragment
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, assignTenantFragment)
+                .addToBackStack(null)
+                .commit()
 
         }
 
@@ -224,6 +266,12 @@ class RequestDetailFragment : Fragment() {
         return rootView
 
 
+    }
+    fun formatTimestamp(timestamp: com.google.firebase.Timestamp?): String {
+        if (timestamp == null) return ""
 
+        val date = timestamp.toDate()
+        val sdf = SimpleDateFormat("MMMM dd, yyyy hh:mm a", Locale.getDefault())
+        return sdf.format(date)
     }
 }
